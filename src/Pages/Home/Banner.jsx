@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
@@ -7,7 +7,7 @@ const Banner = () => {
             <h2 className="text-white lg:text-3xl  font-bold italic">Transform your finances effortlessly with our dynamic account and finance platform – your key to smart, secure, and simplified money management!</h2>
             </div>
             <div className="text-center mt-8 lg:-mt-[120px]">
-                <button className="btn">Account</button>
+               <Link to='/login'><button className="btn font-bold bg-gradient-to-r from-cyan-500 to-blue-500 border-none  ">Login Now</button></Link>
             </div>
         </div>
     );
