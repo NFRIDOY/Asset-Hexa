@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import InputField from "../../Components/InputField";
+
 const Login = () => {
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -5,39 +8,22 @@ const Login = () => {
   return (
     <div className="mt-28">
       <div className="w-full mx-auto lg:w-[500px] drop-shadow-lg bg-white">
-        <form onSubmit={handleLoginForm} className="p-12">
+        <form onSubmit={handleLoginForm} className="px-12 pt-12 pb-6">
           <h1 className="backdrop-blur-sm text-4xl pb-8">Login</h1>
           <div className="space-y-5">
-            {/* Div for email input */}
-            <div>
-              <label htmlFor="email" className="block mb-2">
-                Email
-              </label>
-              <div className="relative">
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="example@gmail.com"
-                  className="p-3 block w-full pl-10 drop-shadow-lg outline-none"
-                />
-              </div>
-            </div>
-            {/* Div for password input */}
-            <div>
-              <label htmlFor="password" className="block mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="pass"
-                  type="password"
-                  placeholder=".............."
-                  className="p-3 block w-full pl-10 drop-shadow-lg outline-none"
-                />
-              </div>
-            </div>
+            {/* for email input */}
+            <InputField
+              InputName={"Email"}
+              type={"email"}
+              placeholder={"example@gmail.com"}
+            />
+            {/*for password input */}
+            <InputField
+              inputName={"Password"}
+              type={"text"}
+              placeholder={"***********"}
+            />
           </div>
-
           {/* Div for submit button */}
           <div>
             <button
@@ -49,9 +35,9 @@ const Login = () => {
           </div>
         </form>
         {/* Div for Other login options */}
-        <div className="pb-12">
+        <div className="pb-6 space-y-5">
           <p className="text-center font-semibold">OR</p>
-          <div className="flex justify-center space-x-4 mt-5">
+          <div className="flex justify-center space-x-4 ">
             {/* Google login button */}
             <button aria-label="Log in with Google" className="p-3 rounded-sm">
               <svg
@@ -111,6 +97,12 @@ const Login = () => {
               </svg>
             </button>
           </div>
+          <p className="text-center">
+            Don&apos;t have an Account?{" "}
+            <Link to="/register" className="font-bold">
+              Sign Up
+            </Link>
+          </p>
         </div>
       </div>
     </div>
