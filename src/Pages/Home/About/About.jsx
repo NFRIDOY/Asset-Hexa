@@ -11,7 +11,7 @@ const About = () => {
             <div className="bg-[#212454] h-96 md:h-72 pt-10">
                 <h1 className="md:ml-20 ml-20 mb-2 text-6xl font-bold text-white">ABOUT US</h1>
                 <h3 className="md:ml-20 ml-36 mb-1 text-[#DDD831] text-xl " >GREAT COMPANY</h3>
-                <p className="pt-5 md:ml-20 ml-10 text-[#9BA39e] w-[420px] md:w-[800px] ">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
+                <p className="pt-5 md:ml-20 ml-10 text-[#9BA39e] w-[420px] md:w-[700px]  lg:w-[800px]">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
             </div>
             <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
                 <div>
@@ -37,7 +37,7 @@ const About = () => {
             <div className='mt-10'>
                 <h2 className='text-3xl text-center mb-2'><span className='text-[#E1DD4A] '>Team </span>Members</h2>
                 <p className='text-2xl text-center mb-10 text-white'>We have created alliances with recognized entities that contribute to improving quality of your life.</p>
-                <div className='gap-5 grid grid-cols-1 md:grid-cols-3'>
+                <div className='gap-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3'>
                     <div className=' border '>
                         <p className='bg-[#DDD831] h-5 mb-5 '></p>
                         <div className='flex justify-center'>
@@ -94,7 +94,7 @@ const About = () => {
                         </div>
                         <div className='flex justify-center gap-2'>
                             <CiLinkedin className='mt-1' style={20} />
-                            <p>Linkdin</p>
+                            <p className='pb-10'>Linkdin</p>
                         </div>
                     </div>
                     <div className=' border '>
@@ -123,7 +123,7 @@ const About = () => {
                         </div>
                         <div className='flex justify-center gap-2'>
                             <CiLinkedin className='mt-1' style={20} />
-                            <p>Linkdin</p>
+                            <p className='pb-10'>Linkdin</p>
                         </div>
                     </div>
                     <div className=' border '>
@@ -152,7 +152,7 @@ const About = () => {
                         </div>
                         <div className='flex justify-center gap-2'>
                             <CiLinkedin className='mt-1' style={20} />
-                            <p>Linkdin</p>
+                            <p className='pb-10'>Linkdin</p>
                         </div>
                     </div>
                     <div className=' border '>
@@ -181,7 +181,7 @@ const About = () => {
                         </div>
                         <div className='flex justify-center gap-2'>
                             <CiLinkedin className='mt-1' style={20} />
-                            <p>Linkdin</p>
+                            <p className='pb-10'>Linkdin</p>
                         </div>
                     </div>
                     <div className=' border '>
