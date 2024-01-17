@@ -1,20 +1,27 @@
 import { Link } from "react-router-dom";
 import InputField from "../../Components/InputField";
 
-const Login = () => {
-  const handleLoginForm = (e) => {
+const Register = () => {
+  const handleRegisterForm = (e) => {
     e.preventDefault();
     const form = e.target;
+    const username = form.Username.value;
     const email = form.Email.value;
     const password = form.Password.value;
-    console.log(email, password);
+    console.log(username, email, password);
   };
   return (
     <div className="mt-28">
       <div className="w-full mx-auto lg:w-[500px] drop-shadow-lg bg-white">
-        <form onSubmit={handleLoginForm} className="px-12 pt-12 pb-6">
-          <h1 className="backdrop-blur-sm text-4xl pb-8">Login</h1>
+        <form onSubmit={handleRegisterForm} className="px-12 pt-12 pb-6">
+          <h1 className="backdrop-blur-sm text-4xl pb-8">Register</h1>
           <div className="space-y-5">
+            {/* for email input */}
+            <InputField
+              inputName={"Username"}
+              type={"text"}
+              placeholder={"example"}
+            />
             {/* for email input */}
             <InputField
               inputName={"Email"}
@@ -34,7 +41,7 @@ const Login = () => {
               type="submit"
               className="py-2 px-5 mb-4 mt-6 shadow-lg before:block before:-left-1 before:-top-1 before:bg-black before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block text-xl"
             >
-              Login
+              Register
             </button>
           </div>
         </form>
@@ -102,9 +109,9 @@ const Login = () => {
             </button>
           </div>
           <p className="text-center">
-            Don&apos;t have an Account?{" "}
-            <Link to="/register" className="font-bold">
-              Sign Up
+            Already have an Account?{" "}
+            <Link to="/login" className="font-bold">
+              Login
             </Link>
           </p>
         </div>
@@ -113,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
