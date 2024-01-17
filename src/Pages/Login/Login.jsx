@@ -4,6 +4,10 @@ import InputField from "../../Components/InputField";
 const Login = () => {
   const handleLoginForm = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.Email.value;
+    const password = form.Password.value;
+    console.log(email, password);
   };
   return (
     <div className="mt-28">

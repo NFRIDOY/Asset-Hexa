@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 const InputField = ({ inputName, type, placeholder }) => {
-  console.log(inputName, type, placeholder);
   return (
     <div>
       <label htmlFor={inputName} className="block mb-2">
