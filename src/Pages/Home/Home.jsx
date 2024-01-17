@@ -1,12 +1,11 @@
-import Footer from "../../Components/Shared/Footer";
+import Banner from "./Banner";
 
 const Home = () => {
     return (
         <div>
 
-
-            {/*added  Footer Section in Home page */}
-            <Footer/>
+            <h1>this is home</h1>
+            <Banner></Banner>
         </div>
     );
 };
