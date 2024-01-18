@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../Components/InputField";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+
+  const { user, setUser, createUserEmailPass, updateUser, logOut } = useAuth();
+  const navigate = useNavigate()
+
   const handleRegisterForm = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -9,6 +14,24 @@ const Register = () => {
     const email = form.Email.value;
     const password = form.Password.value;
     console.log(username, email, password);
+
+    createUserEmailPass(email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user)
+        setUser(user)
+        alert("User Created")
+        
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(" Error on CreateUser ",errorCode)
+        console.log(" Error on CreateUser ",errorMessage)
+        alert("User Creation Error")
+      });
+
   };
   return (
     <div className="mt-28">
