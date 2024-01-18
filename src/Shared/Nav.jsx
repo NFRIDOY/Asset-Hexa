@@ -10,33 +10,33 @@ const Nav = () => {
             isPending ? "pending" : isActive ? "active" : ""
           }
         >
-          Item 1
+          Home
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/messages"
+          to="/about"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""
           }
         >
-          Item 2
+          About
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/messages"
+          to="/HelpDesk"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""
           }
         >
-          Item 3
+          Help Desk
         </NavLink>
       </li>
     </>
   );
   return (
-    <div>
+    <div className="">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">

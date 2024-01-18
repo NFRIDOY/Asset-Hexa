@@ -1,15 +1,14 @@
 
-import About from "./About/About";
 
 import Banner from "./Banner";
+import FeatureHome from "./FeatureHome";
 
 
 const Home = () => {
     return (
         <div>
-            <h1>this is home</h1>
             <Banner></Banner>
-            <About></About>
+        <FeatureHome></FeatureHome>
         </div>
     );
 };

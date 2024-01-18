@@ -12,8 +12,8 @@ import { CiLinkedin } from "react-icons/ci";
 
 const About = () => {
     return (
-        <div className=' max-w-[1450px] mx-auto bg-[#587EF6]'>
-            <div className="pr-6 pl-3 bg-[#212454] h-96 md:h-72 pt-10">
+        <div className=' max-w-[100%] mx-auto bg-[#587EF6]'>
+            <div className="bg-[#212454] h-96 md:h-72 pt-10">
                 <h1 className="md:ml-20 ml-20 mb-2 text-6xl font-bold text-white">ABOUT US</h1>
                 <h3 className="md:ml-20 ml-36 mb-1 text-[#DDD831] text-xl " >GREAT COMPANY</h3>
                 <p className="pt-5 md:ml-20 ml-10 text-[#9BA39e] w-[420px] md:w-[700px]  lg:w-[800px]">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
