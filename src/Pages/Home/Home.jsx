@@ -1,5 +1,6 @@
 
 
+import WhyChooseUs from "../../Components/HelpDesk/WhyChooseUs";
 import Banner from "./Banner";
 import FeatureHome from "./FeatureHome";
 
@@ -9,7 +10,8 @@ const Home = () => {
         <div>
             <Banner></Banner>
         <FeatureHome></FeatureHome>
-        </div>
+        <WhyChooseUs></WhyChooseUs>
+    </div>
     );
 };
 
