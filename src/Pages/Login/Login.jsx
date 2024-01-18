@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
 
-  const { user, setUser, signInEmailPass, googleSignIn } = useAuth()
+  const { user, setUser, signInEmailPass, googleSignIn, githubSignIn } = useAuth()
   const navigate = useNavigate()
 
   const handleLoginForm = (e) => {
@@ -45,6 +45,26 @@ const Login = () => {
             alert("User Login Using Google")
             // console.log(location.pathname)
             console.log(location?.state)
+            navigate(location?.state ? location?.state : '/')
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("User Login Failed")
+            console.log(" Error on CreateUser ", errorCode)
+            console.log(" Error on CreateUser ", errorMessage)
+        });
+}
+  const hangleGithubSignIn = () => {
+    githubSignIn()
+        .then((result) => {
+            const user = result.user;
+            setUser(user)
+            console.log(user)
+            // getToken()
+            alert("User Login Using Github")
+            // console.log(location.pathname)
+            // console.log(location?.state)
             navigate(location?.state ? location?.state : '/')
         }).catch((error) => {
             // Handle Errors here.
@@ -137,7 +157,7 @@ const Login = () => {
             </button>
 
             {/* Github login button */}
-            <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+            <button aria-label="Log in with GitHub" className="p-3 rounded-sm" onClick={hangleGithubSignIn}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"

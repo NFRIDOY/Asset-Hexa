@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, updateProfile, GithubAuthProvider } from "firebase/auth";
 import app from './../utility/Firebase/firebase.config';
 import PropTypes from 'prop-types'; // ES6
 
@@ -11,7 +11,12 @@ export default function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     const auth = getAuth(app);
+
+    // google auth provider
     const googleProvider = new GoogleAuthProvider();
+
+    // gitgub auth provider
+    const githubProvider = new GithubAuthProvider();
 
     /**
      * Create User By Email & Pass
@@ -31,6 +36,11 @@ export default function AuthProvider({ children }) {
     const googleSignIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
+    }
+    
+    const githubSignIn = () => {
+        setLoading(true)
+        return signInWithPopup(auth, githubProvider)
     }
 
     /**
@@ -109,7 +119,7 @@ export default function AuthProvider({ children }) {
         }
     }
 
-    const contextInfo = { user, setUser, loading, setLoading, createUserEmailPass, signInEmailPass, googleSignIn, logOut, updateUser }
+    const contextInfo = { user, setUser, loading, setLoading, createUserEmailPass, signInEmailPass, googleSignIn, logOut, updateUser, githubSignIn }
 
     return (
         <AuthContext.Provider value={contextInfo}>
