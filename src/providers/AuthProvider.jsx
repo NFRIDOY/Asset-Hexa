@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, updateProfile } from "firebase/auth";
 import app from './../utility/Firebase/firebase.config';
 import PropTypes from 'prop-types'; // ES6
 
@@ -22,6 +22,7 @@ export default function AuthProvider({ children }) {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
+
     const signInEmailPass = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
@@ -70,7 +71,45 @@ export default function AuthProvider({ children }) {
         }
     }, [user])
 
-    const contextInfo = { user, setUser, loading, setLoading, createUserEmailPass, signInEmailPass, googleSignIn, logOut }
+    //Update Ueser
+    const updateUser = (name, photoURL) => {
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photoURL,
+            // emailVerified : user.emailVerified
+        })
+            .then(() => {
+                // Profile updated!
+                // ...
+                // toast.success(user.displayName)
+                // toast.success(user.photoURL)
+                setUser(user)
+                // toast.success("Profile updated!")
+                // logOut()
+
+
+            }).catch((error) => {
+                // An error occurred
+                // ...
+                // toast.success("Profile updated! Failed")
+                console.log(error)
+            });
+        if (user !== null) {
+            // The user object has basic properties such as display name, email, etc.
+            const displayName = user.displayName;
+            const email = user.email;
+            // const photoURL = user.photoURL;
+            const emailVerified = user.emailVerified;
+
+            setUser(user)
+            // The user's ID, unique to the Firebase project. Do NOT use
+            // this value to authenticate with your backend server, if
+            // you have one. Use User.getToken() instead.
+            const uid = user.uid;
+        }
+    }
+
+    const contextInfo = { user, setUser, loading, setLoading, createUserEmailPass, signInEmailPass, googleSignIn, logOut, updateUser }
 
     return (
         <AuthContext.Provider value={contextInfo}>

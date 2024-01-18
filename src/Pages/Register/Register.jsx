@@ -13,7 +13,8 @@ const Register = () => {
     const username = form.Username.value;
     const email = form.Email.value;
     const password = form.Password.value;
-    console.log(username, email, password);
+    const photoURL = form.Photo.value;
+    console.log(username, email, password, photoURL);
 
     createUserEmailPass(email, password)
       .then((userCredential) => {
@@ -21,14 +22,15 @@ const Register = () => {
         const user = userCredential.user;
         console.log(user)
         setUser(user)
+        updateUser(name, photoURL);
         alert("User Created")
-        
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(" Error on CreateUser ",errorCode)
-        console.log(" Error on CreateUser ",errorMessage)
+        console.log(" Error on CreateUser ", errorCode)
+        console.log(" Error on CreateUser ", errorMessage)
         alert("User Creation Error")
       });
 
@@ -56,6 +58,11 @@ const Register = () => {
               inputName={"Password"}
               type={"text"}
               placeholder={"***********"}
+            />
+            <InputField
+              inputName={"Photo"}
+              type={"text"}
+              placeholder={"photo URL"}
             />
           </div>
           {/* Div for submit button */}
