@@ -1,11 +1,16 @@
+
+
+
+import Income from "../../Components/HelpDesk/Home/Income";
 import Banner from "./Banner";
+
 
 const Home = () => {
     return (
         <div>
-
-            <h1>this is home</h1>
             <Banner></Banner>
+            <Income/>
+            
         </div>
     );
 };
