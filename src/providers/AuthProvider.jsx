@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import app from './../utility/Firebase/firebase.config';
+import PropTypes from 'prop-types'; // ES6
 
 
 export const AuthContext = createContext(null)
 
-export default function AuthProvider({children}) {
+export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -36,6 +37,7 @@ export default function AuthProvider({children}) {
      */
     const logOut = () => {
         setLoading(true)
+        alert("User Signed Out!!!")
         return signOut(auth)
     }
 
@@ -51,14 +53,14 @@ export default function AuthProvider({children}) {
             setLoading(false)
             if (currentUser) {
                 // User is signed in
-                const loggedInUser = {email: currentUser.email};
+                const loggedInUser = { email: currentUser.email };
 
                 console.log(loggedInUser)
 
                 // TODO: get token
             } else {
                 // User is signed out
-                alert("User Signed Out!!!")
+                // alert("User Signed Out!!!")
 
             }
         })
@@ -75,6 +77,10 @@ export default function AuthProvider({children}) {
             {children}
         </AuthContext.Provider>
     );
-};
+}
 
 // export default AuthProvider;
+
+AuthProvider.propTypes = {
+    children: PropTypes.node,
+}
