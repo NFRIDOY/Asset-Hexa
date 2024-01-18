@@ -1,13 +1,14 @@
-import Income from "../../Components/Home/Income";
+
+
 import Banner from "./Banner";
+import FeatureHome from "./FeatureHome";
 
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <Income/>
-
+        <FeatureHome></FeatureHome>
         </div>
     );
 };
