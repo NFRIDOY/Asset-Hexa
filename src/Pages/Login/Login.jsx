@@ -1,14 +1,81 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../Components/InputField";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+
+  const { user, setUser, signInEmailPass, googleSignIn, githubSignIn } = useAuth()
+  const navigate = useNavigate()
+
   const handleLoginForm = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.Email.value;
     const password = form.Password.value;
     console.log(email, password);
+
+    signInEmailPass(email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUser(user)
+        alert("User Login")
+        console.log(user)
+        // console.log(location.pathname)
+        console.log(location?.state)
+        // getToken()
+        navigate(location?.state ? location?.state : '/')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("User Login Failed")
+        console.log(" Error on CreateUser ", errorCode)
+        console.log(" Error on CreateUser ", errorMessage)
+      });
   };
+
+  const hangleGoogleSignIn = () => {
+    googleSignIn()
+        .then((result) => {
+            const user = result.user;
+            setUser(user)
+            console.log(user)
+            // getToken()
+            alert("User Login Using Google")
+            // console.log(location.pathname)
+            console.log(location?.state)
+            navigate(location?.state ? location?.state : '/')
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("User Login Failed")
+            console.log(" Error on CreateUser ", errorCode)
+            console.log(" Error on CreateUser ", errorMessage)
+        });
+}
+  const hangleGithubSignIn = () => {
+    githubSignIn()
+        .then((result) => {
+            const user = result.user;
+            setUser(user)
+            console.log(user)
+            // getToken()
+            alert("User Login Using Github")
+            // console.log(location.pathname)
+            // console.log(location?.state)
+            navigate(location?.state ? location?.state : '/')
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("User Login Failed")
+            console.log(" Error on CreateUser ", errorCode)
+            console.log(" Error on CreateUser ", errorMessage)
+        });
+}
+
   return (
     <div className="mt-28">
       <div className="w-full mx-auto lg:w-[500px] drop-shadow-lg bg-white">
@@ -43,7 +110,7 @@ const Login = () => {
           <p className="text-center font-semibold">OR</p>
           <div className="flex justify-center space-x-4 ">
             {/* Google login button */}
-            <button aria-label="Log in with Google" className="p-3 rounded-sm">
+            <button aria-label="Log in with Google" className="p-3 rounded-sm" onClick={hangleGoogleSignIn}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
@@ -90,7 +157,7 @@ const Login = () => {
             </button>
 
             {/* Github login button */}
-            <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+            <button aria-label="Log in with GitHub" className="p-3 rounded-sm" onClick={hangleGithubSignIn}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
