@@ -48,7 +48,7 @@ export default function AuthProvider({ children }) {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log("unSubscribe")
+            // console.log("unSubscribe")
             console.log(currentUser)
             setUser(currentUser)
             setLoading(false)
@@ -56,7 +56,7 @@ export default function AuthProvider({ children }) {
                 // User is signed in
                 const loggedInUser = { email: currentUser.email };
 
-                console.log(loggedInUser)
+                // console.log(loggedInUser)
 
                 // TODO: get token
             } else {
