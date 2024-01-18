@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import incomePic from "../../../assets/Income/Mint.com-ZoneB-X-Small-2.jpg"
+import incomePic from "../../assets/Income/Mint.com-ZoneB-X-Small-2.jpg"
 const Income = () => {
     return (
         <div>
