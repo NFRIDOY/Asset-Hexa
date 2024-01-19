@@ -2,86 +2,51 @@ import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../Components/InputField";
 import useAuth from "../../hooks/useAuth";
 
-const Login = () => {
+const Register = () => {
 
-  const { user, setUser, signInEmailPass, googleSignIn, githubSignIn } = useAuth()
+  const { user, setUser, createUserEmailPass, updateUser, logOut } = useAuth();
   const navigate = useNavigate()
 
-  const handleLoginForm = (e) => {
+  const handleRegisterForm = (e) => {
     e.preventDefault();
     const form = e.target;
+    const username = form.Username.value;
     const email = form.Email.value;
     const password = form.Password.value;
-    console.log(email, password);
+    const photoURL = form.Photo.value;
+    console.log(username, email, password, photoURL);
 
-    signInEmailPass(email, password)
+    createUserEmailPass(email, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed up 
         const user = userCredential.user;
-        setUser(user)
-        alert("User Login")
         console.log(user)
-        // console.log(location.pathname)
-        console.log(location?.state)
-        // getToken()
-        navigate(location?.state ? location?.state : '/')
+        setUser(user)
+        updateUser(name, photoURL);
+        alert("User Created")
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert("User Login Failed")
         console.log(" Error on CreateUser ", errorCode)
         console.log(" Error on CreateUser ", errorMessage)
+        alert("User Creation Error")
       });
+
   };
-
-  const hangleGoogleSignIn = () => {
-    googleSignIn()
-        .then((result) => {
-            const user = result.user;
-            setUser(user)
-            console.log(user)
-            // getToken()
-            alert("User Login Using Google")
-            // console.log(location.pathname)
-            console.log(location?.state)
-            navigate(location?.state ? location?.state : '/')
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert("User Login Failed")
-            console.log(" Error on CreateUser ", errorCode)
-            console.log(" Error on CreateUser ", errorMessage)
-        });
-}
-  const hangleGithubSignIn = () => {
-    githubSignIn()
-        .then((result) => {
-            const user = result.user;
-            setUser(user)
-            console.log(user)
-            // getToken()
-            alert("User Login Using Github")
-            // console.log(location.pathname)
-            // console.log(location?.state)
-            navigate(location?.state ? location?.state : '/')
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert("User Login Failed")
-            console.log(" Error on CreateUser ", errorCode)
-            console.log(" Error on CreateUser ", errorMessage)
-        });
-}
-
   return (
     <div className="mt-28">
       <div className="w-full mx-auto lg:w-[500px] drop-shadow-lg bg-white">
-        <form onSubmit={handleLoginForm} className="px-12 pt-12 pb-6">
-          <h1 className="backdrop-blur-sm text-4xl pb-8">Login</h1>
+        <form onSubmit={handleRegisterForm} className="px-12 pt-12 pb-6">
+          <h1 className="backdrop-blur-sm text-4xl pb-8">Register</h1>
           <div className="space-y-5">
+            {/* for email input */}
+            <InputField
+              inputName={"Username"}
+              type={"text"}
+              placeholder={"example"}
+            />
             {/* for email input */}
             <InputField
               inputName={"Email"}
@@ -94,6 +59,11 @@ const Login = () => {
               type={"text"}
               placeholder={"***********"}
             />
+            <InputField
+              inputName={"Photo"}
+              type={"text"}
+              placeholder={"photo URL"}
+            />
           </div>
           {/* Div for submit button */}
           <div>
@@ -101,7 +71,7 @@ const Login = () => {
               type="submit"
               className="py-2 px-5 mb-4 mt-6 shadow-lg before:block before:-left-1 before:-top-1 before:bg-black before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block text-xl"
             >
-              Login
+              Register
             </button>
           </div>
         </form>
@@ -110,7 +80,7 @@ const Login = () => {
           <p className="text-center font-semibold">OR</p>
           <div className="flex justify-center space-x-4 ">
             {/* Google login button */}
-            <button aria-label="Log in with Google" className="p-3 rounded-sm" onClick={hangleGoogleSignIn}>
+            <button aria-label="Log in with Google" className="p-3 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
@@ -157,7 +127,7 @@ const Login = () => {
             </button>
 
             {/* Github login button */}
-            <button aria-label="Log in with GitHub" className="p-3 rounded-sm" onClick={hangleGithubSignIn}>
+            <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
@@ -169,9 +139,9 @@ const Login = () => {
             </button>
           </div>
           <p className="text-center">
-            Don&apos;t have an Account?{" "}
-            <Link to="/register" className="font-bold">
-              Sign Up
+            Already have an Account?{" "}
+            <Link to="/login" className="font-bold">
+              Login
             </Link>
           </p>
         </div>
@@ -180,4 +150,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

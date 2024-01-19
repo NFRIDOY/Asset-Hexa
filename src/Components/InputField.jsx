@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const InputField = ({ inputName, type, placeholder }) => {
   return (
     <div>
@@ -17,4 +18,9 @@ const InputField = ({ inputName, type, placeholder }) => {
   );
 };
 
+InputField.propTypes = {
+  inputName: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 export default InputField;
