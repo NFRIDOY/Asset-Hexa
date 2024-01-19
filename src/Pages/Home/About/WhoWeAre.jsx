@@ -23,7 +23,7 @@ const WhoWeAre = () => {
         </div>
         {/* Form */}
         <div className="flex-1 p-8 rounded-2xl  my-auto items-center ">
-          <div className="p-3 leading-6 ">
+          <div className="p-3 leading-6 max-w-xl">
             <h1 className=" mb-5 text-black text-3xl lg:text-5xl font-bold">
               {" "}
               So , "who we are"?
