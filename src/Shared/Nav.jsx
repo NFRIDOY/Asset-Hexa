@@ -1,6 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 const Nav = () => {
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user?.email);
   const ul = (
     <>
       <li>
@@ -70,10 +74,30 @@ const Nav = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{ul}</ul>
         </div>
+        {/* Login Logout toggle button logic */}
         <div className="navbar-end">
-          <Link to="/login" className="btn">
-            Login
-          </Link>
+          {user?.email ? (
+            <div className="flex gap-3 items-center">
+              <div className="w-10 rounded-full">
+                <img
+                  className="w-full rounded-full"
+                  src={
+                    user?.photoURL
+                      ? `${user?.photoURL}`
+                      : "https://i.ibb.co/C2QsnzC/jae-park-7-GX5a-ICaawdb5i4-unsplash.jpg"
+                  }
+                  alt=""
+                />
+              </div>
+              <button onClick={() => logOut()} className="btn">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
