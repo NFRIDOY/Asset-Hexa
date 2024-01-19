@@ -1,14 +1,17 @@
-import Income from "../../Components/Home/Income";
+
+
+import WhyChooseUs from "../../Components/HelpDesk/WhyChooseUs";
 import Banner from "./Banner";
+import FeatureHome from "./FeatureHome";
 
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <Income/>
-
-        </div>
+        <FeatureHome></FeatureHome>
+        <WhyChooseUs></WhyChooseUs>
+    </div>
     );
 };
 
