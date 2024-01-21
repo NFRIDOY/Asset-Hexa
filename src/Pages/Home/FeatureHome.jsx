@@ -8,7 +8,7 @@ import loti2 from "../../lottie/Animation - 1705568847598.json";
 
 const FeatureHome = () => {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto my-40">
       <p className="text-4xl font-bold text-center text-black mb-5 mt-10">
         Discover what&apos;s so amazing about Asset Hexa
       </p>
