@@ -16,8 +16,8 @@ const MainLayout = () => {
 				to="/"
 				className={({ isActive }) =>
 					isActive
-						? "text-black font-bold  p-2 text-xl "
-						: "btn btn-ghost text-white"
+						? "text-black lg:text-primaryColor font-bold  p-2 text-xl "
+						: "p-2 text-xl text-white lg:text-black"
 				}
 			>
 				Home
@@ -29,7 +29,7 @@ const MainLayout = () => {
 					isPending
 						? "pending"
 						: isActive
-						? "text-black font-bold  p-2 text-xl "
+						? "text-black lg:text-primaryColor font-bold  p-2 text-xl "
 						: "p-2 text-xl text-white lg:text-black"
 				}
 			>
@@ -41,7 +41,7 @@ const MainLayout = () => {
 					isPending
 						? "pending"
 						: isActive
-						? "text-black font-bold  p-2 text-xl "
+						? "text-black lg:text-primaryColor font-bold  p-2 text-xl "
 						: "p-2 text-xl text-white  lg:text-black"
 				}
 			>
