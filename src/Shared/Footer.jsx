@@ -6,11 +6,7 @@ const Footer = () => {
         <div>
             <footer className="footer p-10 mt-5 bg-base-200 text-base-content">
                 <aside>
-<<<<<<< HEAD
-                    <img className="h-16" src={logo} alt="" />
-=======
                     <img className="w-32 h-16" src={logo} alt="logo" />
->>>>>>> ad1bc0bce474147c4bf5c59be0987bd7b6a733af
                     <p>Finance & Accounting Services.<br />Providing reliable tech since 2023</p>
                 </aside>
                 <nav>
