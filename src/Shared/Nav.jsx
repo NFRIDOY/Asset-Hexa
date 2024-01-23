@@ -19,6 +19,16 @@ const Nav = () => {
       </li>
       <li>
         <NavLink
+          to="dashboard/overView"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+        >
+        Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/about"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""
