@@ -13,12 +13,15 @@ const Transection = () => {
         </TabList>
 
         <TabPanel>
-          <div>
+          <div className="mt-8 space-y-3">
             <TransectionColumn />
           </div>
         </TabPanel>
         <TabPanel>
-          <TransectionColumn />
+          <div className="mt-8 space-y-3">
+            <TransectionColumn />
+            <TransectionColumn />
+          </div>
         </TabPanel>
       </Tabs>
     </div>
