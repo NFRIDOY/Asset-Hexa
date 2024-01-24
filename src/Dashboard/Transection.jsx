@@ -1,21 +1,24 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import TransectionColumn from "../Components/TransectionColumn";
 
 const Transection = () => {
   return (
     <div>
       <h2>Transection</h2>
       <Tabs>
-        <TabList className={"flex justify-center border-b"}>
+        <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Expense</Tab>
           <Tab>Income</Tab>
         </TabList>
 
         <TabPanel>
-          <h2>Any content 1</h2>
+          <div>
+            <TransectionColumn />
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <TransectionColumn />
         </TabPanel>
       </Tabs>
     </div>
