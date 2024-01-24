@@ -89,12 +89,12 @@ const Nav = () => {
                   alt=""
                 />
               </div>
-              <button onClick={() => logOut()} className="btn">
+              <button onClick={() => logOut()} className="btn btn-sm">
                 Logout
               </button>
             </div>
           ) : (
-            <Link to="/login" className="btn">
+            <Link to="/login" className="btn btn-sm">
               Login
             </Link>
           )}
