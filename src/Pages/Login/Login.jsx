@@ -13,7 +13,7 @@ const Login = () => {
     const email = form.Email.value;
     const password = form.Password.value;
     console.log(email, password);
-
+''
     signInEmailPass(email, password)
       .then((userCredential) => {
         // Signed in 
