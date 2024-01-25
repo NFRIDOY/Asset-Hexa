@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import "../../src/App.css"
 import {
 	LineChart,
 	Line,
@@ -244,7 +245,7 @@ const OverView = () => {
 					</div>
 				</div>
 			</div>
-			<div className=" space-x-4 absolute bottom-8 right-8 ">
+			<div className="group parentbutton space-x-4 absolute bottom-8 right-20">
 				<button className="group w-[50px] h-[50px] relative">
 					<span className="group-hover:shadow-[0px_0px_30px_2px_#0d87f8] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#0d87f8] to-[#70c4ff] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
 						<svg
@@ -269,14 +270,14 @@ const OverView = () => {
 										<path
 											id="vector"
 											d="M11.998 5.84424L11.998 18.1604"
-											stroke="#9EE6FD"
+											stroke="#000"
 											strokeWidth="2"
 											strokeLinecap="round"
 										></path>{" "}
 										<path
 											id="vector_2"
 											d="M18.1561 12.002L5.83998 12.0019"
-											stroke="#9EE6FD"
+											stroke="#000"
 											strokeWidth="2"
 											strokeLinecap="round"
 										></path>{" "}
@@ -285,35 +286,38 @@ const OverView = () => {
 							</g>{" "}
 						</svg>{" "}
 					</span>{" "}
-					<span className=" bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
+					<span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]">
+                   </span>{" "}
 					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block ">
-                    <button
+                    </span>{" "}
+					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block ">
+                    </span>{" "}
+				</button>
+
+				<button
 					onClick={() => {
                         document.getElementById("modal_expanse").showModal();
                     }}
-					className="btn absolute bottom-4 -left-10 group-hover:static  btn-primary"
+					className="custom-button income"
 				>
-					add income
-				</button></span>{" "}
+					Add Income
 				</button>
-
-				
-			
-				<button
+                <button
 					onClick={() =>
 						document.getElementById("modal_expanse").showModal()
 					}
-					className="btn btn-warning"
+					className="custom-button expanse"
 				>
-					add Expence{" "}
+					Add Expence{" "}
 				</button>
+				
 				<button
 					onClick={() =>
 						document.getElementById("modal_transfer").showModal()
 					}
-					className="btn btn-success"
+					className="custom-button Transfer"
 				>
-					add transfer{" "}
+					Add Transfer{" "}
 				</button>
 			</div>
 
