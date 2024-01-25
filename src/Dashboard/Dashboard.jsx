@@ -9,7 +9,7 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open max-w-7xl mx-auto">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col mt-10   lg:mx-28">
+            <div className="drawer-content flex flex-col mt-10   ">
                 {/* Page content here */}
                 <div className="-mt-3 ml-10 lg:ml-0">
                     <Outlet></Outlet>

@@ -12,6 +12,7 @@ const Login = () => {
   const location = useLocation()
   const from = location?.state?.from?.pathname || '/'
 
+
   // form submit handler
   const handleSubmit = async event => {
     event.preventDefault()
@@ -55,6 +56,76 @@ const Login = () => {
     }
 
   }
+
+  const handleLoginForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.Email.value;
+    const password = form.Password.value;
+    console.log(email, password);
+''
+    signInEmailPass(email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUser(user)
+        alert("User Login")
+        console.log(user)
+        // console.log(location.pathname)
+        console.log(location?.state)
+        // getToken()
+        navigate(location?.state ? location?.state : '/')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("User Login Failed")
+        console.log(" Error on CreateUser ", errorCode)
+        console.log(" Error on CreateUser ", errorMessage)
+      });
+  };
+
+  const hangleGoogleSignIn = () => {
+    googleSignIn()
+        .then((result) => {
+            const user = result.user;
+            setUser(user)
+            console.log(user)
+            // getToken()
+            alert("User Login Using Google")
+            // console.log(location.pathname)
+            console.log(location?.state)
+            navigate(location?.state ? location?.state : '/')
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("User Login Failed")
+            console.log(" Error on CreateUser ", errorCode)
+            console.log(" Error on CreateUser ", errorMessage)
+        });
+}
+  const hangleGithubSignIn = () => {
+    githubSignIn()
+        .then((result) => {
+            const user = result.user;
+            setUser(user)
+            console.log(user)
+            // getToken()
+            alert("User Login Using Github")
+            // console.log(location.pathname)
+            // console.log(location?.state)
+            navigate(location?.state ? location?.state : '/')
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("User Login Failed")
+            console.log(" Error on CreateUser ", errorCode)
+            console.log(" Error on CreateUser ", errorMessage)
+        });
+}
+
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
