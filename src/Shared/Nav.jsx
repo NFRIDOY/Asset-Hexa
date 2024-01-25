@@ -1,3 +1,4 @@
+
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo.png";
 import { useContext } from "react";
@@ -15,6 +16,16 @@ const Nav = () => {
           }
         >
           Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="dashboard/overView"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+        >
+        Dashboard
         </NavLink>
       </li>
       <li>
