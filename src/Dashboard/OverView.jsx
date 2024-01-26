@@ -11,13 +11,32 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxios from "../hooks/useAxios";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+
 
 const OverView = () => {
 	const [incomeText, setIncomeText] = useState("");
 	const [expanseText, setExpanseText] = useState("");
 	const [transferText, setTransferText] = useState("");
+    // const [transferData , setTransferData] = useState("") 
+    const axiosPublic = useAxios()
     const {user}= useContext(AuthContext)
-    console.log(user);
+    
+    // https://asset-hexa-server.vercel.app/transections?type=EXPENSE&email=backend@example.com
+    const { data: transferData = [] , refetch} = useQuery({
+        queryKey: ["transeferData"],
+        queryFn: async () => {
+          const res = await axiosPublic.get(
+            `/transections?type=TRANSFER&email=${user?.email}`
+          );
+          return res.data;
+        },
+    });
+    // console.log(transection);
+    //   console.log(transection);
+
 
 	const data = [
 		{
@@ -103,6 +122,7 @@ const OverView = () => {
 		const account = form.account.value;
 		const note = form.note.value;
         const email = user.email
+        const type = "INCOME"
 
 		if (
 			date == "Invalid Date" ||
@@ -113,10 +133,20 @@ const OverView = () => {
 		) {
 			setIncomeText("please fill out all the form");
 		} else {
-			const incomeData = {email, date, amount, category, account, note };
+			const incomeData = {email, date, amount, category, account, note , type  };
 			setIncomeText("");
-			console.log(incomeData);
+			console.log(incomeData) , "thiw is incoem t=data";
 			form.reset();
+            axiosPublic.post("/transections" , incomeData)
+            .then(res => {
+                console.log(res.data);
+                if(res?.data.resultAccount.acknowledged){
+                    toast.success('Income Data added Successfully')
+
+                }
+            })
+            
+
 		}
 	};
 
@@ -129,6 +159,7 @@ const OverView = () => {
 		const account = form.account.value;
 		const note = form.note.value;
         const email = user.email
+        const type = "EXPENSE"
 
 		if (
 			date == "Invalid Date" ||
@@ -139,10 +170,20 @@ const OverView = () => {
 		) {
 			setExpanseText("please fill out all the form");
 		} else {
-			const expanseData = {email, date, amount, category, account, note };
+			const expanseData = {email, date, amount, category, account, note , type };
 			setExpanseText("");
 			console.log(expanseData);
-			form.reset();
+            form.reset();
+            axiosPublic.post("/transections" , expanseData)
+            .then(res => {
+                console.log(res.data);
+                if(res?.data.resultAccount.acknowledged){
+                    toast.success('Expanse Data added Successfully')
+
+                }
+            })
+
+
 		}
 	};
 
@@ -155,6 +196,7 @@ const OverView = () => {
 		const to = form.to.value;
 		const note = form.note.value;
         const email = user.email
+        const type = "TRANSFER"
 
 		if (
 			date == "Invalid Date" ||
@@ -165,19 +207,31 @@ const OverView = () => {
 		) {
 			setTransferText("please fill out all the form");
 		} else {
-			const expanseData = {email , date, amount, from, to, note  };
+			const transferData = {email , date, amount, from, to, note ,type  };
 			setTransferText("");
-			console.log(expanseData);
+			console.log(transferData);
 			form.reset();
+            axiosPublic.post("/transections" , transferData)
+            .then(res => {
+                console.log(res.data);
+                if(res?.data.resultAccount.acknowledged){
+                    toast.success('Transfer Data added Successfully')
+
+                }
+            })
 		}
 	};
 
 
 
+    
+
+
+
 	return (
 		<div>
-			<div className="flex gap-5">
-				<div>
+			<div className="flex flex-col lg:flex-row gap-5">
+				<div className="lg:overflow-x-auto">
 					<LineChart
 						width={700}
 						height={400}
@@ -216,30 +270,19 @@ const OverView = () => {
 							{/* head */}
 							<thead>
 								<tr>
-									<th>Note</th>
-									<th>Type</th>
-									<th>Transection</th>
+									<th>from</th>
+									<th>To</th>
+									<th>amount</th>
 								</tr>
 							</thead>
 							<tbody>
-								{/* row 1 */}
-								<tr>
-									<td>Cy Ganderton</td>
-									<td>Quality Control Specialist</td>
-									<td>Blue</td>
-								</tr>
-								{/* row 2 */}
-								<tr className="hover">
-									<td>Hart Hagerty</td>
-									<td>Desktop Support Technician</td>
-									<td>Purple</td>
-								</tr>
-								{/* row 3 */}
-								<tr>
-									<td>Brice Swyre</td>
-									<td>Tax Accountant</td>
-									<td>Red</td>
-								</tr>
+                            {transferData?.map((item) => <tr key={item?.id} className="hover">
+									<td> {item?.from} </td>
+									<td>{item?.to}</td>
+									<td>{item?.amount}</td>
+								</tr> )}
+								
+								
 							</tbody>
 						</table>
 					</div>
@@ -296,7 +339,7 @@ const OverView = () => {
 
 				<button
 					onClick={() => {
-                        document.getElementById("modal_expanse").showModal();
+                        document.getElementById("modal_income").showModal();
                     }}
 					className="custom-button income"
 				>
