@@ -13,15 +13,30 @@ import {
 import { AuthContext } from "../providers/AuthProvider";
 import useAxios from "../hooks/useAxios";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 
 const OverView = () => {
 	const [incomeText, setIncomeText] = useState("");
 	const [expanseText, setExpanseText] = useState("");
 	const [transferText, setTransferText] = useState("");
+    // const [transferData , setTransferData] = useState("") 
     const axiosPublic = useAxios()
     const {user}= useContext(AuthContext)
-    console.log(user);
+    
+    // https://asset-hexa-server.vercel.app/transections?type=EXPENSE&email=backend@example.com
+    const { data: transferData = [] , refetch} = useQuery({
+        queryKey: ["transeferData"],
+        queryFn: async () => {
+          const res = await axiosPublic.get(
+            `/transections?type=TRANSFER&email=${user?.email}`
+          );
+          return res.data;
+        },
+    });
+    // console.log(transection);
+    //   console.log(transection);
+
 
 	const data = [
 		{
@@ -209,6 +224,10 @@ const OverView = () => {
 
 
 
+    
+
+
+
 	return (
 		<div>
 			<div className="flex flex-col lg:flex-row gap-5">
@@ -251,30 +270,19 @@ const OverView = () => {
 							{/* head */}
 							<thead>
 								<tr>
-									<th>Note</th>
-									<th>Type</th>
-									<th>Transection</th>
+									<th>from</th>
+									<th>To</th>
+									<th>amount</th>
 								</tr>
 							</thead>
 							<tbody>
-								{/* row 1 */}
-								<tr>
-									<td>Cy Ganderton</td>
-									<td>Quality Control Specialist</td>
-									<td>Blue</td>
-								</tr>
-								{/* row 2 */}
-								<tr className="hover">
-									<td>Hart Hagerty</td>
-									<td>Desktop Support Technician</td>
-									<td>Purple</td>
-								</tr>
-								{/* row 3 */}
-								<tr>
-									<td>Brice Swyre</td>
-									<td>Tax Accountant</td>
-									<td>Red</td>
-								</tr>
+                            {transferData?.map((item) => <tr key={item?.id} className="hover">
+									<td> {item?.from} </td>
+									<td>{item?.to}</td>
+									<td>{item?.amount}</td>
+								</tr> )}
+								
+								
 							</tbody>
 						</table>
 					</div>
