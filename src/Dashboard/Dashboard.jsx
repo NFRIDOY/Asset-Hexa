@@ -5,6 +5,7 @@ import money from '../lottie/Animation - 1706022352528.json'
 import Lottie from "lottie-react";
 import { FaDoorOpen } from "react-icons/fa";
 
+
 const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open max-w-7xl mx-auto">
@@ -48,13 +49,22 @@ const Dashboard = () => {
                         </>
                     </ul>
 
+
+                    <div className=''>
+                       <p className='italic mt-4 p-3 font-bold bg-pink-100  rounded-lg'>
+                            <NavLink to='/dashboard/profile'>Profile</NavLink>
+
+                       </p>
+                       
+                    </div>
+
                     <div className="bg-pink-100 p-2 rounded-lg mt-4">
                         <div className="mx-auto ">
                             <Lottie
                                 className="mx-auto w-[150px] md:[w-150px] lg:w-[150px]"
                                 animationData={money}
                                 loop={true}
-                            />
+                          />
                         </div>
                     </div>
                 </div>
