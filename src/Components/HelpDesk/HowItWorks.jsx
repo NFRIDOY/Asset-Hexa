@@ -1,5 +1,6 @@
 import image from "../../assets/how-it-works/HowItworiks.jpg";
 import { Link } from "react-router-dom";
+import Statistics from './../../Dashboard/Statistics';
 
 const HowItWorks = () => {
   return (
@@ -37,7 +38,7 @@ const HowItWorks = () => {
             </div>
             <div>
               <h1 className="text-2xl font-semibold">
-                Sign Up and create an account
+                Create an account For Your Money
               </h1>
               <p className="text-gray-500">
                 Begin your journey by regestering and setting up your account
@@ -50,7 +51,7 @@ const HowItWorks = () => {
             </div>
             <div>
               <h1 className="text-2xl font-semibold">
-                Sign Up and create an account
+                Add Transection Income/Expenses
               </h1>
               <p className="text-gray-500">
                 Begin your journey by regestering and setting up your account
@@ -63,7 +64,7 @@ const HowItWorks = () => {
             </div>
             <div>
               <h1 className="text-2xl font-semibold">
-                Sign Up and create an account
+                Watch Your Account Statistics
               </h1>
               <p className="text-gray-500">
                 Begin your journey by regestering and setting up your account
