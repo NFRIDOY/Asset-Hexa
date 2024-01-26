@@ -1,13 +1,8 @@
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
+import useAxios from "../hooks/useAxios";
+import { useEffect, useState } from "react";
+import { longFormatters } from "date-fns";
 
-const data01 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-  { name: "Group E", value: 278 },
-  { name: "Group F", value: 189 },
-];
 const COLORS = [
   "#0088FE",
   "#00C49F",
@@ -17,12 +12,34 @@ const COLORS = [
   "#fb6f92",
 ];
 const Statistics = () => {
+  const [pieData, setPieData] = useState([]);
+  const [pieLabel, setPieLabel] = useState([]);
+  const axiosPublic = useAxios();
+  useEffect(() => {
+    axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
+      //   console.log(res.data);
+      setPieData(res.data.accPiData);
+      setPieLabel(res.data.accPiLebel);
+    });
+  }, [axiosPublic]);
+  //   console.log(pieData, pieLabel);
+  const data01 = [
+    { name: pieLabel[0], value: pieData[0] },
+    { name: pieLabel[1], value: pieData[1] },
+    { name: pieLabel[2], value: 500 },
+    { name: pieLabel[3], value: 400 },
+    { name: pieLabel[4], value: 100 },
+    { name: pieLabel[5], value: pieData[5] },
+    { name: pieLabel[6], value: pieData[5] },
+  ];
   return (
-    <div className="mt-10">
-      <div className="flex flex-col md:flex-row justify-center items-center">
+    <div className="mt-20">
+      <div className="flex flex-col gap-10 md:flex-row justify-center items-center">
         {/* Pie 1 */}
         <div className="flex flex-col justify-center items-center overflow-clip">
-          <h1 className="text-4xl  text-center font-bold">Income</h1>
+          <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
+            Accounts
+          </h1>
           <PieChart width={400} height={400}>
             <Pie
               dataKey="value"
@@ -48,7 +65,7 @@ const Statistics = () => {
         </div>
         <div></div>
         {/* PIE 2 */}
-        <div className="flex flex-col justify-center items-center overflow-clip">
+        {/* <div className="flex flex-col justify-center items-center overflow-clip">
           <h1 className="text-4xl  text-center font-bold">Expense</h1>
           <PieChart width={400} height={400}>
             <Pie
@@ -71,7 +88,7 @@ const Statistics = () => {
             <Tooltip />
             <Legend />
           </PieChart>
-        </div>
+        </div> */}
       </div>
     </div>
   );
