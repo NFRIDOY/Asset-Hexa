@@ -2,17 +2,19 @@
 // import { MdDeleteForever } from "react-icons/md";
 // import { GrDocumentUpdate } from "react-icons/gr";
 
+import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const TransectionColumn = ({transactionType}) => {
 
   const axiosPublic = useAxios()
+  const {user}=useAuth()
 
   const { data: transection = [] } = useQuery({
     queryKey: ['transection'],
     queryFn: async () => {
-        const res = await axiosPublic.get(`/transections?type=${transactionType}&email=backend@example.com`)
+        const res = await axiosPublic.get(`/transections?type=${transactionType}&email=${user?.email}`)
         return res.data
 
     }
