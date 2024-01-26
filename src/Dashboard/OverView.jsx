@@ -17,15 +17,20 @@ import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 
 const OverView = () => {
+
+    // state to hold  erroretext from diffrent modal 
+
 	const [incomeText, setIncomeText] = useState("");
 	const [expanseText, setExpanseText] = useState("");
 	const [transferText, setTransferText] = useState("");
-	// const [transferData , setTransferData] = useState("")
+
 	const axiosPublic = useAxios();
 	const { user } = useContext(AuthContext);
 	const [pieData, setPieData] = useState([]);
 	const [pieLabel, setPieLabel] = useState([]);
 
+
+    // Loading Data form Paichart 
 
     useEffect(() => {
         axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
@@ -36,6 +41,9 @@ const OverView = () => {
       }, [axiosPublic]);
 
 	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
+
+    // Loading Data for TransferData Table
+
 	const { data: transferData = [], refetch } = useQuery({
 		queryKey: ["transeferData"],
 		queryFn: async () => {
@@ -45,9 +53,7 @@ const OverView = () => {
 			return res.data;
 		},
 	});
-	// console.log(transection);
-	  console.log(transferData);
-
+    // this is Data for Line Chart
 	// const data = [
 	// 	{
 	// 		name: "Jan",
@@ -123,6 +129,9 @@ const OverView = () => {
 	// 	},
 	// ];
 
+
+    // This is for Paichart (color and data fo piechart)
+
 	const data01 = [
 		{ name: pieLabel[0], value: pieData[0] },
 		{ name: pieLabel[1], value: pieData[1] },
@@ -142,8 +151,10 @@ const OverView = () => {
 		"#fb6f92",
 	];
 
+    // this is function to handle income Data from to Post Data
+   
 	const handleSubmitIncome = (e) => {
-		e.preventDefault();
+        e.preventDefault();
 		const form = e.target;
 		const date = new Date(form.date.value);
 		const amount = form.amount.value;
@@ -182,6 +193,9 @@ const OverView = () => {
 			});
 		}
 	};
+
+
+    // this is function to handle Expanse Data from to Post Data
 
 	const handleSubmitExpanse = (e) => {
 		e.preventDefault();
@@ -224,6 +238,9 @@ const OverView = () => {
 		}
 	};
 
+
+    // this is function to handle Expanse Data from to Post Data
+
 	const handleSubmittransfer = (e) => {
 		e.preventDefault();
 		const form = e.target;
@@ -260,6 +277,8 @@ const OverView = () => {
 	return (
 		<div className=" ">
 			<div className="flex justify-around flex-col items-center lg:flex-row gap-5">
+
+                {/* this div is for LineChart */}
 				{/* <div className="lg:overflow-x-auto">
 					<LineChart
 						width={700}
@@ -291,6 +310,8 @@ const OverView = () => {
 					</LineChart>
 				</div> */}
 
+                {/* this div is for piechart */}
+
 				<div className="flex justify-around flex-col items-center overflow-clip">
 					
 					<PieChart width={400} height={400}>
@@ -316,6 +337,8 @@ const OverView = () => {
 						<Legend />
 					</PieChart>
 				</div>
+
+                {/* this div is to show transfer Data table */}
 				<div>
 					<h1 className="text-xl font-medium text-center mb-5">
 						Transections{" "}
@@ -351,6 +374,10 @@ const OverView = () => {
 					</div>
 				</div>
 			</div>
+
+
+            {/* for add income , Expanse , transfer and parent Button  */}
+            
 			<div className="group parentbutton space-x-4 absolute bottom-8 right-20">
 				<button className="group w-[50px] h-[50px] relative">
 					<span className="group-hover:shadow-[0px_0px_30px_2px_#0d87f8] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#0d87f8] to-[#70c4ff] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
