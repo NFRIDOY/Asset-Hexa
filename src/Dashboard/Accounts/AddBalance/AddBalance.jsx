@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
  
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 import { AuthContext } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 

@@ -4,7 +4,7 @@ import logo from "../assets/logo/logo.png"
 const Footer = () => {
     return (
         <div>
-            <footer className="footer p-10 mt-5 bg-base-200 text-base-content">
+            <footer className="footer p-10 mt-5 bg-emerald-50 text-base-content">
                 <aside>
                     <img className="w-32 h-16" src={logo} alt="logo" />
                     <p>Finance & Accounting Services.<br />Providing reliable tech since 2023</p>
@@ -33,7 +33,7 @@ const Footer = () => {
                     <a className="link link-hover">Security</a>
                 </nav>
             </footer>
-            <footer className="footer footer-center  p-4 bg-base-300 text-base-content">
+            <footer className="footer footer-center  p-4 bg-emerald-100 text-base-content">
                 <aside>
                     <p>Copyright © 2024 - All right reserved by Asset Hexa Ltd</p>
                 </aside>

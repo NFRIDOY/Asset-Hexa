@@ -5,7 +5,6 @@ import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../providers/AuthProvider";
 import AccountCard from "./Accounts/AccountCard/AccountCard";
 import { FaRegChartBar } from "react-icons/fa";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
@@ -70,7 +69,7 @@ const Accounts = () => {
             }
             <div className="bg-[#F7F7FA]  h-36">
                 <div className="flex justify-end mr-5 pt-14">
-                    <Link to="addBalance">
+                    <Link to="/dashboard/addBalance">
                         <div className="bg-[#3EEE2A]  w-6 h-5 pr-8 pl-4 pt-4 pb-8 rounded-full">
                             <AiOutlinePlus className="text-black font-bold " style={20} />
                         </div>

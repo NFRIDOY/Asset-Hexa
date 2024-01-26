@@ -12,7 +12,7 @@ const Banner = () => {
       </div>
       <div className="text-center mt-8 lg:-mt-[120px]">
         <Link to="/login">
-          <button className="btn font-bold bg-gradient-to-r from-cyan-500 to-blue-500 border-none  ">
+          <button className="btn font-bold bg-emerald-400 text-white border-none  ">
             Login Now
           </button>
         </Link>
