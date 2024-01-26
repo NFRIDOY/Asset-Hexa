@@ -25,7 +25,8 @@ const AddBalance = () => {
       e.target.reset();
       // console.log(addBalance);
       axiosPublic.post('/accounts', addBalance)
-      .then(res => {
+      .then(res => { 
+         console.log(res.data);
          if (res.data.insertedId) {
              console.log('user balance added to the data base ');
              Swal.fire({
