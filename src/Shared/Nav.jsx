@@ -14,7 +14,6 @@ const Nav = () => {
   }
 
   const ul = (
-
     // <li><NavLink to={'/contact'} className={({ isActive, isPending }) =>
     //     isPending ? "pending" : isActive ? "text-[#FF444A]  " : ""}>Contact</NavLink></li>
 
@@ -60,7 +59,6 @@ const Nav = () => {
         </NavLink>
       </li>
     </>
-
   );
   return (
     <div className=" items-center text-center ">
