@@ -8,12 +8,13 @@ import { FaRegChartBar } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { CiBank } from "react-icons/ci";
 
 
 const Accounts = () => {
     const axiosPublic = useAxios();
     const { user } = useContext(AuthContext);
-    const [total, setTotal]= useState(0);
+    const [total, setTotal] = useState(0);
 
 
     const [Balance, setBalance] = useState([]);
@@ -24,11 +25,11 @@ const Accounts = () => {
                 console.log(data.data);
             })
         const totalAmount = Balance.reduce((total, item) => total + parseInt(item.amount), 0);
-              setTotal(totalAmount)
+        setTotal(totalAmount)
 
     }, [axiosPublic, user, Balance, setTotal])
 
-    
+
 
 
 
@@ -48,14 +49,15 @@ const Accounts = () => {
 
                 </div>
             </div>
-            <div className=" pl-5 pr-5 mb-2">
-               <div>
-
-               </div>
-                {/* Total  */}
+            <div className=" pl-5 pr-5 mb-2 flex justify-between items-center">
                 <div>
-                    <h2 className="flex justify-end text-[#6C6C6C]">Total</h2>
-                    <p className="text-[#181818] flex justify-end">$ {total}</p>
+                    <CiBank className="text-2xl" />
+                </div>
+
+                {/* Total  */}
+                <div className="flex items-center gap-2">
+                    <h2 className="  text-[#6C6C6C]">Total</h2>
+                    <p className="text-[#181818] ">$ {total}</p>
                 </div>
             </div>
             <div className=" flex justify-between bg-[#F7F7FA] rounded h-10 border-t-2">
