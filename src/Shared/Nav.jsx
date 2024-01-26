@@ -5,13 +5,24 @@ import { AuthContext } from "../providers/AuthProvider";
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user?.email);
+
+  const handleOut = () => {
+    logOut()
+        .then()
+        .catch()
+}
+
   const ul = (
+
+    // <li><NavLink to={'/contact'} className={({ isActive, isPending }) =>
+    //     isPending ? "pending" : isActive ? "text-[#FF444A] underline " : ""}>Contact</NavLink></li>
+
     <>
       <li>
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
+            isPending ? "pending" : isActive ? "text-emerald-400 underline  " : ""
           }
         >
           Home
@@ -19,9 +30,19 @@ const Nav = () => {
       </li>
       <li>
         <NavLink
+          to="dashboard/overView"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
+          }
+        >
+        Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/about"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
+            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
           }
         >
           About
@@ -31,13 +52,14 @@ const Nav = () => {
         <NavLink
           to="/HelpDesk"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
+            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
           }
         >
           Help Desk
         </NavLink>
       </li>
     </>
+    
   );
   return (
     <div className="">
@@ -62,7 +84,7 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu font-bold menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {ul}
             </ul>
@@ -72,32 +94,39 @@ const Nav = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{ul}</ul>
+          <ul className=" flex gap-8 px-1 font-bold">{ul}</ul>
         </div>
         {/* Login Logout toggle button logic */}
         <div className="navbar-end">
-          {user?.email ? (
-            <div className="flex gap-3 items-center">
-              <div className="w-10 rounded-full">
-                <img
-                  className="w-full rounded-full"
-                  src={
-                    user?.photoURL
-                      ? `${user?.photoURL}`
-                      : "https://i.ibb.co/C2QsnzC/jae-park-7-GX5a-ICaawdb5i4-unsplash.jpg"
-                  }
-                  alt=""
-                />
-              </div>
-              <button onClick={() => logOut()} className="btn">
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link to="/login" className="btn">
-              Login
-            </Link>
-          )}
+        <div>
+                        {
+                            user?.email ? <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        {
+                                            user && <img src={user.photoURL} />
+                                        }
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <button className="btn btn-sm text-blue-600 font-bold  btn-ghost">{
+                                            user && <p>{user.displayName}</p>
+                                        }</button>
+
+                                    </li>
+                                    <li>
+                                        <button onClick={handleOut} className="btn btn-sm text-green-600 font-bold btn-ghost">Logout</button>
+
+                                    </li>
+                                </ul>
+                            </div>
+                                :
+                                <Link to='/login'>
+                                    <button className="btn  mr-2  btn-outline btn-accent text-white ">Login</button>
+                                </Link>
+                        }
+                    </div>
         </div>
       </div>
     </div>

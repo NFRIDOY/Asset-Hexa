@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import app from "./../utility/Firebase/firebase.config";
 import PropTypes from "prop-types"; // ES6
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -57,7 +58,7 @@ export default function AuthProvider({ children }) {
    */
   const logOut = () => {
     setLoading(true);
-    alert("User Signed Out!!!");
+    toast.success("User Signed Out!!!")
     return signOut(auth);
   };
 
