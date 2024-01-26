@@ -7,13 +7,10 @@ const Nav = () => {
   // console.log(user?.email);
 
   const handleOut = () => {
-    logOut()
-        .then()
-        .catch()
-}
+    logOut().then().catch();
+  };
 
   const ul = (
-
     // <li><NavLink to={'/contact'} className={({ isActive, isPending }) =>
     //     isPending ? "pending" : isActive ? "text-[#FF444A] underline " : ""}>Contact</NavLink></li>
 
@@ -22,7 +19,11 @@ const Nav = () => {
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-emerald-400 underline  " : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-emerald-400 underline  "
+              : ""
           }
         >
           Home
@@ -32,17 +33,25 @@ const Nav = () => {
         <NavLink
           to="dashboard/overView"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-emerald-400 underline "
+              : ""
           }
         >
-        Dashboard
+          Dashboard
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/about"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-emerald-400 underline "
+              : ""
           }
         >
           About
@@ -52,14 +61,17 @@ const Nav = () => {
         <NavLink
           to="/HelpDesk"
           className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-emerald-400 underline " : ""
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-emerald-400 underline "
+              : ""
           }
         >
           Help Desk
         </NavLink>
       </li>
     </>
-    
   );
   return (
     <div className="">
@@ -98,35 +110,41 @@ const Nav = () => {
         </div>
         {/* Login Logout toggle button logic */}
         <div className="navbar-end">
-        <div>
-                        {
-                            user?.email ? <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        {
-                                            user && <img src={user.photoURL} />
-                                        }
-                                    </div>
-                                </label>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li>
-                                        <button className="btn btn-sm text-blue-600 font-bold  btn-ghost">{
-                                            user && <p>{user.displayName}</p>
-                                        }</button>
-
-                                    </li>
-                                    <li>
-                                        <button onClick={handleOut} className="btn btn-sm text-green-600 font-bold btn-ghost">Logout</button>
-
-                                    </li>
-                                </ul>
-                            </div>
-                                :
-                                <Link to='/login'>
-                                    <button className="btn  mr-2  btn-outline btn-accent text-white ">Login</button>
-                                </Link>
-                        }
-                    </div>
+          <div>
+            {user?.email ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    {user && <img src={user.photoURL} />}
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <button className="btn btn-sm text-blue-600 font-bold  btn-ghost">
+                      {user && <p>{user.displayName}</p>}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleOut}
+                      className="btn btn-sm text-green-600 font-bold btn-ghost"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="btn  mr-2  btn-outline btn-accent text-white ">
+                  Login
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
