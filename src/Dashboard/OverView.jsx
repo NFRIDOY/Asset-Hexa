@@ -275,7 +275,7 @@ const OverView = () => {
 	};
 
 	return (
-		<div className=" ">
+		<div className="bg-sky-200 h-screen max-h-[600px] ">
 			<div className="flex justify-around flex-col items-center lg:flex-row gap-5">
 
                 {/* this div is for LineChart */}
@@ -377,7 +377,7 @@ const OverView = () => {
 
 
             {/* for add income , Expanse , transfer and parent Button  */}
-            
+
 			<div className="group parentbutton space-x-4 absolute bottom-8 right-20">
 				<button className="group w-[50px] h-[50px] relative">
 					<span className="group-hover:shadow-[0px_0px_30px_2px_#0d87f8] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#0d87f8] to-[#70c4ff] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
