@@ -11,6 +11,8 @@ import OverView from "../Dashboard/OverView";
 import Transection from "../Dashboard/Transection";
 import Statistics from "../Dashboard/Statistics";
 import Accounts from "../Dashboard/Accounts";
+import Profile from "../Dashboard/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +44,11 @@ export const router = createBrowserRouter([
   },
   {
     path:'dashboard',
-    element:<Dashboard></Dashboard>,
+    element:  
+    <PrivateRoute>
+      <Dashboard></Dashboard>
+
+    </PrivateRoute>,
     children:[
       {
         path:'overView',
@@ -59,7 +65,18 @@ export const router = createBrowserRouter([
       {
         path:'accounts',
         element:<Accounts></Accounts>
-      }
+      },
+      {
+        path:'profile',
+        element:
+        
+        <PrivateRoute>
+
+          <Profile/>
+
+        </PrivateRoute>
+      },
+
     ]
   }
 ]);
