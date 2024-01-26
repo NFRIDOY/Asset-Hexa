@@ -11,7 +11,7 @@ const Dashboard = () => {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col mt-10   ">
                 {/* Page content here */}
-                <div className="-mt-3 ml-10 lg:ml-0">
+                <div className="-mt-3 ml-0 lg:ml-10">
                     <Outlet></Outlet>
                 </div>
                 <label htmlFor="my-drawer-2" className=" absolute top-0 justify-start flex w-20 mx-auto lg:mt-6 drawer-button lg:hidden"><FaDoorOpen className='text-2xl'></FaDoorOpen></label>

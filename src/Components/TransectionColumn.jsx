@@ -1,14 +1,38 @@
-const TransectionColumn = () => {
+/* eslint-disable react/prop-types */
+// import { MdDeleteForever } from "react-icons/md";
+// import { GrDocumentUpdate } from "react-icons/gr";
+
+import useAxios from "../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+
+const TransectionColumn = ({transactionType}) => {
+
+  const axiosPublic = useAxios()
+
+  const { data: transection = [] } = useQuery({
+    queryKey: ['transection'],
+    queryFn: async () => {
+        const res = await axiosPublic.get(`/transections?type=${transactionType}&email=backend@example.com`)
+        return res.data
+
+    }
+
+})
+
+
   return (
-    <div className="flex items-center justify-around border rounded-md p-4">
-      <h4 className="text-xl font-bold">Salary</h4>
-      <div className="felx felx-col">
-        <p className="font-medium">Note</p>
-        <p className="text-gray-400 font-medium">Cash</p>
-      </div>
-      <p className="text-lg font-bold text-blue-500">$500</p>
+    transection.map(transectionItem=>(<div key={transectionItem._id} className="flex items-center justify-around border rounded-md p-4">
+    <h4 className="text-xl font-bold">{transectionItem.category}</h4>
+    <div className="felx felx-col">
+      <p className="font-medium">{transectionItem.note}</p>
     </div>
+    <p className="text-lg font-bold text-blue-500">${transectionItem.amount}</p>
+    {/* <MdDeleteForever className="text-3xl text-red-600"></MdDeleteForever>
+    <GrDocumentUpdate className="text-2xl text-green-600"></GrDocumentUpdate> */}
+  </div> ))
   );
 };
 
 export default TransectionColumn;
+
+
