@@ -1,4 +1,4 @@
-import { PieChart, Pie, Tooltip } from "recharts";
+import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 
 const data01 = [
   { name: "Group A", value: 400 },
@@ -8,7 +8,14 @@ const data01 = [
   { name: "Group E", value: 278 },
   { name: "Group F", value: 189 },
 ];
-
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#ff006e",
+  "#fb6f92",
+];
 const Statistics = () => {
   return (
     <div className="mt-10">
@@ -26,8 +33,17 @@ const Statistics = () => {
               outerRadius={80}
               fill="#8884d8"
               label
-            />
+            >
+              {data01?.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+
             <Tooltip />
+            <Legend />
           </PieChart>
         </div>
         <div></div>
@@ -44,8 +60,16 @@ const Statistics = () => {
               outerRadius={80}
               fill="#8884d8"
               label
-            />
+            >
+              {data01?.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
             <Tooltip />
+            <Legend />
           </PieChart>
         </div>
       </div>
