@@ -3,7 +3,8 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import home from '../assets/logo/logo.png'
 import money from '../lottie/Animation - 1706022352528.json'
 import Lottie from "lottie-react";
-import { FaDoorOpen } from "react-icons/fa";
+
+import { AiOutlineMenu } from 'react-icons/ai'
 
 
 const Dashboard = () => {
@@ -15,7 +16,7 @@ const Dashboard = () => {
                 <div className="-mt-3 ml-0 lg:ml-10">
                     <Outlet></Outlet>
                 </div>
-                <label htmlFor="my-drawer-2" className=" absolute top-0 justify-start flex w-20 mx-auto lg:mt-6 drawer-button lg:hidden"><FaDoorOpen className='text-2xl'></FaDoorOpen></label>
+                <label htmlFor="my-drawer-2" className=" absolute top-0 justify-start flex w-20 mx-auto lg:mt-6 drawer-button lg:hidden"><AiOutlineMenu className='text-2xl m-4 '></AiOutlineMenu></label>
 
             </div>
             <div className="drawer-side">
