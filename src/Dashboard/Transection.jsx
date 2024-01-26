@@ -14,13 +14,13 @@ const Transection = () => {
 
         <TabPanel>
           <div className="mt-8 space-y-3">
-            <TransectionColumn />
+            <TransectionColumn transactionType={'EXPENSE'}/>
           </div>
         </TabPanel>
         <TabPanel>
           <div className="mt-8 space-y-3">
-            <TransectionColumn />
-            <TransectionColumn />
+            <TransectionColumn transactionType={'INCOME'} />
+            
           </div>
         </TabPanel>
       </Tabs>
