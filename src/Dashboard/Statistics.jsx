@@ -1,7 +1,6 @@
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import useAxios from "../hooks/useAxios";
 import { useEffect, useState } from "react";
-import { longFormatters } from "date-fns";
 
 const COLORS = [
   "#0088FE",
@@ -18,8 +17,8 @@ const Statistics = () => {
   useEffect(() => {
     axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
       //   console.log(res.data);
-      setPieData(res.data.accPiData);
-      setPieLabel(res.data.accPiLebel);
+      setPieData(res?.data?.accPiData);
+      setPieLabel(res?.data?.accPiLebel);
     });
   }, [axiosPublic]);
   //   console.log(pieData, pieLabel);
