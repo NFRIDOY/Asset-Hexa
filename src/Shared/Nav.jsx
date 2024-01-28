@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo.png";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { AiOutlineMenu } from 'react-icons/ai'
 const Nav = () => {
 	const { user, logOut } = useContext(AuthContext);
 	// console.log(user?.email);
