@@ -99,56 +99,64 @@ const Nav = () => {
         <div className="navbar-end">
           <div>
             {
-              user?.email ? <div className="dropdown dropdown-end">
-                <label tabIndex={0} >
-                  <div
+              user?.email ? (
+              //   <div className="dropdown dropdown-end">
+              //   <label tabIndex={0} >
+              //     <div
 
-                    className='p-2 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
-                  >
-                    <div className=' md:block'>
-                      {/* Avatar */}
-                      <img
-                        className='rounded-full'
-                        referrerPolicy='no-referrer'
-                        src={user && user.photoURL}
-                        alt='profile'
-                        height='30'
-                        width='30'
-                      />
+              //       className='p-2 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
+              //     >
+              //       <div className=' md:block'>
+              //         {/* Avatar */}
+              //         <img
+              //           className='rounded-full'
+              //           referrerPolicy='no-referrer'
+              //           src={user && user.photoURL}
+              //           alt='profile'
+              //           height='30'
+              //           width='30'
+              //         />
 
-                    </div>
-                    <AiOutlineMenu />
-                  </div>
-                </label>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                  <li className="items-center text-center">
+              //       </div>
+              //       <AiOutlineMenu />
+              //     </div>
+              //   </label>
+              //   <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              //     <li className="items-center text-center">
 
-                    <Link to="/dashboard/profile">
+              //       <Link to="/dashboard/profile">
 
-                      {
-                        user && <p className="text-black items-center m-auto font-bold text-center">{user.displayName}</p>
-                      }
+              //         {
+              //           user && <p className="text-black items-center m-auto font-bold text-center">{user.displayName}</p>
+              //         }
 
-                    </Link>
+              //       </Link>
 
 
-                    <NavLink
-                      to="dashboard/overView"
+              //       <NavLink
+              //         to="dashboard/overView"
 
-                    >
-                      <button className="text-black font-bold" >
+              //       >
+              //         <button className="text-black font-bold" >
 
-                        Dashboard
-                      </button>
-                    </NavLink>
+              //           Dashboard
+              //         </button>
+              //       </NavLink>
 
-                  </li>
-                  <li>
-                    <button onClick={handleOut} className="btn btn-sm text-green-600 font-bold btn-ghost">Logout</button>
+              //     </li>
+              //     <li>
+              //       <button onClick={handleOut} className="btn btn-sm text-green-600 font-bold btn-ghost">Logout</button>
 
-                  </li>
-                </ul>
+              //     </li>
+              //   </ul>
+              // </div>
+
+              <div className="space-x-4">
+                <button className="btn hover:bg-primaryColor hover:text-white  btn-outline rounded-none text-primaryColor ">Dashboard</button>
+                <button className="btn hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor ">Logout</button>
+              
               </div>
+              )
                 :
                 <Link to='/login'>
                   <button className="btn  mr-2  btn-outline btn-accent text-white ">Login</button>
