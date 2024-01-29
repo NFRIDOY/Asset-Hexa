@@ -17,6 +17,8 @@
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.0",
     "match-sorter": "^6.3.2",
+    "mongodb": "^6.3.0",
+    "mongodb-connection-string-url": "^3.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,7 +28,8 @@
     "react-spinners": "^0.13.8",
     "react-tabs": "^6.0.2",
     "recharts": "^2.10.4",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.10.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

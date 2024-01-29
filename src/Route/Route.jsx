@@ -13,6 +13,7 @@ import Statistics from "../Dashboard/Statistics";
 import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
+import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path:'accounts',
         element:<Accounts></Accounts>
+      },
+      {
+        path:'addBalance',
+        element:<AddBalance></AddBalance>
       },
       {
         path:'profile',
