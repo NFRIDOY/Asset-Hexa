@@ -1,10 +1,12 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Footer from "../Shared/Footer";
 import Navrouts from "../CodePiece/Navrouts";
 import NavUl from "../CodePiece/NavUl";
+import { AuthContext } from "../providers/AuthProvider";
 
 const MainLayout = () => {
+	const {logOut , user} = useContext(AuthContext)
 
 	
 	return (
@@ -30,9 +32,17 @@ const MainLayout = () => {
 							aria-label="close sidebar"
 							className="drawer-overlay"
 						></label>
-						<ul style={{backdropFilter: "blur(30px)"}} className="menu bg-transparent p-4 w-80 min-h-full ">
+						<ul style={{backdropFilter: "blur(30px)"}} className="menu bg-transparent p-4 w-80 min-h-full text-center">
 							{/* Sidebar content here */}
 							<NavUl></NavUl>
+
+							{
+								user ? <div><div className="divider divider-success"></div>
+
+								<Link to="/Dashboard/Profile" className="p-2 text-xl text-white  lg:text-black	">Profile</Link>
+								<p onClick={() => logOut()} className="p-2 text-xl text-white  lg:text-black">Logout</p> </div>: null
+								
+							}
 						</ul>
 					</div>
 				</div>

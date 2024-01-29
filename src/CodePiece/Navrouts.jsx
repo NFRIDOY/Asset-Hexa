@@ -10,7 +10,7 @@ const Navrouts = () => {
 	const { user, logOut } = useContext(AuthContext);
 
 	return (
-		<div className="w-full navbar bg-base-300">
+		<div className="w-full navbar ">
 			<div className="flex-none lg:hidden">
 				<label
 					htmlFor="my-drawer-3"
@@ -21,7 +21,7 @@ const Navrouts = () => {
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
-						className="inline-block w-6 h-6 stroke-current"
+						className="inline-block w-8 h-8 stroke-current"
 					>
 						<path
 							strokeLinecap="round"
@@ -35,7 +35,7 @@ const Navrouts = () => {
 
 			<div className="navbar p-0 bg-base-100">
 				<div className="navbar-start">
-					<Link to="/" className="btn btn-ghost text-xl">
+					<Link to="/" className="btn p-0 btn-ghost text-xl">
 						<img className="h-14" src={logo} alt="" />
 					</Link>
 				</div>
@@ -85,18 +85,23 @@ const Navrouts = () => {
 						// 	</div>
 						// </div>
 
-						<div className="space-x-4">
-							<Link to="/dashboard/overView">
-                            <button className="btn hover:border-primaryColor hover:bg-primaryColor hover:text-white  btn-outline rounded-none text-primaryColor ">
-								Dashboard
-							</button>
-                        </Link>
-							<button  onClick={() => logOut()} className="btn hidden md:block hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor ">
-								Logout
-							</button>
+						<div className="">
+							<div className="flex gap-2 ">
+								<Link to="/dashboard/overView">
+									<button className="btn border-primaryColor hover:bg-primaryColor bg-primaryColor text-white  btn-outline rounded-none ">
+										Dashboard
+									</button>
+								</Link>
+								<button
+									onClick={() => logOut()}
+									className="btn hidden md:block hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor "
+								>
+									Logout
+								</button>
+							</div>
 						</div>
 					) : (
-						<Link to="/login" className="btn">
+						<Link to="/login" className="btn  btn-outline hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor ">
 							Login
 						</Link>
 					)}

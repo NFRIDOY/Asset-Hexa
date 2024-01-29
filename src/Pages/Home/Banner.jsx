@@ -8,7 +8,7 @@ const Banner = () => {
 		<div className="flex flex-col md:flex-row justify-center items-center rounded-br-[300px] bg-gradient-to-br from-[#23A455] to-[#34D399]  h-[600px]  bg-black   bg-cover bg-center">
 			<div className="max-w-[500px] mt-10 p-4 space-y-7">
 				<h1 className="text-4xl lg:text-6xl  font-bold text-white ">
-					Get an easy <br /> ways to manage your finence{" "}
+					Get an easy <br className="hidden lg:block " /> ways to manage your finence{" "}
 				</h1>
 				<p className="text-[#F5F5DC] ">
 					Transform your finances effortlessly with our dynamic
