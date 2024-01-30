@@ -6,7 +6,10 @@ import useTransection from "../hooks/useTransection";
 const Transection = () => {
   const { transections: incomes } = useTransection("INCOME");
   const { transections: expenses } = useTransection("EXPENSE");
-  // console.log(incomes);
+  const { transections: tranfers } = useTransection("TRANSFER");
+
+  console.log(expenses, tranfers);
+
   return (
     <div>
       <h2>Transection</h2>
@@ -14,6 +17,7 @@ const Transection = () => {
         <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Income</Tab>
           <Tab>Expense</Tab>
+          <Tab>Transfer</Tab>
         </TabList>
 
         <TabPanel>
@@ -29,6 +33,16 @@ const Transection = () => {
         <TabPanel>
           <div className="mt-8 space-y-3">
             {expenses.map((transection) => (
+              <TransectionColumn
+                key={transection._id}
+                transection={transection}
+              ></TransectionColumn>
+            ))}
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="mt-8 space-y-3">
+            {tranfers.map((transection) => (
               <TransectionColumn
                 key={transection._id}
                 transection={transection}
