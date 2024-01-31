@@ -40,7 +40,7 @@ const WhoWeAre = () => {
               journey to wealth and freedom.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 ">
                 Contact us
               </button>
             </Link>
