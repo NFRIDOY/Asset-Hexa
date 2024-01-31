@@ -1,6 +1,7 @@
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import useAxios from "../hooks/useAxios";
 import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const COLORS = [
   "#0088FE",
@@ -11,26 +12,17 @@ const COLORS = [
   "#fb6f92",
 ];
 const Statistics = () => {
+  const { user } = useAuth();
   const [pieData, setPieData] = useState([]);
-  const [pieLabel, setPieLabel] = useState([]);
   const axiosPublic = useAxios();
   useEffect(() => {
-    axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
+    axiosPublic.get(`/chartData/${user?.eamil}`).then((res) => {
       //   console.log(res.data);
-      setPieData(res?.data?.accPiData);
-      setPieLabel(res?.data?.accPiLebel);
+      setPieData(res?.data);
     });
-  }, [axiosPublic]);
-  //   console.log(pieData, pieLabel);
-  const data01 = [
-    { name: pieLabel[0], value: pieData[0] },
-    { name: pieLabel[1], value: pieData[1] },
-    { name: pieLabel[2], value: 500 },
-    { name: pieLabel[3], value: 400 },
-    { name: pieLabel[4], value: 100 },
-    { name: pieLabel[5], value: pieData[5] },
-    { name: pieLabel[6], value: pieData[5] },
-  ];
+  }, [axiosPublic, user]);
+  // console.log(pieData);
+  const data01 = pieData;
   return (
     <div className="mt-20">
       <div className="flex flex-col gap-10 md:flex-row justify-center items-center">
