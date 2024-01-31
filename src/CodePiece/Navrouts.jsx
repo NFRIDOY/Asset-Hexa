@@ -87,11 +87,14 @@ const Navrouts = () => {
 
 						<div className="">
 							<div className="flex gap-2 ">
+								
 								<Link to="/dashboard/overView">
-									<button className="btn border-primaryColor hover:bg-primaryColor bg-primaryColor text-white  btn-outline rounded-none ">
+									<button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
 										Dashboard
 									</button>
 								</Link>
+								
+								
 								<button
 									onClick={() => logOut()}
 									className="btn hidden md:block hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor "
@@ -101,7 +104,10 @@ const Navrouts = () => {
 							</div>
 						</div>
 					) : (
-						<Link to="/login" className="btn  btn-outline hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor ">
+						<Link
+							to="/login"
+							className="btn  btn-outline hover:border-primaryColor hover:bg-primaryColor hover:text-white btn-outline rounded-none  text-primaryColor "
+						>
 							Login
 						</Link>
 					)}
