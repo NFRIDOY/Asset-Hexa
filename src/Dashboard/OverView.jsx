@@ -17,8 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 
 const OverView = () => {
-
-    // state to hold  erroretext from diffrent modal 
+	// state to hold  erroretext from diffrent modal
 
 	const [incomeText, setIncomeText] = useState("");
 	const [expanseText, setExpanseText] = useState("");
@@ -29,20 +28,19 @@ const OverView = () => {
 	const [pieData, setPieData] = useState([]);
 	const [pieLabel, setPieLabel] = useState([]);
 
+	// Loading Data form Paichart
 
-    // Loading Data form Paichart 
-
-    useEffect(() => {
-        axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
-          //   console.log(res.data);
-          setPieData(res.data.accPiData);
-          setPieLabel(res.data.accPiLebel);
-        });
-      }, [axiosPublic]);
+	useEffect(() => {
+		axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
+			//   console.log(res.data);
+			setPieData(res.data.accPiData);
+			setPieLabel(res.data.accPiLebel);
+		});
+	}, [axiosPublic]);
 
 	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
 
-    // Loading Data for TransferData Table
+	// Loading Data for TransferData Table
 
 	const { data: transferData = [], refetch } = useQuery({
 		queryKey: ["transeferData"],
@@ -53,108 +51,29 @@ const OverView = () => {
 			return res.data;
 		},
 	});
-    // this is Data for Line Chart
-	// const data = [
-	// 	{
-	// 		name: "Jan",
-	// 		Income: 4000,
-	// 		Expenses: 2400,
-	// 		amt: 2400,
-	// 	},
-	// 	{
-	// 		name: "Feb",
-	// 		Income: 3000,
-	// 		Expenses: 1398,
-	// 		amt: 2210,
-	// 	},
-	// 	{
-	// 		name: "March",
-	// 		Income: 2000,
-	// 		Expenses: 9800,
-	// 		amt: 2290,
-	// 	},
-	// 	{
-	// 		name: "April",
-	// 		Income: 2780,
-	// 		Expenses: 3908,
-	// 		amt: 2000,
-	// 	},
-	// 	{
-	// 		name: "May",
-	// 		Income: 1890,
-	// 		Expenses: 4800,
-	// 		amt: 2181,
-	// 	},
-	// 	{
-	// 		name: "June",
-	// 		Income: 2390,
-	// 		Expenses: 3800,
-	// 		amt: 2500,
-	// 	},
-	// 	{
-	// 		name: "July",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// 	{
-	// 		name: "Aug",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// 	{
-	// 		name: "Sep",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// 	{
-	// 		name: "Oct",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// 	{
-	// 		name: "Nov",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// 	{
-	// 		name: "Dec",
-	// 		Income: 3490,
-	// 		Expenses: 4300,
-	// 		amt: 2100,
-	// 	},
-	// ];
 
+	const { data: AccountData = [] } = useQuery({
+		queryKey: ["AccountData"],
+		queryFn: async () => {
+			const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
+			return res.data;
+		},
+	});
 
-    // This is for Paichart (color and data fo piechart)
+	console.log(AccountData);
+	// This is for Paichart (color and data fo piechart)
 
 	const data01 = [
-		{ name: pieLabel[0], value: pieData[0] },
-		{ name: pieLabel[1], value: pieData[1] },
-		{ name: pieLabel[2], value: 500 },
-		{ name: pieLabel[3], value: 400 },
-		{ name: pieLabel[4], value: 100 },
-		{ name: pieLabel[5], value: pieData[5] },
-		{ name: pieLabel[6], value: pieData[5] },
+		{ name: "Income", value: pieData[0] },
+		{ name: "Expanse", value: pieData[1] },
 	];
 
-	const COLORS = [
-		"#0088FE",
-		"#00C49F",
-		"#FFBB28",
-		"#FF8042",
-		"#ff006e",
-		"#fb6f92",
-	];
+	const COLORS = ["#449B38", "#E94444"];
 
-    // this is function to handle income Data from to Post Data
-   
+	// this is function to handle income Data from to Post Data
+
 	const handleSubmitIncome = (e) => {
-        e.preventDefault();
+		e.preventDefault();
 		const form = e.target;
 		const date = new Date(form.date.value);
 		const amount = form.amount.value;
@@ -194,8 +113,7 @@ const OverView = () => {
 		}
 	};
 
-
-    // this is function to handle Expanse Data from to Post Data
+	// this is function to handle Expanse Data from to Post Data
 
 	const handleSubmitExpanse = (e) => {
 		e.preventDefault();
@@ -238,8 +156,7 @@ const OverView = () => {
 		}
 	};
 
-
-    // this is function to handle Expanse Data from to Post Data
+	// this is function to handle Expanse Data from to Post Data
 
 	const handleSubmittransfer = (e) => {
 		e.preventDefault();
@@ -274,78 +191,89 @@ const OverView = () => {
 		}
 	};
 
+	const BGcolorsOfAccount = [
+		"#FFE338",
+		"#e94444",
+		"#4CAF50",
+		"#2196F3",
+		"#9C27B0",
+		"#FF9800",
+		"#795548",
+	];
+
+	const getRandomColor = () => {
+		// Generate a random index to pick a color from the array
+		const randomIndex = Math.floor(
+			Math.random() * BGcolorsOfAccount.length
+		);
+		return BGcolorsOfAccount[randomIndex];
+	};
+
 	return (
-		<div className="bg-sky-200 h-screen max-h-[600px] ">
-			<div className="flex justify-around flex-col items-center lg:flex-row gap-5">
-
-                {/* this div is for LineChart */}
-				{/* <div className="lg:overflow-x-auto">
-					<LineChart
-						width={700}
-						height={400}
-						data={data}
-						margin={{
-							top: 5,
-							right: 30,
-							left: 20,
-							bottom: 5,
-						}}
-					>
-						<CartesianGrid strokeDasharray="3 3" />
-						<XAxis dataKey="name" />
-						<YAxis />
-						<Tooltip />
-						<Legend />
-						<Line
-							type="monotone"
-							dataKey="Income"
-							stroke="#8884d8"
-							activeDot={{ r: 8 }}
-						/>
-						<Line
-							type="monotone"
-							dataKey="Expenses"
-							stroke="#82ca9d"
-						/>
-					</LineChart>
-				</div> */}
-
-                {/* this div is for piechart */}
-
-				<div className="flex justify-around flex-col items-center overflow-clip">
-					
-					<PieChart width={400} height={400}>
-						<Pie
-							dataKey="value"
-							isAnimationActive={false}
-							data={data01}
-							cx="50%"
-							cy="50%"
-							outerRadius={80}
-							fill="#8884d8"
-							label
+		<div className="p-8   bg-base-300 ">
+			<div className=" ">
+				<div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-scroll scrollable-content ">
+					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
+						<h1 className="text-xl font-medium">Cash</h1>
+						<p className="text-5xl font-semibold">$00</p>
+					</div>
+					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8   min-w-60 ">
+						<h1 className="text-xl font-medium">Nagad</h1>
+						<p className="text-5xl font-semibold">$00</p>
+					</div>
+					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8   min-w-60">
+						<h1 className="text-xl font-medium">Saving</h1>
+						<p className="text-5xl font-semibold">$00</p>
+					</div>
+					<div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
+						<h1 className="text-xl font-medium">Loan</h1>
+						<p className="text-5xl font-semibold">$0000000</p>
+					</div>
+					{AccountData.map((item) => (
+						<div
+							style={{ backgroundColor: getRandomColor() }}
+							key={item?.id}
+							className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
 						>
-							{data01?.map((entry, index) => (
-								<Cell
-									key={`cell-${index}`}
-									fill={COLORS[index % COLORS.length]}
-								/>
-							))}
-						</Pie>
-
-						<Tooltip />
-						<Legend />
-					</PieChart>
+							<h1 className="text-xl font-medium">
+								{item?.account}
+							</h1>
+							<p className="text-5xl font-semibold">
+								${item?.amount}
+							</p>
+						</div>
+					))}
 				</div>
 
-                {/* this div is to show transfer Data table */}
-				<div>
-					<h1 className="text-xl font-medium text-center mb-5">
-						Transections{" "}
-					</h1>
-					<div className="overflow-x-auto">
-						<table className="table text-center">
-							{/* head */}
+				<div className="flex gap-5 mt-5">
+					<div className="bg-white ">
+						<PieChart width={400} height={400}>
+							<Pie
+								dataKey="value"
+								isAnimationActive={false}
+								data={data01}
+								cx="50%"
+								cy="50%"
+								outerRadius={140}
+								fill="#8884d8"
+								label
+							>
+								{data01?.map((entry, index) => (
+									<Cell
+										key={`cell-${index}`}
+										fill={COLORS[index % COLORS.length]}
+									/>
+								))}
+							</Pie>
+
+							<Tooltip />
+							<Legend />
+						</PieChart>{" "}
+					</div>
+
+					<div className="flex-1 bg-white min-h-[500px] overflow-y-scroll scrollable-content">
+								<h1 className="text-center text-2xl my-2 " > Recent Transection</h1>
+						<table className="table table-lg  text-center">
 							<thead>
 								<tr>
 									<th>Date</th>
@@ -358,12 +286,18 @@ const OverView = () => {
 							<tbody>
 								{transferData?.map((item) => (
 									<tr key={item?.id} className="hover">
-										<td> {new Date(
-									item?.date
-								).toLocaleDateString()} </td>
-										<td> {new Date(
-									item?.date
-								).toLocaleTimeString()} </td>
+										<td>
+											{" "}
+											{new Date(
+												item?.date
+											).toLocaleDateString()}{" "}
+										</td>
+										<td>
+											{" "}
+											{new Date(
+												item?.date
+											).toLocaleTimeString()}{" "}
+										</td>
 										<td> {item?.from} </td>
 										<td>{item?.to}</td>
 										<td>${item?.amount}</td>
@@ -373,10 +307,16 @@ const OverView = () => {
 						</table>
 					</div>
 				</div>
+
+				<div>
+					{/* <h1 className="text-xl font-medium text-center mb-5">
+						Transections
+					</h1> */}
+					
+				</div>
 			</div>
 
-
-            {/* for add income , Expanse , transfer and parent Button  */}
+			{/* for add income , Expanse , transfer and parent Button  */}
 
 			<div className="group parentbutton space-x-4 absolute bottom-8 right-20">
 				<button className="group w-[50px] h-[50px] relative">
