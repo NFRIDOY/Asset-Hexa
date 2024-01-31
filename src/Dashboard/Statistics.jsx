@@ -1,7 +1,5 @@
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
-import useAxios from "../hooks/useAxios";
-import { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAccountsPie from "../hooks/useAccountsPie";
 
 const COLORS = [
   "#0088FE",
@@ -11,18 +9,12 @@ const COLORS = [
   "#ff006e",
   "#fb6f92",
 ];
+
 const Statistics = () => {
-  const { user } = useAuth();
-  const [pieData, setPieData] = useState([]);
-  const axiosPublic = useAxios();
-  useEffect(() => {
-    axiosPublic.get(`/chartData/${user?.eamil}`).then((res) => {
-      //   console.log(res.data);
-      setPieData(res?.data);
-    });
-  }, [axiosPublic, user]);
-  // console.log(pieData);
-  const data01 = pieData;
+  const [accountsPieData] = useAccountsPie();
+
+  const data01 = accountsPieData;
+
   return (
     <div className="mt-20">
       <div className="flex flex-col gap-10 md:flex-row justify-center items-center">
