@@ -459,7 +459,7 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Category
+                Select Category
               </option>
               <option value="Food">Food</option>
               <option value="Cloth">Cloth</option>
@@ -476,11 +476,15 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Account
+                Select Account
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
             <input
               name="note"
