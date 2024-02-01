@@ -7,8 +7,6 @@ import useAxios from "../../../hooks/useAxios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
-
-
 const AddBalance = () => {
    
    const  {user} = useContext(AuthContext)
@@ -87,7 +85,6 @@ const AddBalance = () => {
                <button className=" btn w-full text-white bg-[#3EEE2A]">Save</button>
             </div>
          </form>
-
       </div>
    );
 };

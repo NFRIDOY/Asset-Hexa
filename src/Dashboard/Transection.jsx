@@ -12,7 +12,10 @@ const Transection = () => {
 
   return (
     <div>
-      <h2>Transection</h2>
+      {/* <h2>Transection</h2> */}
+      <h1 className="my-10 text-5xl text-center font-bold text-emerald-500 uppercase">
+      Transections
+      </h1>
       <Tabs>
         <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Income</Tab>

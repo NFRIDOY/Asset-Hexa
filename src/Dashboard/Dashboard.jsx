@@ -39,26 +39,26 @@ const Dashboard = () => {
 
 					<div className="w-52 h-screen bg-white justify-between  flex flex-col ">
 						<div>
-                        <div className="  rounded-lg lg:mt-3">
-							<figure>
-								<Link to="/">
-									<img src={home} alt="" />
-								</Link>
-							</figure>
-						</div>
-						<ul className="menu text-lg  space-y-2 h-[300px]  rounded-lg mt-4">
-							<NavLink
-								className={({ isActive }) =>
-									isActive
-										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-										: "flex px-4 p-2 items-center mr-4 gap-3"
-								}
-								to="/dashboard/overView"
-							>
-								<MdOutlineDashboard /> Overview
-							</NavLink>
+							<div className="  rounded-lg lg:mt-3">
+								<figure>
+									<Link to="/">
+										<img src={home} alt="" />
+									</Link>
+								</figure>
+							</div>
+							<ul className="menu text-lg  space-y-2 h-[320px]  rounded-lg mt-4">
+								<NavLink
+									className={({ isActive }) =>
+										isActive
+											? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+											: "flex px-4 p-2 items-center mr-4 gap-3"
+									}
+									to="/dashboard/overView"
+								>
+									<MdOutlineDashboard /> Overview
+								</NavLink>
 
-							
+
 								<NavLink className={({ isActive }) =>
 									isActive
 										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
@@ -67,8 +67,8 @@ const Dashboard = () => {
 									<GrTransaction />
 									Transection
 								</NavLink>
-							
-						
+
+
 								<NavLink className={({ isActive }) =>
 									isActive
 										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
@@ -77,7 +77,7 @@ const Dashboard = () => {
 									<IoStatsChartSharp />
 									Statistics
 								</NavLink>
-						
+
 								<NavLink className={({ isActive }) =>
 									isActive
 										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
@@ -86,19 +86,38 @@ const Dashboard = () => {
 									<MdAccountBalance />
 									Accounts
 								</NavLink>
-                                <NavLink className={({ isActive }) =>
+
+								<NavLink className={({ isActive }) =>
+									isActive
+										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+										: "flex px-4 p-2 items-center mr-4 gap-3"
+								} to="/dashboard/addBlog">
+									<CgProfile />
+									Add Blog
+								</NavLink>
+								<NavLink className={({ isActive }) =>
 									isActive
 										? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
 										: "flex px-4 p-2 items-center mr-4 gap-3"
 								} to="/dashboard/profile">
 									<CgProfile />
-Profile
+									Profile
 								</NavLink>
-							
-						</ul>
-                        </div>
+								{/* <NavLink
+									className={({ isActive }) =>
+										isActive
+											? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+											: "flex px-4 p-2 items-center mr-4 gap-3"
+									}
+									to="/dashboard/addBlog"
+								>
+									<MdOutlineDashboard /> Add Blog
+								</NavLink> */}
 
-						
+							</ul>
+						</div>
+
+
 
 						<div className="p-2  rounded-lg mt-4">
 							<div className="mx-auto ">
