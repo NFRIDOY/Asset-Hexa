@@ -6,7 +6,7 @@ const useAccountsPie = () => {
   const { user } = useAuth();
   const axiosPublic = useAxios();
   const { data: chartsData, isLoading } = useQuery({
-    queryKey: "chartsData",
+    queryKey: ["chartsData"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/chartData/${user?.email}`);
       return res.data;
