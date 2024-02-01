@@ -43,7 +43,7 @@ const FeatureHome = () => {
               see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Income
               </button>
             </Link>
@@ -83,7 +83,7 @@ const FeatureHome = () => {
               see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Expence
               </button>
             </Link>
@@ -119,7 +119,7 @@ const FeatureHome = () => {
               you see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Dashboard
               </button>
             </Link>
