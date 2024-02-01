@@ -9,7 +9,7 @@ const Transection = () => {
   const { transections: tranfers } = useTransection("TRANSFER");
 
   return (
-    <div>
+    <div className="mt-14">
       <Tabs className={"mt-8"}>
         <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Income</Tab>
