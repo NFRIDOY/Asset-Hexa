@@ -13,6 +13,8 @@ import {
 import app from "./../utility/Firebase/firebase.config";
 import PropTypes from "prop-types"; // ES6
 import toast from "react-hot-toast";
+import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext(null);
 
@@ -28,6 +30,30 @@ export default function AuthProvider({ children }) {
   // gitgub auth provider
   const githubProvider = new GithubAuthProvider();
 
+  // const axiosPublic = useAxios();
+
+   // create default 4 accounts for new users
+  // const createDefaultAccounts = (group, account, amount = 0, description) => {
+  //   const addAccount = {
+  //     group, account, amount, description, email: user?.email,
+  //   }
+
+  //   axiosPublic.post('/accounts', addAccount)
+  //     .then(res => {
+  //       if (res.data.insertedId) {
+  //         console.log(res.data);
+  //         console.log('user balance added to the data base ');
+  //         // Swal.fire({
+  //         //   position: "top-end",
+  //         //   icon: "success",
+  //         //   title: "  Your has been added",
+  //         //   showConfirmButton: false,
+  //         //   timer: 1500
+  //         // });
+  //       }
+  //     })
+  // }
+
   /**
    * Create User By Email & Pass
    * Sign in with email and password
@@ -35,6 +61,11 @@ export default function AuthProvider({ children }) {
    */
   const createUserEmailPass = (email, password) => {
     setLoading(true);
+    // createDefaultAccounts(group, account, amount = 0, description)
+    // createDefaultAccounts("Cash", "Cash", 0, "Default Account" )
+    // createDefaultAccounts("Account", "Bkash", 0, "Default Account" )
+    // createDefaultAccounts("Saving", "Saving", 0, "Default Account" )
+    // createDefaultAccounts("Loan", "Loan", 0, "Default Account" )
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
