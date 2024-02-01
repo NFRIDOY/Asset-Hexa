@@ -105,3 +105,7 @@ body {
   top: -60px;
   left: -52px;
 }
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}

@@ -8,8 +8,8 @@ import loti2 from "../../lottie/Animation - 1705568847598.json";
 
 const FeatureHome = () => {
   return (
-    <div className="max-w-7xl mx-auto my-40">
-      <p className="text-4xl font-bold text-center text-black mb-5 mt-10">
+    <div className="max-w-7xl mx-auto md:my-16">
+      <p className="text-4xl mb-10 font-bold text-center text-black  mt-10">
         Discover what&apos;s so amazing about Asset Hexa
       </p>
       <h1 className="font-5xl font-poppins font-extrabold border-b-4 border-dimBlue text-white mb-10"></h1>
@@ -43,7 +43,7 @@ const FeatureHome = () => {
               see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Income
               </button>
             </Link>
@@ -83,7 +83,7 @@ const FeatureHome = () => {
               see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Expence
               </button>
             </Link>
@@ -119,7 +119,7 @@ const FeatureHome = () => {
               you see easy opportunities to save.
             </p>
             <Link to="">
-              <button className="btn  text-white bg-emerald-400 mt-4 md:mt-6">
+              <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Dashboard
               </button>
             </Link>
