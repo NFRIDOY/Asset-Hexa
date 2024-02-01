@@ -36,7 +36,7 @@ const Accounts = () => {
 
         <div className="flex justify-end gap-10 ">
           <div>
-            <FaRegChartBar style={20} />
+            {/* <FaRegChartBar style={20} /> */}
           </div>
         </div>
       </div>
