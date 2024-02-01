@@ -208,9 +208,9 @@ const OverView = () => {
   };
 
   return (
-    <div className="p-8   bg-base-300 ">
+    <div className="md:p-8 bg-base-300 mt-10">
       <div className=" ">
-        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-scroll scrollable-content ">
+        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-hidden overflow-x-auto">
           <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Cash</h1>
             <p className="text-5xl font-semibold">$00</p>
@@ -225,13 +225,13 @@ const OverView = () => {
           </div>
           <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Loan</h1>
-            <p className="text-5xl font-semibold">$0000000</p>
+            <p className="text-5xl font-semibold">$00</p>
           </div>
-          {AccountData.map((item) => (
+          {AccountData?.map((item) => (
             <div
               style={{ backgroundColor: getRandomColor() }}
               key={item?.id}
-              className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
+              className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl px-8  min-w-60 "
             >
               <h1 className="text-xl font-medium">{item?.account}</h1>
               <p className="text-5xl font-semibold">${item?.amount}</p>
@@ -239,9 +239,9 @@ const OverView = () => {
           ))}
         </div>
 
-        <div className="flex gap-5 mt-5">
-          <div className="bg-white ">
-            <PieChart width={400} height={400}>
+        <div className="flex flex-col xl:flex-row gap-5 mt-5">
+          <div className="bg-white flex justify-center items-center">
+            <PieChart width={320} height={320}>
               <Pie
                 dataKey="value"
                 isAnimationActive={false}
@@ -262,7 +262,7 @@ const OverView = () => {
 
               <Tooltip />
               <Legend />
-            </PieChart>{" "}
+            </PieChart>
           </div>
 
           <div className="flex-1 bg-white min-h-[500px] overflow-y-scroll scrollable-content">
@@ -394,7 +394,7 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Category
+                Select Category
               </option>
               <option value="Allowance">Allowance</option>
               <option value="Salary">Salary</option>
@@ -409,11 +409,14 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Account
+                Select Account
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
             <input
               name="note"
@@ -456,7 +459,7 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Category
+                Select Category
               </option>
               <option value="Food">Food</option>
               <option value="Cloth">Cloth</option>
@@ -464,6 +467,7 @@ const OverView = () => {
               <option value="Social">Social</option>
               <option value="Regular">Regular</option>
               <option value="Health">Health</option>
+              <option value="Other">Other</option>
             </select>
 
             <select
@@ -472,11 +476,15 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Account
+                Select Account
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
             <input
               name="note"
@@ -512,7 +520,7 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               min="0"
-              oninput="validity.valid||(value='');"
+              onInput="validity.valid||(value='');"
               className="input input-bordered w-full "
             />
             <select
@@ -523,9 +531,12 @@ const OverView = () => {
               <option disabled value="">
                 From
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
 
             <select
@@ -536,9 +547,12 @@ const OverView = () => {
               <option disabled value="">
                 To
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
             <input
               name="note"
