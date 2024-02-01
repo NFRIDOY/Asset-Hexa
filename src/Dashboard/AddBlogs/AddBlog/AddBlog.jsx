@@ -18,7 +18,7 @@ const AddBlog = () => {
         const description = form.description.value;
         const image = form.image.value;
         const addBlogs = {
-            title, description, image
+            title, description, image, upvote: 0, downvote: 0
         }
         console.log(addBlogs);
         e.target.reset();
