@@ -4,7 +4,7 @@ import debt from "../../assets/WhyChooseUs/4334503.png";
 
 const WhyChooseUs = () => {
   return (
-    <div className="my-40 px-2">
+    <div className="my-20 px-2">
       <div className="my-10 text-center">
         <h1 className="text-3xl mb-2 font-semibold ">Why Choose Us</h1>
         <p>Empowering Your Financial Future Through Expert Money Management</p>
