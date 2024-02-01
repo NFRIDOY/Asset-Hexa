@@ -210,7 +210,7 @@ const OverView = () => {
   return (
     <div className="md:p-8 bg-base-300 mt-10">
       <div className=" ">
-        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-hidden overflow-x-scroll">
+        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-hidden overflow-x-auto">
           <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Cash</h1>
             <p className="text-5xl font-semibold">$00</p>
@@ -227,7 +227,7 @@ const OverView = () => {
             <h1 className="text-xl font-medium">Loan</h1>
             <p className="text-5xl font-semibold">$00</p>
           </div>
-          {AccountData.map((item) => (
+          {AccountData?.map((item) => (
             <div
               style={{ backgroundColor: getRandomColor() }}
               key={item?.id}
@@ -412,7 +412,7 @@ const OverView = () => {
                 Select Account
               </option>
               {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
               }
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
@@ -479,7 +479,7 @@ const OverView = () => {
                 Select Account
               </option>
               {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
               }
 
               {/* <option value="Cash">Cash</option>
@@ -532,7 +532,7 @@ const OverView = () => {
                 From
               </option>
               {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
               }
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
@@ -548,7 +548,7 @@ const OverView = () => {
                 To
               </option>
               {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
               }
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
