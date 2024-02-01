@@ -44,14 +44,14 @@ const AddBalance = () => {
    return (
       <div>
          <Link to={"/dashboard/accounts"}>
-            <div className="flex gap-4 mb-10">
+            <div className="flex gap-4 mb-10 pt-20">
                <AiOutlineArrowLeft className="mt-[5px]" style={20} />
                <h1>Add Account</h1>
             </div>
          </Link>
 
          <form onSubmit={Balance}  >
-            <div className="flex gap-20 mb-2">
+            <div className="flex gap-[78px] mb-2">
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Group </span>
                </label>
@@ -63,19 +63,19 @@ const AddBalance = () => {
                   <option className="text-[#000]">Loan</option>
                </select>
             </div>
-            <div className="flex gap-20 mb-2">
+            <div className="flex  md:gap-12 lg:gap-10 mb-2">
                <label className="label w-24">
                   <span className="label-text text-[#000]">Account Name </span>
                </label>
                <input name="account" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
             </div>
-            <div className="flex gap-20 mb-2">
+            <div className="flex gap-[70px] mb-2">
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Amount</span>
                </label>
                <input name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
             </div>
-            <div className="flex gap-20 mb-5">
+            <div className="flex gap-[49px] mb-5">
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Description</span>
                </label>
