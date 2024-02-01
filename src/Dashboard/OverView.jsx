@@ -394,7 +394,7 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Category
+                Select Category
               </option>
               <option value="Allowance">Allowance</option>
               <option value="Salary">Salary</option>
@@ -409,11 +409,14 @@ const OverView = () => {
               defaultValue=""
             >
               <option disabled value="">
-                select Account
+                Select Account
               </option>
-              <option value="Cash">Cash</option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
-              <option value="Card">Card</option>
+              <option value="Card">Card</option> */}
             </select>
             <input
               name="note"
@@ -464,6 +467,7 @@ const OverView = () => {
               <option value="Social">Social</option>
               <option value="Regular">Regular</option>
               <option value="Health">Health</option>
+              <option value="Other">Other</option>
             </select>
 
             <select
