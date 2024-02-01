@@ -14,6 +14,8 @@ import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
+import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
+import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ export const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "UpdateProfile",
+    element: <UpdateProfile/>,
   },
   {
     path: "register",
@@ -80,6 +86,10 @@ export const router = createBrowserRouter([
           <Profile/>
 
         </PrivateRoute>
+      },
+      {
+        path:'addBlog',
+        element:<AddBlog></AddBlog>
       },
 
     ]
