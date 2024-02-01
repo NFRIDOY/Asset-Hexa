@@ -8,15 +8,9 @@ const Transection = () => {
   const { transections: expenses } = useTransection("EXPENSE");
   const { transections: tranfers } = useTransection("TRANSFER");
 
-  console.log(expenses, tranfers);
-
   return (
     <div>
-      {/* <h2>Transection</h2> */}
-      <h1 className="my-10 text-5xl text-center font-bold text-emerald-500 uppercase">
-      Transections
-      </h1>
-      <Tabs>
+      <Tabs className={"mt-8"}>
         <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Income</Tab>
           <Tab>Expense</Tab>
@@ -25,32 +19,50 @@ const Transection = () => {
 
         <TabPanel>
           <div className="mt-8 space-y-3">
-            {incomes.map((transection) => (
-              <TransectionColumn
-                key={transection._id}
-                transection={transection}
-              ></TransectionColumn>
-            ))}
+            {incomes.length ? (
+              incomes.map((transection) => (
+                <TransectionColumn
+                  key={transection._id}
+                  transection={transection}
+                ></TransectionColumn>
+              ))
+            ) : (
+              <div className="flex justify-center items-center text-4xl font-extrabold">
+                <h1 className="mt-28 uppercase">No DATA</h1>
+              </div>
+            )}
           </div>
         </TabPanel>
         <TabPanel>
           <div className="mt-8 space-y-3">
-            {expenses.map((transection) => (
-              <TransectionColumn
-                key={transection._id}
-                transection={transection}
-              ></TransectionColumn>
-            ))}
+            {expenses.length ? (
+              expenses.map((transection) => (
+                <TransectionColumn
+                  key={transection._id}
+                  transection={transection}
+                ></TransectionColumn>
+              ))
+            ) : (
+              <div className="flex justify-center items-center text-4xl font-extrabold">
+                <h1 className="mt-28 uppercase">No DATA</h1>
+              </div>
+            )}
           </div>
         </TabPanel>
         <TabPanel>
           <div className="mt-8 space-y-3">
-            {tranfers.map((transection) => (
-              <TransectionColumn
-                key={transection._id}
-                transection={transection}
-              ></TransectionColumn>
-            ))}
+            {tranfers.length ? (
+              tranfers.map((transection) => (
+                <TransectionColumn
+                  key={transection._id}
+                  transection={transection}
+                ></TransectionColumn>
+              ))
+            ) : (
+              <div className="flex justify-center items-center text-4xl font-extrabold">
+                <h1 className="mt-28 uppercase">No DATA</h1>
+              </div>
+            )}
           </div>
         </TabPanel>
       </Tabs>
