@@ -33,8 +33,8 @@ const OverView = () => {
   useEffect(() => {
     axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
       //   console.log(res.data);
-      setPieData(res.data.accPiData);
-      setPieLabel(res.data.accPiLebel);
+      setPieData(res?.data?.accPiData);
+      setPieLabel(res?.data?.accPiLebel);
     });
   }, [axiosPublic]);
 
@@ -42,7 +42,7 @@ const OverView = () => {
 
   // Loading Data for TransferData Table
 
-  const { data: transferData = [], refetch } = useQuery({
+  const { data: transferData = [] } = useQuery({
     queryKey: ["transeferData"],
     queryFn: async () => {
       const res = await axiosPublic.get(
@@ -227,16 +227,17 @@ const OverView = () => {
             <h1 className="text-xl font-medium">Loan</h1>
             <p className="text-5xl font-semibold">$00</p>
           </div>
-          {AccountData?.map((item) => (
-            <div
-              style={{ backgroundColor: getRandomColor() }}
-              key={item?.id}
-              className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl px-8  min-w-60 "
-            >
-              <h1 className="text-xl font-medium">{item?.account}</h1>
-              <p className="text-5xl font-semibold">${item?.amount}</p>
-            </div>
-          ))}
+          {AccountData &&
+            AccountData?.map((item) => (
+              <div
+                style={{ backgroundColor: getRandomColor() }}
+                key={item?.id}
+                className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl px-8  min-w-60 "
+              >
+                <h1 className="text-xl font-medium">{item?.account}</h1>
+                <p className="text-5xl font-semibold">${item?.amount}</p>
+              </div>
+            ))}
         </div>
 
         <div className="flex flex-col xl:flex-row gap-5 mt-5">
@@ -342,7 +343,7 @@ const OverView = () => {
               </g>{" "}
             </svg>{" "}
           </span>{" "}
-          <span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
           <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
           <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
         </button>
@@ -411,9 +412,11 @@ const OverView = () => {
               <option disabled value="">
                 Select Account
               </option>
-              {
-                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData?.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
               <option value="Card">Card</option> */}
@@ -478,9 +481,11 @@ const OverView = () => {
               <option disabled value="">
                 Select Account
               </option>
-              {
-                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData?.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
 
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
@@ -531,9 +536,11 @@ const OverView = () => {
               <option disabled value="">
                 From
               </option>
-              {
-                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData?.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
               <option value="Card">Card</option> */}
@@ -547,9 +554,11 @@ const OverView = () => {
               <option disabled value="">
                 To
               </option>
-              {
-                AccountData?.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData?.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
               <option value="Card">Card</option> */}
