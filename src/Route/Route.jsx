@@ -14,6 +14,7 @@ import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
+import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
           <Profile/>
 
         </PrivateRoute>
+      },
+      {
+        path:'addBlog',
+        element:<AddBlog></AddBlog>
       },
 
     ]

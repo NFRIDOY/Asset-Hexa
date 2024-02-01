@@ -19,7 +19,7 @@ const AddBlog = () => {
         }
         console.log(addBlogs);
         e.target.reset();
-        
+
         axiosPublic.post('/blogs', addBlogs)
             .then(res => {
                 console.log(res.data);
@@ -38,11 +38,11 @@ const AddBlog = () => {
 
     return (
         <div className=" bg-[#91F0AC]"> {/*  */}
-           
-            <div  className="pt-10 pb-10">
+
+            <div className="pt-10 pb-10">
                 <div className=" md:ml-72  pt-16 pl-16 pr-16 pb-16 rounded-tl-badge rounded-br-badge bg-[#3EEE2A]  w-[450px]">
                     <form onSubmit={Blogs}>
-                            
+
                         <div className=" mb-2">
                             <label className="label">
                                 <span className="label-text text-[#7D7D7D]"> Title </span>
