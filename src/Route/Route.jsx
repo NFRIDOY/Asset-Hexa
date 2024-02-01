@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
 import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
+import Blog from "../Dashboard/AddBlogs/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path:"/helpDesk",
         element:<HelpDesk></HelpDesk>
+      },
+      {
+        path:"/Blogs",
+        element:<Blog/>
       }
     ],
   },
