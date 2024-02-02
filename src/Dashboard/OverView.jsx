@@ -247,7 +247,7 @@ const OverView = () => {
 							className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
 						>
 							<h1 className="text-xl font-medium">
-								{item?.name
+								{item?.account
 }
 							</h1>
 							<p className="text-5xl font-semibold">
