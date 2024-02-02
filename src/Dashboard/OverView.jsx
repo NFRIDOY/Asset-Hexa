@@ -257,8 +257,8 @@ const OverView = () => {
 					))}
 				</div>
 
-				<div className="flex gap-5 mt-5">
-					<div className="bg-white ">
+				<div className="flex flex-col lg:flex-row gap-5 mt-5">
+					<div className="bg-white  ">
 						<PieChart width={400} height={400}>
 							<Pie
 								dataKey="value"
@@ -283,7 +283,7 @@ const OverView = () => {
 						</PieChart>{" "}
 					</div>
 
-					<div className="flex-1 overflow-y-scroll scrollable-content h-[500px] bg-white ">
+					<div className="flex-1 overflow-y-scroll scrollable-content h-auto  lg:h-[500px] bg-white ">
 						<h1 className="text-center    text-2xl my-2 ">
 							{" "}
 							Recent Transection

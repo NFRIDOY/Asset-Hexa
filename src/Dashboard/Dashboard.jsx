@@ -11,7 +11,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 const Dashboard = () => {
   return (
-    <div className=" h-screen bg-base-300">
+    <div className=" lg:h-screen bg-base-300">
       <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col   ">
