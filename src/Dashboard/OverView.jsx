@@ -1,15 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import "../../src/App.css";
-// import {
-// 	LineChart,
-// 	Line,
-// 	XAxis,
-// 	YAxis,
-// 	CartesianGrid,
-// 	Tooltip,
-// 	Legend,
-// 	ResponsiveContainer,
-// } from "recharts";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxios from "../hooks/useAxios";
 import toast from "react-hot-toast";
@@ -25,32 +15,48 @@ const OverView = () => {
 
 	const axiosPublic = useAxios();
 	const { user } = useContext(AuthContext);
-	const [pieData, setPieData] = useState([]);
-	const [pieLabel, setPieLabel] = useState([]);
+	// const [pieData, setPieData] = useState([]);
 
-	// Loading Data form Paichart
+	// useEffect(() => {
+	// 	axiosPublic.get(`/totalInExp?email=${user?.email}`).then((res) => {
+	// 		setPieData(res?.data);
+	// 	});
+	// }, [axiosPublic]);
 
-	useEffect(() => {
-		axiosPublic.get("/accountPi?email=front@example.com").then((res) => {
-			//   console.log(res.data);
-			setPieData(res.data.accPiData);
-			setPieLabel(res.data.accPiLebel);
-		});
-	}, [axiosPublic]);
 
-	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
-
-	// Loading Data for TransferData Table
-
-	const { data: transferData = [], refetch } = useQuery({
-		queryKey: ["transeferData"],
+	const { data: PiData = [], refetch: PiREfetch } = useQuery({
+		queryKey: ["piData"],
 		queryFn: async () => {
 			const res = await axiosPublic.get(
-				`/transections?type=TRANSFER&email=${user?.email}`
+				`/totalInExp?email=${user?.email}`
 			);
 			return res.data;
 		},
 	});
+
+	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
+
+	// Loading Data for recent transection Table
+
+	const { data: transectionData = [], refetch } = useQuery({
+		queryKey: ["transeferData"],
+		queryFn: async () => {
+			const res = await axiosPublic.get(
+				`/transections?email=${user?.email}`
+			);
+			return res.data;
+		},
+	});
+
+	const sortedTransactions = [...transectionData];
+
+	// Sorting by date in descending order
+	sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+	// Now sortedTransactions contains the sorted data by recent date
+	console.log( "this is sorted data", sortedTransactions);
+
+	console.log("transectionData", transectionData);
 
 	const { data: AccountData = [] } = useQuery({
 		queryKey: ["AccountData"],
@@ -58,17 +64,17 @@ const OverView = () => {
 			const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
 			return res.data;
 		},
-	});
+	});	
 
 	console.log(AccountData);
 	// This is for Paichart (color and data fo piechart)
 
 	const data01 = [
-		{ name: "Income", value: pieData[0] },
-		{ name: "Expanse", value: pieData[1] },
+		{ name: "Income", value: PiData?.totalIncome },
+		{ name: "Expanse", value: PiData?.totalExpense },
 	];
 
-	const COLORS = ["#449B38", "#E94444"];
+	const COLORS = ["#317DF0", "#F8A11B"];
 
 	// this is function to handle income Data from to Post Data
 
@@ -102,12 +108,13 @@ const OverView = () => {
 				type,
 			};
 			setIncomeText("");
-			console.log(incomeData), "thiw is incoem t=data";
 			form.reset();
 			axiosPublic.post("/transections", incomeData).then((res) => {
-				console.log(res.data);
+				// console.log(res.data);
 				if (res?.data.resultAccount.acknowledged) {
 					toast.success("Income Data added Successfully");
+					refetch()
+					PiREfetch()
 				}
 			});
 		}
@@ -145,12 +152,14 @@ const OverView = () => {
 				type,
 			};
 			setExpanseText("");
-			console.log(expanseData);
+			// console.log(expanseData);
 			form.reset();
 			axiosPublic.post("/transections", expanseData).then((res) => {
-				console.log(res.data);
+				// console.log(res.data);
 				if (res?.data.resultAccount.acknowledged) {
 					toast.success("Expanse Data added Successfully");
+					refetch()
+					PiREfetch()
 				}
 			});
 		}
@@ -180,12 +189,13 @@ const OverView = () => {
 		} else {
 			const transferData = { email, date, amount, from, to, note, type };
 			setTransferText("");
-			console.log(transferData);
+			// console.log(transferData);
 			form.reset();
 			axiosPublic.post("/transections", transferData).then((res) => {
 				console.log(res.data);
-				if (res?.data.resultAccount.acknowledged) {
+				if (res?.data.resultTransec.acknowledged) {
 					toast.success("Transfer Data added Successfully");
+					refetch()
 				}
 			});
 		}
@@ -236,7 +246,8 @@ const OverView = () => {
 							className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
 						>
 							<h1 className="text-xl font-medium">
-								{item?.account}
+								{item?.name
+}
 							</h1>
 							<p className="text-5xl font-semibold">
 								${item?.amount}
@@ -271,20 +282,22 @@ const OverView = () => {
 						</PieChart>{" "}
 					</div>
 
-					<div className="flex-1 bg-white min-h-[500px] overflow-y-scroll scrollable-content">
-								<h1 className="text-center text-2xl my-2 " > Recent Transection</h1>
-						<table className="table table-lg  text-center">
+					<div className="flex-1 overflow-y-scroll scrollable-content h-[500px] bg-white ">
+						<h1 className="text-center    text-2xl my-2 ">
+							{" "}
+							Recent Transection
+						</h1>
+						<table className="table table-pin-rows  table-lg  text-center">
 							<thead>
-								<tr>
+								<tr className="">
 									<th>Date</th>
 									<th>Time</th>
-									<th>from</th>
-									<th>To</th>
+									<th>Type</th>
 									<th>amount</th>
 								</tr>
 							</thead>
-							<tbody>
-								{transferData?.map((item) => (
+							<tbody className="  ">
+								{sortedTransactions?.map((item) => (
 									<tr key={item?.id} className="hover">
 										<td>
 											{" "}
@@ -298,8 +311,8 @@ const OverView = () => {
 												item?.date
 											).toLocaleTimeString()}{" "}
 										</td>
-										<td> {item?.from} </td>
-										<td>{item?.to}</td>
+										<td> {item?.type} </td>
+										{/* <td>{item?.category}</td> */}
 										<td>${item?.amount}</td>
 									</tr>
 								))}
@@ -312,15 +325,14 @@ const OverView = () => {
 					{/* <h1 className="text-xl font-medium text-center mb-5">
 						Transections
 					</h1> */}
-					
 				</div>
 			</div>
 
 			{/* for add income , Expanse , transfer and parent Button  */}
 
-			<div className="group parentbutton space-x-4 absolute bottom-8 right-20">
+			<div className="group parentbutton space-x-4 absolute bottom-16 right-20">
 				<button className="group w-[50px] h-[50px] relative">
-					<span className="group-hover:shadow-[0px_0px_30px_2px_#0d87f8] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#0d87f8] to-[#70c4ff] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
+					<span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
 						<svg
 							width={25}
 							viewBox="0 0 24 24"
@@ -359,9 +371,9 @@ const OverView = () => {
 							</g>{" "}
 						</svg>{" "}
 					</span>{" "}
-					<span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
-					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
-					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#0d87f8]/50 to-[#70c4ff]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
+					<span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
+					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
+					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
 				</button>
 
 				<button
@@ -487,12 +499,12 @@ const OverView = () => {
 							<option disabled value="">
 								select Category
 							</option>
-							<option value="Allowance">Food</option>
-							<option value="Salary">Cloth</option>
-							<option value="pettyCash">Education</option>
-							<option value="Bonus">Social</option>
-							<option value="Others">Investment</option>
-							<option value="Others">Health</option>
+							<option value="Food">Food</option>
+							<option value="Cloth">Cloth</option>
+							<option value="Education">Education</option>
+							<option value="Social">Social</option>
+							<option value="Investment">Investment</option>
+							<option value="Health">Health</option>
 						</select>
 
 						<select
@@ -515,7 +527,7 @@ const OverView = () => {
 						/>
 						<p className="text-red-500">{expanseText}</p>
 						<button className="btn btn-info w-full " type="submit">
-							Add Income
+							Add Expanse
 						</button>
 					</form>
 				</div>
