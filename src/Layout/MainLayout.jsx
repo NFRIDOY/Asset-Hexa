@@ -32,7 +32,7 @@ const MainLayout = () => {
 							aria-label="close sidebar"
 							className="drawer-overlay"
 						></label>
-						<ul style={{backdropFilter: "blur(30px)"}} className="menu bg-transparent p-4 w-80 min-h-full text-center">
+						<ul style={{backdropFilter: "blur(30px)"}} className="menu bg-transparent p-4 w-56 min-h-full text-center">
 							{/* Sidebar content here */}
 							<NavUl></NavUl>
 
