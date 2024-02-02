@@ -5,6 +5,7 @@ import useAxios from "../hooks/useAxios";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
+import { Link } from "react-router-dom";
 
 const OverView = () => {
 
@@ -219,12 +220,19 @@ const OverView = () => {
     );
     return BGcolorsOfAccount[randomIndex];
   };
+  const getIndexColor = () => {
+    // Generate a random index to pick a color from the array
+    const randomIndex = Math.floor(
+      Math.random() * BGcolorsOfAccount.length
+    );
+    return BGcolorsOfAccount[randomIndex];
+  };
 
   return (
     <div className="p-8   bg-base-300 ">
       <div className=" ">
-        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-scroll scrollable-content ">
-          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
+        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
+          {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Cash</h1>
             <p className="text-5xl font-semibold">$00</p>
           </div>
@@ -239,8 +247,8 @@ const OverView = () => {
           <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Loan</h1>
             <p className="text-5xl font-semibold">$00</p>
-          </div>
-          {AccountData.map((item) => (
+          </div> */}
+          {!AccountData ? AccountData.map((item) => (
             <div
               style={{ backgroundColor: getRandomColor() }}
               key={item?.id}
@@ -254,7 +262,7 @@ const OverView = () => {
                 ${item?.amount}
               </p>
             </div>
-          ))}
+          )) : <Link to={"../../dashboard/AddBalance"} className="h-32 w-full flex justify-center items-center "> <p className="btn btn-accent w-fit ">Create Accounts First</p></Link>}
         </div>
 
         <div className="flex gap-5 mt-5">
