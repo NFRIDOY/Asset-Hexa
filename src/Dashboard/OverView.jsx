@@ -83,7 +83,7 @@ const OverView = () => {
     e.preventDefault();
     const form = e.target;
     const date = new Date(form.date.value);
-    const amount = form.amount.value;
+    const amount = parseFloat(form.amount.value);
     const category = form.category.value;
     const account = form.account.value;
     const note = form.note.value;
@@ -127,7 +127,7 @@ const OverView = () => {
     e.preventDefault();
     const form = e.target;
     const date = new Date(form.date.value);
-    const amount = form.amount.value;
+    const amount = parseFloat(form.amount.value);
     const category = form.category.value;
     const account = form.account.value;
     const note = form.note.value;
@@ -172,7 +172,7 @@ const OverView = () => {
     e.preventDefault();
     const form = e.target;
     const date = form.date.value;
-    const amount = form.amount.value;
+    const amount = parseFloat(form.amount.value);
     const from = form.from.value;
     const to = form.to.value;
     const note = form.note.value;
