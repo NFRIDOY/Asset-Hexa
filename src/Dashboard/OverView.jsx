@@ -5,8 +5,10 @@ import useAxios from "../hooks/useAxios";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
+import { Link } from "react-router-dom";
 
 const OverView = () => {
+
 
 	// state to hold  erroretext from diffrent modal
 
@@ -326,284 +328,296 @@ const OverView = () => {
 					{/* <h1 className="text-xl font-medium text-center mb-5">
 						Transections
 					</h1> */}
-				</div>
-			</div>
+        </div>
+      </div>
 
-			{/* for add income , Expanse , transfer and parent Button  */}
+      {/* for add income , Expanse , transfer and parent Button  */}
 
-			<div className="group parentbutton space-x-4 absolute bottom-16 right-20">
-				<button className="group w-[50px] h-[50px] relative">
-					<span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
-						<svg
-							width={25}
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							{" "}
-							<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>{" "}
-							<g
-								id="SVGRepo_tracerCarrier"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							></g>{" "}
-							<g id="SVGRepo_iconCarrier">
-								{" "}
-								<g id="style=linear">
-									{" "}
-									<g id="add">
-										{" "}
-										<path
-											id="vector"
-											d="M11.998 5.84424L11.998 18.1604"
-											stroke="#000"
-											strokeWidth="2"
-											strokeLinecap="round"
-										></path>{" "}
-										<path
-											id="vector_2"
-											d="M18.1561 12.002L5.83998 12.0019"
-											stroke="#000"
-											strokeWidth="2"
-											strokeLinecap="round"
-										></path>{" "}
-									</g>{" "}
-								</g>{" "}
-							</g>{" "}
-						</svg>{" "}
-					</span>{" "}
-					<span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
-					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
-					<span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
-				</button>
+      <div className="group parentbutton space-x-4 absolute bottom-16 right-20">
+        <button className="group w-[50px] h-[50px] relative">
+          <span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
+            <svg
+              width={25}
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {" "}
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>{" "}
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>{" "}
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <g id="style=linear">
+                  {" "}
+                  <g id="add">
+                    {" "}
+                    <path
+                      id="vector"
+                      d="M11.998 5.84424L11.998 18.1604"
+                      stroke="#000"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    ></path>{" "}
+                    <path
+                      id="vector_2"
+                      d="M18.1561 12.002L5.83998 12.0019"
+                      stroke="#000"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    ></path>{" "}
+                  </g>{" "}
+                </g>{" "}
+              </g>{" "}
+            </svg>{" "}
+          </span>{" "}
+          <span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
+        </button>
 
-				<button
-					onClick={() => {
-						document.getElementById("modal_income").showModal();
-					}}
-					className="custom-button income"
-				>
-					Add Income
-				</button>
-				<button
-					onClick={() =>
-						document.getElementById("modal_expanse").showModal()
-					}
-					className="custom-button expanse"
-				>
-					Add Expence{" "}
-				</button>
+        <button
+          onClick={() => {
+            document.getElementById("modal_income").showModal();
+          }}
+          className="custom-button income"
+        >
+          Add Income
+        </button>
+        <button
+          onClick={() =>
+            document.getElementById("modal_expanse").showModal()
+          }
+          className="custom-button expanse"
+        >
+          Add Expence{" "}
+        </button>
 
-				<button
-					onClick={() =>
-						document.getElementById("modal_transfer").showModal()
-					}
-					className="custom-button Transfer"
-				>
-					Add Transfer{" "}
-				</button>
-			</div>
+        <button
+          onClick={() =>
+            document.getElementById("modal_transfer").showModal()
+          }
+          className="custom-button Transfer"
+        >
+          Add Transfer{" "}
+        </button>
+      </div>
 
-			{/*-------------------- Modal for Indcome----------------------- */}
+      {/*-------------------- Modal for Indcome----------------------- */}
 
-			<dialog id="modal_income" className="modal">
-				<div className="modal-box">
-					<h3 className="font-bold text-lg text-center mb-6">
-						Input Your Income Data
-					</h3>
-					<form onSubmit={handleSubmitIncome} className="space-y-4">
-						<div className="input input-bordered flex  justify-between items-center">
-							<p> Date</p>
-							<input
-								name="date"
-								placeholder=""
-								type="datetime-local"
-							/>
-						</div>
-						<input
-							name="amount"
-							type="number"
-							placeholder="Amount"
-							className="input input-bordered w-full "
-						/>
-						<select
-							name="category"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								select Category
-							</option>
-							<option value="Allowance">Allowance</option>
-							<option value="Salary">Salary</option>
-							<option value="pettyCash">pettyCash</option>
-							<option value="Bonus">Bonus</option>
-							<option value="Others">Others</option>
-						</select>
+      <dialog id="modal_income" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center mb-6">
+            Input Your Income Data
+          </h3>
+          <form onSubmit={handleSubmitIncome} className="space-y-4">
+            <div className="input input-bordered flex  justify-between items-center">
+              <p> Date</p>
+              <input
+                name="date"
+                placeholder=""
+                type="datetime-local"
+              />
+            </div>
+            <input
+              name="amount"
+              type="number"
+              placeholder="Amount"
+              className="input input-bordered w-full "
+            />
+            <select
+              name="category"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                Select Category
+              </option>
+              <option value="Allowance">Allowance</option>
+              <option value="Salary">Salary</option>
+              <option value="pettyCash">pettyCash</option>
+              <option value="Bonus">Bonus</option>
+              <option value="Others">Others</option>
+            </select>
 
-						<select
-							name="account"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								select Account
-							</option>
-							<option value="Cash">Cash</option>
+            <select
+              name="account"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                Select Account
+              </option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
 							<option value="Accounts">Accounts</option>
-							<option value="Card">Card</option>
-						</select>
-						<input
-							name="note"
-							type="text"
-							placeholder="Note"
-							className="input input-bordered w-full "
-						/>
-						<p className="text-red-500">{incomeText}</p>
-						<button className="btn btn-info w-full " type="submit">
-							Add Income
-						</button>
-					</form>
-				</div>
-				<form method="dialog" className="modal-backdrop">
-					<button>close</button>
-				</form>
-			</dialog>
+							<option value="Card">Card</option> */}
+            </select>
+            <input
+              name="note"
+              type="text"
+              placeholder="Note"
+              className="input input-bordered w-full "
+            />
+            <p className="text-red-500">{incomeText}</p>
+            <button className="btn btn-info w-full " type="submit">
+              Add Income
+            </button>
+          </form>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
 
-			{/*-------------------- Modal for Expanse----------------------- */}
+      {/*-------------------- Modal for Expanse----------------------- */}
 
-			<dialog id="modal_expanse" className="modal">
-				<div className="modal-box">
-					<h3 className="font-bold text-lg text-center mb-6">
-						Input Your Expance Data
-					</h3>
-					<form onSubmit={handleSubmitExpanse} className="space-y-4">
-						<div className="input input-bordered flex  justify-between items-center">
-							<p> Date</p>
-							<input
-								name="date"
-								placeholder=""
-								type="datetime-local"
-							/>
-						</div>
-						<input
-							name="amount"
-							type="number"
-							placeholder="Amount"
-							className="input input-bordered w-full "
-						/>
-						<select
-							name="category"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								select Category
-							</option>
-							<option value="Food">Food</option>
-							<option value="Cloth">Cloth</option>
-							<option value="Education">Education</option>
-							<option value="Social">Social</option>
-							<option value="Investment">Investment</option>
-							<option value="Health">Health</option>
-						</select>
+      <dialog id="modal_expanse" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center mb-6">
+            Input Your Expance Data
+          </h3>
+          <form onSubmit={handleSubmitExpanse} className="space-y-4">
+            <div className="input input-bordered flex  justify-between items-center">
+              <p> Date</p>
+              <input
+                name="date"
+                placeholder=""
+                type="datetime-local"
+              />
+            </div>
+            <input
+              name="amount"
+              type="number"
+              placeholder="Amount"
+              className="input input-bordered w-full "
+            />
+            <select
+              name="category"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                Select Category
+              </option>
+              <option value="Food">Food</option>
+              <option value="Cloth">Cloth</option>
+              <option value="Education">Education</option>
+              <option value="Social">Social</option>
+              <option value="Investment">Investment</option>
+              <option value="Health">Health</option>
+            </select>
 
-						<select
-							name="account"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								select Account
-							</option>
-							<option value="Cash">Cash</option>
+            <select
+              name="account"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                Select Account
+              </option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
 							<option value="Accounts">Accounts</option>
-							<option value="Card">Card</option>
-						</select>
-						<input
-							name="note"
-							type="text"
-							placeholder="Note"
-							className="input input-bordered w-full "
-						/>
-						<p className="text-red-500">{expanseText}</p>
-						<button className="btn btn-info w-full " type="submit">
-							Add Expanse
-						</button>
-					</form>
-				</div>
-				<form method="dialog" className="modal-backdrop">
-					<button>close</button>
-				</form>
-			</dialog>
+							<option value="Card">Card</option> */}
+            </select>
+            <input
+              name="note"
+              type="text"
+              placeholder="Note"
+              className="input input-bordered w-full "
+            />
+            <p className="text-red-500">{expanseText}</p>
+            <button className="btn btn-info w-full " type="submit">
+              Add Expanse
+            </button>
+          </form>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
 
-			{/* -------------------------modal for transfer-------------- */}
+      {/* -------------------------modal for transfer-------------- */}
 
-			<dialog id="modal_transfer" className="modal">
-				<div className="modal-box">
-					<h3 className="font-bold text-lg text-center mb-6">
-						Input Your transfer Data
-					</h3>
-					<form onSubmit={handleSubmittransfer} className="space-y-4">
-						<div className="input input-bordered flex  justify-between items-center">
-							<p> Date</p>
-							<input
-								name="date"
-								placeholder=""
-								type="datetime-local"
-							/>
-						</div>
-						<input
-							name="amount"
-							type="number"
-							placeholder="Amount"
-							min="0"
-							oninput="validity.valid||(value='');"
-							className="input input-bordered w-full "
-						/>
-						<select
-							name="from"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								From
-							</option>
-							<option value="Cash">Cash</option>
-							<option value="Accounts">Accounts</option>
-							<option value="Card">Card</option>
-						</select>
+      <dialog id="modal_transfer" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center mb-6">
+            Input Your transfer Data
+          </h3>
+          <form onSubmit={handleSubmittransfer} className="space-y-4">
+            <div className="input input-bordered flex  justify-between items-center">
+              <p> Date</p>
+              <input
+                name="date"
+                placeholder=""
+                type="datetime-local"
+              />
+            </div>
+            <input
+              name="amount"
+              type="number"
+              placeholder="Amount"
+              min="0"
+              onInput="validity.valid||(value='');"
+              className="input input-bordered w-full "
+            />
+            <select
+              name="from"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                From
+              </option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
+              <option value="Accounts">Accounts</option>
+              <option value="Card">Card</option> */}
+            </select>
 
-						<select
-							name="to"
-							className="select select-bordered w-full"
-							defaultValue=""
-						>
-							<option disabled value="">
-								To
-							</option>
-							<option value="Cash">Cash</option>
-							<option value="Accounts">Accounts</option>
-							<option value="Card">Card</option>
-						</select>
-						<input
-							name="note"
-							type="text"
-							placeholder="Note"
-							className="input input-bordered w-full "
-						/>
-						<p className="text-red-500">{transferText}</p>
-						<button className="btn btn-info w-full " type="submit">
-							Save
-						</button>
-					</form>
-				</div>
-				<form method="dialog" className="modal-backdrop">
-					<button>close</button>
-				</form>
-			</dialog>
-		</div>
-	);
+            <select
+              name="to"
+              className="select select-bordered w-full"
+              defaultValue=""
+            >
+              <option disabled value="">
+                To
+              </option>
+              {
+                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
+              }
+              {/* <option value="Cash">Cash</option>
+              <option value="Accounts">Accounts</option>
+              <option value="Card">Card</option> */}
+            </select>
+            <input
+              name="note"
+              type="text"
+              placeholder="Note"
+              className="input input-bordered w-full "
+            />
+            <p className="text-red-500">{transferText}</p>
+            <button className="btn btn-info w-full " type="submit">
+              Save
+            </button>
+          </form>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </div>
+  );
 
 };
 
