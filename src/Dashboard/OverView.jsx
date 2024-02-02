@@ -9,323 +9,329 @@ import { Link } from "react-router-dom";
 
 const OverView = () => {
 
+  // state to hold  erroretext from diffrent modal
 
-	// state to hold  erroretext from diffrent modal
+  const [incomeText, setIncomeText] = useState("");
+  const [expanseText, setExpanseText] = useState("");
+  const [transferText, setTransferText] = useState("");
 
-	const [incomeText, setIncomeText] = useState("");
-	const [expanseText, setExpanseText] = useState("");
-	const [transferText, setTransferText] = useState("");
+  const axiosPublic = useAxios();
+  const { user } = useContext(AuthContext);
+  // const [pieData, setPieData] = useState([]);
 
-	const axiosPublic = useAxios();
-	const { user } = useContext(AuthContext);
-	// const [pieData, setPieData] = useState([]);
-
-	// useEffect(() => {
-	// 	axiosPublic.get(`/totalInExp?email=${user?.email}`).then((res) => {
-	// 		setPieData(res?.data);
-	// 	});
-	// }, [axiosPublic]);
+  // useEffect(() => {
+  // 	axiosPublic.get(`/totalInExp?email=${user?.email}`).then((res) => {
+  // 		setPieData(res?.data);
+  // 	});
+  // }, [axiosPublic]);
 
 
-	const { data: PiData = [], refetch: PiREfetch } = useQuery({
-		queryKey: ["piData"],
-		queryFn: async () => {
-			const res = await axiosPublic.get(
-				`/totalInExp?email=${user?.email}`
-			);
-			return res.data;
-		},
-	});
+  const { data: PiData = [], refetch: PiREfetch } = useQuery({
+    queryKey: ["piData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/totalInExp?email=${user?.email}`
+      );
+      return res.data;
+    },
+  });
 
-	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
+  // https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
 
-	// Loading Data for recent transection Table
+  // Loading Data for recent transection Table
 
-	const { data: transectionData = [], refetch } = useQuery({
-		queryKey: ["transeferData"],
-		queryFn: async () => {
-			const res = await axiosPublic.get(
-				`/transections?email=${user?.email}`
-			);
-			return res.data;
-		},
-	});
+  const { data: transectionData = [], refetch } = useQuery({
+    queryKey: ["transeferData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/transections?email=${user?.email}`
+      );
+      return res.data;
+    },
+  });
 
-	const sortedTransactions = [...transectionData];
+  const sortedTransactions = [...transectionData];
 
-	// Sorting by date in descending order
-	sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Sorting by date in descending order
+  sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-	// Now sortedTransactions contains the sorted data by recent date
-	console.log( "this is sorted data", sortedTransactions);
+  // Now sortedTransactions contains the sorted data by recent date
+  console.log("this is sorted data", sortedTransactions);
 
-	console.log("transectionData", transectionData);
+  console.log("transectionData", transectionData);
 
-	const { data: AccountData = [] } = useQuery({
-		queryKey: ["AccountData"],
-		queryFn: async () => {
-			const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
-			return res.data;
-		},
-	});	
+  const { data: AccountData = [] } = useQuery({
+    queryKey: ["AccountData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
+      return res.data;
+    },
+  });
 
-	console.log(AccountData);
-	// This is for Paichart (color and data fo piechart)
+  console.log(AccountData);
+  // This is for Paichart (color and data fo piechart)
 
-	const data01 = [
-		{ name: "Income", value: PiData?.totalIncome },
-		{ name: "Expanse", value: PiData?.totalExpense },
-	];
+  const data01 = [
+    { name: "Income", value: PiData?.totalIncome },
+    { name: "Expanse", value: PiData?.totalExpense },
+  ];
 
-	const COLORS = ["#317DF0", "#F8A11B"];
+  const COLORS = ["#317DF0", "#F8A11B"];
 
-	// this is function to handle income Data from to Post Data
+  // this is function to handle income Data from to Post Data
 
-	const handleSubmitIncome = (e) => {
-		e.preventDefault();
-		const form = e.target;
-		const date = new Date(form.date.value);
-		const amount = form.amount.value;
-		const category = form.category.value;
-		const account = form.account.value;
-		const note = form.note.value;
-		const email = user.email;
-		const type = "INCOME";
+  const handleSubmitIncome = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = new Date(form.date.value);
+    const amount = parseFloat(form.amount.value);
+    const category = form.category.value;
+    const account = form.account.value;
+    const note = form.note.value;
+    const email = user.email;
+    const type = "INCOME";
 
-		if (
-			date == "Invalid Date" ||
-			amount == "" ||
-			category == "" ||
-			account == "" ||
-			note == ""
-		) {
-			setIncomeText("please fill out all the form");
-		} else {
-			const incomeData = {
-				email,
-				date,
-				amount,
-				category,
-				account,
-				note,
-				type,
-			};
-			setIncomeText("");
-			form.reset();
-			axiosPublic.post("/transections", incomeData).then((res) => {
-				// console.log(res.data);
-				if (res?.data.resultAccount.acknowledged) {
-					toast.success("Income Data added Successfully");
-					refetch()
-					PiREfetch()
-				}
-			});
-		}
-	};
+    if (
+      date == "Invalid Date" ||
+      amount == "" ||
+      category == "" ||
+      account == "" ||
+      note == ""
+    ) {
+      setIncomeText("please fill out all the form");
+    } else {
+      const incomeData = {
+        email,
+        date,
+        amount,
+        category,
+        account,
+        note,
+        type,
+      };
+      setIncomeText("");
+      form.reset();
+      axiosPublic.post("/transections", incomeData).then((res) => {
+        // console.log(res.data);
+        if (res?.data.resultAccount.acknowledged) {
+          toast.success("Income Data added Successfully");
+          refetch()
+          PiREfetch()
+        }
+      });
+    }
+  };
 
-	// this is function to handle Expanse Data from to Post Data
+  // this is function to handle Expanse Data from to Post Data
 
-	const handleSubmitExpanse = (e) => {
-		e.preventDefault();
-		const form = e.target;
-		const date = new Date(form.date.value);
-		const amount = form.amount.value;
-		const category = form.category.value;
-		const account = form.account.value;
-		const note = form.note.value;
-		const email = user.email;
-		const type = "EXPENSE";
+  const handleSubmitExpanse = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = new Date(form.date.value);
+    const amount = parseFloat(form.amount.value);
+    const category = form.category.value;
+    const account = form.account.value;
+    const note = form.note.value;
+    const email = user.email;
+    const type = "EXPENSE";
 
-		if (
-			date == "Invalid Date" ||
-			amount == "" ||
-			category == "" ||
-			account == "" ||
-			note == ""
-		) {
-			setExpanseText("please fill out all the form");
-		} else {
-			const expanseData = {
-				email,
-				date,
-				amount,
-				category,
-				account,
-				note,
-				type,
-			};
-			setExpanseText("");
-			// console.log(expanseData);
-			form.reset();
-			axiosPublic.post("/transections", expanseData).then((res) => {
-				// console.log(res.data);
-				if (res?.data.resultAccount.acknowledged) {
-					toast.success("Expanse Data added Successfully");
-					refetch()
-					PiREfetch()
-				}
-			});
-		}
-	};
+    if (
+      date == "Invalid Date" ||
+      amount == "" ||
+      category == "" ||
+      account == "" ||
+      note == ""
+    ) {
+      setExpanseText("please fill out all the form");
+    } else {
+      const expanseData = {
+        email,
+        date,
+        amount,
+        category,
+        account,
+        note,
+        type,
+      };
+      setExpanseText("");
+      // console.log(expanseData);
+      form.reset();
+      axiosPublic.post("/transections", expanseData).then((res) => {
+        // console.log(res.data);
+        if (res?.data.resultAccount.acknowledged) {
+          toast.success("Expanse Data added Successfully");
+          refetch()
+          PiREfetch()
+        }
+      });
+    }
+  };
 
-	// this is function to handle Expanse Data from to Post Data
+  // this is function to handle Expanse Data from to Post Data
 
-	const handleSubmittransfer = (e) => {
-		e.preventDefault();
-		const form = e.target;
-		const date = form.date.value;
-		const amount = form.amount.value;
-		const from = form.from.value;
-		const to = form.to.value;
-		const note = form.note.value;
-		const email = user.email;
-		const type = "TRANSFER";
+  const handleSubmittransfer = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = form.date.value;
+    const amount = parseFloat(form.amount.value);
+    const from = form.from.value;
+    const to = form.to.value;
+    const note = form.note.value;
+    const email = user.email;
+    const type = "TRANSFER";
 
-		if (
-			date == "Invalid Date" ||
-			amount == "" ||
-			from == "" ||
-			to == "" ||
-			note == ""
-		) {
-			setTransferText("please fill out all the form");
-		} else {
-			const transferData = { email, date, amount, from, to, note, type };
-			setTransferText("");
-			// console.log(transferData);
-			form.reset();
-			axiosPublic.post("/transections", transferData).then((res) => {
-				console.log(res.data);
-				if (res?.data.resultTransec.acknowledged) {
-					toast.success("Transfer Data added Successfully");
-					refetch()
-				}
-			});
-		}
-	};
+    if (
+      date == "Invalid Date" ||
+      amount == "" ||
+      from == "" ||
+      to == "" ||
+      note == ""
+    ) {
+      setTransferText("please fill out all the form");
+    } else {
+      const transferData = { email, date, amount, from, to, note, type };
+      setTransferText("");
+      // console.log(transferData);
+      form.reset();
+      axiosPublic.post("/transections", transferData).then((res) => {
+        console.log(res.data);
+        if (res?.data.resultTransec.acknowledged) {
+          toast.success("Transfer Data added Successfully");
+          refetch()
+        }
+      });
+    }
+  };
 
-	const BGcolorsOfAccount = [
-		"#FFE338",
-		"#e94444",
-		"#4CAF50",
-		"#2196F3",
-		"#9C27B0",
-		"#FF9800",
-		"#795548",
-	];
+  const BGcolorsOfAccount = [
+    "#FFE338",
+    "#e94444",
+    "#4CAF50",
+    "#2196F3",
+    "#9C27B0",
+    "#FF9800",
+    "#795548",
+  ];
 
-	const getRandomColor = () => {
-		// Generate a random index to pick a color from the array
-		const randomIndex = Math.floor(
-			Math.random() * BGcolorsOfAccount.length
-		);
-		return BGcolorsOfAccount[randomIndex];
-	};
+  const getRandomColor = () => {
+    // Generate a random index to pick a color from the array
+    const randomIndex = Math.floor(
+      Math.random() * BGcolorsOfAccount.length
+    );
+    return BGcolorsOfAccount[randomIndex];
+  };
+  const getIndexColor = () => {
+    // Generate a random index to pick a color from the array
+    const randomIndex = Math.floor(
+      Math.random() * BGcolorsOfAccount.length
+    );
+    return BGcolorsOfAccount[randomIndex];
+  };
 
-	return (
-		<div className="p-8   bg-base-300 ">
-			<div className=" ">
-				<div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-scroll scrollable-content ">
-					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
-						<h1 className="text-xl font-medium">Cash</h1>
-						<p className="text-5xl font-semibold">$00</p>
-					</div>
-					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8   min-w-60 ">
-						<h1 className="text-xl font-medium">Nagad</h1>
-						<p className="text-5xl font-semibold">$00</p>
-					</div>
-					<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8   min-w-60">
-						<h1 className="text-xl font-medium">Saving</h1>
-						<p className="text-5xl font-semibold">$00</p>
-					</div>
-					<div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
-						<h1 className="text-xl font-medium">Loan</h1>
-						<p className="text-5xl font-semibold">$00</p>
-					</div>
-					{AccountData.map((item) => (
-						<div
-							style={{ backgroundColor: getRandomColor() }}
-							key={item?.id}
-							className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
-						>
-							<h1 className="text-xl font-medium">
-								{item?.account
-}
-							</h1>
-							<p className="text-5xl font-semibold">
-								${item?.amount}
-							</p>
-						</div>
-					))}
-				</div>
+  return (
+    <div className="p-8   bg-base-300 ">
+      <div className=" ">
+        <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
+            <h1 className="text-xl font-medium">Cash</h1>
+            <p className="text-5xl font-semibold">$00</p>
+          </div>
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8   min-w-60 ">
+            <h1 className="text-xl font-medium">Nagad</h1>
+            <p className="text-5xl font-semibold">$00</p>
+          </div>
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8   min-w-60">
+            <h1 className="text-xl font-medium">Saving</h1>
+            <p className="text-5xl font-semibold">$00</p>
+          </div>
+          <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
+            <h1 className="text-xl font-medium">Loan</h1>
+            <p className="text-5xl font-semibold">$00</p>
+          </div>
+          {AccountData ? AccountData.map((item) => (
+            <div
+              style={{ backgroundColor: getRandomColor() }}
+              key={item?.id}
+              className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
+            >
+              <h1 className="text-xl font-medium">
+                {item?.account
+                }
+              </h1>
+              <p className="text-5xl font-semibold">
+                ${item?.amount}
+              </p>
+            </div>
+          )) : <Link to={"../../dashboard/AddBalance"} className="h-32 w-full flex justify-center items-center "> <p className="btn btn-accent w-fit ">Create Accounts First</p></Link>}
+        </div>
 
-				<div className="flex flex-col lg:flex-row gap-5 mt-5">
-					<div className="bg-white  ">
-						<PieChart width={400} height={400}>
-							<Pie
-								dataKey="value"
-								isAnimationActive={false}
-								data={data01}
-								cx="50%"
-								cy="50%"
-								outerRadius={140}
-								fill="#8884d8"
-								label
-							>
-								{data01?.map((entry, index) => (
-									<Cell
-										key={`cell-${index}`}
-										fill={COLORS[index % COLORS.length]}
-									/>
-								))}
-							</Pie>
+        <div className="flex gap-5 mt-5">
+          <div className="bg-white ">
+            <PieChart width={400} height={400}>
+              <Pie
+                dataKey="value"
+                isAnimationActive={false}
+                data={data01}
+                cx="50%"
+                cy="50%"
+                outerRadius={140}
+                fill="#8884d8"
+                label
+              >
+                {data01?.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
 
-							<Tooltip />
-							<Legend />
-						</PieChart>{" "}
-					</div>
+              <Tooltip />
+              <Legend />
+            </PieChart>{" "}
+          </div>
 
-					<div className="flex-1 overflow-y-scroll scrollable-content h-auto  lg:h-[500px] bg-white ">
-						<h1 className="text-center    text-2xl my-2 ">
-							{" "}
-							Recent Transection
-						</h1>
-						<table className="table table-pin-rows  table-lg  text-center">
-							<thead>
-								<tr className="">
-									<th>Date</th>
-									<th>Time</th>
-									<th>Type</th>
-									<th>amount</th>
-								</tr>
-							</thead>
-							<tbody className="  ">
-								{sortedTransactions?.map((item) => (
-									<tr key={item?.id} className="hover">
-										<td>
-											{" "}
-											{new Date(
-												item?.date
-											).toLocaleDateString()}{" "}
-										</td>
-										<td>
-											{" "}
-											{new Date(
-												item?.date
-											).toLocaleTimeString()}{" "}
-										</td>
-										<td> {item?.type} </td>
-										{/* <td>{item?.category}</td> */}
-										<td>${item?.amount}</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</div>
+          <div className="flex-1 overflow-y-scroll scrollable-content h-[500px] bg-white ">
+            <h1 className="text-center    text-2xl my-2 ">
+              {" "}
+              Recent Transection
+            </h1>
+            <table className="table table-pin-rows  table-lg  text-center">
+              <thead>
+                <tr className="">
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Type</th>
+                  <th>amount</th>
+                </tr>
+              </thead>
+              <tbody className="  ">
+                {sortedTransactions?.map((item) => (
+                  <tr key={item?.id} className="hover">
+                    <td>
+                      {" "}
+                      {new Date(
+                        item?.date
+                      ).toLocaleDateString()}{" "}
+                    </td>
+                    <td>
+                      {" "}
+                      {new Date(
+                        item?.date
+                      ).toLocaleTimeString()}{" "}
+                    </td>
+                    <td> {item?.type} </td>
+                    {/* <td>{item?.category}</td> */}
+                    <td>${item?.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-				<div>
-					{/* <h1 className="text-xl font-medium text-center mb-5">
+        <div>
+          {/* <h1 className="text-xl font-medium text-center mb-5">
 						Transections
 					</h1> */}
         </div>
