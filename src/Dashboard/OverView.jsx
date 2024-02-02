@@ -237,7 +237,7 @@ const OverView = () => {
 					</div>
 					<div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
 						<h1 className="text-xl font-medium">Loan</h1>
-						<p className="text-5xl font-semibold">$0000000</p>
+						<p className="text-5xl font-semibold">$00</p>
 					</div>
 					{AccountData.map((item) => (
 						<div
