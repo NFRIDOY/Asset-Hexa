@@ -248,7 +248,7 @@ const OverView = () => {
             <h1 className="text-xl font-medium">Loan</h1>
             <p className="text-5xl font-semibold">$00</p>
           </div> */}
-          {!AccountData ? AccountData.map((item) => (
+          {AccountData ? AccountData.map((item) => (
             <div
               style={{ backgroundColor: getRandomColor() }}
               key={item?.id}
