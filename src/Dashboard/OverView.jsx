@@ -232,7 +232,7 @@ const OverView = () => {
     <div className="p-8   bg-base-300 ">
       <div className=" ">
         <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
-          {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Cash</h1>
             <p className="text-5xl font-semibold">$00</p>
           </div>
@@ -247,7 +247,7 @@ const OverView = () => {
           <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
             <h1 className="text-xl font-medium">Loan</h1>
             <p className="text-5xl font-semibold">$00</p>
-          </div> */}
+          </div>
           {AccountData ? AccountData.map((item) => (
             <div
               style={{ backgroundColor: getRandomColor() }}
