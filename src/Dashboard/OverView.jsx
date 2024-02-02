@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 
 const OverView = () => {
+
 	// state to hold  erroretext from diffrent modal
 
 	const [incomeText, setIncomeText] = useState("");
@@ -603,6 +604,7 @@ const OverView = () => {
 			</dialog>
 		</div>
 	);
+
 };
 
 export default OverView;
