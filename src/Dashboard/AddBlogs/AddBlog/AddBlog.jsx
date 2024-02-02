@@ -45,16 +45,16 @@ const AddBlog = () => {
         <div className="flex justify-center"> {/*  */}
 
             <h1></h1>
-            <div className="pt-10 pb-10 ml-72 lg:w-full flex justify-center relative ">
+            <div className="pt-10 pb-10 lg:ml-72 lg:w-full flex justify-center relative ">
                 <div className="lg:w-1/2 -z-100 absolute  -left-60">
                     <Lottie
-                        className="mx-auto w-fit md:w-72 lg:w-full  "
+                        className="mx-auto w-0 md:w-72 lg:w-full   "
                         animationData={lotiBlog}
                         loop={true}
                     />
                 </div>
                 {/* <div className=" md:ml-72  pt-16 pl-16 pr-16 pb-16 rounded-tl-badge rounded-br-badge bg-[#3EEE2A]  w-[450px]"> */}
-                <div className=" p-6 rounded-md bg-gradient-to-tr from-[#8dc487] to-[#b7f4b1f7] transition-all ease-in-out duration-1000 hover:translate-x-24 w-[80%] z-10">
+                <div className=" p-6 rounded-md bg-gradient-to-tr from-[#8dc487] to-[#b7f4b1f7] lg:transition-all lg:ease-in-out lg:duration-1000 lg:hover:translate-x-24 w-full md:w-[100%] lg:w-[80%] -z-0 lg:z-10">
                     <form onSubmit={Blogs}>
 
                         <div className=" mb-2">
