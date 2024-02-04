@@ -25,8 +25,10 @@ const BlogCard = ({ Bloggs }) => {
   //   }, [likes, dislikes]);
 
   return (
-    <div className="p-2 md:p-5 cursor-pointer">
-      <div className="w-full space-y-3">
+    <div
+      className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}
+    >
+      <div className="w-full space-y-4">
         <div className="">
           <img className="rounded-lg w-full h-72" src={Bloggs?.image} alt="" />
         </div>
