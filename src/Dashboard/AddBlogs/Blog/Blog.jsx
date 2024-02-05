@@ -10,7 +10,7 @@ const Blog = () => {
   const axiosPublic = useAxios();
   useEffect(() => {
     setLoading(true);
-    axios.get("https://asset-hexa-server.vercel.app/blogs").then((data) => {
+    axios.get("http://localhost:5000/blogs").then((data) => {
       SetBlogs(data.data);
       setLoading(false);
       // console.log(data.data);
@@ -22,7 +22,7 @@ const Blog = () => {
 
   return (
     <div className="mt-10 mb-40">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
         {Blogg?.map((Bloggs) => (
           <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
         ))}
