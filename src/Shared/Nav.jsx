@@ -43,6 +43,18 @@ const Nav = () => {
       >
         Help Desk
       </NavLink>
+      <NavLink
+        to="/Business"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-black font-bold text-primaryColor p-2 text-xl "
+            : "p-2 text-xl "
+        }
+      >
+        Business
+      </NavLink>
     </>
   );
   return (

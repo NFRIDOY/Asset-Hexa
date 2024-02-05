@@ -23,12 +23,12 @@ export default function InvestmentTable() {
     }, [])
 
     return (
-        <div >
+        <div className="h-screen">
             {/* <h1>
                 investmentTable
             </h1> */}
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="overflow-x-scroll">
+                <table className="table table-xs lg:table-lg">
                     {/* head */}
                     <thead>
                         <tr>
@@ -41,14 +41,14 @@ export default function InvestmentTable() {
                     {
                         <tbody>
                             {
-                                (investments.length === 0) ? investments.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
+                                (investments.length !== 0) ? investments.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
                             }
                         </tbody>
 
                     }
                 </table>
                 {
-                    (investments.length !== 0) ? <div
+                    (investments.length === 0) ? <div
                         className="flex flex-col justify-center items-center my-10">
                         <div className=" w-fit  col-span-12 text-center flex justify-center">
                             <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
