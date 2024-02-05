@@ -16,13 +16,13 @@ const Blog = () => {
       // console.log(data.data);
     });
   }, [axiosPublic]);
-  console.log(Blogg);
+  // console.log(Blogg);
 
   if (loading) return <Loader />;
 
   return (
     <div className="mt-10 mb-40">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
         {Blogg?.map((Bloggs) => (
           <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
         ))}
