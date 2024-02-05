@@ -10,13 +10,13 @@ const Blog = () => {
   const axiosPublic = useAxios();
   useEffect(() => {
     setLoading(true);
-    axiosPublic.get("/blogs").then((data) => {
+    axios.get("https://asset-hexa-server.vercel.app/blogs").then((data) => {
       SetBlogs(data.data);
       setLoading(false);
       // console.log(data.data);
     });
   }, [axiosPublic]);
-  console.log(Blogg);
+  // console.log(Blogg);
 
   if (loading) return <Loader />;
 

@@ -17,6 +17,8 @@ import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
 import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
+import Investments from "../Dashboard/Investments/Investments";
+import Business from "../Components/Business/Business";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path:"/Blogs",
         element:<Blog/>
+      },
+      {
+        path:"/Business",
+        element:<Business/>
       }
     ],
   },
@@ -82,6 +88,15 @@ export const router = createBrowserRouter([
         path:'addBalance',
         element:<AddBalance></AddBalance>
       },
+      
+      {
+        path:'addBlog',
+        element:<AddBlog></AddBlog>
+      },
+      {
+        path:'investments',
+        element:<Investments></Investments>
+      },
       {
         path:'profile',
         element:
@@ -91,10 +106,6 @@ export const router = createBrowserRouter([
           <Profile/>
 
         </PrivateRoute>
-      },
-      {
-        path:'addBlog',
-        element:<AddBlog></AddBlog>
       },
 
     ]
