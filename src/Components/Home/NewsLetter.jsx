@@ -53,13 +53,23 @@ const NewsLetter = () => {
                                 <input type="email" placeholder="Enter Your Email" name="email" className="input input-bordered" required />
                             </div>
 
-                            <div className="form-control mt-6 flex justify-center">
-                                <button
+                            <div className="form-control mt-6 flex flex-row justify-evenly">
+                                <div>
+                                    <button
 
-                                    className=" text-white font-[700] rounded-lg py-4 px-6  w-full bg-gradient-to-r from-green-600 to-green-400 "
-                                >
-                                    Subscribe to monthly newsletter
-                                </button>
+                                        className=" text-white font-[700] rounded-lg py-4 px-3   bg-gradient-to-r from-green-600 to-green-400 cursor-pointer transition-all duration-700 hover:scale-105"
+                                    >
+                                        Free Subscribtion 
+                                    </button>
+                                </div>
+                                <div>
+                                    <button
+
+                                        className=" text-white font-[700] rounded-lg py-4 px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
+                                    >
+                                        Premium Subscrbtion
+                                    </button>
+                                </div>
                             </div>
                         </form>
 
