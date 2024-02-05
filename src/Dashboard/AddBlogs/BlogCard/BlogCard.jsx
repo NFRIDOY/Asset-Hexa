@@ -36,12 +36,16 @@ const BlogCard = ({ Bloggs }) => {
           <div className="flex items-center gap-3">
             <img
               className="w-14 h-14 rounded-full"
-              src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
+              src={`${
+                Bloggs.authorImage
+                  ? Bloggs?.authorImage
+                  : "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
+              }`}
               alt=""
             />
             <div>
-              <p className="font-bold">Author</p>
-              <p>Date</p>
+              <p className="font-bold">{Bloggs?.author}</p>
+              <p>{Bloggs?.time}</p>
             </div>
           </div>
           <div>
