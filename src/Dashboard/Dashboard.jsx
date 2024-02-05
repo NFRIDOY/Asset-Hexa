@@ -21,7 +21,7 @@ const Dashboard = () => {
           </div>
           <label
             htmlFor="my-drawer-2"
-            className=" absolute top-0  justify-start flex w-20 mx-auto lg:mt-6 drawer-button lg:hidden"
+            className=" absolute top-0  justify-start flex w-20 mx-auto  drawer-button lg:hidden"
           >
             <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
           </label>
@@ -33,7 +33,7 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <div className="w-52 h-screen bg-white justify-between  flex flex-col ">
+          <div className="w-52 h-screen bg-white justify-center  flex flex-col ">
             <div>
               <div className="  rounded-lg lg:mt-3">
                 <figure>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                   </Link>
                 </figure>
               </div>
-              <ul className="menu text-lg  space-y-2 h-[320px]  rounded-lg mt-4">
+              <ul className="menu text-lg  space-y-2 h-[380px]  rounded-lg mt-4">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
@@ -107,6 +107,17 @@ const Dashboard = () => {
                       ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
+                  to="/dashboard/investments"
+                >
+                  <CgProfile />
+                  Investments
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
                   to="/dashboard/profile"
                 >
                   <CgProfile />
@@ -128,7 +139,7 @@ const Dashboard = () => {
             <div className="p-2  rounded-lg mt-4">
               <div className="mx-auto ">
                 <Lottie
-                  className="mx-auto mb-12 w-[150px] md:[w-150px] lg:w-[200px]"
+                  className="mx-auto  w-[150px] md:[w-150px] lg:w-[180px]"
                   animationData={money}
                   loop={true}
                 />

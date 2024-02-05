@@ -10,7 +10,7 @@ const Blog = () => {
   const axiosPublic = useAxios();
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/blogs").then((data) => {
+    axios.get("https://asset-hexa-server.vercel.app/blogs").then((data) => {
       SetBlogs(data.data);
       setLoading(false);
       // console.log(data.data);

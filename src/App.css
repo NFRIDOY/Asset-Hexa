@@ -110,3 +110,6 @@ body {
 .scrollable-content::-webkit-scrollbar {
   display: none;
 }
+.no-hover {
+  pointer-events: none;
+}

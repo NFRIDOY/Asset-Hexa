@@ -17,6 +17,8 @@ import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
 import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
+import Investments from "../Dashboard/Investments/Investments";
+import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import axios from "axios";
 
@@ -41,16 +43,6 @@ export const router = createBrowserRouter([
       {
         path: "/Blogs",
         element: <Blog />,
-      },
-      {
-        path: "/blogDetails/:id",
-        element: <BlogDetails />,
-        loader: async ({ params }) => {
-          const res = await axios.get(
-            `http://localhost:5000/blogs/${params.id}`
-          );
-          return res.data;
-        },
       },
     ],
   },
@@ -93,6 +85,15 @@ export const router = createBrowserRouter([
       {
         path: "addBalance",
         element: <AddBalance></AddBalance>,
+      },
+
+      {
+        path: "addBlog",
+        element: <AddBlog></AddBlog>,
+      },
+      {
+        path: "investments",
+        element: <Investments></Investments>,
       },
       {
         path: "profile",
