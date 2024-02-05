@@ -49,7 +49,7 @@ const Accounts = () => {
           {/* Total  */}
           <div className="flex items-center justify-end gap-2">
             <h2 className="  text-[#6C6C6C]">Total</h2>
-            <p className="text-[#181818] ">$ {total}</p>
+            <p className="text-[#181818] ">$ {parseFloat(total)}</p>
           </div>
         </div>
         <div className="grid grid-cols-3 bg-[#F7F7FA] rounded h-10 border-t-2">

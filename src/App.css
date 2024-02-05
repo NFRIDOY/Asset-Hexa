@@ -72,13 +72,14 @@ body {
 .income{
   position: absolute;
   top: 0;
-  left: -20px;
+  left: -26px;
 }
 
 .parentbutton:hover .income{
   position: absolute;
-  top: -200px;
-  left: -60px;
+ 
+  top: -60px;
+  left: -52px;
 }
 
 
@@ -91,7 +92,7 @@ body {
 .parentbutton:hover .expanse{
   position: absolute;
   top: -135px;
-  left: -56px;
+  left: -55px;
 }
 
 .Transfer{
@@ -102,8 +103,8 @@ body {
 
 .parentbutton:hover .Transfer{
   position: absolute;
-  top: -60px;
-  left: -52px;
+  top: -200px;
+  left: -55px;
 }
 
 .scrollable-content::-webkit-scrollbar {
