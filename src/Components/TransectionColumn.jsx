@@ -1,15 +1,29 @@
 /* eslint-disable react/prop-types */
 
+import { GrDocumentUpdate } from "react-icons/gr";
+import { MdDeleteForever } from "react-icons/md";
+
 const TransectionColumn = ({ transection }) => {
   return (
-    <div className="flex items-center justify-around border rounded-md p-4 capitalize">
-      <h4 className="text-xl font-bold ">{transection?.category || transection?.from}</h4>
-      <div className="felx felx-col">
-        <p className="font-medium">{transection?.note}</p>
+    <div className="max-w-6xl mx-auto h-24 overflow-hidden grid grid-cols-3 place-items-center gap-10 border shadow-md shadow-emerald-400 rounded-md py-3 px-3 md:px-6 capitalize">
+      <div className="place-self-start flex flex-col  gap-2">
+        <h4 className="text-xl font-bold text-emerald-600">
+          {transection?.category || transection?.from}
+        </h4>
+        <p className="text-xs font-medium">{transection?.note}</p>
       </div>
-      <p className="text-lg font-bold text-blue-500">${transection?.amount || transection?.from}</p>
-      {/* <MdDeleteForever className="text-3xl text-red-600"></MdDeleteForever>
-    <GrDocumentUpdate className="text-2xl text-green-600"></GrDocumentUpdate> */}
+      <p className="text-xl font-bold text-emerald-600">
+        ${transection?.amount || transection?.from}
+      </p>
+
+      <div className="flex items-center justify-end gap-1 md:gap-8">
+        <button>
+          <MdDeleteForever className="text-3xl text-red-600"></MdDeleteForever>
+        </button>
+        <button>
+          <GrDocumentUpdate className="text-2xl text-green-600"></GrDocumentUpdate>
+        </button>
+      </div>
     </div>
   );
 };
