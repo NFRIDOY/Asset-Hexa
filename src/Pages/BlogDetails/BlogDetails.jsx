@@ -1,10 +1,19 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import { SlDislike, SlLike } from "react-icons/sl";
-import { CiBookmarkPlus } from "react-icons/ci";
 import BookmarkButton from "../../Components/BookmarkButton";
+import useAuth from "../../api/useAuth";
+import axios from "axios";
+import useBlog from "../../hooks/useBlog";
+import { useEffect, useState } from "react";
 
 const BlogDetails = () => {
+  const [isLiked, setIsLiked] = useState(false);
+  const { id } = useParams();
+  const { user } = useAuth();
+  const { blog, refetch } = useBlog(id);
+
   const {
+    _id,
     title,
     author,
     authorImage,
@@ -15,9 +24,48 @@ const BlogDetails = () => {
     dislikes,
     comments,
     time,
-  } = useLoaderData();
+  } = blog;
 
-  const handleLike = () => {};
+  useEffect(() => {
+    const isLiked = likes?.find((like) => like.personEmail === user?.email);
+
+    if (isLiked) {
+      return setIsLiked(true);
+    } else {
+      return setIsLiked(false);
+    }
+  }, [likes, user?.email]);
+
+  const handleLike = () => {
+    const mongoDate = new Date();
+    // Customize the date format
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+      mongoDate
+    );
+    const data = {
+      personEmail: user?.email,
+      personName: user?.displayName,
+      likedDate: formattedDate,
+    };
+
+    // const isLiked = likes.find((like) => like.personEmail === user?.email);
+    if (isLiked) {
+      return console.log("already liked");
+    } else {
+      axios.patch(`http://localhost:5000/blogs/${_id}`, data).then((res) => {
+        refetch();
+        console.log(res.data);
+      });
+    }
+  };
   const handleDislike = () => {};
   const handleAddtoBookmark = () => {};
   return (
@@ -58,7 +106,11 @@ const BlogDetails = () => {
           <div className="flex justify-center items-center gap-16">
             <div className="flex items-center gap-2">
               <button
-                className="btn px-6 text-white bg-emerald-500"
+                className={`btn px-6 ${
+                  isLiked
+                    ? "text-white bg-emerald-500 hover:text-white hover:bg-emerald-500"
+                    : ""
+                }`}
                 onClick={handleLike}
               >
                 <SlLike />
