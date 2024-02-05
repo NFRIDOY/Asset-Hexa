@@ -22,7 +22,7 @@ const Contact = () => {
 
 
   return (
-    <div id="Contact" className="mt-4 mb-20 ">
+    <div id="contact" className="mt-4 mb-20 ">
       <p className="text-3xl font-bold text-center text-black mb-5 mt-10">
         Contact US
       </p>
