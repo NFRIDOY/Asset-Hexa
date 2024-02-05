@@ -18,6 +18,7 @@ import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
 import Investments from "../Dashboard/Investments/Investments";
+import Business from "../Components/Business/Business";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path:"/Blogs",
         element:<Blog/>
+      },
+      {
+        path:"/Business",
+        element:<Business/>
       }
     ],
   },
