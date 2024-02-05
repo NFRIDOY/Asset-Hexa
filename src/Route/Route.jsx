@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         element: <Blog />,
       },
       {
-        path: "/blogsDetails/:id",
+        path: "/blogDetails/:id",
         element: <BlogDetails />,
         loader: async ({ params }) => {
           const res = await axios.get(
