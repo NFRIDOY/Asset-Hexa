@@ -23,6 +23,7 @@ import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import Businesses from "../Components/Businesses/Businesses";
 import Payment from "../Components/Home/Payment/Payment";
 import Business from "../Components/Business/Business";
+import BusinessForm from "../Components/Business/BusinessForm";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "business",
         element: <Business></Business>,
+      },
+      {
+        path: "businessForm",
+        element: <BusinessForm />,
       },
       {
         path: "profile",
