@@ -1,10 +1,13 @@
 import axios from "axios";
 import useAuth from "../../hooks/useAuth"
 import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
+import formattedDate from "../../functions/formatDate"
 
 export default function BusinessForm() {
     const { user } = useAuth()
     const axiosPublic = useAxios();
+    // console.log(formattedDate);
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -18,6 +21,7 @@ export default function BusinessForm() {
         const Minimum = parseFloat(form.Minimum.value);
         const Maximum = parseFloat(form.Maximum.value);
         const Profit = parseFloat(form.Profit.value);
+
         
 
         const newBusinessObj = {
@@ -31,16 +35,29 @@ export default function BusinessForm() {
             Minimum,
             Maximum,
             Profit,
+            time : formattedDate,
             userName: user?.displayName,
             photoURL: user?.photoURL,
             companyVarification: false,
+            totalInvestment: 0,
+            investmentOwner: {}
         }
         console.log(newBusinessObj);
 
-        axios.post("http://localhost:5000/bussiness", newBusinessObj)
-        .then((res) => {
-            console.log(res.data);
-        })
+        // axios.post("http://localhost:5000/bussiness", newBusinessObj)
+        axiosPublic.post("/bussiness", newBusinessObj)
+            .then((res) => {
+                console.log("res.data", res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your Blog has been posted!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
 
     }
     return (
