@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import newsletter from '../../lottie/newsletter.json'
+import { Link } from "react-router-dom";
 
 
 const NewsLetter = () => {
@@ -57,18 +58,18 @@ const NewsLetter = () => {
                                 <div>
                                     <button
 
-                                        className=" text-white font-[700] rounded-lg py-4 px-3   bg-gradient-to-r from-green-600 to-green-400 cursor-pointer transition-all duration-700 hover:scale-105"
+                                        className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3   bg-gradient-to-r from-green-600 to-green-400 cursor-pointer transition-all duration-700 hover:scale-105"
                                     >
-                                        Free Subscribtion 
+                                        Free Subscribtion
                                     </button>
                                 </div>
                                 <div>
-                                    <button
+                                    <Link to='/newsPayment'><button
 
-                                        className=" text-white font-[700] rounded-lg py-4 px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
+                                        className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
                                     >
                                         Premium Subscrbtion
-                                    </button>
+                                    </button></Link>
                                 </div>
                             </div>
                         </form>

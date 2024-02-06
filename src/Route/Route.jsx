@@ -18,9 +18,10 @@ import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
 import Investments from "../Dashboard/Investments/Investments";
-import Business from "../Components/Business/Business";
+// import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import axios from "axios";
+import Payment from "../Components/Home/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
           return res.data;
         },
       },
+      {
+        path:"/newsPayment",
+        element:<Payment></Payment>
+      }
     ],
   },
   {
