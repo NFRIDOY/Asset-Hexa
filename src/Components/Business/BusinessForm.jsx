@@ -1,12 +1,53 @@
+import axios from "axios";
 import useAuth from "../../hooks/useAuth"
+import useAxios from "../../hooks/useAxios";
 
 export default function BusinessForm() {
     const { user } = useAuth()
+    const axiosPublic = useAxios();
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = e.target;
+        const CompanyName = form.CompanyName.value;
+        const CompanyEmail = form.CompanyEmail.value;
+        const BrandImage = form.BrandImage.value;
+        const BannerImage = form.BannerImage.value;
+        const Designation = form.Designation.value;
+        const userEmail = form.userEmail.value;
+        const CompanyDescription = form.CompanyDescription.value;
+        const Minimum = parseFloat(form.Minimum.value);
+        const Maximum = parseFloat(form.Maximum.value);
+        const Profit = parseFloat(form.Profit.value);
+        
+
+        const newBusinessObj = {
+            CompanyName,
+            CompanyEmail,
+            BrandImage,
+            BannerImage,
+            Designation,
+            userEmail,
+            CompanyDescription,
+            Minimum,
+            Maximum,
+            Profit,
+            userName: user?.displayName,
+            photoURL: user?.photoURL,
+            companyVarification: false,
+        }
+        console.log(newBusinessObj);
+
+        axios.post("http://localhost:5000/bussiness", newBusinessObj)
+        .then((res) => {
+            console.log(res.data);
+        })
+
+    }
     return (
         <div className="w-full p-4">
             {/* add Business */}
 
-            <form className="card-body bg-green-300 flex gap-y-2 rounded-3xl">
+            <form className="card-body bg-green-300 flex gap-y-2 rounded-3xl" onSubmit={handleSubmit}>
                 <div className="font-bold text-center w-full py-5 bg-zinc-800 text-white">
                     <span className=" text-3xl">Company Info</span>
                 </div>
@@ -15,13 +56,13 @@ export default function BusinessForm() {
                         <label className="label">
                             <span className="label-text text-3xl">Company Name</span>
                         </label>
-                        <input type="text" placeholder="Company Name" className="input input-bordered" required />
+                        <input type="text" name="CompanyName" placeholder="Company Name" className="input input-bordered" required />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text text-3xl">Company Email</span>
                         </label>
-                        <input type="email" name="" placeholder="email" className="input input-bordered" required />
+                        <input type="email" name="CompanyEmail" placeholder="email" className="input input-bordered" required />
                     </div>
                 </div>
                 <div className="flex gap-x-5 flex-col lg:flex-row">
@@ -29,13 +70,13 @@ export default function BusinessForm() {
                         <label className="label">
                             <span className="label-text text-3xl">Brand Image</span>
                         </label>
-                        <input type="text" placeholder="Brand Image" className="input input-bordered" required />
+                        <input type="text" name="BrandImage" placeholder="Brand Image" className="input input-bordered" required />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text text-3xl">Banner Image</span>
                         </label>
-                        <input type="text" placeholder="Brand Image" className="input input-bordered" required />
+                        <input type="text" name="BannerImage" placeholder="Brand Image" className="input input-bordered" required />
                     </div>
                 </div>
                 <div className="font-bold text-center w-full py-5 my-5 bg-zinc-800 text-white">
@@ -46,7 +87,7 @@ export default function BusinessForm() {
                         <label className="label">
                             <span className="label-text text-3xl">Your Designation</span>
                         </label>
-                        <input type="text" placeholder="Designation" className="input input-bordered" required />
+                        <input type="text" name="Designation" placeholder="Designation" className="input input-bordered" required />
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
