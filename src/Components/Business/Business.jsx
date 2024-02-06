@@ -2,6 +2,6 @@
 
 export default function Business() {
     return (
-        <div>Business</div>
+        <div>Business Manage</div>
     )
 }

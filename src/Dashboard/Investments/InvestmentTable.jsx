@@ -3,6 +3,7 @@ import useAuth from './../../hooks/useAuth';
 import axiosSecure from "./../../api/index";
 import useAxios from "../../hooks/useAxios";
 import InvestmentRow from "./InvestmentRow";
+import Investments from './Investments';
 
 
 export default function InvestmentTable() {
@@ -13,8 +14,9 @@ export default function InvestmentTable() {
 
     const [investments, setInvestments] = useState([]);
 
+    console.log(`${user?.email}`)
     useEffect(() => {
-        axiosPublic.get("/users")
+        axiosPublic.get(`/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 console.log(res.data)
@@ -34,8 +36,8 @@ export default function InvestmentTable() {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Investments</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     {

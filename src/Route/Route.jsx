@@ -21,6 +21,7 @@ import Investments from "../Dashboard/Investments/Investments";
 import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import axios from "axios";
+import Businesses from "../Components/Businesses/Businesses";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
           );
           return res.data;
         },
+      },
+      {
+        path: "businesses",
+        element: <Businesses></Businesses>,
       },
     ],
   },
@@ -106,6 +111,10 @@ export const router = createBrowserRouter([
         element: <Investments></Investments>,
       },
       {
+        path: "business",
+        element: <Business></Business>,
+      },
+      {
         path: "profile",
         element: (
           <PrivateRoute>
@@ -117,6 +126,7 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
+
     ],
   },
 ]);
