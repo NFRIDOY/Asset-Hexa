@@ -2,9 +2,13 @@ import { useParams } from "react-router";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BookmarkButton from "../../Components/BookmarkButton";
 import useAuth from "../../api/useAuth";
-import axios from "axios";
 import useBlog from "../../hooks/useBlog";
 import { useEffect, useState } from "react";
+import CommentSection from "../../Components/CommentSection";
+import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
+
+//http://localhost:5000
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -12,13 +16,13 @@ const BlogDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
+  const axiosPublic = useAxios();
 
   const {
     _id,
     title,
     author,
     authorImage,
-    authorEmail,
     description,
     image,
     likes,
@@ -45,7 +49,6 @@ const BlogDetails = () => {
     }
   }, [likes, user?.email, dislikes]);
 
-  console.log(isLiked, isDisliked);
   const handleLike = () => {
     const mongoDate = new Date();
     // Customize the date format
@@ -70,8 +73,8 @@ const BlogDetails = () => {
     if (isLiked) {
       return console.log("already liked");
     } else {
-      axios
-        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=like`, data)
+      axiosPublic
+        .patch(`/blogs/${_id}?likeORdislike=like`, data)
         .then((res) => {
           refetch();
           console.log(res.data);
@@ -102,8 +105,8 @@ const BlogDetails = () => {
     if (isDisliked) {
       return console.log("already disliked");
     } else {
-      axios
-        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=dislike`, data)
+      axiosPublic
+        .patch(`/blogs/${_id}?likeORdislike=dislike`, data)
         .then((res) => {
           refetch();
           console.log(res.data);
@@ -111,11 +114,46 @@ const BlogDetails = () => {
     }
   };
   const handleAddtoBookmark = () => {};
+  const handlePostComment = (e) => {
+    e.preventDefault();
+    const text = e.target.commentText.value;
+    const mongoDate = new Date();
+    // Customize the date format
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+      mongoDate
+    );
+    const data = {
+      text,
+      commenter: user?.displayName,
+      commenterEmail: user?.email,
+      time: formattedDate,
+    };
+    axiosPublic
+      .patch(`/blogs/${_id}?likeORdislike=comment`, data)
+      .then((res) => {
+        if (res.data?.modifiedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your comment has been posted!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+          e.target.reset();
+        }
+      });
+  };
   return (
     <div className="min-h-screen">
-      {/* <h1 className="text-5xl font-bold text-center">
-        Read Blogs HERE:{title}
-      </h1> */}
       <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">
         <div className="flex items-center justify-between gap-2 ">
           <div className="flex items-center flex-wrap gap-3">
@@ -181,6 +219,12 @@ const BlogDetails = () => {
           </h1>
           <p className="text-lg font-normal">{description || ""}</p>
         </div>
+      </div>
+      <div className="mt-20 max-w-7xl mx-auto">
+        <CommentSection
+          comments={comments}
+          handlePostComment={handlePostComment}
+        />
       </div>
     </div>
   );
