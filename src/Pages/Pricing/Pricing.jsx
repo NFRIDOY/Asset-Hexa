@@ -16,27 +16,27 @@ const Pricing = () => {
         const brongePrice = "10";
         const featureOne = "Weekly subscription";
         const featureTwo = "Weekly technical support";
-        const Info = {
+        const brongeInfo = {
             bronge, brongeTwo, brongePrice, featureOne, featureTwo, email: user?.email,
             name:user?.displayName
         }
-        console.log(Info);
+        console.log(brongeInfo);
         // e.target.reset();
 
-        // axiosPublic.post('/blogs', addBlogs)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.insertedId) {
-        //             console.log('user balance added to the data base ');
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "  Your has been added",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //         }
-        //     })
+        axiosPublic.post('/price', brongeInfo)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    console.log('user balance added to the data base ');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "  Your has been added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
 
@@ -49,28 +49,28 @@ const Pricing = () => {
         const silverPrice = "20";
         const featureOne = "Weekly subscription";
         const featureTwo = "Weekly technical support";
-        const Info = { 
+        const selverInfo = { 
             silver, silverTwo, silverPrice,featureOne, featureTwo, email: user?.email,
             name:user?.displayName
          
         }
-        console.log(Info);
+        // console.log(Info);
         // e.target.reset();
 
-        // axiosPublic.post('/blogs', addBlogs)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.insertedId) {
-        //             console.log('user balance added to the data base ');
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "  Your has been added",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //         }
-        //     })
+        axiosPublic.post('/price', selverInfo)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    console.log('user balance added to the data base ');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "  Your has been added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
 // goldInfo 
@@ -83,29 +83,29 @@ const Pricing = () => {
         const goldPrice = "30";
         const featureOne = "Weekly subscription";
         const featureTwo = "Weekly technical support";
-        const Info = {
+        const GoldInfo = {
              
             
             gold, goldTwo, goldPrice, featureOne, featureTwo, email: user?.email,
             name:user?.displayName
         }
-        console.log(Info);
+        // console.log(Info);
         // e.target.reset();
 
-        // axiosPublic.post('/blogs', addBlogs)
-        //     .then(res => {
-        //         console.log(res.data);
-        //         if (res.data.insertedId) {
-        //             console.log('user balance added to the data base ');
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "  Your has been added",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //         }
-        //     })
+        axiosPublic.post('/price', GoldInfo)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    console.log('user balance added to the data base ');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "  Your has been added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
    
