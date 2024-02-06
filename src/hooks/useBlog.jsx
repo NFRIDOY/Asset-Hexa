@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const useBlog = (id) => {
-  const { data: blog = [], refetch } = useQuery({
+  const { data: blog = {}, refetch } = useQuery({
     queryKey: ["singleBlogData"],
     enabled: !!id,
     queryFn: async () => {

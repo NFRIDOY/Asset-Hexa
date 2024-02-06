@@ -40,6 +40,7 @@ const AddBlog = () => {
       dislikes: [],
       comments: [],
       time: formattedDate,
+      isVerified: false,
     };
     // console.log(formattedDate);
     e.target.reset();

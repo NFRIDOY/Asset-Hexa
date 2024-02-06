@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router";
+import { useParams } from "react-router";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BookmarkButton from "../../Components/BookmarkButton";
 import useAuth from "../../api/useAuth";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isDisliked, setIsDisliked] = useState(false);
   const { id } = useParams();
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
@@ -27,15 +28,24 @@ const BlogDetails = () => {
   } = blog;
 
   useEffect(() => {
-    const isLiked = likes?.find((like) => like.personEmail === user?.email);
+    const didLike = likes?.find((like) => like.personEmail === user?.email);
+    const didDisliked = dislikes?.find(
+      (dislike) => dislike.personEmail === user?.email
+    );
 
-    if (isLiked) {
-      return setIsLiked(true);
+    if (didLike) {
+      setIsLiked(true);
     } else {
-      return setIsLiked(false);
+      setIsLiked(false);
     }
-  }, [likes, user?.email]);
+    if (didDisliked) {
+      setIsDisliked(true);
+    } else {
+      setIsDisliked(false);
+    }
+  }, [likes, user?.email, dislikes]);
 
+  console.log(isLiked, isDisliked);
   const handleLike = () => {
     const mongoDate = new Date();
     // Customize the date format
@@ -60,20 +70,53 @@ const BlogDetails = () => {
     if (isLiked) {
       return console.log("already liked");
     } else {
-      axios.patch(`http://localhost:5000/blogs/${_id}`, data).then((res) => {
-        refetch();
-        console.log(res.data);
-      });
+      axios
+        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=like`, data)
+        .then((res) => {
+          refetch();
+          console.log(res.data);
+        });
     }
   };
-  const handleDislike = () => {};
+  const handleDislike = () => {
+    const mongoDate = new Date();
+    // Customize the date format
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+      mongoDate
+    );
+    const data = {
+      personEmail: user?.email,
+      personName: user?.displayName,
+      likedDate: formattedDate,
+    };
+
+    // const isLiked = likes.find((like) => like.personEmail === user?.email);
+    if (isDisliked) {
+      return console.log("already disliked");
+    } else {
+      axios
+        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=dislike`, data)
+        .then((res) => {
+          refetch();
+          console.log(res.data);
+        });
+    }
+  };
   const handleAddtoBookmark = () => {};
   return (
     <div className="min-h-screen">
       {/* <h1 className="text-5xl font-bold text-center">
         Read Blogs HERE:{title}
       </h1> */}
-      <div className="mt-10 font-medium max-w-7xl mx-auto space-y-5 px-1">
+      <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">
         <div className="flex items-center justify-between gap-2 ">
           <div className="flex items-center flex-wrap gap-3">
             <img
@@ -118,7 +161,14 @@ const BlogDetails = () => {
               <p>{likes?.length || 0} </p>
             </div>
             <div className="flex items-center gap-2">
-              <button className="btn px-6" onClick={handleDislike}>
+              <button
+                className={`btn px-6 ${
+                  isDisliked
+                    ? "text-white bg-emerald-500 hover:text-white hover:bg-emerald-500"
+                    : ""
+                }`}
+                onClick={handleDislike}
+              >
                 <SlDislike />
               </button>
               <p>{dislikes?.length || 0}</p>
