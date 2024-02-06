@@ -2,11 +2,13 @@ import { useParams } from "react-router";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BookmarkButton from "../../Components/BookmarkButton";
 import useAuth from "../../api/useAuth";
-import axios from "axios";
 import useBlog from "../../hooks/useBlog";
 import { useEffect, useState } from "react";
 import CommentSection from "../../Components/CommentSection";
 import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
+
+//http://localhost:5000
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -14,13 +16,13 @@ const BlogDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
+  const axiosPublic = useAxios();
 
   const {
     _id,
     title,
     author,
     authorImage,
-    authorEmail,
     description,
     image,
     likes,
@@ -71,8 +73,8 @@ const BlogDetails = () => {
     if (isLiked) {
       return console.log("already liked");
     } else {
-      axios
-        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=like`, data)
+      axiosPublic
+        .patch(`/blogs/${_id}?likeORdislike=like`, data)
         .then((res) => {
           refetch();
           console.log(res.data);
@@ -103,8 +105,8 @@ const BlogDetails = () => {
     if (isDisliked) {
       return console.log("already disliked");
     } else {
-      axios
-        .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=dislike`, data)
+      axiosPublic
+        .patch(`/blogs/${_id}?likeORdislike=dislike`, data)
         .then((res) => {
           refetch();
           console.log(res.data);
@@ -134,8 +136,8 @@ const BlogDetails = () => {
       commenterEmail: user?.email,
       time: formattedDate,
     };
-    axios
-      .patch(`http://localhost:5000/blogs/${_id}?likeORdislike=comment`, data)
+    axiosPublic
+      .patch(`/blogs/${_id}?likeORdislike=comment`, data)
       .then((res) => {
         if (res.data?.modifiedCount) {
           Swal.fire({
