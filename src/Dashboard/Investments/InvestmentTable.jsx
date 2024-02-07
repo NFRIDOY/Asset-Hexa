@@ -4,6 +4,7 @@ import axiosSecure from "./../../api/index";
 import useAxios from "../../hooks/useAxios";
 import InvestmentRow from "./InvestmentRow";
 import Investments from './Investments';
+import { Link } from "react-router-dom";
 
 
 export default function InvestmentTable() {
@@ -25,11 +26,11 @@ export default function InvestmentTable() {
     }, [])
 
     return (
-        <div className="h-screen">
+        <div className="h-screen lg:mx-5">
             {/* <h1>
                 investmentTable
             </h1> */}
-            <div className="overflow-x-scroll">
+            <div className="overflow-x-auto">
                 <table className="table table-xs lg:table-lg">
                     {/* head */}
                     <thead>
@@ -52,10 +53,17 @@ export default function InvestmentTable() {
                 {
                     (investments.length === 0) ? <div
                         className="flex flex-col justify-center items-center my-10">
-                        <div className=" w-fit  col-span-12 text-center flex justify-center">
-                            <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
-                                No Data
-                            </span>
+                        <div>
+                            <div className=" w-fit  col-span-12 text-center flex justify-center">
+                                <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
+                                    No Data
+                                </span>
+                            </div>
+                            <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
+                                <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
+                                    Invest Now
+                                </span>
+                            </Link>
                         </div>
                     </div> : null
                 }

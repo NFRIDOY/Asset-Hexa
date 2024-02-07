@@ -8,7 +8,7 @@ export default function BusinessCard({ business }) {
             <div className="card lg:card-side bg-base-100 shadow-xl">
                 <figure className="lg:w-[20%] relative">
                     <img src={business?.BrandImage} className="object-cover w-40" alt="Album" />
-                    {/* <img src={business?.BannerImage} className="object-cover w-40" alt="Album" /> */}
+                    <img src={business?.BannerImage} className="object-cover w-40" alt="Album" />
 
                     {/* <figure className=""> */}
                     {/* </figure> */}
