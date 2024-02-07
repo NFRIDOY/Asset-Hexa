@@ -8,7 +8,7 @@ import CommentSection from "../../Components/CommentSection";
 import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 
-//http://localhost:5000
+//http://localhost:5000\
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -17,6 +17,7 @@ const BlogDetails = () => {
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
   const axiosPublic = useAxios();
+  console.log(blog);
 
   const {
     _id,
