@@ -93,6 +93,11 @@ const Navrouts = () => {
 										Dashboard
 									</button>
 								</Link>
+								<Link to="/AdminDashboard/AdminOverview">
+									<button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
+										Admin Dashboard
+									</button>
+								</Link>
 								
 								
 								<button

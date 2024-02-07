@@ -23,7 +23,13 @@ import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import Businesses from "../Components/Businesses/Businesses";
 import Payment from "../Components/Home/Payment/Payment";
 import Business from "../Components/Business/Business";
-import BusinessForm from "../Components/Business/BusinessForm";
+import BusinessForm from "../Components/Business/BusinessForm";  
+import axios from "axios";
+import DashboardLayout from "../AdminDashboard/DashboardLayout";
+import AdminOverview from "../AdminDashboard/AdminOverview";
+import BlogVerification from "../AdminDashboard/BlogVerification";
+import BusinessVerification from "../AdminDashboard/BusinessVerification";
+import UserVarification from "../AdminDashboard/UserVarification";
 
 export const router = createBrowserRouter([
   {
@@ -132,5 +138,31 @@ export const router = createBrowserRouter([
       },
 
     ],
-  },
+  },{
+		path: "AdminDashboard",
+		element: <DashboardLayout></DashboardLayout>,
+		errorElement: <Errorpage></Errorpage>,
+		children: [
+			{
+				path: "AdminOverview",
+				element: <AdminOverview></AdminOverview>,
+			},
+			{
+				path: "BusinessVerification",
+				element: <BusinessVerification></BusinessVerification>,
+			},
+			{
+				path: "BlogVerification",
+				element: <BlogVerification></BlogVerification>,
+			},
+			{
+				path: "userVerification",
+				element: <UserVarification></UserVarification>,
+			},
+		],
+	},
+
+
+
+	
 ]);
