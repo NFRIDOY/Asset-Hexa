@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.1.0",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.4.0",
     "@tanstack/react-query": "^5.17.19",
+    "aos": "^3.0.0-beta.6",
     "axios": "^1.6.5",
     "date-fns": "^3.3.1",
     "firebase": "^10.7.1",

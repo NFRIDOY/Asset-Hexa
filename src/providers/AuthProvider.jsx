@@ -32,7 +32,7 @@ export default function AuthProvider({ children }) {
 
   // const axiosPublic = useAxios();
 
-   // create default 4 accounts for new users
+  // create default 4 accounts for new users
   // const createDefaultAccounts = (group, account, amount = 0, description) => {
   //   const addAccount = {
   //     group, account, amount, description, email: user?.email,
@@ -89,7 +89,7 @@ export default function AuthProvider({ children }) {
    */
   const logOut = () => {
     setLoading(true);
-    toast.success("User Signed Out!!!")
+    toast.success("User Signed Out!!!");
     return signOut(auth);
   };
 
@@ -129,9 +129,9 @@ export default function AuthProvider({ children }) {
       .then(() => {
         // Profile updated!
         // ...
+        setUser(user);
         // toast.success(user.displayName)
         // toast.success(user.photoURL)
-        setUser(user);
         // toast.success("Profile updated!")
         // logOut()
       })

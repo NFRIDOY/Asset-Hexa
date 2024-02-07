@@ -14,9 +14,14 @@ import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
-import AddBlog from './../Dashboard/AddBlogs/AddBlog/AddBlog';
+import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
+import Investments from "../Dashboard/Investments/Investments";
+// import Business from "../Components/Business/Business";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+import axios from "axios";
+import Payment from "../Components/Home/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -33,12 +38,20 @@ export const router = createBrowserRouter([
         element: <About></About>,
       },
       {
-        path:"/helpDesk",
-        element:<HelpDesk></HelpDesk>
+        path: "/helpDesk",
+        element: <HelpDesk></HelpDesk>,
       },
       {
-        path:"/Blogs",
-        element:<Blog/>
+        path: "/Blogs",
+        element: <Blog />,
+      },
+      {
+        path: "/blogDetails/:id",
+        element: <BlogDetails />,
+      },
+      {
+        path:"/newsPayment",
+        element:<Payment></Payment>
       }
     ],
   },
@@ -48,55 +61,61 @@ export const router = createBrowserRouter([
   },
   {
     path: "UpdateProfile",
-    element: <UpdateProfile/>,
+    element: <UpdateProfile />,
   },
   {
     path: "register",
     element: <Register />,
   },
   {
-    path:'dashboard',
-    element:  
-    <PrivateRoute>
-      <Dashboard></Dashboard>
-
-    </PrivateRoute>,
-    children:[
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path:'overView',
-        element:<OverView></OverView>
+        path: "overView",
+        element: <OverView></OverView>,
       },
       {
-        path:'transection',
-        element:<Transection></Transection>
+        path: "transection",
+        element: <Transection></Transection>,
       },
       {
-        path:'statistics',
-        element:<Statistics></Statistics>
+        path: "statistics",
+        element: <Statistics></Statistics>,
       },
       {
-        path:'accounts',
-        element:<Accounts></Accounts>
+        path: "accounts",
+        element: <Accounts></Accounts>,
       },
       {
-        path:'addBalance',
-        element:<AddBalance></AddBalance>
-      },
-      {
-        path:'profile',
-        element:
-        
-        <PrivateRoute>
-
-          <Profile/>
-
-        </PrivateRoute>
-      },
-      {
-        path:'addBlog',
-        element:<AddBlog></AddBlog>
+        path: "addBalance",
+        element: <AddBalance></AddBalance>,
       },
 
-    ]
-  }
+      {
+        path: "addBlog",
+        element: <AddBlog></AddBlog>,
+      },
+      {
+        path: "investments",
+        element: <Investments></Investments>,
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addBlog",
+        element: <AddBlog></AddBlog>,
+      },
+    ],
+  },
 ]);
