@@ -18,9 +18,12 @@ import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
 import Blog from "../Dashboard/AddBlogs/Blog/Blog";
 import Investments from "../Dashboard/Investments/Investments";
-import Business from "../Components/Business/Business";
+// import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
-import axios from "axios";
+import Businesses from "../Components/Businesses/Businesses";
+import Payment from "../Components/Home/Payment/Payment";
+import Business from "../Components/Business/Business";
+import BusinessForm from "../Components/Business/BusinessForm";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +51,14 @@ export const router = createBrowserRouter([
         path: "/blogDetails/:id",
         element: <BlogDetails />,
       },
+      {
+        path: "/businesses",
+        element: <Businesses></Businesses>,
+      },
+      {
+        path:"/newsPayment",
+        element:<Payment></Payment>
+      }
     ],
   },
   {
@@ -100,6 +111,14 @@ export const router = createBrowserRouter([
         element: <Investments></Investments>,
       },
       {
+        path: "business",
+        element: <Business></Business>,
+      },
+      {
+        path: "businessForm",
+        element: <BusinessForm />,
+      },
+      {
         path: "profile",
         element: (
           <PrivateRoute>
@@ -111,6 +130,7 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
+
     ],
   },
 ]);

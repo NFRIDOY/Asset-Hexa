@@ -42,7 +42,7 @@ const Dashboard = () => {
                   </Link>
                 </figure>
               </div>
-              <ul className="menu text-lg  space-y-2 h-[380px]  rounded-lg mt-4">
+              <ul className="menu text-lg  space-y-2 h-fit  rounded-lg mt-4">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
@@ -109,8 +109,19 @@ const Dashboard = () => {
                   }
                   to="/dashboard/investments"
                 >
-                  <CgProfile />
+                  <IoStatsChartSharp />
                   Investments
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/dashboard/business"
+                >
+                  <MdAccountBalance />
+                  Business
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
