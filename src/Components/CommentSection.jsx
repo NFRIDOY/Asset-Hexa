@@ -10,9 +10,9 @@ const CommentSection = ({ comments, handlePostComment }) => {
       </h2>
       <div className="w-full bg-emerald-300 flex flex-col-reverse md:flex-row pt-5 mt-5 rounded-t-lg">
         <div className="flex-1 p-5">
-          {comments.length ? (
-            comments?.map((comment) => (
-              <Comment key={comment._id} comment={comment} />
+          {comments?.length ? (
+            comments?.map((comment, idx) => (
+              <Comment key={idx} comment={comment} />
             ))
           ) : (
             <p className="text-center font-bold mt-10 text-gray-500">
