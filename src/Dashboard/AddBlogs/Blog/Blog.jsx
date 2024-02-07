@@ -10,7 +10,8 @@ const Blog = () => {
   const axiosPublic = useAxios();
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/blogs").then((data) => {
+    // axios.get("http://localhost:5000/blogs").then((data) => {
+      axiosPublic.get("/blogs").then((data) => {
       SetBlogs(data.data);
       setLoading(false);
       // console.log(data.data);
