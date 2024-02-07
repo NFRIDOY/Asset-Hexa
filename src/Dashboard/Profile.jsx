@@ -22,13 +22,13 @@ const Profile = () => {
           <a href='#' className='relative block'>
             <img
               alt='profile'
-              src={user.photoURL}
+              src={user?.photoURL}
               className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '
             />
           </a>
 
           <p className='p-2 px-4 text-xs text-white bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  rounded-full'>
-            {user && user.displayName}
+            {user && user?.displayName}
           </p>
 
 
