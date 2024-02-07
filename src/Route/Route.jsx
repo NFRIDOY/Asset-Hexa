@@ -14,9 +14,9 @@ import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
-import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
+import AddBlog from "../Dashboard/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
-import Blog from "../Dashboard/AddBlogs/Blog/Blog";
+import Blog from "../Pages/Blog/Blog";
 import Investments from "../Dashboard/Investments/Investments";
 // import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
@@ -62,9 +62,9 @@ export const router = createBrowserRouter([
         element: <Businesses></Businesses>,
       },
       {
-        path:"/newsPayment",
-        element:<Payment></Payment>
-      }
+        path: "/newsPayment",
+        element: <Payment></Payment>,
+      },
     ],
   },
   {
@@ -110,7 +110,7 @@ export const router = createBrowserRouter([
 
       {
         path: "addBlog",
-        element: <AddBlog></AddBlog>,
+        element: <AddBlog />,
       },
       {
         path: "investments",
@@ -136,7 +136,6 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
-
     ],
   },{
 		path: "AdminDashboard",
