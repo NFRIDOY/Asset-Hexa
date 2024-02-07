@@ -7,17 +7,20 @@ import { useEffect, useState } from "react";
 import CommentSection from "../../Components/CommentSection";
 import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { FaBookmark } from "react-icons/fa";
 
 //http://localhost:5000\
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const { id } = useParams();
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
   const axiosPublic = useAxios();
-  console.log(blog);
 
   const {
     _id,
@@ -50,6 +53,7 @@ const BlogDetails = () => {
     }
   }, [likes, user?.email, dislikes]);
 
+  // Event Handler for Like Functionality
   const handleLike = () => {
     const mongoDate = new Date();
     // Customize the date format
@@ -82,6 +86,8 @@ const BlogDetails = () => {
         });
     }
   };
+
+  // Event Handler for Disl;ike Functionality
   const handleDislike = () => {
     const mongoDate = new Date();
     // Customize the date format
@@ -114,7 +120,45 @@ const BlogDetails = () => {
         });
     }
   };
-  const handleAddtoBookmark = () => {};
+
+  // Event Handler for Adding to bookmark Functionality
+  const handleAddtoBookmark = () => {
+    const mongoDate = new Date();
+    // Customize the date format
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+      mongoDate
+    );
+    const bookmarkedBlogData = {
+      blogID: _id,
+      blogTitle: title,
+      author,
+      user: user?.email,
+      date: formattedDate,
+    };
+
+    // console.log(bookmarkedBlogData);
+    axios
+      .post("http://localhost:5000/bookmark", bookmarkedBlogData)
+      .then((res) => {
+        if (res.data?.insertedId) {
+          // console.log(res.data);
+          toast.success("Added to bookmark!");
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
+  // Event Handler for Comment Functionality
   const handlePostComment = (e) => {
     e.preventDefault();
     const text = e.target.commentText.value;
@@ -174,8 +218,8 @@ const BlogDetails = () => {
             <p className="text-2xl font-semibold hidden md:block">/</p>
             <p className="md:text-lg">Comments: {comments?.length || 0}</p>
           </div>
-          <div>
-            <BookmarkButton onClick={handleAddtoBookmark} />
+          <div onClick={handleAddtoBookmark}>
+            <BookmarkButton isBookmarked={isBookmarked} />
           </div>
         </div>
         <div>

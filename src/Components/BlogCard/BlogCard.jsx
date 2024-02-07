@@ -1,8 +1,6 @@
-// import { useState, useEffect } from "react";
-import { CiBookmarkPlus } from "react-icons/ci";
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import BookmarkButton from "../BookmarkButton";
 
 const BlogCard = ({ Bloggs }) => {
   return (
@@ -36,9 +34,7 @@ const BlogCard = ({ Bloggs }) => {
                 </div>
               </div>
               <div>
-                <button>
-                  <CiBookmarkPlus className="text-3xl font-bold"></CiBookmarkPlus>
-                </button>
+                <BookmarkButton />
               </div>
             </div>
             <div className="space-y-2">
