@@ -24,12 +24,12 @@ import Businesses from "../Components/Businesses/Businesses";
 import Payment from "../Components/Home/Payment/Payment";
 import Business from "../Components/Business/Business";
 import BusinessForm from "../Components/Business/BusinessForm";  
-import axios from "axios";
 import DashboardLayout from "../AdminDashboard/DashboardLayout";
 import AdminOverview from "../AdminDashboard/AdminOverview";
 import BlogVerification from "../AdminDashboard/BlogVerification";
 import BusinessVerification from "../AdminDashboard/BusinessVerification";
 import UserVarification from "../AdminDashboard/UserVarification";
+import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <Businesses></Businesses>,
+      },
+      {
+        path:"/businessDetails/:id",
+        element:<BusinessDetails></BusinessDetails>
       },
       {
         path: "/newsPayment",
