@@ -5,6 +5,7 @@ import useAxios from "../../hooks/useAxios";
 import InvestmentRow from "./InvestmentRow";
 import Investments from './Investments';
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 export default function InvestmentTable() {
@@ -17,7 +18,8 @@ export default function InvestmentTable() {
 
     console.log(`${user?.email}`)
     useEffect(() => {
-        axiosPublic.get(`/investments?email=${user?.email}`)
+        // axiosPublic.get(`/bussiness?email=${user?.email}`)
+        axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 console.log(res.data)
@@ -26,7 +28,7 @@ export default function InvestmentTable() {
     }, [])
 
     return (
-        <div className="h-screen lg:mx-5">
+        <div className="h-screen lg:mx-5 w-full">
             {/* <h1>
                 investmentTable
             </h1> */}
@@ -36,15 +38,17 @@ export default function InvestmentTable() {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Investments</th>
-                            <th>Option</th>
+                            <th>BrandName</th>
+                            <th>UserName</th>
+                            <th>Maximum Invesment</th>
+                            <th>profit</th>
+                            <th>view Business</th>
                         </tr>
                     </thead>
                     {
                         <tbody>
                             {
-                                (investments.length !== 0) ? investments.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
+                                ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
                             }
                         </tbody>
 
