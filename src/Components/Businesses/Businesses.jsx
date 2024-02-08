@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import Loader from "../../Route/loader";
-import axios from "axios";
 import BusinessCard from "../BusinessCard/BusinessCard";
 
 
