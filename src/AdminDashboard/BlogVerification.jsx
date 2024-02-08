@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 const BlogVerification = () => {
 
     const [loading, setLoading] = useState(true);
-	const [businessData, SetBusinessData] = useState([]);
+	const [blogData, setBlogData] = useState([]);
 	const axiosPublic = useAxios();
 
 	useEffect(() => {
 		setLoading(true);
 		axiosPublic.get("/blogs").then((data) => {
-			SetBusinessData(data.data);
+			setBlogData(data.data);
 			setLoading(false);
 			console.log(data.data);
 		});
@@ -36,14 +36,14 @@ const BlogVerification = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{businessData.map((item) => (
+						{blogData?.map((item) => (
 							<tr key={item?.id} className="hover">
 								<th>{item?.title}</th>
 								<td>{item?.author}</td>
 								<td>{new Date(
 												item?.time
 											).toLocaleDateString()}</td>
-								<td className="p-0"><Link to="/AdminDashboard/AdminOverview">
+								<td className="p-0"><Link to={`/blogDetails/${item?._id}`}>
 									<button className="btn  bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
 										View blog
 									</button>

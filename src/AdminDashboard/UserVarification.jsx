@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 import { useEffect, useState } from "react";
 import Loader from "../Route/loader";
@@ -12,7 +13,8 @@ const UserVarification = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		axiosPublic.get("/users").then((data) => {
+		axiosPublic.get("/users")
+		.then((data) => {
 			SetusersData(data.data);
 			setLoading(false);
 			console.log(data.data);
@@ -22,7 +24,22 @@ const UserVarification = () => {
 	if (loading) return <Loader />;
 
 	const handleVarify = (email) => {
-		console.log("user Email" , email)
+		
+		
+		axiosPublic.put(`/user/${email}`  )
+		.then(res => {
+			if(res?.data.modifiedCount >= 1 ){
+				toast.success("user marked as verified");
+				document.getElementById(email).setAttribute("hidden", "true");
+				
+			}
+			else{
+				toast.error("User is already verified");
+				
+			}
+		})
+		.catch(err => console.log(err))
+		
 	}
 
 	return (
@@ -40,7 +57,7 @@ const UserVarification = () => {
 						</thead>
 						<tbody>
 							{usersData?.map((item) => (
-                                <tr key={item?.id} className="hover">
+                                <tr id={item?.email}  key={item?.id} className={item?.isVerified ? "hidden" : "hover"}>
 									<td className="py-1 flex justify-center" >
                                         <img className="w-14 h-14 " src={item?.photoURL ? item?.photoURL : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} alt="" />
                                         
