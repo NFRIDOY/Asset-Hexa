@@ -7,18 +7,6 @@ const BusinessDetails = () => {
     const { id } = useParams();
     const { business, } = useBusiness(id);
 
-
-    // const [businessDetails, SetBusinessDetails] = useState([]);
-    // const axiosPublic = useAxios();
-    // useEffect(() => {
-
-    //     // axios.get("http://localhost:5000/bussiness").then((data) => {
-    //     axiosPublic.get("/bussiness").then((data) => {
-    //         SetBusinessDetails(data.data);
-    //         console.log(data.data)
-    //         // console.log(data.data);
-    //     });
-    // }, [axiosPublic]);
     return (
         <div className="max-w-7xl mx-auto px-2">
             <div className=" ">
