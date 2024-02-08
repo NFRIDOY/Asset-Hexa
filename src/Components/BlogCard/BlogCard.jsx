@@ -1,30 +1,8 @@
-// import { useState, useEffect } from "react";
-import { CiBookmarkPlus } from "react-icons/ci";
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import BookmarkButton from "../BookmarkButton";
 
 const BlogCard = ({ Bloggs }) => {
-  //   const [likes, setLikes] = useState(
-  //     parseInt(localStorage.getItem("likes")) || 0
-  //   );
-  //   const [dislikes, setDislikes] = useState(
-  //     parseInt(localStorage.getItem("dislikes")) || 0
-  //   );
-
-  //   const handleLike = () => {
-  //     setLikes(likes + 1);
-  //   };
-
-  //   const handleDislike = () => {
-  //     setDislikes(dislikes + 1);
-  //   };
-
-  //   useEffect(() => {
-  //     localStorage.setItem("likes", likes);
-  //     localStorage.setItem("dislikes", dislikes);
-  //   }, [likes, dislikes]);
-
   return (
     <>
       <Link to={`/blogDetails/${Bloggs._id}`}>
@@ -44,11 +22,11 @@ const BlogCard = ({ Bloggs }) => {
                 <img
                   className="w-14 h-14 rounded-full"
                   src={`${
-                    Bloggs.authorImage
+                    Bloggs?.authorImage
                       ? Bloggs?.authorImage
-                      : "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
+                      : "https://i.ibb.co/C2QsnzC/jae-park-7-GX5a-ICaawdb5i4-unsplash.jpg"
                   }`}
-                  alt=""
+                  alt={`image of ${Bloggs?.author}`}
                 />
                 <div>
                   <p className="font-bold">{Bloggs?.author}</p>
@@ -56,9 +34,7 @@ const BlogCard = ({ Bloggs }) => {
                 </div>
               </div>
               <div>
-                <button>
-                  <CiBookmarkPlus className="text-3xl font-bold"></CiBookmarkPlus>
-                </button>
+                <BookmarkButton />
               </div>
             </div>
             <div className="space-y-2">
