@@ -1,9 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import BookmarkButton from "../BookmarkButton";
-import axios from "axios";
-import toast from "react-hot-toast";
-import useAuth from "../../api/useAuth";
 import useBookmarked from "../../hooks/useBookmarked";
 import { useEffect, useState } from "react";
 

@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { FaBookmark } from "react-icons/fa";
 import useBookmarked from "../../hooks/useBookmarked";
 
 //http://localhost:5000\
@@ -155,8 +154,8 @@ const BlogDetails = () => {
     };
 
     // console.log(bookmarkedBlogData);
-    axios
-      .post("http://localhost:5000/bookmark", bookmarkedBlogData)
+    axiosPublic
+      .post("/bookmark", bookmarkedBlogData)
       .then((res) => {
         if (res.data?.insertedId) {
           // console.log(res.data);
