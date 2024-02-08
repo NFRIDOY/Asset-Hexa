@@ -44,8 +44,8 @@ const AdminOverview = () => {
 				</div>
 			</div>
 
-			<div className="flex gap-5 mt-5   ">
-				<div className="bg-white  p-10">
+			<div className="flex flex-col md:flex-row gap-10 md:mt-5 my-5   ">
+				<div className="bg-white  md:p-10 mx-auto">
 					<PieChart width={350} height={350}>
 						<Pie
 							dataKey="value"
@@ -70,8 +70,8 @@ const AdminOverview = () => {
 					</PieChart>{" "}
 				</div>
 
-				<div className="bg-white w-full p-6 px-10 flex gap-5 items-center justify-between">
-					<Link to="/AdminDashboard/BusinessVerification"  className="w-48 shadow-custom flex flex-col justify-center items-center  h-48 -mt-16 ">
+				<div className="bg-white w-full p-6 px-10 flex flex-col md:flex-row gap-5 items-center justify-between">
+					<Link to="/AdminDashboard/BusinessVerification"  className="w-72   md:w-48 shadow-custom flex flex-col justify-center items-center h-72 md:h-48 md:-mt-16 ">
 						<div className="relative">
 							<IoMdBusiness size={72} className="!z-[-999]" />
 
@@ -84,7 +84,7 @@ const AdminOverview = () => {
 						</div>
 						<h1 className="text-lg ">Business Varification</h1>
 					</Link>
-					<Link to="/AdminDashboard/userVerification" className="w-48 flex flex-col justify-center items-center  h-48 mt-16 shadow-custom ">
+					<Link to="/AdminDashboard/userVerification" className="w-72 md:w-48 flex flex-col justify-center items-center h-72 md:h-48 md:mt-16 shadow-custom ">
 						<div className="relative">
 							<FaUserAlt size={72} className="!z-[-999]" />
 
@@ -97,7 +97,7 @@ const AdminOverview = () => {
 						</div>
                         <h1 className="text-lg mt-2 ">User Varification</h1>
 					</Link>
-					<Link to="/AdminDashboard/BlogVerification" className="w-48  flex flex-col justify-center items-center  h-48 -mt-16 shadow-custom  ">
+					<Link to="/AdminDashboard/BlogVerification" className="w-72 md:w-48 flex flex-col justify-center items-center h-72 md:h-48 md:-mt-16 shadow-custom  ">
 						<div className="relative">
 							<ImBlog size={72} className="!z-[-999]" />
 
