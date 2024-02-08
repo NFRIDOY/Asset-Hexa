@@ -1,10 +1,59 @@
 import React from 'react';
 
+import { useEffect, useState } from "react";
+import Loader from "../Route/loader";
+import useAxios from "../hooks/useAxios";
+import { Link } from "react-router-dom";
+
 const BlogVerification = () => {
+
+    const [loading, setLoading] = useState(true);
+	const [businessData, SetBusinessData] = useState([]);
+	const axiosPublic = useAxios();
+
+	useEffect(() => {
+		setLoading(true);
+		axiosPublic.get("/blogs").then((data) => {
+			SetBusinessData(data.data);
+			setLoading(false);
+			console.log(data.data);
+		});
+	}, [axiosPublic]);
+
+	if (loading) return <Loader />;
+
     return (
-        <div>
-            <h1>this is blog varificattion</h1>
-        </div>
+       <div className="bg-base-300 h-screen">
+			<div className="">
+				<table className="table table-pin-rows table-lg text-center">
+					{/* head */}
+					<thead>
+						<tr className="bg-gradient-to-r from-[#23A455] to-[#34D399] text-white ">
+							<th>Title</th>
+							<th>Author</th>
+							<th>Date Posted</th>
+							<th>view Blog</th>
+						</tr>
+					</thead>
+					<tbody>
+						{businessData.map((item) => (
+							<tr key={item?.id} className="hover">
+								<th>{item?.title}</th>
+								<td>{item?.author}</td>
+								<td>{new Date(
+												item?.time
+											).toLocaleDateString()}</td>
+								<td className="p-0"><Link to="/AdminDashboard/AdminOverview">
+									<button className="btn  bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
+										View blog
+									</button>
+								</Link></td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
     );
 };
 
