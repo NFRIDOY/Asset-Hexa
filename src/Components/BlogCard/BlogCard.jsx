@@ -1,8 +1,62 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import BookmarkButton from "../BookmarkButton";
+import useBookmarked from "../../hooks/useBookmarked";
+import { useEffect, useState } from "react";
 
 const BlogCard = ({ Bloggs }) => {
+  // const { user } = useAuth();
+  const { bookmarked } = useBookmarked();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // Event Handler for Adding to bookmark Functionality
+  // const handleAddtoBookmark = () => {
+  //   const mongoDate = new Date();
+  //   // Customize the date format
+  //   const options = {
+  //     year: "numeric",
+  //     month: "short",
+  //     day: "numeric",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     second: "2-digit",
+  //   };
+  //   const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+  //     mongoDate
+  //   );
+  //   const bookmarkedBlogData = {
+  //     blogID: Bloggs?._id,
+  //     author: Bloggs?.author,
+  //     blogTitle: Bloggs?.title,
+  //     user: user?.email,
+  //     date: formattedDate,
+  //   };
+
+  //   // console.log(bookmarkedBlogData);
+  //   axios
+  //     .post("http://localhost:5000/bookmark", bookmarkedBlogData)
+  //     .then((res) => {
+  //       if (res.data?.insertedId) {
+  //         // console.log(res.data);
+  //         bookmarkRefetch();
+  //         toast.success("Added to bookmark!");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message);
+  //     });
+  // };
+
+  useEffect(() => {
+    const didBookmarked = bookmarked?.find(
+      (bookmked) => bookmked.blogID === Bloggs._id
+    );
+    if (didBookmarked) {
+      setIsBookmarked(true);
+    } else {
+      setIsBookmarked(false);
+    }
+  }, [bookmarked, Bloggs._id]);
   return (
     <>
       <Link to={`/blogDetails/${Bloggs._id}`}>
@@ -34,7 +88,7 @@ const BlogCard = ({ Bloggs }) => {
                 </div>
               </div>
               <div>
-                <BookmarkButton />
+                <BookmarkButton isBookmarked={isBookmarked} />
               </div>
             </div>
             <div className="space-y-2">

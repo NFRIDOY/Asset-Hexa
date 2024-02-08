@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import useAuth from "../api/useAuth";
+import useAxios from "./useAxios";
 
 const useBookmarked = () => {
+  const axiosPublic = useAxios();
   const { user } = useAuth();
   const {
     data: bookmarked,
@@ -11,9 +12,7 @@ const useBookmarked = () => {
   } = useQuery({
     queryKey: ["bookmarkDataByUser"],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:5000/bookmark/${user?.email}`
-      );
+      const res = await axiosPublic.get(`/bookmark/${user?.email}`);
       return res.data;
     },
   });
