@@ -10,6 +10,7 @@ import useAxios from "../../hooks/useAxios";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FaBookmark } from "react-icons/fa";
+import useBookmarked from "../../hooks/useBookmarked";
 
 //http://localhost:5000\
 
@@ -18,9 +19,10 @@ const BlogDetails = () => {
   const [isDisliked, setIsDisliked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { id } = useParams();
+  const axiosPublic = useAxios();
   const { user } = useAuth();
   const { blog, refetch } = useBlog(id);
-  const axiosPublic = useAxios();
+  const { bookmarked, refetch: bookmarkRefetch } = useBookmarked();
 
   const {
     _id,
@@ -40,6 +42,9 @@ const BlogDetails = () => {
     const didDisliked = dislikes?.find(
       (dislike) => dislike.personEmail === user?.email
     );
+    const didBookmarked = bookmarked?.find(
+      (bookmked) => bookmked.blogID === _id
+    );
 
     if (didLike) {
       setIsLiked(true);
@@ -51,7 +56,12 @@ const BlogDetails = () => {
     } else {
       setIsDisliked(false);
     }
-  }, [likes, user?.email, dislikes]);
+    if (didBookmarked) {
+      setIsBookmarked(true);
+    } else {
+      setIsBookmarked(false);
+    }
+  }, [likes, user?.email, dislikes, bookmarked]);
 
   // Event Handler for Like Functionality
   const handleLike = () => {
@@ -150,6 +160,7 @@ const BlogDetails = () => {
       .then((res) => {
         if (res.data?.insertedId) {
           // console.log(res.data);
+          bookmarkRefetch();
           toast.success("Added to bookmark!");
         }
       })
