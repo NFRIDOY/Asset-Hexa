@@ -14,16 +14,22 @@ import Accounts from "../Dashboard/Accounts";
 import Profile from "../Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AddBalance from "../Dashboard/Accounts/AddBalance/AddBalance";
-import AddBlog from "./../Dashboard/AddBlogs/AddBlog/AddBlog";
+import AddBlog from "../Dashboard/AddBlog";
 import UpdateProfile from "../Dashboard/Accounts/UpdateProfile";
-import Blog from "../Dashboard/AddBlogs/Blog/Blog";
+import Blog from "../Pages/Blog/Blog";
 import Investments from "../Dashboard/Investments/Investments";
 // import Business from "../Components/Business/Business";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import Businesses from "../Components/Businesses/Businesses";
 import Payment from "../Components/Home/Payment/Payment";
 import Business from "../Components/Business/Business";
-import BusinessForm from "../Components/Business/BusinessForm";
+import BusinessForm from "../Components/Business/BusinessForm";  
+import axios from "axios";
+import DashboardLayout from "../AdminDashboard/DashboardLayout";
+import AdminOverview from "../AdminDashboard/AdminOverview";
+import BlogVerification from "../AdminDashboard/BlogVerification";
+import BusinessVerification from "../AdminDashboard/BusinessVerification";
+import UserVarification from "../AdminDashboard/UserVarification";
 
 export const router = createBrowserRouter([
   {
@@ -56,9 +62,9 @@ export const router = createBrowserRouter([
         element: <Businesses></Businesses>,
       },
       {
-        path:"/newsPayment",
-        element:<Payment></Payment>
-      }
+        path: "/newsPayment",
+        element: <Payment></Payment>,
+      },
     ],
   },
   {
@@ -104,7 +110,7 @@ export const router = createBrowserRouter([
 
       {
         path: "addBlog",
-        element: <AddBlog></AddBlog>,
+        element: <AddBlog />,
       },
       {
         path: "investments",
@@ -130,7 +136,32 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
-
     ],
-  },
+  },{
+		path: "AdminDashboard",
+		element: <DashboardLayout></DashboardLayout>,
+		errorElement: <Errorpage></Errorpage>,
+		children: [
+			{
+				path: "AdminOverview",
+				element: <AdminOverview></AdminOverview>,
+			},
+			{
+				path: "BusinessVerification",
+				element: <BusinessVerification></BusinessVerification>,
+			},
+			{
+				path: "BlogVerification",
+				element: <BlogVerification></BlogVerification>,
+			},
+			{
+				path: "userVerification",
+				element: <UserVarification></UserVarification>,
+			},
+		],
+	},
+
+
+
+	
 ]);

@@ -1,9 +1,9 @@
 import Swal from "sweetalert2";
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../hooks/useAxios";
 
-import lotiBlog from "../../../lottie/AnimationBlog.json";
+import lotiBlog from "../lottie/AnimationBlog.json";
 import Lottie from "lottie-react";
-import useAuth from "../../../api/useAuth";
+import useAuth from "../api/useAuth";
 
 const AddBlog = () => {
   const { user } = useAuth();
