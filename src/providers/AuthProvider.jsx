@@ -13,8 +13,6 @@ import {
 import app from "./../utility/Firebase/firebase.config";
 import PropTypes from "prop-types"; // ES6
 import toast from "react-hot-toast";
-import useAxios from "../hooks/useAxios";
-import Swal from "sweetalert2";
 
 export const AuthContext = createContext(null);
 

@@ -22,7 +22,9 @@ export default function BusinessForm() {
         const Maximum = parseFloat(form.Maximum.value);
         const Profit = parseFloat(form.Profit.value);
 
-        
+        const getTotalInvestment = () => {
+            return 0;
+        }
 
         const newBusinessObj = {
             CompanyName,
@@ -35,12 +37,12 @@ export default function BusinessForm() {
             Minimum,
             Maximum,
             Profit,
-            time : formattedDate,
+            time: formattedDate,
             userName: user?.displayName,
             photoURL: user?.photoURL,
             companyVarification: false,
-            totalInvestment: 0,
-            investmentOwner: {}
+            investmentOwner: [],
+            totalInvestment: getTotalInvestment(),
         }
         console.log(newBusinessObj);
 
