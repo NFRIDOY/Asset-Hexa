@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+// import useAxios from "./useAxios";
 import axios from "axios";
 
 const useBlog = (id) => {
+  // const axiosPublic = useAxios();
   const { data: blog = {}, refetch } = useQuery({
     queryKey: ["singleBlogData"],
     enabled: !!id,
@@ -12,5 +14,5 @@ const useBlog = (id) => {
   });
   return { blog, refetch };
 };
-
+//http://localhost:5000
 export default useBlog;

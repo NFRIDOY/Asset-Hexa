@@ -3,15 +3,18 @@ import home from "../assets/logo/logo.png";
 import money from "../lottie/Animation - 1706022352528.json";
 import Lottie from "lottie-react";
 import { MdOutlineDashboard } from "react-icons/md";
-import { GrTransaction } from "react-icons/gr";
-import { IoStatsChartSharp } from "react-icons/io5";
-import { MdAccountBalance } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMenu } from "react-icons/ai";
+import { ImBlog } from "react-icons/im";
+import { FaUserAlt } from "react-icons/fa";
 
-const Dashboard = () => {
-  return (
-    <div className=" h-screen bg-base-300">
+import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
+import { IoMdBusiness } from "react-icons/io";
+const DashboardLayout = () => {
+    return (
+        <div>
+
+<div className=" h-screen bg-base-300">
       <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col   ">
@@ -33,23 +36,23 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <div className="w-52 h-screen bg-white justify-center  flex flex-col ">
+          <div className="w-60 h-screen bg-white justify-center  flex flex-col ">
             <div>
-              <div className="  rounded-lg lg:mt-3">
+              <div className="w-48  rounded-lg lg:mt-3">
                 <figure>
                   <Link to="/">
                     <img src={home} alt="" />
                   </Link>
                 </figure>
               </div>
-              <ul className="menu text-lg  space-y-2 h-fit  rounded-lg mt-4">
+              <ul className="menu text-lg  space-y-2 h-[380px]  rounded-lg mt-2">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
                       ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
-                  to="/dashboard/overView"
+                  to="/AdminDashboard/AdminOverview"
                 >
                   <MdOutlineDashboard /> Overview
                 </NavLink>
@@ -60,10 +63,10 @@ const Dashboard = () => {
                       ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
-                  to="/dashboard/transection"
+                  to="/AdminDashboard/BusinessVerification"
                 >
-                  <GrTransaction />
-                  Transection
+                  <IoMdBusiness />
+                  Verify Business
                 </NavLink>
 
                 <NavLink
@@ -72,10 +75,10 @@ const Dashboard = () => {
                       ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
-                  to="/dashboard/statistics"
+                  to="/AdminDashboard/userVerification"
                 >
-                  <IoStatsChartSharp />
-                  Statistics
+                  <FaUserAlt />
+                  verify User
                 </NavLink>
 
                 <NavLink
@@ -84,10 +87,10 @@ const Dashboard = () => {
                       ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
-                  to="/dashboard/accounts"
+                  to="/AdminDashboard/BlogVerification"
                 >
-                  <MdAccountBalance />
-                  Accounts
+                  <ImBlog />
+                  verify Blogs
                 </NavLink>
 
                 <NavLink
@@ -101,39 +104,7 @@ const Dashboard = () => {
                   <CgProfile />
                   Add Blog
                 </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-                      : "flex px-4 p-2 items-center mr-4 gap-3"
-                  }
-                  to="/dashboard/investments"
-                >
-                  <IoStatsChartSharp />
-                  Investments
-                </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-                      : "flex px-4 p-2 items-center mr-4 gap-3"
-                  }
-                  to="/dashboard/business"
-                >
-                  <MdAccountBalance />
-                  Business
-                </NavLink>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-                      : "flex px-4 p-2 items-center mr-4 gap-3"
-                  }
-                  to="/dashboard/profile"
-                >
-                  <CgProfile />
-                  Profile
-                </NavLink>
+               
                 {/* <NavLink
 									className={({ isActive }) =>
 										isActive
@@ -150,7 +121,7 @@ const Dashboard = () => {
             <div className="p-2  rounded-lg mt-4">
               <div className="mx-auto ">
                 <Lottie
-                  className="mx-auto  w-[150px] md:[w-150px] lg:w-[180px]"
+                  className=" w-[150px] md:[w-150px] lg:w-[180px]"
                   animationData={money}
                   loop={true}
                 />
@@ -159,8 +130,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>        </div>
+    );
 };
 
-export default Dashboard;
+export default DashboardLayout;
