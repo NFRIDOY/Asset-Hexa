@@ -24,11 +24,11 @@ const BlogVerification = () => {
 
     return (
        <div className="bg-base-300 h-screen">
-			<div className="">
+			<div className="overflow-x-scroll">
 				<table className="table table-pin-rows table-lg text-center">
 					{/* head */}
 					<thead>
-						<tr className="bg-gradient-to-r from-[#23A455] to-[#34D399] text-white ">
+						<tr className="z-[0] bg-gradient-to-r from-[#23A455] to-[#34D399] text-white ">
 							<th>Title</th>
 							<th>Author</th>
 							<th>Date Posted</th>

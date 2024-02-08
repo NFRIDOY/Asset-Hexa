@@ -45,10 +45,10 @@ const UserVarification = () => {
 	return (
 		<div>
 			<div className="bg-base-300 ">
-				<div className="">
+				<div className="overflow-x-scroll">
 					<table className="table table-pin-rows  table-lg text-center">
 						<thead   className="">
-							<tr className=" bg-gradient-to-r from-[#23A455] to-[#34D399] text-white ">
+							<tr className="z-[0] bg-gradient-to-r from-[#23A455] to-[#34D399] text-white ">
                                 <th>Profile Picture</th>
 								<th>UserName</th>
 								<th>UserEmail</th>
