@@ -8,12 +8,12 @@ const AccountCard = ({ Balances }) => {
           {/* cash  */}
 
           <div className="grid grid-cols-3 mb-3 shadow-sm rounded h-10 border-b-2 mt-2">
-            <p className="ml-5  text-[#AEAEAF]">{Balances.name}</p>
+            <p className="ml-5  text-[#AEAEAF]">{Balances?.account}</p>
             <p className="text-[#AEAEAF] flex justify-center">
-              {Balances.group}
+              {Balances?.group}
             </p>
             <p className="mr-5 text-[#AEAEAF] flex justify-end">
-              $ {Balances.amount}
+              $ {Balances?.amount}
             </p>
           </div>
         </div>

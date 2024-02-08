@@ -1,19 +1,19 @@
+import Businesses from "../../Components/Businesses/Businesses";
 import WhyChooseUs from "../../Components/HelpDesk/WhyChooseUs";
- 
-
+import NewsLetter from "../../Components/Home/NewsLetter";
 import Banner from "./Banner";
 import FeatureHome from "./FeatureHome";
 
-
-
 const Home = () => {
-    return (
-        <div>
-            <Banner></Banner>
-            <FeatureHome></FeatureHome>
-            <WhyChooseUs></WhyChooseUs>
-        </div>
-    );
+  return (
+    <div>
+      <Banner></Banner>
+      <FeatureHome></FeatureHome>
+      <NewsLetter></NewsLetter>
+      <WhyChooseUs></WhyChooseUs>
+      <Businesses></Businesses>
+    </div>
+  );
 };
 
 export default Home;

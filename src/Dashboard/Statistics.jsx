@@ -41,9 +41,9 @@ const Statistics = () => {
   // console.log(isData01, isData02, isData03);
   return (
     <div className="mt-20">
-      <div className="flex flex-col gap-10 md:flex-row justify-center items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-10">
         {/* Pie 1 */}
-        <div className="flex-1 flex flex-col justify-center items-center overflow-clip">
+        <div className="flex flex-col justify-center items-center place-self-start">
           <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
             Accounts
           </h1>
@@ -76,7 +76,7 @@ const Statistics = () => {
           )}
         </div>
         {/* Pie 2 */}
-        <div className="flex-1 flex flex-col justify-center items-center overflow-clip">
+        <div className="flex flex-col justify-center items-center place-self-start">
           <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
             Income
           </h1>
@@ -109,7 +109,7 @@ const Statistics = () => {
           )}
         </div>
         {/* Pie 3 */}
-        <div className="flex-1 flex flex-col justify-center items-center overflow-clip">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-1 flex flex-col justify-center items-center xl:place-self-start">
           <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
             Expense
           </h1>

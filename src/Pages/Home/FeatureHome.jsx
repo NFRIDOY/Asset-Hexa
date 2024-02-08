@@ -8,7 +8,7 @@ import loti2 from "../../lottie/Animation - 1705568847598.json";
 
 const FeatureHome = () => {
   return (
-    <div className="max-w-7xl mx-auto md:my-16">
+    <div className="max-w-7xl mx-auto md:my-40">
       <p className="text-4xl mb-10 font-bold text-center text-black  mt-10">
         Discover what&apos;s so amazing about Asset Hexa
       </p>
@@ -42,7 +42,7 @@ const FeatureHome = () => {
               Effortlessly track your income and gain insights that’ll help you
               see easy opportunities to save.
             </p>
-            <Link to="">
+            <Link to="dashboard/overView">
               <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Income
               </button>
@@ -82,7 +82,7 @@ const FeatureHome = () => {
               Effortlessly track your expence and gain insights that’ll help you
               see easy opportunities to save.
             </p>
-            <Link to="">
+            <Link to="dashboard/overView">
               <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Add Expence
               </button>
@@ -118,7 +118,7 @@ const FeatureHome = () => {
               Effortlessly track your cashflow and gain insights that’ll help
               you see easy opportunities to save.
             </p>
-            <Link to="">
+            <Link to="dashboard/statistics">
               <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 Dashboard
               </button>
