@@ -15,6 +15,7 @@ export default function Businesses() {
         axiosPublic.get("/bussiness").then((data) => {
             SetBusinessData(data.data);
             setLoading(false);
+            console.log(data.data)
             // console.log(data.data);
         });
     }, [axiosPublic]);
