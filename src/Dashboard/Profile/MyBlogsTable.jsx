@@ -10,12 +10,12 @@ const MyBlogsTable = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/blog/${user?.email}`)
+    fetch(`https://asset-hexa-server.vercel.app/blog/${user?.email}`)
       .then(res => res.json())
       .then(data => setBlogs(data))
   }, [user])
 
-  console.log(blogs);
+  // console.log(blogs);
 
 
 
