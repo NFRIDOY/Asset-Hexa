@@ -61,7 +61,7 @@ const BlogDetails = () => {
     } else {
       setIsBookmarked(false);
     }
-  }, [likes, user?.email, dislikes, bookmarked]);
+  }, [likes, user?.email, dislikes, bookmarked, _id]);
 
   // Event Handler for Like Functionality
   const handleLike = () => {
