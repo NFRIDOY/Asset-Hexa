@@ -1,19 +1,12 @@
 /* eslint-disable react/prop-types */
-<<<<<<< HEAD
+ 
+import { Link } from 'react-router-dom';
 
-=======
->>>>>>> 86d5b5e9ad9ea35a33227709a995049549e32589
-import { Link } from "react-router-dom";
-
-
-const BusinessCard = ({ business }) => {
-    console.log(business);
+const BusinessCard = ({business}) => {
     return (
         <div>
-            <Link to={`/businessDetails/${business._id}`}>
-                <div
-                    className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}
-                >
+            <Link to={`/businessDetails/${business?._id}`}>
+                <div className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}>
                     <div className="w-full space-y-4">
                         <div className="">
                             <img
@@ -48,38 +41,13 @@ const BusinessCard = ({ business }) => {
                                     .slice(0, 150)}...
                             </p>
                         </div>
-                        {/* <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <button className="btn btn-sm" onClick={handleLike}>
-                <SlLike />
-              </button>
-              <p>{likes} </p>
-            </div>
-  
-            <div className="flex items-center gap-2">
-              <button className="btn btn-sm" onClick={handleDislike}>
-                <SlDislike />
-              </button>
-              <p>{dislikes}</p>
-            </div>
-          </div> */}
+
                     </div>
                 </div>
-<<<<<<< HEAD
+
             </Link>
         </div>
     );
 };
 
 export default BusinessCard;
-=======
-            </div>
-
-            {/* new card  */}
-            
-
-
-        </div >
-    )
-}
->>>>>>> 86d5b5e9ad9ea35a33227709a995049549e32589
