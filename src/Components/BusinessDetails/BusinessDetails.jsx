@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useBusiness from "../../hooks/useBusiness";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
+import useAdmin from "../../hooks/useAdmin";
 
 
 const BusinessDetails = () => {
@@ -27,6 +28,8 @@ const BusinessDetails = () => {
 			.catch(err => console.log(err))
 	
 	  }
+
+      const [isAdmin] = useAdmin()
 
     return (
         <div className="max-w-7xl mx-auto px-2">
@@ -85,9 +88,9 @@ const BusinessDetails = () => {
 
                     </p>
 
-                    <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
-                varify this blog
-              </button>
+                    {isAdmin && <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
+                varify this business
+              </button>}
                 </div>
             </div>
 
