@@ -10,7 +10,7 @@ const Loader = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <ScaleLoader size={100} color='red' />
+      <ScaleLoader size={100} color='#008000' />
     </div>
   )
 }

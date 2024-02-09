@@ -81,11 +81,7 @@ export const router = createBrowserRouter([
     path: "UpdateProfile",
     element: <UpdateProfile />,
   },
-  {
-    path: "updateblogs",
-    element: <UpdateBlog/>,
-    
-  },
+  
   {
     path: "register",
     element: <Register />,
@@ -143,6 +139,13 @@ export const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+      
+      },
+
+      {
+        path: "updateblogs/:id",
+        element: <UpdateBlog/>,
+        
       },
       {
         path: "addBlog",
