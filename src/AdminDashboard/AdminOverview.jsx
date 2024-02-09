@@ -5,11 +5,29 @@ import { Link } from "react-router-dom";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { IoMdBusiness } from "react-icons/io";
 import verified from "../assets/dashboard/varified.png";
+import { useQuery } from "@tanstack/react-query";
+
 import "../../src/App.css"
+import useAxios from "../hooks/useAxios";
 const AdminOverview = () => {
+
+	const axiosPublic = useAxios()
+
+	const { data: adminState = [] } = useQuery({
+		queryKey: ["AdminState"],
+		queryFn: async () => {
+			const res = await axiosPublic.get(
+				`/adminState`
+			);
+			return res.data;
+		},
+	});
+	console.log(adminState)
+
+
 	const data01 = [
-		{ name: "newsletter subscription", value: 100 },
-		{ name: "business subscriptions", value: 300 },
+		{ name: "newsletter subscription", value: adminState?.newsLetterSubscriptionCount },
+		{ name: "Total Site User", value: adminState?.userCount },
 	];
 
 	const COLORS = ["#317DF0", "#F8A11B"];
@@ -18,33 +36,33 @@ const AdminOverview = () => {
 			<div className="bg-white p-4 flex rounded-xl gap-3 overflow-x-auto min-h-40">
 				<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-56 ">
 					<h1 className="text-base font-medium">total Users</h1>
-					<p className="text-3xl md:text-5xl font-semibold">00</p>
+					<p className="text-3xl md:text-5xl font-semibold">{adminState?.userCount}</p>
 				</div>
 				<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
 					<h1 className="text-base font-medium">Total Transection</h1>
-					<p className="text-3xl md:text-5xl font-semibold">00</p>
+					<p className="text-3xl md:text-5xl font-semibold">{adminState?.transectionsCount}</p>
 				</div>
 				<div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
 					<h1 className="text-base font-medium">Total Blogs</h1>
-					<p className="text-3xl md:text-5xl font-semibold">00</p>
+					<p className="text-3xl md:text-5xl font-semibold">{adminState?.blogCount}</p>
 				</div>
 				<div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
 					<h1 className="text-base font-medium">
 						{" "}
 						Business posting{" "}
 					</h1>
-					<p className="text-3xl md:text-5xl font-semibold">00</p>
+					<p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
 				</div>
 				<div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-purple-700 to-purple-400  px-8 min-w-48 md:min-w-56 ">
 					<h1 className="text-base font-medium">
 						{" "}
 						Newslater subscitption
 					</h1>
-					<p className="text-3xl md:text-5xl font-semibold">00</p>
+					<p className="text-3xl md:text-5xl font-semibold">{adminState?.newsLetterSubscriptionCount}</p>
 				</div>
 			</div>
 
-			<div className="flex flex-col md:flex-row gap-10 md:mt-5 my-5   ">
+			<div className="flex flex-col md:flex-row gap-5 md:mt-5 my-5   ">
 				<div className="bg-white  md:p-10 mx-auto">
 					<PieChart width={350} height={350}>
 						<Pie

@@ -208,6 +208,24 @@ const BlogDetails = () => {
         }
       });
   };
+
+
+  const handleVerification = () => {
+    axiosPublic.put(`/blog/${_id}`  )
+		.then(res => {
+			if(res?.data.modifiedCount >= 1 ){
+				toast.success("Blog marked as verified");
+				document.getElementById(email).setAttribute("hidden", "true");
+				
+			}
+			else{
+				toast.error("Blog is already verified");
+				
+			}
+		})
+		.catch(err => console.log(err))
+
+  }
   return (
     <div className="min-h-screen">
       <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">
@@ -279,6 +297,10 @@ const BlogDetails = () => {
             </span>
           </h1>
           <p className="text-lg font-normal">{description || ""}</p>
+
+          <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
+                varify this blog
+              </button>
         </div>
       </div>
       <div className="mt-20 max-w-7xl mx-auto">
