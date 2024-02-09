@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 import CommentSection from "../../Components/CommentSection";
 import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
-import axios from "axios";
 import toast from "react-hot-toast";
 import useBookmarked from "../../hooks/useBookmarked";
 import useAdmin from "../../hooks/useAdmin";
+import { MdVerified } from "react-icons/md";
 
 //http://localhost:5000\
 
@@ -35,6 +35,7 @@ const BlogDetails = () => {
     dislikes,
     comments,
     time,
+    isVerified,
   } = blog;
 
   useEffect(() => {
@@ -291,8 +292,13 @@ const BlogDetails = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-6 break-words">
-            {title || ""}
+          <h1 className="text-3xl md:text-5xl font-bold mb-6 break-words flex items-center lg:items-end">
+            {title || ""}{" "}
+            <span>
+              {isVerified && (
+                <MdVerified className="ml-2 text-4xl text-blue-500" />
+              )}
+            </span>
           </h1>
           <p className="text-lg font-normal">{description || ""}</p>
 
