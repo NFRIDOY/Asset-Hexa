@@ -4,7 +4,7 @@ import { FaBookmark } from "react-icons/fa";
 
 const BookmarkButton = ({ isBookmarked }) => {
   return (
-    <button>
+    <button className="transition-all duration-500">
       {isBookmarked ? (
         <FaBookmark className="text-2xl font-bold transition-all duration-300 hover:scale-105 text-emerald-600"></FaBookmark>
       ) : (

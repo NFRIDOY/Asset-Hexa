@@ -14,17 +14,17 @@ const DashboardLayout = () => {
     return (
         <div>
 
-<div className=" h-screen bg-base-300">
-      <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
+<div className=" h-screen bg-base-300 ">
+      <div className="drawer lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col   ">
           {/* Page content here */}
-          <div className="lg:ml-10 ">
-            <Outlet></Outlet>
+          <div className="lg:ml-10  ">
+            <Outlet ></Outlet>
           </div>
           <label
             htmlFor="my-drawer-2"
-            className=" absolute top-0  justify-start flex w-20 mx-auto  drawer-button lg:hidden"
+            className="fixed bg-white  z-[999] top-0  justify-start flex  mx-auto  drawer-button lg:hidden"
           >
             <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
           </label>
@@ -93,17 +93,6 @@ const DashboardLayout = () => {
                   verify Blogs
                 </NavLink>
 
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-                      : "flex px-4 p-2 items-center mr-4 gap-3"
-                  }
-                  to="/dashboard/addBlog"
-                >
-                  <CgProfile />
-                  Add Blog
-                </NavLink>
                
                 {/* <NavLink
 									className={({ isActive }) =>
