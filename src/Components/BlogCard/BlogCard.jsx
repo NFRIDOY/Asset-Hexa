@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import BookmarkButton from "../BookmarkButton";
 import useBookmarked from "../../hooks/useBookmarked";
 import { useEffect, useState } from "react";
+import { MdVerified } from "react-icons/md";
 
 const BlogCard = ({ Bloggs }) => {
   // const { user } = useAuth();
@@ -92,8 +93,13 @@ const BlogCard = ({ Bloggs }) => {
               </div>
             </div>
             <div className="space-y-2">
-              <h1 className="font-bold text-xl lg:text-2xl text-left">
+              <h1 className="font-bold text-xl lg:text-2xl text-left flex items-center">
                 {Bloggs?.title}
+                {Bloggs.isVerified && (
+                  <span>
+                    <MdVerified className="ml-2 text-xl text-blue-500" />
+                  </span>
+                )}
               </h1>
               <p className="text-left md:h-24">
                 {Bloggs?.description.slice(0, 150)}...
