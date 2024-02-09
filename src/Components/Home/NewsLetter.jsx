@@ -2,21 +2,41 @@ import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import newsletter from '../../lottie/newsletter.json'
 import { Link } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import useAuth from './../../hooks/useAuth';
 
 
 const NewsLetter = () => {
 
+    const axiosPublic = useAxios();
+    const { user } = useAuth();
+
     const handleClick = e => {
         e.preventDefault()
-        const email = e.target.email.value;
-        console.log(email)
+        const email = e.target.email.value;        
+        const newsLetterSubscriptionObj = {
+            userName: user?.displayName,
+            email: email,
+            letterSubscriptionType: "free"
+        }
 
-        Swal.fire(
-            'Congratulations',
-            'You Successfully subscribed on monthly newsletter!',
-            'success'
-        )
-        e.target.reset()
+        axiosPublic.post("/newsLetterSubscription", newsLetterSubscriptionObj)
+            .then((res) => {
+                console.log(res.data);
+                if (res?.data?.insertedId) {
+                    Swal.fire(
+                        'Congratulations',
+                        'You Successfully subscribed on monthly newsletter!',
+                        'success'
+                    )
+                    e.target.reset()
+                }
+            })
+            .catch(() => {
+                console.log("Error On Subscribe");
+            })
+
+
 
     }
 
@@ -63,14 +83,14 @@ const NewsLetter = () => {
                                         Free Subscribtion
                                     </button>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <Link to='/newsPayment'><button
 
                                         className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
                                     >
                                         Premium Subscrbtion
                                     </button></Link>
-                                </div>
+                                </div> */}
                             </div>
                         </form>
 
