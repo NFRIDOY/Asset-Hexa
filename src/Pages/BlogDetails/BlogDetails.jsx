@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import CommentSection from "../../Components/CommentSection";
 import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
-import axios from "axios";
 import toast from "react-hot-toast";
 import useBookmarked from "../../hooks/useBookmarked";
 
