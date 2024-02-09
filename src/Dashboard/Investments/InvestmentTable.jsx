@@ -28,7 +28,7 @@ export default function InvestmentTable() {
     }, [])
 
     return (
-        <div className="h-screen lg:mx-5 w-full">
+        <div className="h-[calc(100vh-280px)] lg:mx-5 w-full">
             {/* <h1>
                 investmentTable
             </h1> */}
