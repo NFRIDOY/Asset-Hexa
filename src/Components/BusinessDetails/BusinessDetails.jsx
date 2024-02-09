@@ -4,32 +4,60 @@ import useBusiness from "../../hooks/useBusiness";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import useAdmin from "../../hooks/useAdmin";
+import InvestmentRow from './../../Dashboard/Investments/InvestmentRow';
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 
 const BusinessDetails = () => {
     const { id } = useParams();
     const { business } = useBusiness(id);
     const axiosPublic = useAxios()
+    const {user} = useAuth();
 
-    console.log(business);
-    
+    // console.log(business);
+
     const handleVerification = () => {
-		axiosPublic.put(`/business/${id}`  )
-			.then(res => {
-				if(res?.data.modifiedCount >= 1 ){
-					toast.success("Business marked as verified");
-					
-				}
-				else{
-					toast.error("Business is already verified");
-					
-				}
-			})
-			.catch(err => console.log(err))
-	
-	  }
+        axiosPublic.put(`/business/${id}`)
+            .then(res => {
+                if (res?.data.modifiedCount >= 1) {
+                    toast.success("Business marked as verified");
 
-      const [isAdmin] = useAdmin()
+                }
+                else {
+                    toast.error("Business is already verified");
+
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    const handleInvest = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const invest = parseFloat(form.invest.value);
+        console.log(invest);
+        const InvestmentObj = {
+            investor: user?.email,
+            invest: invest
+        }
+
+        axiosPublic.put(`/businessInvest/${id}`, InvestmentObj)
+        // axios.put(`http://localhost:5000/businessInvest/${id}`, InvestmentObj)
+            .then(res => {
+                if (res?.data.modifiedCount >= 1) {
+                    toast.success("Invested on this Business ");
+
+                }
+                else {
+                    toast.error("Faild to Invest");
+
+                }
+            })
+    }
+
+    const [isAdmin] = useAdmin()
 
     return (
         <div className="max-w-7xl mx-auto px-2">
@@ -50,11 +78,11 @@ const BusinessDetails = () => {
                             <p>{business?.time}</p>
                         </div>
                     </div>
-                    <div className="flex lg:pr-32 mt-5 ml-10 ">
-                        <button className="btn bg-[#4FD28C]  ">Investment</button>
-                        <input className="shadow-xl outline-none input input-bordered input-primary" type="text " name="" id="" />
+                    <form onSubmit={handleInvest} className="flex lg:pr-32 mt-5 ml-10 ">
+                        <input className="shadow-xl outline-none input input-bordered input-primary" type="number " name="invest" id="invest" />
+                        <button className="btn bg-[#4FD28C]  " type="submit">Investment</button>
 
-                    </div>
+                    </form>
 
 
                 </div>
@@ -89,8 +117,8 @@ const BusinessDetails = () => {
                     </p>
 
                     {isAdmin && <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
-                varify this business
-              </button>}
+                        varify this business
+                    </button>}
                 </div>
             </div>
 
