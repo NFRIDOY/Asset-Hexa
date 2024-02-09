@@ -2,21 +2,73 @@ import { useContext, useEffect, useState } from "react";
 import TableRow from "./TableRow";
 
 import { AuthContext } from "../../providers/AuthProvider";
+import Loader from "../../Route/loader";
+
+import Swal from "sweetalert2";
 
 const MyBlogsTable = () => {
 
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
+  const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
+
   useEffect(() => {
+    setLoading(true);
     fetch(`https://asset-hexa-server.vercel.app/blog/${user?.email}`)
       .then(res => res.json())
       .then(data => setBlogs(data))
-  }, [user])
+      setLoading(false);
+  }, [user]);
 
   // console.log(blogs);
 
+  const handelDelete = id => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to recover this blog!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`https://asset-hexa-server.vercel.app/blogs/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.deletedCount > 0) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Your Blog has been Deleted!',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+
+                    const remaining = blogs.filter(blog => blog._id !== id);
+                    setBlogs(remaining);
+                }
+            });
+        } else if (result.isDismissed) {
+            Swal.fire({
+                title: 'Cancelled',
+                text: 'Your blog is safe!',
+                icon: 'error',
+                confirmButtonText: 'OK!',
+            });
+        }
+    });
+};
+
+
+  if (loading) return <Loader />;
 
 
 
@@ -71,6 +123,7 @@ const MyBlogsTable = () => {
                     blogs.map(blog => <TableRow
                       key={blog._id}
                       blog={blog}
+                      handelDelete={handelDelete}
                     >
 
 

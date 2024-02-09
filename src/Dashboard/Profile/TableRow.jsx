@@ -1,7 +1,16 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const TableRow = ({blog}) => {
-    // console.log(blog);
+const TableRow = ({blog , handelDelete}) => {
+
+
+    const {_id} = blog;
+    // console.log(_id);
+
+
+  
+
+
     return (
         <tr className="">
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -29,7 +38,7 @@ const TableRow = ({blog}) => {
             </td>
             
             <td className=''>
-                <Link to="/updateblogs">
+                <Link to={`/dashboard/updateblogs/${blog._id}`}>
                 <button className='  ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white btn btn-sm '>
                     Update
                 </button>
@@ -38,7 +47,7 @@ const TableRow = ({blog}) => {
             </td>
             <td className=''>
                 <div className=''>
-                    <button className=' ml-3   bg-gradient-to-r from-[#a42323] via-[#c1300b] to-[#a0260d] hover:border-none  border-none hover:bg-primaryColor  text-white btn btn-sm '>
+                    <button onClick={()=> handelDelete(_id)  } className=' ml-3   bg-gradient-to-r from-[#a42323] via-[#c1300b] to-[#a0260d] hover:border-none  border-none hover:bg-primaryColor  text-white btn btn-sm '>
                         Delete
                     </button>
                 </div>
