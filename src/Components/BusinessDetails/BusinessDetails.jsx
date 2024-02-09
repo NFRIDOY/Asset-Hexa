@@ -5,7 +5,7 @@ import useBusiness from "../../hooks/useBusiness";
 
 const BusinessDetails = () => {
     const { id } = useParams();
-    const { business, } = useBusiness(id);
+    const { business } = useBusiness(id);
 
     return (
         <div className="max-w-7xl mx-auto px-2">
@@ -27,14 +27,14 @@ const BusinessDetails = () => {
                         </div>
                     </div>
                     <div className="flex lg:pr-32 mt-5 ml-10 ">
-                         <button className="btn bg-[#4FD28C]  ">Investment</button>
+                        <button className="btn bg-[#4FD28C]  ">Investment</button>
                         <input className="shadow-xl outline-none input input-bordered input-primary" type="text " name="" id="" />
-                        
+
                     </div>
-                     
+
 
                 </div>
-                
+
             </div>
 
             <div className="mt-5">

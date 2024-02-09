@@ -1,8 +1,4 @@
 /* eslint-disable react/prop-types */
-<<<<<<< HEAD
-
-=======
->>>>>>> 86d5b5e9ad9ea35a33227709a995049549e32589
 import { Link } from "react-router-dom";
 
 
@@ -65,21 +61,11 @@ const BusinessCard = ({ business }) => {
           </div> */}
                     </div>
                 </div>
-<<<<<<< HEAD
+
             </Link>
         </div>
     );
 };
 
 export default BusinessCard;
-=======
-            </div>
 
-            {/* new card  */}
-            
-
-
-        </div >
-    )
-}
->>>>>>> 86d5b5e9ad9ea35a33227709a995049549e32589
