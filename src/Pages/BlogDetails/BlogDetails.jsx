@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import useBookmarked from "../../hooks/useBookmarked";
+import useAdmin from "../../hooks/useAdmin";
 import { MdVerified } from "react-icons/md";
 
 //http://localhost:5000\
@@ -209,6 +210,9 @@ const BlogDetails = () => {
       });
   };
 
+   const [isAdmin] = useAdmin()
+   console.log(isAdmin);
+
 
   const handleVerification = () => {
     axiosPublic.put(`/blog/${_id}`  )
@@ -298,9 +302,9 @@ const BlogDetails = () => {
           </h1>
           <p className="text-lg font-normal">{description || ""}</p>
 
-          <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
+          {isAdmin && <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
                 varify this blog
-              </button>
+              </button>}
         </div>
       </div>
       <div className="mt-20 max-w-7xl mx-auto">

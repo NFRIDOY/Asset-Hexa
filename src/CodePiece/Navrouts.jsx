@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import NavUl from "./NavUl";
+import useAdmin from "../hooks/useAdmin";
 
 const Navrouts = () => {
 	const { user, logOut } = useContext(AuthContext);
 
+	const [isAdmin] = useAdmin()
 	return (
 		<div className="w-full navbar ">
 			<div className="flex-none lg:hidden">
@@ -87,17 +89,21 @@ const Navrouts = () => {
 
 						<div className="">
 							<div className="flex gap-2 ">
+
+								{
+									isAdmin ?<Link to="/AdminDashboard/AdminOverview">
+									<button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
+										 Dashboard
+									</button>
+								</Link>		 	: <Link to="/dashboard/overView">
+										 <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
+											 Dashboard
+										 </button>
+									 </Link> 
+								}
 								
-								<Link to="/dashboard/overView">
-									<button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
-										Dashboard
-									</button>
-								</Link>
-								<Link to="/AdminDashboard/AdminOverview">
-									<button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
-										Admin Dashboard
-									</button>
-								</Link>
+								
+								
 								
 								
 								<button
