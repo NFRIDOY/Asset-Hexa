@@ -30,6 +30,7 @@ import BlogVerification from "../AdminDashboard/BlogVerification";
 import BusinessVerification from "../AdminDashboard/BusinessVerification";
 import UserVarification from "../AdminDashboard/UserVarification";
 import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
+import UpdateBlog from "../Pages/Blog/UpdateBlog";
 
 export const router = createBrowserRouter([
   {
