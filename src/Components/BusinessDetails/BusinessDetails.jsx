@@ -1,11 +1,32 @@
 
 import { useParams } from "react-router-dom";
 import useBusiness from "../../hooks/useBusiness";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
 
 
 const BusinessDetails = () => {
     const { id } = useParams();
     const { business } = useBusiness(id);
+    const axiosPublic = useAxios()
+
+    console.log(business);
+    
+    const handleVerification = () => {
+		axiosPublic.put(`/business/${id}`  )
+			.then(res => {
+				if(res?.data.modifiedCount >= 1 ){
+					toast.success("Business marked as verified");
+					
+				}
+				else{
+					toast.error("Business is already verified");
+					
+				}
+			})
+			.catch(err => console.log(err))
+	
+	  }
 
     return (
         <div className="max-w-7xl mx-auto px-2">
@@ -63,6 +84,10 @@ const BusinessDetails = () => {
                         {business?.CompanyDescription}
 
                     </p>
+
+                    <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
+                varify this blog
+              </button>
                 </div>
             </div>
 
