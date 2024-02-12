@@ -12,14 +12,14 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { IoMdBusiness } from "react-icons/io";
 const DashboardLayout = () => {
     return (
-        <div>
+        <div className="bg-base-200">
 
-<div className=" h-screen bg-base-300 ">
-      <div className="drawer lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-[calc(100vh-32px)]">
+<div className=" h-screen  bg-base-300 max-w-screen-2xl  mx-auto ">
+      <div className="drawer  lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col   ">
+        <div className="drawer-content   bg-base-300 flex flex-col   ">
           {/* Page content here */}
-          <div className="lg:ml-10  ">
+          <div className=" ">
             <Outlet ></Outlet>
           </div>
           <label
@@ -29,14 +29,14 @@ const DashboardLayout = () => {
             <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
           </label>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side    ">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
 
-          <div className="w-60 h-screen bg-white justify-center  flex flex-col ">
+          <div className="w-60 h-full g=  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
             <div>
               <div className="w-48  rounded-lg lg:mt-3">
                 <figure>
@@ -45,11 +45,11 @@ const DashboardLayout = () => {
                   </Link>
                 </figure>
               </div>
-              <ul className="menu text-lg  space-y-2 h-[380px]  rounded-lg mt-2">
+              <ul className="menu text-lg  space-y-2 text-white   rounded-lg mt-2">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/AdminDashboard/AdminOverview"
@@ -60,7 +60,7 @@ const DashboardLayout = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/AdminDashboard/BusinessVerification"
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/AdminDashboard/userVerification"
@@ -84,7 +84,7 @@ const DashboardLayout = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/AdminDashboard/BlogVerification"
@@ -97,7 +97,7 @@ const DashboardLayout = () => {
                 {/* <NavLink
 									className={({ isActive }) =>
 										isActive
-											? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+											? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
 											: "flex px-4 p-2 items-center mr-4 gap-3"
 									}
 									to="/dashboard/addBlog"
@@ -107,7 +107,7 @@ const DashboardLayout = () => {
               </ul>
             </div>
 
-            <div className="p-2  rounded-lg mt-4">
+            <div className="  rounded-lg ">
               <div className="mx-auto ">
                 <Lottie
                   className=" w-[150px] md:[w-150px] lg:w-[180px]"
