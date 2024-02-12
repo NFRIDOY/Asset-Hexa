@@ -12,7 +12,7 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { IoMdBusiness } from "react-icons/io";
 const DashboardLayout = () => {
     return (
-        <div>
+        <div className="bg-base-200">
 
 <div className=" h-screen  bg-base-300 max-w-screen-2xl  mx-auto ">
       <div className="drawer  lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-">
@@ -36,7 +36,7 @@ const DashboardLayout = () => {
             className="drawer-overlay"
           ></label>
 
-          <div className="w-60 h-full  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
+          <div className="w-60 h-full g=  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
             <div>
               <div className="w-48  rounded-lg lg:mt-3">
                 <figure>
@@ -45,7 +45,7 @@ const DashboardLayout = () => {
                   </Link>
                 </figure>
               </div>
-              <ul className="menu text-lg  space-y-2   rounded-lg mt-2">
+              <ul className="menu text-lg  space-y-2 text-white   rounded-lg mt-2">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
