@@ -16,10 +16,10 @@ export default function InvestmentTable() {
 
     const [investments, setInvestments] = useState([]);
 
-    console.log(`${user?.email}`)
+    // console.log(`${user?.email}`)
     useEffect(() => {
-        axiosPublic.get(`/bussiness?email=${user?.email}`)
-        // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
+        axiosPublic.get(`/investments?email=${user?.email}`)
+        // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 console.log(res.data)
