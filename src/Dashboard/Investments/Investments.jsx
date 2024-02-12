@@ -45,7 +45,7 @@ export default function Investments() {
             0
         );
         setTotal(totalAmount);
-    }, [axiosPublic, user,Balance, setTotal]);
+    }, [user, Balance, setTotal]);
 
     const data01 = [
         { name: "Investment", value: 1000 },
