@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
- 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const BusinessCard = ({business}) => {
+
+const BusinessCard = ({ business }) => {
+    console.log(business);
     return (
         <div>
             <Link to={`/businessDetails/${business?._id}`}>
@@ -51,3 +52,4 @@ const BusinessCard = ({business}) => {
 };
 
 export default BusinessCard;
+

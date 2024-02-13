@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
- 
+import axios from "axios";
 import Loader from "../../Route/loader";
 import BlogCard from "../../Components/BlogCard/BlogCard";
 
