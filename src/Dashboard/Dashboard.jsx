@@ -11,10 +11,10 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 const Dashboard = () => {
   return (
-    <div className=" h-screen bg-base-300">
+    <div className=" h-screen  bg-base-300 max-w-screen-2xl  mx-auto">
       <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col   ">
+        <div className="drawer-content   bg-base-300 flex flex-col     ">
           {/* Page content here */}
           <div className="lg:ml-10 ">
             <Outlet></Outlet>
@@ -33,7 +33,7 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <div className="w-52 h-screen bg-white justify-center  flex flex-col ">
+          <div className="w-60 h-full g=  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col">
             <div>
               <div className="  rounded-lg lg:mt-3">
                 <figure>
@@ -46,7 +46,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/overView"
@@ -57,7 +57,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/transection"
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/statistics"
@@ -81,7 +81,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/accounts"
@@ -93,7 +93,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/addBlog"
@@ -104,7 +104,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/investments"
@@ -115,7 +115,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/business"
@@ -126,7 +126,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/profile"
