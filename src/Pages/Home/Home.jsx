@@ -12,6 +12,7 @@ const Home = () => {
       <NewsLetter></NewsLetter>
       <WhyChooseUs></WhyChooseUs>
        
+    
     </div>
   );
 };

@@ -24,7 +24,7 @@ const BlogVerification = () => {
 
     return (
        <div className="bg-base-300 h-screen">
-			<div className="overflow-x-scroll">
+			<div className="overflow-x-scroll md:overflow-x-hidden">
 				<table className="table table-pin-rows table-lg text-center">
 					{/* head */}
 					<thead>
@@ -37,7 +37,7 @@ const BlogVerification = () => {
 					</thead>
 					<tbody>
 						{blogData?.map((item) => (
-							<tr key={item?.id} className="hover">
+							<tr key={item?.id} className={item?.isVerified ? "hidden" : "hover"}>
 								<th>{item?.title}</th>
 								<td>{item?.author}</td>
 								<td>{new Date(

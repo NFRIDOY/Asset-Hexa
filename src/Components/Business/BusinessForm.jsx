@@ -41,7 +41,7 @@ export default function BusinessForm() {
             userName: user?.displayName,
             photoURL: user?.photoURL,
             companyVarification: false,
-            investmentOwner: [],
+            investmentOwner: new Array(),
             totalInvestment: getTotalInvestment(),
         }
         console.log(newBusinessObj);
