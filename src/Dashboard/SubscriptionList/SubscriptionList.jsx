@@ -21,11 +21,7 @@ const SubscriptionList = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
+                            
                             <th>#</th>
                             <th>Image</th>
                             <th>Name</th>
@@ -38,9 +34,7 @@ const SubscriptionList = () => {
                     <tbody>
                         {payments.map((pay, i) => (
                             <tr key={pay._id}>
-                                <th>
-                                    <label></label>
-                                </th>
+                               
                                 <td>{i + 1}</td>
                                 <td>
                                     <div className="flex items-center gap-3">
