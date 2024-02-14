@@ -30,6 +30,8 @@ import BlogVerification from "../AdminDashboard/BlogVerification";
 import BusinessVerification from "../AdminDashboard/BusinessVerification";
 import UserVarification from "../AdminDashboard/UserVarification";
 import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
+import UpdateBlog from "../Pages/Blog/UpdateBlog";
+import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,7 @@ export const router = createBrowserRouter([
         path: "/Blogs",
         element: <Blog />,
       },
+      
       {
         path: "/blogDetails/:id",
         element: <BlogDetails />,
@@ -79,6 +82,7 @@ export const router = createBrowserRouter([
     path: "UpdateProfile",
     element: <UpdateProfile />,
   },
+  
   {
     path: "register",
     element: <Register />,
@@ -136,6 +140,13 @@ export const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+      
+      },
+
+      {
+        path: "updateblogs/:id",
+        element: <UpdateBlog/>,
+        
       },
       {
         path: "addBlog",
@@ -163,6 +174,10 @@ export const router = createBrowserRouter([
 				path: "userVerification",
 				element: <UserVarification></UserVarification>,
 			},
+      {
+        path:"subscriptionList",
+        element:<SubscriptionList></SubscriptionList>
+      }
 		],
 	},
 

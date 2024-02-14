@@ -4,16 +4,19 @@ import newsletter from '../../lottie/newsletter.json'
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import useAuth from './../../hooks/useAuth';
+import useSubscriptionList from "../../hooks/useSubscriptionList";
 
 
 const NewsLetter = () => {
 
     const axiosPublic = useAxios();
     const { user } = useAuth();
+    const [payments] = useSubscriptionList()
+    const mail = payments.find(pay => pay?.email == user?.email)
 
     const handleClick = e => {
         e.preventDefault()
-        const email = e.target.email.value;        
+        const email = e.target.email.value;
         const newsLetterSubscriptionObj = {
             userName: user?.displayName,
             email: email,
@@ -35,9 +38,6 @@ const NewsLetter = () => {
             .catch(() => {
                 console.log("Error On Subscribe");
             })
-
-
-
     }
 
     return (
@@ -83,14 +83,24 @@ const NewsLetter = () => {
                                         Free Subscribtion
                                     </button>
                                 </div>
-                                {/* <div>
-                                    <Link to='/newsPayment'><button
+                                {
+                                    mail ? <div>
+                                        <button
 
-                                        className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
-                                    >
-                                        Premium Subscrbtion
-                                    </button></Link>
-                                </div> */}
+                                            className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
+                                        >
+                                            Already Subscribed
+                                        </button>
+                                    </div> :
+                                        <div>
+                                            <Link to='/newsPayment'><button
+
+                                                className=" text-white font-[700] rounded-lg px-2 py-3 lg:py-4 lg:px-3 cursor-pointer transition-all duration-700 hover:scale-105  bg-gradient-to-r from-green-600 to-green-400 "
+                                            >
+                                                Premium Subscrbtion
+                                            </button></Link>
+                                        </div>
+                                }
                             </div>
                         </form>
 

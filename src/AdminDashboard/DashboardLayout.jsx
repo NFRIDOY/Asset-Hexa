@@ -93,6 +93,18 @@ const DashboardLayout = () => {
                   verify Blogs
                 </NavLink>
 
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/subscriptionList"
+                >
+                  <ImBlog />
+                  Subscription List
+                </NavLink>
+
                
                 {/* <NavLink
 									className={({ isActive }) =>
