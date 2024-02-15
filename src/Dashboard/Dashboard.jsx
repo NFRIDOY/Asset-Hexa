@@ -15,7 +15,7 @@ const Dashboard = () => {
       <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content   bg-base-300 flex flex-col     ">
-          {/* Page content here */}
+          {/* Page content  */}
           <div className="lg:ml-10 ">
             <Outlet></Outlet>
           </div>

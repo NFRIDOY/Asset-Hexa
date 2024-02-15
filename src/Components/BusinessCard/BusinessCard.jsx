@@ -6,8 +6,15 @@ const BusinessCard = ({ business }) => {
     console.log(business);
     return (
         <div>
+<<<<<<< HEAD
             <Link to={`/businessDetails/${business?._id}`}>
                 <div className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}>
+=======
+            <Link to={`/businessDetails/${business._id}`}>
+                <div
+                    className={`p-2 md:p-5 cursor-pointer border rounded-lg transition-all duration-500 hover:scale-105`}
+                >
+>>>>>>> 6f57195eaea1587553b06f9719d4d6716de24016
                     <div className="w-full space-y-4">
                         <div className="">
                             <img
@@ -34,13 +41,13 @@ const BusinessCard = ({ business }) => {
                             {/* <h1 className="font-bold text-xl lg:text-2xl text-left">
                                 
                             </h1> */}
-                            <p className="card-title text-success">
+                            {/* <p className="card-title text-success">
                                 Range: {business?.Minimum} BDT -  {business?.Maximum} BDT &gt;&gt; Profit {business?.Profit} % Per Mounth
-                            </p>
-                            <p className="text-left md:h-24">
+                            </p> */}
+                            {/* <p className="text-left md:h-24">
                                 {business?.CompanyDescription
                                     .slice(0, 150)}...
-                            </p>
+                            </p> */}
                         </div>
 
                     </div>
