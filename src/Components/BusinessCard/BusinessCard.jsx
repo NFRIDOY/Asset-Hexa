@@ -6,15 +6,10 @@ const BusinessCard = ({ business }) => {
     console.log(business);
     return (
         <div>
-<<<<<<< HEAD
-            <Link to={`/businessDetails/${business?._id}`}>
-                <div className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}>
-=======
             <Link to={`/businessDetails/${business._id}`}>
                 <div
                     className={`p-2 md:p-5 cursor-pointer border rounded-lg transition-all duration-500 hover:scale-105`}
                 >
->>>>>>> 6f57195eaea1587553b06f9719d4d6716de24016
                     <div className="w-full space-y-4">
                         <div className="">
                             <img

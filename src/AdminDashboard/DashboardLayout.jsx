@@ -93,10 +93,6 @@ const DashboardLayout = () => {
                     verify Blogs
                   </NavLink>
 
-<<<<<<< HEAD
-
-                  {/* <NavLink
-=======
                 <NavLink
                   className={({ isActive }) =>
                     isActive
@@ -111,7 +107,6 @@ const DashboardLayout = () => {
 
                
                 {/* <NavLink
->>>>>>> 6f57195eaea1587553b06f9719d4d6716de24016
 									className={({ isActive }) =>
 										isActive
 											? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
