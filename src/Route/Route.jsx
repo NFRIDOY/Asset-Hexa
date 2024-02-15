@@ -31,6 +31,7 @@ import BusinessVerification from "../AdminDashboard/BusinessVerification";
 import UserVarification from "../AdminDashboard/UserVarification";
 import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
 import UpdateBlog from "../Pages/Blog/UpdateBlog";
+import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 
 export const router = createBrowserRouter([
   {
@@ -173,6 +174,10 @@ export const router = createBrowserRouter([
 				path: "userVerification",
 				element: <UserVarification></UserVarification>,
 			},
+      {
+        path:"subscriptionList",
+        element:<SubscriptionList></SubscriptionList>
+      }
 		],
 	},
 
