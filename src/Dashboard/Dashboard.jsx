@@ -33,7 +33,7 @@ const Dashboard = () => {
             className="drawer-overlay"
           ></label>
 
-          <div className="w-60 h-full g=  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col">
+          <div className="w-60 h-full  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between text-white flex flex-col">
             <div>
               <div className="  rounded-lg lg:mt-3">
                 <figure>
@@ -46,7 +46,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/overView"
@@ -57,7 +57,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/transection"
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/statistics"
@@ -81,7 +81,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/accounts"
@@ -90,11 +90,10 @@ const Dashboard = () => {
                   Accounts
                 </NavLink>
 
-
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/addBlog"
@@ -105,7 +104,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/investments"
@@ -116,7 +115,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/business"
@@ -127,7 +126,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
+                      ? "text-[#23A455] flex px-4 gap-3 items-center bg-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/profile"
