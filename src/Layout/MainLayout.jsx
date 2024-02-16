@@ -15,6 +15,8 @@ const MainLayout = () => {
 	const {logOut , user} = useContext(AuthContext)
 	const axiosPublic = useAxios()
 	const [toastData , setToastData] = useState([])
+	
+	
 	const lastNOtification = toastData[0]
 
 	const Msg = ({ closeToast, toastProps }) => (
@@ -30,8 +32,9 @@ const MainLayout = () => {
 
 	useEffect(() => {
     
-		const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
-	
+		const socket = io("https://asset-hexa-server-notification.glitch.me/", {
+			transports: ["websocket"]});
+		
 		socket.on("connection" , () => {
 		  console.log("connected to Socet io");
 		  
@@ -57,7 +60,7 @@ const MainLayout = () => {
 		return () => {
 			socket.disconnect();
 		};
-	  }, [setToastData , lastNOtification])
+	  }, [toastData, lastNOtification])
 
 	  console.log("the toast data is " ,toastData);
 	
@@ -74,6 +77,7 @@ const MainLayout = () => {
 					
 
 						<Navrouts setToastData={setToastData}></Navrouts>
+						{/* <Navrouts ></Navrouts> */}
 						<Outlet></Outlet>
 						<Footer></Footer>
 						
