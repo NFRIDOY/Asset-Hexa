@@ -14,20 +14,14 @@ const DashboardLayout = () => {
   return (
     <div className="bg-base-200">
 
-      <div className=" h-screen  bg-base-300 max-w-screen-2xl  mx-auto ">
-        <div className="drawer  lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-">
-          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content   bg-base-300 flex flex-col   ">
-            {/* Page content here */}
-            <div className=" ">
-              <Outlet ></Outlet>
-            </div>
-            <label
-              htmlFor="my-drawer-2"
-              className="fixed bg-white  z-[999] top-0  justify-start flex  mx-auto  drawer-button lg:hidden"
-            >
-              <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
-            </label>
+
+<div className=" h-screen  bg-base-300 min-w-full  mx-auto ">
+      <div className="drawer  lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content   bg-base-300 flex flex-col   ">
+          {/* Page content here */}
+          <div className=" ">
+            <Outlet ></Outlet>
           </div>
           <div className="drawer-side    ">
             <label
