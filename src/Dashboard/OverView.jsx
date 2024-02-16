@@ -42,6 +42,7 @@ const OverView = () => {
 	});
 
 	const sortedTransactions = [...transectionData];
+	console.log(sortedTransactions);
 
 	// Sorting by date in descending order
 	sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));

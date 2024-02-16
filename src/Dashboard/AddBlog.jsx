@@ -4,6 +4,7 @@ import useAxios from "../hooks/useAxios";
 import lotiBlog from "../lottie/AnimationBlog.json";
 import Lottie from "lottie-react";
 import useAuth from "../api/useAuth";
+import { io } from "socket.io-client";
 
 const AddBlog = () => {
   const { user } = useAuth();
@@ -48,6 +49,11 @@ const AddBlog = () => {
     axiosPublic.post("/blogs", blogData).then((res) => {
       //   console.log(res.data);
       if (res.data.insertedId) {
+
+        console.log("connected to Socet io");
+        const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
+        socket.emit("new_blog_posted" , {message : `${user?.displayName} posted a blog : ${title}`})
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -58,6 +64,8 @@ const AddBlog = () => {
       }
     });
   };
+
+  
 
   return (
     // <div className=" bg-[#91F0AC]"> {/*  */}
@@ -123,6 +131,7 @@ const AddBlog = () => {
               <button className=" btn btn-primary w-32 text-white ">
                 Add post
               </button>
+             
             </div>
           </form>
         </div>
