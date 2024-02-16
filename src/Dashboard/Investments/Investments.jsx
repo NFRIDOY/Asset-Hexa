@@ -55,7 +55,7 @@ export default function Investments() {
                 setInvestments(res.data)
                 console.log(res.data)
             })
-        
+
         const totalInvestment = investments.reduce(
             (total, item) => total + parseInt(item.invest),
             0
@@ -73,7 +73,7 @@ export default function Investments() {
         // <div style={{ border: "2px solid red" }} className="h-[calc(100vh-32px)] p-5">
 
         <div className=" border-purple-600 bg-green-400">
-            <div className=" max-h-screen p-4 bg-base-300">
+            <div className="md:max-h-screen p-4 bg-base-300">
                 <div className="bg-white p-4 flex rounded-xl gap-3 overflow-x-auto min-h-40">
                     {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-56 ">
                             <h1 className="text-base font-medium">total Users</h1>
@@ -85,7 +85,7 @@ export default function Investments() {
                     </div>
                     <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
                         <h1 className="text-base font-medium">Total Investments</h1>
-                        <p className="text-3xl md:text-5xl font-semibold">00</p>
+                        <p className="text-3xl md:text-5xl font-semibold">{totalInvestments}</p>
                     </div>
                     <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
                         <h1 className="text-base font-medium">
@@ -103,7 +103,7 @@ export default function Investments() {
                         </div> */}
                 </div>
 
-                <div className="flex gap-5 mt-5   ">
+                <div className="flex gap-5 mt-5 flex-col md:flex-row  ">
                     <div className="bg-white  p-10">
                         <PieChart width={350} height={350}>
                             <Pie
@@ -130,7 +130,10 @@ export default function Investments() {
                     </div>
 
                     {/* <div className="bg-red-500 w-full p-6 px-10 flex gap-5 items-center justify-between"> */}
+                    <div className="w-full h-full">
                         <InvestmentTable />
+                    </div>
+
                     {/* </div> */}
                 </div>
             </div>
