@@ -1,4 +1,4 @@
-import Businesses from "../../Components/Businesses/Businesses";
+
 import WhyChooseUs from "../../Components/HelpDesk/WhyChooseUs";
 import NewsLetter from "../../Components/Home/NewsLetter";
 import Banner from "./Banner";
@@ -11,7 +11,8 @@ const Home = () => {
       <FeatureHome></FeatureHome>
       <NewsLetter></NewsLetter>
       <WhyChooseUs></WhyChooseUs>
-      {/* <Businesses></Businesses> */}
+       
+    
     </div>
   );
 };

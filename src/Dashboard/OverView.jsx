@@ -370,7 +370,7 @@ const OverView = () => {
 
 			<div className="group parentbutton  space-x-4 fixed  z-[999] bottom-16 right-20">
 				<button onTouchEnd={addClass} onClick={handleParent} className="group w-[50px] h-[50px] relative">
-					<span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
+					<span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 right-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
 						<svg
 							width={25}
 							viewBox="0 0 24 24"

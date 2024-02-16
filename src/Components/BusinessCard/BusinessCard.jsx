@@ -44,21 +44,7 @@ const BusinessCard = ({ business }) => {
                                     .slice(0, 150)}...
                             </p> */}
                         </div>
-                        {/* <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <button className="btn btn-sm" onClick={handleLike}>
-                <SlLike />
-              </button>
-              <p>{likes} </p>
-            </div>
-  
-            <div className="flex items-center gap-2">
-              <button className="btn btn-sm" onClick={handleDislike}>
-                <SlDislike />
-              </button>
-              <p>{dislikes}</p>
-            </div>
-          </div> */}
+
                     </div>
                 </div>
 

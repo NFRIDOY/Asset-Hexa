@@ -5,7 +5,7 @@ import BlogCard from "../../Components/BlogCard/BlogCard";
 import { useGetBlogsQuery } from "../../features/blogSlice";
 
 const Blog = () => {
-  const { data: blogs, isLoading } = useGetBlogsQuery();
+  const { data: blogs = [], isLoading } = useGetBlogsQuery();
   // console.log(blogs);
   // const [loading, setLoading] = useState(true);
   // const [Blogg, SetBlogs] = useState([]);
