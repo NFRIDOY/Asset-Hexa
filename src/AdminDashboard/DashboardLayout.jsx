@@ -12,7 +12,7 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { IoMdBusiness } from "react-icons/io";
 const DashboardLayout = () => {
   return (
-    <div className="bg-base-200">
+
 
 
 <div className=" h-screen  bg-base-300 min-w-full  mx-auto ">
