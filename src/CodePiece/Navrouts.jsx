@@ -29,7 +29,11 @@ const Navrouts = ({setToastData}) => {
 			return res.data;
 		},
 	});
-	setToastData(notifications)
+
+	if (notifications.length > 0) {
+		setToastData(notifications);
+	}
+	console.log(notifications);
 
 
 	return (
