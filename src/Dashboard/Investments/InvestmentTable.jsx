@@ -22,7 +22,7 @@ export default function InvestmentTable() {
             // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             })
         // .catch((error) => console.log(error))
     }, [])

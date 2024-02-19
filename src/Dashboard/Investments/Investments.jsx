@@ -28,7 +28,7 @@ export default function Investments() {
             return res.data;
         },
     });
-    console.log(adminState)
+    // console.log(adminState)
 
 
 
@@ -41,7 +41,7 @@ export default function Investments() {
     useEffect(() => {
         axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
             setAccountData(data?.data);
-            console.log(data.data);
+            // console.log(data.data);
         });
         const totalAmount = accountData.reduce(
             (total, item) => total + parseInt(item.amount),
@@ -53,7 +53,7 @@ export default function Investments() {
             // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             })
 
         const totalInvestment = investments.reduce(
