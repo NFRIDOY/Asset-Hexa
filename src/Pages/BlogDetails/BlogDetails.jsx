@@ -14,6 +14,7 @@ import {
   useGetBlogQuery,
   useGetBookmarkedQuery,
   useLikeBlogMutation,
+  useUnlikeOrUndislikeMutation,
   useUpdateVerificationMutation,
 } from "../../features/blogSlice";
 
@@ -33,6 +34,7 @@ const BlogDetails = () => {
   const { data: bookmarked = [] } = useGetBookmarkedQuery(user?.email);
   const [addToBookmark] = useAddToBookmarkMutation();
   const [updateVerification] = useUpdateVerificationMutation();
+  const [unlikeOrUndislike] = useUnlikeOrUndislikeMutation();
 
   useEffect(() => {
     const didLike = blog?.likes?.find(
@@ -87,11 +89,24 @@ const BlogDetails = () => {
       id: blog?._id,
       likeData,
     };
+    const queryDataL = {
+      id: blog?._id,
+      email: user?.email,
+      query: "like",
+    };
+    const queryDataD = {
+      id: blog?._id,
+      email: user?.email,
+      query: "dislike",
+    };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (isLiked) {
-      return console.log("already liked");
+    if (!isLiked && isDisliked) {
+      unlikeOrUndislike(queryDataD);
+      return likeBlog(data);
+    } else if (isLiked) {
+      return unlikeOrUndislike(queryDataL);
     } else {
-      likeBlog(data);
+      return likeBlog(data);
     }
   };
 
@@ -121,11 +136,24 @@ const BlogDetails = () => {
       dislikeData,
     };
 
+    const queryDataL = {
+      id: blog?._id,
+      email: user?.email,
+      query: "like",
+    };
+    const queryDataD = {
+      id: blog?._id,
+      email: user?.email,
+      query: "dislike",
+    };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (isDisliked) {
-      return console.log("already disliked");
+    if (!isDisliked && isLiked) {
+      unlikeOrUndislike(queryDataL);
+      return dislikeBlog(data);
+    } else if (isDisliked) {
+      return unlikeOrUndislike(queryDataD);
     } else {
-      dislikeBlog(data);
+      return dislikeBlog(data);
     }
   };
 

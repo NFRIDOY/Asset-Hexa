@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+//https://asset-hexa-server.vercel.app
+//http://localhost:5000
 export const blogApi = createApi({
   reducerPath: "blogApi",
   baseQuery: fetchBaseQuery({
@@ -67,6 +68,14 @@ export const blogApi = createApi({
       }),
       invalidatesTags: ["blogAPI"],
     }),
+    // Update Blog Like or dislike Data
+    unlikeOrUndislike: builder.mutation({
+      query: (data) => ({
+        url: `/blog/deleteLD/${data?.id}?email=${data?.email}&queryArray=${data?.query}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["blogAPI"],
+    }),
   }),
 });
 // invalidatesTags: ["BlogAPI"], for mutations {update,delete,create}
@@ -79,4 +88,5 @@ export const {
   useGetBookmarkedQuery,
   useAddToBookmarkMutation,
   useUpdateVerificationMutation,
+  useUnlikeOrUndislikeMutation,
 } = blogApi;
