@@ -15,7 +15,7 @@ const DashboardLayout = () => {
 
 
 
-<div className=" h-screen  bg-base-300 min-w-full  mx-auto ">
+    <div className=" h-screen  bg-base-300 min-w-full  mx-auto ">
       <div className="drawer  lg:drawer-open  mx-auto bg-white w-full rounded-2xl min-h-">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content   bg-base-300 flex flex-col   ">
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
                     to="/AdminDashboard/userVerification"
                   >
                     <FaUserAlt />
-                    verify User
+                    Verify User
                   </NavLink>
 
                   <NavLink
@@ -87,20 +87,20 @@ const DashboardLayout = () => {
                     verify Blogs
                   </NavLink>
 
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
-                      : "flex px-4 p-2 items-center mr-4 gap-3"
-                  }
-                  to="/AdminDashboard/subscriptionList"
-                >
-                  <ImBlog />
-                  Subscription List
-                </NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                        : "flex px-4 p-2 items-center mr-4 gap-3"
+                    }
+                    to="/AdminDashboard/subscriptionList"
+                  >
+                    <ImBlog />
+                    Subscription List
+                  </NavLink>
 
-               
-                {/* <NavLink
+
+                  {/* <NavLink
 									className={({ isActive }) =>
 										isActive
 											? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
