@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo/logo.png";
 import { Link, NavLink } from "react-router-dom";
 
@@ -10,15 +10,18 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hooks/useAxios";
 
-const Navrouts = ({setToastData}) => {
+const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification}) => {
 	const { user, logOut } = useContext(AuthContext);
 	const axiosPublic = useAxios()
+
 
 	const [isAdmin] = useAdmin();
 	console.log(user);
 
 	const handleNotification = () => {
+		setIsUnSeenNotification(0)
 		document.getElementById("my_modal_2").showModal();
+
 	};
 
 
@@ -34,6 +37,11 @@ const Navrouts = ({setToastData}) => {
 		setToastData(notifications);
 	}
 	console.log(notifications);
+
+
+
+
+	
 
 
 	return (
@@ -113,14 +121,16 @@ const Navrouts = ({setToastData}) => {
 						// </div>
 
 						<div className="">
-							<div className="flex gap-2 items-center ">
+							<div className="flex gap-2  items-center ">
 								<div
 									onClick={handleNotification}
 									className="indicator mr-4 cursor-pointer"
 								>
 									<IoNotificationsOutline className="text-4xl " />
+									<span className={isUnSeenNotification > 0 ? " " : "hidden"}>
 									<span className="badge badge-xl  badge-success text-white indicator-item">
-										+{notifications?.length}
+										+{isUnSeenNotification || 0}
+									</span>
 									</span>
 								</div>
 
@@ -161,7 +171,7 @@ const Navrouts = ({setToastData}) => {
 				{/* You can open the modal using document.getElementById('ID').showModal() method */}
 
 				<dialog id="my_modal_2" className="modal">
-					<div className="modal-box bg-green-400 px-4 pt-12 h-[700px]">
+					<div className="modal-box bg-green-400 px-4 pt-12 max-h-[95vh] ">
 						<form method="dialog">
 							{/* if there is a button in form, it will close the modal */}
 							<button className="btn bg-white btn-sm btn-circle btn-ghost absolute right-2 top-2">
