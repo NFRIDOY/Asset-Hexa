@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth"
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import formattedDate from "../../functions/formatDate"
+import { io } from "socket.io-client";
+
 
 export default function BusinessForm() {
     const { user } = useAuth()
@@ -41,7 +43,7 @@ export default function BusinessForm() {
             userName: user?.displayName,
             photoURL: user?.photoURL,
             companyVarification: false,
-            investmentOwner: [],
+            investmentOwner: new Array(),
             totalInvestment: getTotalInvestment(),
         }
         console.log(newBusinessObj);
@@ -58,6 +60,9 @@ export default function BusinessForm() {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    console.log("connected to Socet io");
+                    const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
+                    socket.emit("new_business_posted" , {message : `${user?.displayName} posted a business : ${"title"}`})
                 }
             })
 
@@ -153,6 +158,7 @@ export default function BusinessForm() {
                 </div>
             </form>
 
+            
         </div>
     )
 }

@@ -17,7 +17,7 @@ const Profile = () => {
         <img
           alt='profile'
           src={bg}
-          className='w-full mb-4 rounded-t-lg h-36'
+          className='w-full mb-4 rounded-t-lg md:h-52 lg:h-64'
         />
         <div className='flex flex-col items-center justify-center p-4 -mt-16'>
           <a href='#' className='relative block'>

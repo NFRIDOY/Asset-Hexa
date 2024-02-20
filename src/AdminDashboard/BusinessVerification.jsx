@@ -18,10 +18,12 @@ const BusinessVerification = () => {
 		});
 	}, [axiosPublic]);
 
+	
+
 	if (loading) return <Loader />;
 	return (
 		<div className="bg-base-300 h-screen ">
-			<div className=" overflow-scroll md:overflow-auto">
+			<div className=" overflow-scroll md:overflow-x-hidden">
 				<table className="table  table-pin-rows table-lg text-center">
 					{/* head */}
 					<thead>
@@ -35,12 +37,12 @@ const BusinessVerification = () => {
 					</thead>
 					<tbody>
 						{businessData.map((item) => (
-							<tr key={item?.id} className="hover">
+							<tr key={item?._id} className={item?.isVerified ? "hidden" : "hover"}>
 								<th>{item?.userName}</th>
 								<td>{item?.CompanyName}</td>
 								<td>{item?.Maximum} </td>
 								<td>{item?.Profit}%</td>
-								<td className="p-0"><Link to="/AdminDashboard/AdminOverview">
+								<td className="p-0"><Link to={`/businessDetails/${item?._id}`}>
 									<button className="btn  bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline rounded-none ">
 										View Business
 									</button>

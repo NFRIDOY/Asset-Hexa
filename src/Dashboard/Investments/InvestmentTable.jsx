@@ -16,62 +16,61 @@ export default function InvestmentTable() {
 
     const [investments, setInvestments] = useState([]);
 
-    console.log(`${user?.email}`)
+    // console.log(`${user?.email}`)
     useEffect(() => {
-        // axiosPublic.get(`/bussiness?email=${user?.email}`)
-        axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
+        axiosPublic.get(`/investments?email=${user?.email}`)
+            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             })
         // .catch((error) => console.log(error))
     }, [])
 
     return (
-        <div className="h-screen lg:mx-5 w-full">
+        // <div className="h-[calc(100vh-280px)] lg:mx-5 w-full">
+        // <div className="h-full lg:mx-5 w-full overflow-x-hidden ">
+        // <div className="bg-white w-full lg:max-h-[calc(100vh-280px)] flex gap-5 items-center overflow-auto">
+        <div className="bg-white w-full overflow-auto">
             {/* <h1>
                 investmentTable
             </h1> */}
-            <div className="overflow-x-auto">
-                <table className="table table-xs lg:table-lg">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>BrandName</th>
-                            <th>UserName</th>
-                            <th>Maximum Invesment</th>
-                            <th>profit</th>
-                            <th>view Business</th>
-                        </tr>
-                    </thead>
+            <table className="table table-xs lg:table-lg">
+                {/* head */}
+                <thead >
+                    <tr className="">
+                        <th></th>
+                        <th></th>
+                        <th>BrandName</th>
+                        <th>Invesment</th>
+                        {/* <th>profit</th>
+                        <th>view Business</th> */}
+                    </tr>
+                </thead>
+                <tbody className="">
                     {
-                        <tbody>
-                            {
-                                ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
-                            }
-                        </tbody>
-
+                        ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
                     }
-                </table>
-                {
-                    (investments.length === 0) ? <div
-                        className="flex flex-col justify-center items-center my-10">
-                        <div>
-                            <div className=" w-fit  col-span-12 text-center flex justify-center">
-                                <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
-                                    No Data
-                                </span>
-                            </div>
-                            <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
-                                <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
-                                    Invest Now
-                                </span>
-                            </Link>
+                </tbody>
+
+            </table>
+            {
+                (investments.length === 0) ? <div
+                    className="flex flex-col justify-center items-center my-10">
+                    <div>
+                        <div className=" w-fit  col-span-12 text-center flex justify-center">
+                            <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
+                                No Data
+                            </span>
                         </div>
-                    </div> : null
-                }
-            </div >
+                        <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
+                            <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
+                                Invest Now
+                            </span>
+                        </Link>
+                    </div>
+                </div> : null
+            }
         </div >
     )
 }
