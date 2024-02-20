@@ -19,7 +19,7 @@ const Accounts = () => {
   useEffect(() => {
     axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
       setBalance(data?.data);
-      console.log(data.data);
+      // console.log(data.data);
     });
     const totalAmount = Balance.reduce(
       (total, item) => total + parseInt(item.amount),

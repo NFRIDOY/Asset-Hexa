@@ -16,7 +16,7 @@ const BlogVerification = () => {
 		axiosPublic.get("/blogs").then((data) => {
 			setBlogData(data.data);
 			setLoading(false);
-			console.log(data.data);
+			// console.log(data.data);
 		});
 	}, [axiosPublic]);
 

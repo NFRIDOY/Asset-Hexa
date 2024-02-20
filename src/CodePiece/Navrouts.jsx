@@ -36,7 +36,7 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 	if (notifications.length > 0) {
 		setToastData(notifications);
 	}
-	console.log(notifications);
+	// console.log(notifications);
 
 
 
