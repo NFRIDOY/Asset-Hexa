@@ -22,11 +22,15 @@ export default function Businesses() {
   return (
     <div>
       {/* All Businesses*/}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
-        {businessData?.map((bus) => (
-          <BusinessCard key={bus?._id} business={bus} />
-        ))}
-      </div>
+      {
+        businessData.length !== 0 ? <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
+          {
+            businessData?.map((bus) => (
+              <BusinessCard key={bus?._id} business={bus} />
+            ))
+          }
+        </div> : <div className="text-center border-0 text-5xl font-bold my-10">No Data</div>
+      }
     </div>
   );
 }
