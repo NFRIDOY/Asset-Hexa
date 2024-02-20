@@ -1,25 +1,9 @@
-import { useEffect, useState } from "react";
-import useAxios from "../../hooks/useAxios";
 import Loader from "../../Route/loader";
 import BlogCard from "../../Components/BlogCard/BlogCard";
 import { useGetBlogsQuery } from "../../features/blogSlice";
 
 const Blog = () => {
-  const { data: blogs, isLoading } = useGetBlogsQuery();
-  // console.log(blogs);
-  // const [loading, setLoading] = useState(true);
-  // const [Blogg, SetBlogs] = useState([]);
-  // const axiosPublic = useAxios();
-  // useEffect(() => {
-  //   setLoading(true);
-  //   // axios.get("http://localhost:5000/blogs").then((data) => {
-  //   axiosPublic.get("/blogs").then((data) => {
-  //     SetBlogs(data.data);
-  //     setLoading(false);
-  //     // console.log(data.data);
-  //   });
-  // }, [axiosPublic]);
-  // console.log(Blogg);
+  const { data: blogs = [], isLoading } = useGetBlogsQuery();
 
   if (isLoading) return <Loader />;
 

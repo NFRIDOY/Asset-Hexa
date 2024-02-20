@@ -20,7 +20,7 @@ const AdminOverview = () => {
 			return res.data;
 		},
 	});
-	console.log(adminState);
+	// console.log(adminState);
 
 	const data01 = [
 		{

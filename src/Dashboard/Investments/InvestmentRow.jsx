@@ -1,12 +1,13 @@
 
 export default function InvestmentRow({investment, index}) {
-    const {email} = investment;
+    const {CompanyName, BrandImage, totalInvestment} = investment;
     return (
-        <tr>
+        <tr className="h-10">
             <th>{index}</th>
-            <td>{email}</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
+            <th><img src={BrandImage} alt="" className="h-10" /></th>
+            <td>{CompanyName}</td>
+            <td>{totalInvestment}</td>
+            {/* <td>Blue</td> */}
         </tr>
     )
 }

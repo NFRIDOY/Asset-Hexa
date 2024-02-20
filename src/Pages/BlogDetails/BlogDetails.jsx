@@ -2,15 +2,21 @@ import { useParams } from "react-router";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BookmarkButton from "../../Components/BookmarkButton";
 import useAuth from "../../api/useAuth";
-import useBlog from "../../hooks/useBlog";
 import { useEffect, useState } from "react";
 import CommentSection from "../../Components/CommentSection";
-import Swal from "sweetalert2";
-import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
-import useBookmarked from "../../hooks/useBookmarked";
 import useAdmin from "../../hooks/useAdmin";
 import { MdVerified } from "react-icons/md";
+import {
+  useAddToBookmarkMutation,
+  useCommentBlogMutation,
+  useDislikeBlogMutation,
+  useGetBlogQuery,
+  useGetBookmarkedQuery,
+  useLikeBlogMutation,
+  useUnlikeOrUndislikeMutation,
+  useUpdateVerificationMutation,
+} from "../../features/blogSlice";
 
 //http://localhost:5000\
 
@@ -19,32 +25,26 @@ const BlogDetails = () => {
   const [isDisliked, setIsDisliked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { id } = useParams();
-  const axiosPublic = useAxios();
   const { user } = useAuth();
-  const { blog, refetch } = useBlog(id);
-  const { bookmarked, refetch: bookmarkRefetch } = useBookmarked();
-
-  const {
-    _id,
-    title,
-    author,
-    authorImage,
-    description,
-    image,
-    likes,
-    dislikes,
-    comments,
-    time,
-    isVerified,
-  } = blog;
+  const [isAdmin] = useAdmin();
+  const { data: blog = {} } = useGetBlogQuery(id);
+  const [likeBlog] = useLikeBlogMutation();
+  const [dislikeBlog] = useDislikeBlogMutation();
+  const [commentBlog] = useCommentBlogMutation();
+  const { data: bookmarked = [] } = useGetBookmarkedQuery(user?.email);
+  const [addToBookmark] = useAddToBookmarkMutation();
+  const [updateVerification] = useUpdateVerificationMutation();
+  const [unlikeOrUndislike] = useUnlikeOrUndislikeMutation();
 
   useEffect(() => {
-    const didLike = likes?.find((like) => like.personEmail === user?.email);
-    const didDisliked = dislikes?.find(
+    const didLike = blog?.likes?.find(
+      (like) => like.personEmail === user?.email
+    );
+    const didDisliked = blog?.dislikes?.find(
       (dislike) => dislike.personEmail === user?.email
     );
     const didBookmarked = bookmarked?.find(
-      (bookmked) => bookmked.blogID === _id
+      (bookmked) => bookmked.blogID === blog?._id
     );
 
     if (didLike) {
@@ -62,7 +62,7 @@ const BlogDetails = () => {
     } else {
       setIsBookmarked(false);
     }
-  }, [likes, user?.email, dislikes, bookmarked, _id]);
+  }, [blog?.likes, user?.email, blog?.dislikes, bookmarked, blog?._id]);
 
   // Event Handler for Like Functionality
   const handleLike = () => {
@@ -79,26 +79,38 @@ const BlogDetails = () => {
     const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
       mongoDate
     );
-    const data = {
+    const likeData = {
       personEmail: user?.email,
       personName: user?.displayName,
       likedDate: formattedDate,
     };
 
+    const data = {
+      id: blog?._id,
+      likeData,
+    };
+    const queryDataL = {
+      id: blog?._id,
+      email: user?.email,
+      query: "like",
+    };
+    const queryDataD = {
+      id: blog?._id,
+      email: user?.email,
+      query: "dislike",
+    };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (isLiked) {
-      return console.log("already liked");
+    if (!isLiked && isDisliked) {
+      unlikeOrUndislike(queryDataD);
+      return likeBlog(data);
+    } else if (isLiked) {
+      return unlikeOrUndislike(queryDataL);
     } else {
-      axiosPublic
-        .patch(`/blogs/${_id}?likeORdislike=like`, data)
-        .then((res) => {
-          refetch();
-          console.log(res.data);
-        });
+      return likeBlog(data);
     }
   };
 
-  // Event Handler for Disl;ike Functionality
+  // Event Handler for Dislike Functionality
   const handleDislike = () => {
     const mongoDate = new Date();
     // Customize the date format
@@ -113,22 +125,35 @@ const BlogDetails = () => {
     const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
       mongoDate
     );
-    const data = {
+    const dislikeData = {
       personEmail: user?.email,
       personName: user?.displayName,
       likedDate: formattedDate,
     };
 
+    const data = {
+      id: blog?._id,
+      dislikeData,
+    };
+
+    const queryDataL = {
+      id: blog?._id,
+      email: user?.email,
+      query: "like",
+    };
+    const queryDataD = {
+      id: blog?._id,
+      email: user?.email,
+      query: "dislike",
+    };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (isDisliked) {
-      return console.log("already disliked");
+    if (!isDisliked && isLiked) {
+      unlikeOrUndislike(queryDataL);
+      return dislikeBlog(data);
+    } else if (isDisliked) {
+      return unlikeOrUndislike(queryDataD);
     } else {
-      axiosPublic
-        .patch(`/blogs/${_id}?likeORdislike=dislike`, data)
-        .then((res) => {
-          refetch();
-          console.log(res.data);
-        });
+      return dislikeBlog(data);
     }
   };
 
@@ -148,26 +173,18 @@ const BlogDetails = () => {
       mongoDate
     );
     const bookmarkedBlogData = {
-      blogID: _id,
-      blogTitle: title,
-      author,
+      blogID: blog?._id,
+      blogTitle: blog?.title,
+      author: blog?.author,
       user: user?.email,
       date: formattedDate,
     };
 
-    // console.log(bookmarkedBlogData);
-    axiosPublic
-      .post("/bookmark", bookmarkedBlogData)
-      .then((res) => {
-        if (res.data?.insertedId) {
-          // console.log(res.data);
-          bookmarkRefetch();
-          toast.success("Added to bookmark!");
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+    addToBookmark(bookmarkedBlogData).then((res) => {
+      if (res.data?.insertedId) {
+        toast.success("Added to bookmark!");
+      }
+    });
   };
 
   // Event Handler for Comment Functionality
@@ -187,49 +204,32 @@ const BlogDetails = () => {
     const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
       mongoDate
     );
-    const data = {
+    const commentData = {
       text,
       commenter: user?.displayName,
       commenterEmail: user?.email,
       time: formattedDate,
     };
-    axiosPublic
-      .patch(`/blogs/${_id}?likeORdislike=comment`, data)
-      .then((res) => {
-        if (res.data?.modifiedCount) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your comment has been posted!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          refetch();
-          e.target.reset();
-        }
-      });
+    const data = {
+      id: blog?._id,
+      commentData,
+    };
+
+    commentBlog(data).then(() => {
+      e.target.reset();
+    });
   };
 
-   const [isAdmin] = useAdmin()
-   console.log(isAdmin);
-
-
   const handleVerification = () => {
-    axiosPublic.put(`/blog/${_id}`  )
-		.then(res => {
-			if(res?.data.modifiedCount >= 1 ){
-				toast.success("Blog marked as verified");
-				document.getElementById(email).setAttribute("hidden", "true");
-				
-			}
-			else{
-				toast.error("Blog is already verified");
-				
-			}
-		})
-		.catch(err => console.log(err))
-
-  }
+    updateVerification(blog?._id)
+      .then((res) => {
+        if (res?.data?.modifiedCount >= 1) {
+          toast.success(`${blog?.title} has been verified`);
+          // document.getElementById("#email").setAttribute("hidden", "true");
+        }
+      })
+      .catch((err) => toast.error(err.message));
+  };
   return (
     <div className="min-h-screen">
       <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">
@@ -238,18 +238,20 @@ const BlogDetails = () => {
             <img
               className="w-12 h-12 rounded-full cursor-pointer"
               src={
-                authorImage ||
+                blog?.authorImage ||
                 "https://i.ibb.co/5L7LVhK/ba927ff34cd961ce2c184d47e8ead9f6.jpg"
               }
-              alt={`image of ${author}`}
+              alt={`image of ${blog?.author}`}
             />
             <h3 className="font-bold md:text-2xl text-emerald-600 underline underline-offset-2">
-              {author}
+              {blog?.author}
             </h3>
             <p className="text-2xl font-semibold hidden md:block">/</p>
-            <p>{time}</p>
+            <p>{blog?.time}</p>
             <p className="text-2xl font-semibold hidden md:block">/</p>
-            <p className="md:text-lg">Comments: {comments?.length || 0}</p>
+            <p className="md:text-lg">
+              Comments: {blog?.comments?.length || 0}
+            </p>
           </div>
           <div onClick={handleAddtoBookmark}>
             <BookmarkButton isBookmarked={isBookmarked} />
@@ -258,8 +260,8 @@ const BlogDetails = () => {
         <div>
           <img
             className="h-[600px] w-full mb-5"
-            src={image}
-            alt={`image of ${title} blog`}
+            src={blog?.image}
+            alt={`image of ${blog?.title} blog`}
           />
 
           <div className="flex justify-center items-center gap-16">
@@ -274,7 +276,7 @@ const BlogDetails = () => {
               >
                 <SlLike />
               </button>
-              <p>{likes?.length || 0} </p>
+              <p>{blog?.likes?.length || 0} </p>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -287,29 +289,36 @@ const BlogDetails = () => {
               >
                 <SlDislike />
               </button>
-              <p>{dislikes?.length || 0}</p>
+              <p>{blog?.dislikes?.length || 0}</p>
             </div>
           </div>
         </div>
         <div>
           <h1 className="text-3xl md:text-5xl font-bold mb-6 break-words flex items-center lg:items-end">
-            {title || ""}{" "}
+            {blog?.title || ""}{" "}
             <span>
-              {isVerified && (
+              {blog?.isVerified ? (
                 <MdVerified className="ml-2 text-4xl text-blue-500" />
+              ) : (
+                <div>
+                  {isAdmin && (
+                    <button
+                      onClick={handleVerification}
+                      className="btn btn-sm ml-2 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md"
+                    >
+                      Verify?
+                    </button>
+                  )}
+                </div>
               )}
             </span>
           </h1>
-          <p className="text-lg font-normal">{description || ""}</p>
-
-          {isAdmin && <button onClick={handleVerification} className="btn mt-4 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 rounded-md">
-                varify this blog
-              </button>}
+          <p className="text-lg font-normal">{blog?.description || ""}</p>
         </div>
       </div>
       <div className="mt-20 max-w-7xl mx-auto">
         <CommentSection
-          comments={comments}
+          comments={blog?.comments}
           handlePostComment={handlePostComment}
         />
       </div>

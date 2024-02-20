@@ -28,27 +28,43 @@ export default function Investments() {
             return res.data;
         },
     });
-    console.log(adminState)
+    // console.log(adminState)
 
 
 
-    const [total, setTotal] = useState();
+    const [total, setTotal] = useState(0);
 
-    const [Balance, setBalance] = useState([]);
+    const [accountData, setAccountData] = useState([]);
+    const [investments, setInvestments] = useState([]);
+    const [totalInvestments, setTotalInvestments] = useState([]);
+
     useEffect(() => {
         axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
-            setBalance(data?.data);
-            console.log(data.data);
+            setAccountData(data?.data);
+            // console.log(data.data);
         });
-        const totalAmount = Balance.reduce(
+        const totalAmount = accountData.reduce(
             (total, item) => total + parseInt(item.amount),
             0
         );
         setTotal(totalAmount);
-    }, [user, Balance, setTotal]);
+
+        axiosPublic.get(`/investments?email=${user?.email}`)
+            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+            .then((res) => {
+                setInvestments(res.data)
+                // console.log(res.data)
+            })
+
+        const totalInvestment = investments.reduce(
+            (total, item) => total + parseInt(item.invest),
+            0
+        );
+        setTotalInvestments(totalInvestment);
+    }, [user, accountData, setTotal]);
 
     const data01 = [
-        { name: "Investment", value: 1000 },
+        { name: "Investment", value: totalInvestments },
         { name: "Total Asset", value: total },
     ];
 
@@ -56,88 +72,73 @@ export default function Investments() {
     return (
         // <div style={{ border: "2px solid red" }} className="h-[calc(100vh-32px)] p-5">
 
-        <div>
-            <div>
-                <div className="p-4 bg-base-300">
-                    <div className="bg-white p-4 flex rounded-xl gap-3 overflow-x-auto min-h-40">
-                        {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-56 ">
+        <div className=" border-purple-600 bg-green-400">
+            <div className="md:max-h-screen p-4 bg-base-300">
+                <div className="bg-white p-4 flex rounded-xl gap-3 overflow-x-auto min-h-40">
+                    {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-56 ">
                             <h1 className="text-base font-medium">total Users</h1>
                             <p className="text-3xl md:text-5xl font-semibold">00</p>
                         </div> */}
-                        <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
-                            <h1 className="text-base font-medium">Total Asset</h1>
-                            <p className="text-3xl md:text-5xl font-semibold">{total}</p>
-                        </div>
-                        <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
-                            <h1 className="text-base font-medium">Total Investments</h1>
-                            <p className="text-3xl md:text-5xl font-semibold">00</p>
-                        </div>
-                        <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
-                            <h1 className="text-base font-medium">
-                                {" "}
-                                Business posted{" "}
-                            </h1>
-                            <p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
-                        </div>
-                        {/* <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-purple-700 to-purple-400  px-8 min-w-48 md:min-w-56 ">
+                    <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
+                        <h1 className="text-base font-medium">Total Asset</h1>
+                        <p className="text-3xl md:text-5xl font-semibold">{total}</p>
+                    </div>
+                    <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
+                        <h1 className="text-base font-medium">Total Investments</h1>
+                        <p className="text-3xl md:text-5xl font-semibold">{totalInvestments}</p>
+                    </div>
+                    <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
+                        <h1 className="text-base font-medium">
+                            {" "}
+                            Business posted{" "}
+                        </h1>
+                        <p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
+                    </div>
+                    {/* <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-purple-700 to-purple-400  px-8 min-w-48 md:min-w-56 ">
                             <h1 className="text-base font-medium">
                                 {" "}
                                 Newslater subscitption
                             </h1>
                             <p className="text-3xl md:text-5xl font-semibold">00</p>
                         </div> */}
+                </div>
+
+                <div className="flex gap-5 mt-5 flex-col md:flex-row  ">
+                    <div className="bg-white  p-10">
+                        <PieChart width={350} height={350}>
+                            <Pie
+                                dataKey="value"
+                                isAnimationActive={false}
+                                data={data01}
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={140}
+                                fill="#8884d8"
+                                label
+                            >
+                                {data01?.map((entry, index) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={COLORS[index % COLORS.length]}
+                                    />
+                                ))}
+                            </Pie>
+
+                            <Tooltip />
+                            <Legend />
+                        </PieChart>{" "}
                     </div>
 
-                    <div className="flex gap-5 mt-5   ">
-                        <div className="bg-white  p-10">
-                            <PieChart width={350} height={350}>
-                                <Pie
-                                    dataKey="value"
-                                    isAnimationActive={false}
-                                    data={data01}
-                                    cx="50%"
-                                    cy="50%"
-                                    outerRadius={140}
-                                    fill="#8884d8"
-                                    label
-                                >
-                                    {data01?.map((entry, index) => (
-                                        <Cell
-                                            key={`cell-${index}`}
-                                            fill={COLORS[index % COLORS.length]}
-                                        />
-                                    ))}
-                                </Pie>
-
-                                <Tooltip />
-                                <Legend />
-                            </PieChart>{" "}
-                        </div>
-
-                        <div className="bg-white w-full p-6 px-10 flex gap-5 items-center justify-between">
-                            <InvestmentTable />
-                        </div>
+                    {/* <div className="bg-red-500 w-full p-6 px-10 flex gap-5 items-center justify-between"> */}
+                    <div className="w-full h-full">
+                        <InvestmentTable />
                     </div>
+
+                    {/* </div> */}
                 </div>
             </div>
-            {/* <div className="lg:max-h-screen p-5 border-2"> */}
-            {/* <div>
 
-                <h1 className="text-center text-4xl font-bold">Investments</h1>
-                <section className="flex">
-                    <div>
-                        <div className=" border-2 h-60 w-60"> Pi Chart </div>
-                        <div className="flex justify-center items-center my-8">
-                            <Link to={"/dashboard/business"} className="btn bg-[#00EC25] hover:bg-[#7dbb86]">
-                                Manage Your Business
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="table investment">
 
-                    </div>
-                </section>
-            </div> */}
         </div>
     )
 }
