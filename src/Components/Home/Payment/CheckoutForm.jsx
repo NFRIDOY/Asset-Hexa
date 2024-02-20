@@ -18,8 +18,8 @@ const CheckoutForm = () => {
     // const price = 200;
 
     useEffect(() => {
-        axiosPublic.post('http://localhost:5000/create-payment-intent', { price: price })
-        // axiosPublic.post('/create-payment-intent', { price: price })
+        // axiosPublic.post('http://localhost:5000/create-payment-intent', { price: price })
+        axiosPublic.post('/create-payment-intent', { price: price })
             .then(res => {
                 console.log(res.data.clientSecret)
                 setClientSecret(res.data.clientSecret)
@@ -85,7 +85,8 @@ const CheckoutForm = () => {
                     date: new Date(),  //utc date convert. use moment js to convert
                     // status: 'pending'
                 }
-                axiosPublic.post('http://localhost:5000/payments', payment)
+                // axiosPublic.post('http://localhost:5000/payments', payment)
+                axiosPublic.post('/payments', payment)
                 // axiosPublic.post('/payments', payment)
                     .then(res => {
                         console.log('payment saved', res.data)
