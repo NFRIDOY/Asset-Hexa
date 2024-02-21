@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import axios from "axios";
 
 
 
@@ -13,7 +14,9 @@ const AccountUpdate = () => {
     console.log(id);
     useEffect(() => {
         // Fetching account data based on the user's email
-        axiosPublic.get(`/accounts/${id}`).then((data) => {
+        axiosPublic.get(`/accounts/${id}`)
+        // axios.get(`http://localhost:5000/accounts/${id}`)
+        .then((data) => {
             setUpdate(data?.data);
             console.log(data.data);
         });
