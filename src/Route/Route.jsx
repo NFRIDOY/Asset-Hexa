@@ -33,6 +33,7 @@ import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
 import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
+import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,11 @@ export const router = createBrowserRouter([
         path: "accounts",
         element: <Accounts></Accounts>,
       },
+      {
+        path: "accountUpdate/:id",
+        element: <AccountUpdate></AccountUpdate>,
+      },
+
       {
         path: "addBalance",
         element: <AddBalance></AddBalance>,

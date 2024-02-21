@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
