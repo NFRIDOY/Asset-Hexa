@@ -14,7 +14,7 @@ const BusinessDetails = () => {
   const axiosPublic = useAxios();
   const { user } = useAuth();
   const [totalInvestments, setTotalInvestment] = useState(
-    business?.totalInvestment
+    business?.totalInvestment || 0
   );
 
   console.log(business);
@@ -128,7 +128,7 @@ const BusinessDetails = () => {
             <p className="card-title text-success">
               {business?.Minimum} BDT - {business?.Maximum} BDT
             </p>
-            <p>Profit {business?.Profit} % Per Mounth</p>
+            <p>Profit {business?.Profit} % Per Month</p>
           </div>
         </div>
         <div className="mt-10 pr-3 pl-3 text-justify">
