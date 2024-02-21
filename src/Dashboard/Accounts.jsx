@@ -10,16 +10,18 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
 
+
 const Accounts = () => {
   const axiosPublic = useAxios();
   const { user } = useContext(AuthContext);
   const [total, setTotal] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [Balance, setBalance] = useState([]);
   useEffect(() => {
     axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
       setBalance(data?.data);
-      console.log(data.data);
+      // console.log(data.data);
     });
     const totalAmount = Balance.reduce(
       (total, item) => total + parseInt(item.amount),
@@ -28,13 +30,17 @@ const Accounts = () => {
     setTotal(totalAmount);
   }, [axiosPublic, user, Balance, setTotal]);
 
+  // delete section 
+
+  
+
+
+
   return (
     <div>
-      <div className="pt-20">
+      <div className="">
         <div className="border-t-2 border-b-2 h-16 flex justify-between pt-4 pl-4 pr-4 mb-2 ">
-          <div>
-            <h1 className=" text-black font-bold"> Accounts</h1>
-          </div>
+         
 
           <div className="flex justify-end gap-10 ">
             <div>
@@ -49,18 +55,18 @@ const Accounts = () => {
           <div></div>
           {/* Total  */}
           <div className="flex items-center justify-end gap-2">
-            <h2 className="  text-black font-bold">Total</h2>
-            <p className="text-[#E44544] ">$ {parseFloat(total)}</p>
+            <h2 className="  text-black font-bold text-2xl">Total</h2>
+            <p className="text-[#E44544] text-2xl ">$ {parseFloat(total)}</p>
           </div>
         </div>
         <div className="grid grid-cols-3 bg-[#F7F7FA] rounded h-10 border-t-2">
-          <p className="mt-2 ml-5 text-black font-bold">Account</p>
-          <p className="mt-2 flex justify-center text-black font-bold">Group</p>
-          <p className="mt-2 mr-5 flex justify-end text-black font-bold">Amount</p>
+          <p className="  ml-5 text-black font-bold text-2xl ">Account</p>
+          <p className="  flex justify-center text-black font-bold text-2xl">Group</p>
+          <p className=" mr-5 flex justify-end text-black font-bold text-2xl">Amount</p>
         </div>
         <div className="grid grid-cols-1">
           {Balance.map((Balances) => (
-            <AccountCard key={Balances._id} Balances={Balances}></AccountCard>
+            <AccountCard setBalance={setBalance} Balance={Balance} key={Balances._id} Balances={Balances} isOpen={isOpen} setIsOpen={setIsOpen}> </AccountCard>
           ))}
         </div>
         <div className="bg-[#F7F7FA]  h-36">
