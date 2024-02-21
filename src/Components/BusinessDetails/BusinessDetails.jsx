@@ -74,9 +74,8 @@ const BusinessDetails = () => {
       invest: invest,
     };
 
-    axiosPublic
-      .put(`/businessInvest/${id}`, InvestmentObj)
-      // axios.put(`http://localhost:5000/businessInvest/${id}`, InvestmentObj)
+    // axios.put(`http://localhost:5000/businessInvest/${id}`, InvestmentObj)
+    axiosPublic.put(`/businessInvest/${id}`, InvestmentObj)
       .then((res) => {
         // console.log(res.data);
         // refetch();
