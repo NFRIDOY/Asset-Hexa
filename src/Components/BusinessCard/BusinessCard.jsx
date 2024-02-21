@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 const BusinessCard = ({ business }) => {
-    console.log(business);
+    // console.log(business);
     return (
         <div>
             <Link to={`/businessDetails/${business._id}`}>
