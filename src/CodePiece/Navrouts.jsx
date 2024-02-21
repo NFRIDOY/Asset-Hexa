@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo/logo.png";
 import { Link, NavLink } from "react-router-dom";
 
@@ -16,13 +16,25 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 
 
 	const [isAdmin] = useAdmin();
-	console.log(user);
+	// console.log(user);
 
 	const handleNotification = () => {
 		setIsUnSeenNotification(0)
 		document.getElementById("my_modal_2").showModal();
+		
+		const obj = {
+			unseenNotification : 0
+		}
+
+		axiosPublic.put(`/notificationsCount/${user?.email}` , obj)
+		.then(res => {
+			// console.log(res.data);
+		})
+
+		// console.log(isUnSeenNotification);
 
 	};
+	
 
 
 	const { data: notifications = [] } = useQuery({
@@ -33,10 +45,18 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 		},
 	});
 
+
+	useEffect( () => {
+		axiosPublic.get(`/notificationsCount/${user?.email}` )
+		.then(res => {
+			setIsUnSeenNotification(res.data?.unseenNotification);
+		})
+	},[user])
+
 	if (notifications.length > 0) {
 		setToastData(notifications);
 	}
-	console.log(notifications);
+	// console.log(notifications);
 
 
 
@@ -45,7 +65,10 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 
 
 	return (
+
+		
 		<div className="w-full navbar ">
+
 			<div className="flex-none lg:hidden">
 				<label
 					htmlFor="my-drawer-3"

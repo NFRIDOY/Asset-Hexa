@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hooks/useAxios";
+import app from "../utility/Firebase/firebase.config";
 
 const MainLayout = () => {
 	const { logOut, user } = useContext(AuthContext);
@@ -18,17 +19,16 @@ const MainLayout = () => {
 
 	const lastNOtification = toastData[0];
 
-	const Msg = ({ closeToast, toastProps }) => (
+	const Msg = ({ closeToast, toastProps, notification }) => (
 		<div className="bg-green-400 text-white  flex gap-4 p-4 mb-2">
 			<img
-				src={lastNOtification?.photoURL}
+				src={notification?.image} 
 				className="w-10 h-10 rounded-full"
 				alt=""
 			/>
 			<div>
 				<h1>
-					{lastNOtification?.userName} posted a{" "}
-					{lastNOtification?.type}
+					{notification?.userName} {notification?.message} 
 				</h1>
 			</div>
 		</div>
@@ -44,16 +44,36 @@ const MainLayout = () => {
 		});
 
 		socket.on("new_blog_posted", (data) => {
-			console.log("new blog posted ", data.message);
+			console.log("new blog posted ", data);
 			setIsUnSeenNotification(isUnSeenNotification + 1);
 
-			toast(<Msg />);
+			
+			setTimeout(function () {
+				toast(<Msg notification={data} />);
+			}, 3000);
+			
+
+			const obj = {
+				unseenNotification: isUnSeenNotification + 1,
+			};
+
+			axiosPublic.put(`/notificationsCount/${user?.email}`, obj);
+
+			// console.log(isUnSeenNotification);
 		});
 		socket.on("new_business_posted", (data) => {
-			console.log("new business posted ", data.message);
+			console.log("new business posted ", data);
 			setIsUnSeenNotification(isUnSeenNotification + 1);
 
-			toast(<Msg />);
+			setTimeout(function () {
+				toast(<Msg notification={data} />);
+			}, 3000);
+
+			const obj = {
+				unseenNotification: isUnSeenNotification + 1,
+			};
+
+			axiosPublic.put(`/notificationsCount/${user?.email}`, obj);
 		});
 
 		return () => {
@@ -61,9 +81,6 @@ const MainLayout = () => {
 		};
 	}, [toastData, lastNOtification]);
 
-	console.log("the toast data is ", toastData);
-
-	
 	return (
 		<div>
 			<div className="min-h-[calc(100vh-56px-256px)]">
@@ -74,8 +91,6 @@ const MainLayout = () => {
 						className="drawer-toggle"
 					/>
 					<div className="drawer-content flex flex-col">
-						
-
 						<Navrouts
 							setToastData={setToastData}
 							setIsUnSeenNotification={setIsUnSeenNotification}
