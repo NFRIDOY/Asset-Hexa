@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const MyBlogsTable = () => {
 
-  const { user } = useContext(AuthContext);
+  const { user  } = useContext(AuthContext);
   // console.log(user);
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
