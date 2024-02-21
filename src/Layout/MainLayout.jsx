@@ -17,7 +17,6 @@ const MainLayout = () => {
 	const [toastData, setToastData] = useState([]);
 	const [isUnSeenNotification, setIsUnSeenNotification] = useState(0);
 
-	const lastNOtification = toastData[0];
 
 	const Msg = ({ closeToast, toastProps, notification }) => (
 		<div className="bg-green-400 text-white  flex gap-4 p-4 mb-2">
@@ -25,7 +24,8 @@ const MainLayout = () => {
 				src={notification?.image} 
 				className="w-10 h-10 rounded-full"
 				alt=""
-			/>
+			/>.
+			
 			<div>
 				<h1>
 					{notification?.userName} {notification?.message} 
@@ -59,7 +59,6 @@ const MainLayout = () => {
 
 			axiosPublic.put(`/notificationsCount/${user?.email}`, obj);
 
-			// console.log(isUnSeenNotification);
 		});
 		socket.on("new_business_posted", (data) => {
 			console.log("new business posted ", data);
@@ -79,7 +78,7 @@ const MainLayout = () => {
 		return () => {
 			socket.disconnect();
 		};
-	}, [toastData, lastNOtification]);
+	}, [toastData]);
 
 	return (
 		<div>

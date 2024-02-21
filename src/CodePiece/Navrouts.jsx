@@ -16,7 +16,6 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 
 
 	const [isAdmin] = useAdmin();
-	// console.log(user);
 
 	const handleNotification = () => {
 		setIsUnSeenNotification(0)
@@ -27,11 +26,7 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 		}
 
 		axiosPublic.put(`/notificationsCount/${user?.email}` , obj)
-		.then(res => {
-			// console.log(res.data);
-		})
-
-		// console.log(isUnSeenNotification);
+		
 
 	};
 	
@@ -56,13 +51,6 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 	if (notifications.length > 0) {
 		setToastData(notifications);
 	}
-	// console.log(notifications);
-
-
-
-
-	
-
 
 	return (
 
