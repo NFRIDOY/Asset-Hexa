@@ -21,7 +21,7 @@ useEffect(() => {
 
     setLoading(true);
 
-    fetch(`https://asset-hexa-server.vercel.app/${user?.email}`)
+    fetch(`https://asset-hexa-server.vercel.app/user/${user?.email}`)
     .then(res => res.json())
     .then(data => setUsers(data))
 
