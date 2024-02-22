@@ -73,7 +73,7 @@ const AddBalance = () => {
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Amount</span>
                </label>
-               <input name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" defaultValue={parseInt(0)} />
+               <input name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text"  />
             </div>
             <div className="flex gap-[49px] mb-5">
                <label className="label w-fit">

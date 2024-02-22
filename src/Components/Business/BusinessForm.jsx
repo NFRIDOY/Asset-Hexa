@@ -44,14 +44,18 @@ export default function BusinessForm() {
             photoURL: user?.photoURL,
             companyVarification: false,
             investmentOwner: new Array(),
-            totalInvestment: getTotalInvestment(),
+            totalInvestment: 0,
+            // totalInvestment: getTotalInvestment(),
         }
         console.log(newBusinessObj);
+        
+    const details = {message : ` posted a business ` , userName : user?.displayName , image : user?.photoURL}
+
 
         // axios.post("http://localhost:5000/bussiness", newBusinessObj)
         axiosPublic.post("/bussiness", newBusinessObj)
             .then((res) => {
-                console.log("res.data", res.data);
+                // console.log("res.data", res.data);
                 if (res.data.insertedId) {
                     Swal.fire({
                         position: "center",
@@ -62,7 +66,7 @@ export default function BusinessForm() {
                     });
                     console.log("connected to Socet io");
                     const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
-                    socket.emit("new_business_posted" , {message : `${user?.displayName} posted a business : ${"title"}`})
+                    socket.emit("new_business_posted" ,details)
                 }
             })
 

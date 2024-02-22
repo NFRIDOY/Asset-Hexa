@@ -6,18 +6,43 @@ import useAdmin from "../../hooks/useAdmin";
 import InvestmentRow from "./../../Dashboard/Investments/InvestmentRow";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const BusinessDetails = () => {
   const { id } = useParams();
-  const { business, refetch } = useBusiness(id);
+  // const { business, refetch } = useBusiness(id);
   const axiosPublic = useAxios();
   const { user } = useAuth();
-  const [totalInvestments, setTotalInvestment] = useState(
-    business?.totalInvestment
-  );
+  // const { data: business = {}, refetch } = useQuery({
+  //   queryKey: ["singleBusinessData"],
+  //   enabled: !!id,
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.get(`/bussiness/${id}`);
+  //     setTotalInvestment(business?.totalInvestment)
+  //     return res.data[0];
+  //   },
 
-  console.log(business);
+  // });
+  const [business, setBusiness] = useState({});
+  const [totalInvestments, setTotalInvestment] = useState();
+  useEffect(() => {
+    axiosPublic.get(`/bussiness/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setBusiness(res.data[0]);
+        setTotalInvestment(business?.totalInvestment)
+      })
+    // .catch(()=>{
+    //   console.log("error on getting business Details");
+    // })
+  }, [business?.totalInvestment, totalInvestments])
+  // const getTotalInvestment = business?.totalInvestment;
+
+
+
+  console.log("business : ", business);
+  console.log("totalInvestment: ", business?.totalInvestment);
 
   const handleVerification = () => {
     axiosPublic
@@ -36,7 +61,7 @@ const BusinessDetails = () => {
     e.preventDefault();
     const form = e.target;
     const invest = parseFloat(form.invest.value);
-    console.log(invest);
+    // console.log(invest);
 
     setTotalInvestment(totalInvestments + invest);
     // const totalAmount = business.totalInvestment.reduce(
@@ -49,18 +74,18 @@ const BusinessDetails = () => {
       invest: invest,
     };
 
-    axiosPublic
-      .put(`/businessInvest/${id}`, InvestmentObj)
-      // axios.put(`http://localhost:5000/businessInvest/${id}`, InvestmentObj)
+    // axios.put(`http://localhost:5000/businessInvest/${id}`, InvestmentObj)
+    axiosPublic.put(`/businessInvest/${id}`, InvestmentObj)
       .then((res) => {
-        console.log(res.data);
-        refetch();
+        // console.log(res.data);
+        // refetch();
+        setTotalInvestment(business?.totalInvestment + invest)
         if (res?.data.result.modifiedCount >= 1) {
           toast.success("Invested on this Business ");
-          refetch();
+          // refetch();
           if (res?.data.addToInvestments.modifiedCount >= 1) {
             toast.success("Added to Your Investments");
-            refetch();
+            // refetch();
           }
         } else {
           toast.error("Faild to Invest");
@@ -103,7 +128,8 @@ const BusinessDetails = () => {
           <div>
             <p className="font-bold text-3xl ">
               Total Investments BDT :
-              <span className="text-[#23A455]"> {totalInvestments}</span>
+              <span className="text-[#23A455]"> {business?.totalInvestment}</span>
+              {/* <span className="text-[#23A455]"> {totalInvestments}</span> */}
             </p>
           </div>
         </div>
@@ -128,7 +154,7 @@ const BusinessDetails = () => {
             <p className="card-title text-success">
               {business?.Minimum} BDT - {business?.Maximum} BDT
             </p>
-            <p>Profit {business?.Profit} % Per Mounth</p>
+            <p>Profit {business?.Profit} % Per Month</p>
           </div>
         </div>
         <div className="mt-10 pr-3 pl-3 text-justify">

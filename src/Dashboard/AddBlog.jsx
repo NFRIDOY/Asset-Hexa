@@ -45,6 +45,9 @@ const AddBlog = () => {
     };
     // console.log(formattedDate);
     e.target.reset();
+    
+
+    const details = {message : ` posted a blog ` , userName : user?.displayName , image : user?.photoURL}
 
     axiosPublic.post("/blogs", blogData).then((res) => {
       //   console.log(res.data);
@@ -52,7 +55,7 @@ const AddBlog = () => {
 
         console.log("connected to Socet io");
         const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
-        socket.emit("new_blog_posted" , {message : `${user?.displayName} posted a blog : ${title}`})
+        socket.emit("new_blog_posted" , details )
 
         Swal.fire({
           position: "center",
@@ -64,6 +67,7 @@ const AddBlog = () => {
       }
     });
   };
+
 
   
 
