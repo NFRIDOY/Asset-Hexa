@@ -40,11 +40,11 @@ const Statistics = () => {
 
   // console.log(isData01, isData02, isData03);
   return (
-    <div className="mt-20">
+    <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-10">
         {/* Pie 1 */}
         <div className="flex flex-col justify-center items-center place-self-start">
-          <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
+          <h1 className="text-5xl text-center font-bold text-[#38d626] uppercase">
             Accounts
           </h1>
           {isData01 ? (
@@ -70,14 +70,14 @@ const Statistics = () => {
               <Legend />
             </PieChart>
           ) : (
-            <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center">
+            <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center text-center">
               <h1>no Data</h1>
             </div>
           )}
         </div>
         {/* Pie 2 */}
         <div className="flex flex-col justify-center items-center place-self-start">
-          <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
+          <h1 className="text-5xl text-center font-bold text-[#38d626] uppercase">
             Income
           </h1>
           {isData02 ? (
@@ -103,14 +103,14 @@ const Statistics = () => {
               <Legend />
             </PieChart>
           ) : (
-            <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center">
+            <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center text-center">
               <h1>no Data</h1>
             </div>
           )}
         </div>
         {/* Pie 3 */}
         <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-1 flex flex-col justify-center items-center xl:place-self-start">
-          <h1 className="text-5xl text-center font-bold text-emerald-500 uppercase">
+          <h1 className="text-5xl text-center font-bold text-[#38d626] uppercase">
             Expense
           </h1>
           <div className="h-[800px]">
@@ -137,7 +137,7 @@ const Statistics = () => {
                 <Legend />
               </PieChart>
             ) : (
-              <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center">
+              <div className="mt-20 uppercase font-extrabold text-3xl flex justify-center items-center text-center">
                 <h1>no Data</h1>
               </div>
             )}

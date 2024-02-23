@@ -231,7 +231,7 @@ const OverView = () => {
   };
 
   return (
-    <div className="p-8   bg-base-300 ">
+    <div className="p-8  bg-base-300 ">
       <div className=" ">
         <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
           <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-60 ">
@@ -367,14 +367,14 @@ const OverView = () => {
                     <path
                       id="vector"
                       d="M11.998 5.84424L11.998 18.1604"
-                      stroke="#000"
+                      stroke="#fff"
                       strokeWidth="2"
                       strokeLinecap="round"
                     ></path>{" "}
                     <path
                       id="vector_2"
                       d="M18.1561 12.002L5.83998 12.0019"
-                      stroke="#000"
+                      stroke="#fff"
                       strokeWidth="2"
                       strokeLinecap="round"
                     ></path>{" "}
@@ -384,8 +384,8 @@ const OverView = () => {
             </svg>{" "}
           </span>{" "}
           <span className=" bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
-          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
-          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block"></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block"></span>{" "}
         </button>
 
         <button
