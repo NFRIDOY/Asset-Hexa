@@ -96,7 +96,7 @@ const BusinessDetails = () => {
   const [isAdmin] = useAdmin();
 
   return (
-    <div className="max-w-7xl mx-auto px-2">
+    <div className="max-w-7xl overflow-hidden mx-auto px-2">
       <div className=" ">
         <div className="">
           <img
