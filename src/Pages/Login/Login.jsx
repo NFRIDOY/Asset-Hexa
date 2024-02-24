@@ -132,8 +132,8 @@ const Login = () => {
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
-          <p className='text-sm text-gray-400'>
-            Sign in to access your account
+          <p className='text-sm text-emerald-400 font-thin'>
+            Sign in to access at Asset-hexa
           </p>
         </div>
         <form
@@ -153,7 +153,7 @@ const Login = () => {
                 id='email'
                 required
                 placeholder='Enter Your Email Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-emerald-400 bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
               />
             </div>
@@ -170,7 +170,7 @@ const Login = () => {
                 id='password'
                 required
                 placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-emerald-400 bg-gray-200 text-gray-900'
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ const Login = () => {
           </div>
         </form>
         <div className='space-y-1'>
-          <button className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+          <button className='text-xs hover:underline hover:text-emerald-400 text-gray-400'>
             Forgot password?
           </button>
         </div>
@@ -212,7 +212,7 @@ const Login = () => {
           Don&apos;t have an account yet?{' '}
           <Link
             to='/register'
-            className='hover:underline hover:text-rose-500 text-gray-600'
+            className='hover:underline hover:text-rose-500 text-emerald-400'
           >
             Sign up
           </Link>

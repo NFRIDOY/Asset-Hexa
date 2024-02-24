@@ -58,7 +58,7 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 	return (
 
 		
-		<div className="w-full navbar ">
+		<div className="w-full navbar p-0 sticky bg-white top-0 z-[99]  ">
 
 			<div className="flex-none lg:hidden">
 				<label
@@ -82,14 +82,14 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 				</label>
 			</div>
 
-			<div className="navbar p-0 bg-base-100">
-				<div className="navbar-start">
+			<div className="navbar z-[0] p-0 bg-base-100">
+				<div className="navbar-start z-[0]">
 					<Link to="/" className="btn p-0 btn-ghost text-xl">
 						<img className="h-14" src={logo} alt="" />
 					</Link>
 				</div>
 				<div className="navbar-center hidden lg:flex">
-					<ul className="menu menu-horizontal gap-4 px-1">
+					<ul className="menu menu-horizontal z-[98] gap-4 px-1">
 						<NavUl></NavUl>
 					</ul>
 				</div>

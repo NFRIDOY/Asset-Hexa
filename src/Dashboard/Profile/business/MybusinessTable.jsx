@@ -1,62 +1,68 @@
-import React from 'react';
+import  { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxios from '../../../hooks/useAxios';
+import InvestmentRow from '../../Investments/InvestmentRow';
+import { Link } from 'react-router-dom';
 
 const MybusinessTable = () => {
-    return (
-        <div className='container mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24 2xl:px-28'>
-          <div className='py-8'>
-            <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-              <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
-                <table className='min-w-full leading-normal'>
-                  <thead>
-                  <tr className="">
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Author Name
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Title 
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Image 
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Update
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Delete
-                        </th>
+  const { user } = useAuth();
+
+  const axiosPublic = useAxios();
+
+  const [investments, setInvestments] = useState([]);
+
+  useEffect(() => {
+      axiosPublic.get(`/investments?email=${user?.email}`)
+          
+          .then((res) => {
+              setInvestments(res.data)
+            
+          })
     
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {/* {
-                      blogs.map(blog => <TableRow
-                        key={blog._id}
-                        blog={blog}
-                        handelDelete={handelDelete}
-                      />)
-                    } */}
-                  </tbody>
-                </table>
+  }, [axiosPublic,user])
+
+
+return (
+
+  <div className="bg-white w-full overflow-auto">
+     
+      <table className="table-auto w-full md:table md:table-xs lg:table-lg">
+          
+          <thead >
+              <tr className="">
+                  <th className="hidden md:table-cell"></th>
+                  <th className="hidden md:table-cell"></th>
+                  <th className="hidden md:table-cell">BrandName</th>
+                  <th className="hidden md:table-cell">Invesment</th>
+                 
+              </tr>
+          </thead>
+          <tbody className="">
+              {
+                  ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
+              }
+          </tbody>
+
+      </table>
+      {
+          (investments.length === 0) ? <div
+              className="flex flex-col justify-center items-center my-10">
+              <div>
+                  <div className=" w-fit  col-span-12 text-center flex justify-center">
+                      <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
+                          No Data
+                      </span>
+                  </div>
+                  <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
+                      <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
+                          Invest Now
+                      </span>
+                  </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      );
+          </div> : null
+      }
+  </div >
+)
 };
 
 export default MybusinessTable;
