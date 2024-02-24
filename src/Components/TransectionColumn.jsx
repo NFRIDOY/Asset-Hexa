@@ -5,14 +5,16 @@ import { MdDeleteForever } from "react-icons/md";
 
 const TransectionColumn = ({ transection }) => {
   return (
-    <div className="max-w-6xl mx-auto h-24 overflow-hidden grid grid-cols-3 place-items-center gap-10 border shadow-md shadow-emerald-400 rounded-md py-3 px-3 md:px-6 capitalize">
+    <div className="max-w-6xl mx-auto h-24 overflow-hidden grid grid-cols-3 place-items-center gap-10 border ring-8 ring-[#38d626] py-3 px-3 md:px-6 capitalize ">
       <div className="place-self-start flex flex-col  gap-2">
-        <h4 className="text-xl font-bold text-emerald-600">
+        <h4 className="text-xl font-bold text-slate-600">
           {transection?.category || transection?.from}
         </h4>
-        <p className="text-xs font-medium">{transection?.note}</p>
+        <p className="text-xs font-medium text-slate-600">
+          {transection?.note}
+        </p>
       </div>
-      <p className="text-xl font-bold text-emerald-600">
+      <p className="text-xl font-bold text-slate-600">
         ${transection?.amount || transection?.from}
       </p>
 

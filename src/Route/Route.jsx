@@ -23,7 +23,7 @@ import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import Businesses from "../Components/Businesses/Businesses";
 import Payment from "../Components/Home/Payment/Payment";
 import Business from "../Components/Business/Business";
-import BusinessForm from "../Components/Business/BusinessForm";  
+import BusinessForm from "../Components/Business/BusinessForm";
 import DashboardLayout from "../AdminDashboard/DashboardLayout";
 import AdminOverview from "../AdminDashboard/AdminOverview";
 import BlogVerification from "../AdminDashboard/BlogVerification";
@@ -32,6 +32,8 @@ import UserVarification from "../AdminDashboard/UserVarification";
 import BusinessDetails from "../Components/BusinessDetails/BusinessDetails";
 import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
+import { useGetBlogQuery } from "../features/blogSlice";
+import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +57,7 @@ export const router = createBrowserRouter([
         path: "/Blogs",
         element: <Blog />,
       },
-      
+
       {
         path: "/blogDetails/:id",
         element: <BlogDetails />,
@@ -65,8 +67,8 @@ export const router = createBrowserRouter([
         element: <Businesses></Businesses>,
       },
       {
-        path:"/businessDetails/:id",
-        element:<BusinessDetails></BusinessDetails>
+        path: "/businessDetails/:id",
+        element: <BusinessDetails></BusinessDetails>,
       },
       {
         path: "/newsPayment",
@@ -82,7 +84,7 @@ export const router = createBrowserRouter([
     path: "UpdateProfile",
     element: <UpdateProfile />,
   },
-  
+
   {
     path: "register",
     element: <Register />,
@@ -112,6 +114,11 @@ export const router = createBrowserRouter([
         element: <Accounts></Accounts>,
       },
       {
+        path: "accountUpdate/:id",
+        element: <AccountUpdate></AccountUpdate>,
+      },
+
+      {
         path: "addBalance",
         element: <AddBalance></AddBalance>,
       },
@@ -140,50 +147,43 @@ export const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
-      
       },
 
       {
         path: "updateblogs/:id",
-        element: <UpdateBlog/>,
-        
+        element: <UpdateBlog />,
       },
       {
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
     ],
-  },{
-		path: "AdminDashboard",
-		element: <DashboardLayout></DashboardLayout>,
-		errorElement: <Errorpage></Errorpage>,
-		children: [
-			{
-				path: "AdminOverview",
-				element: <AdminOverview></AdminOverview>,
-			},
-			{
-				path: "BusinessVerification",
-				element: <BusinessVerification></BusinessVerification>,
-			},
-			{
-				path: "BlogVerification",
-				element: <BlogVerification></BlogVerification>,
-			},
-			{
-				path: "userVerification",
-				element: <UserVarification></UserVarification>,
-			},
+  },
+  {
+    path: "AdminDashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement: <Errorpage></Errorpage>,
+    children: [
       {
-        path:"subscriptionList",
-        element:<SubscriptionList></SubscriptionList>
-      }
-		],
-	},
-
-
-
-	
+        path: "AdminOverview",
+        element: <AdminOverview></AdminOverview>,
+      },
+      {
+        path: "BusinessVerification",
+        element: <BusinessVerification></BusinessVerification>,
+      },
+      {
+        path: "BlogVerification",
+        element: <BlogVerification></BlogVerification>,
+      },
+      {
+        path: "userVerification",
+        element: <UserVarification></UserVarification>,
+      },
+      {
+        path: "subscriptionList",
+        element: <SubscriptionList></SubscriptionList>,
+      },
+    ],
+  },
 ]);
-
-

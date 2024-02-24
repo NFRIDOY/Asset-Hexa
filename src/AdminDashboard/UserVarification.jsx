@@ -17,7 +17,7 @@ const UserVarification = () => {
 		.then((data) => {
 			SetusersData(data.data);
 			setLoading(false);
-			console.log(data.data);
+			// console.log(data.data);
 		});
 	}, [axiosPublic]);
 

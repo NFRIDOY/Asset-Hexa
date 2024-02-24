@@ -93,7 +93,7 @@ const BlogCard = ({ Bloggs }) => {
               </div>
             </div>
             <div className="space-y-2">
-              <h1 className="font-bold text-xl lg:text-2xl text-left flex items-center">
+              <h1 className="font-bold text-xl lg:text-2xl text-left flex items-center h-16">
                 {Bloggs?.title}
                 {Bloggs.isVerified && (
                   <span>

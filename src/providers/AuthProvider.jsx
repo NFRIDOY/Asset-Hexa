@@ -118,42 +118,49 @@ export default function AuthProvider({ children }) {
   }, [user, auth]);
 
   //Update Ueser
-  const updateUser = (name, photoURL) => {
-    updateProfile(auth.currentUser, {
+  // const updateUser = (name, photoURL) => {
+  //   updateProfile(auth.currentUser, {
+  //     displayName: name,
+  //     photoURL: photoURL,
+  //     // emailVerified : user.emailVerified
+  //   })
+  //     .then(() => {
+  //       // Profile updated!
+  //       // ...
+  //       setUser(user);
+  //       // toast.success(user.displayName)
+  //       // toast.success(user.photoURL)
+  //       // toast.success("Profile updated!")
+  //       // logOut()
+  //     })
+  //     .catch((error) => {
+  //       // An error occurred
+  //       // ...
+  //       // toast.success("Profile updated! Failed")
+  //       console.log(error);
+  //     });
+  //   if (user !== null) {
+  //     // The user object has basic properties such as display name, email, etc.
+  //     const displayName = user.displayName;
+  //     const email = user.email;
+  //     // const photoURL = user.photoURL;
+  //     const emailVerified = user.emailVerified;
+
+  //     setUser(user);
+  //     // The user's ID, unique to the Firebase project. Do NOT use
+  //     // this value to authenticate with your backend server, if
+  //     // you have one. Use User.getToken() instead.
+  //     const uid = user.uid;
+  //   }
+  // };
+
+
+  const updateUser = (name, photo) => {
+    return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photoURL,
-      // emailVerified : user.emailVerified
+      photoURL: photo,
     })
-      .then(() => {
-        // Profile updated!
-        // ...
-        setUser(user);
-        // toast.success(user.displayName)
-        // toast.success(user.photoURL)
-        // toast.success("Profile updated!")
-        // logOut()
-      })
-      .catch((error) => {
-        // An error occurred
-        // ...
-        // toast.success("Profile updated! Failed")
-        console.log(error);
-      });
-    if (user !== null) {
-      // The user object has basic properties such as display name, email, etc.
-      const displayName = user.displayName;
-      const email = user.email;
-      // const photoURL = user.photoURL;
-      const emailVerified = user.emailVerified;
-
-      setUser(user);
-      // The user's ID, unique to the Firebase project. Do NOT use
-      // this value to authenticate with your backend server, if
-      // you have one. Use User.getToken() instead.
-      const uid = user.uid;
-    }
-  };
-
+  }
   const contextInfo = {
     user,
     setUser,

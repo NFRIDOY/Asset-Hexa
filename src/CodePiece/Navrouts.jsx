@@ -52,6 +52,9 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 		setToastData(notifications);
 	}
 
+	// console.log(notifications);
+
+
 	return (
 
 		

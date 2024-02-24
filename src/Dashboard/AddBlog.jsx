@@ -45,17 +45,21 @@ const AddBlog = () => {
     };
     // console.log(formattedDate);
     e.target.reset();
-    
 
-    const details = {message : ` posted a blog ` , userName : user?.displayName , image : user?.photoURL}
+    const details = {
+      message: ` posted a blog `,
+      userName: user?.displayName,
+      image: user?.photoURL,
+    };
 
     axiosPublic.post("/blogs", blogData).then((res) => {
       //   console.log(res.data);
       if (res.data.insertedId) {
-
         console.log("connected to Socet io");
-        const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
-        socket.emit("new_blog_posted" , details )
+        const socket = io("https://asset-hexa-server-notification.glitch.me/", {
+          transports: ["websocket"],
+        });
+        socket.emit("new_blog_posted", details);
 
         Swal.fire({
           position: "center",
@@ -67,9 +71,6 @@ const AddBlog = () => {
       }
     });
   };
-
-
-  
 
   return (
     // <div className=" bg-[#91F0AC]"> {/*  */}
@@ -91,51 +92,52 @@ const AddBlog = () => {
           <form onSubmit={handleSubmitBlog}>
             <div className=" mb-2">
               <label className="label">
-                <span className="label-text text-3xl font-bold text-[#000]">
-                  {" "}
-                  Title{" "}
+                <span className="label-text text-3xl font-bold text-white">
+                  Title <span className="text-red-600 text-lg">*</span>
                 </span>
               </label>
               <input
                 name="title"
                 type="text"
-                placeholder="type "
-                className="shadow-xl outline-none input input-bordered input-primary w-full"
+                placeholder="Enter blog title"
+                className="shadow-xl input input-bordered input-primary w-full border-none outline-none"
                 required
               />
             </div>
             <div className="mb-2">
               <label className="label">
-                <span className="label-text text-3xl font-bold text-[#000]">
-                  Description{" "}
+                <span className="label-text text-3xl font-bold text-white">
+                  Description <span className="text-red-600 text-lg">*</span>
                 </span>
               </label>
               <textarea
                 name="description"
-                className="w-full shadow-xl textarea textarea-primary"
-                placeholder="type"
+                className="w-full shadow-xl textarea textarea-primary border-none outline-none"
+                placeholder="Enter blog description"
                 required
               ></textarea>
             </div>
             <div className=" mb-5">
               <label className="label">
-                <span className="label-text text-3xl font-bold text-[#000]">
-                  Image
+                <span className="label-text text-3xl font-bold text-white">
+                  Image <span className="text-red-600 text-lg">*</span>
                 </span>
               </label>
               <input
                 name="image"
                 type="text"
-                placeholder="image url"
-                className="shadow-xl input input-bordered input-primary w-full"
+                placeholder="Enter image url"
+                className="shadow-xl input input-bordered input-primary border-none outline-none w-full"
                 required
               />
             </div>
             <div className="w-full flex justify-end">
-              <button className=" btn btn-primary w-32 text-white ">
-                Add post
+              <button
+                type="submit"
+                className="relative inline-block h-16 w-40 overflow-hidden border-[#38d626] px-5 py-2 text-white font-bold text-lg shadow-lg before:absolute before:inset-0 before:-z-10 before:block before:translate-x-[90%] before:rounded-s-full before:bg-[#4cda3c] before:duration-200 after:absolute after:inset-0 after:-z-10 after:block after:-translate-x-[90%] after:rounded-e-full after:bg-[#4cda3c] after:duration-500 hover:text-white before:hover:translate-x-0 after:hover:translate-x-0"
+              >
+                Add Blog
               </button>
-             
             </div>
           </form>
         </div>

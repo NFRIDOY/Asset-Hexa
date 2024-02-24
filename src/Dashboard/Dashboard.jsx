@@ -11,12 +11,13 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 const Dashboard = () => {
   return (
-    <div className=" h-screen bg-base-300">
+    <div className="h-screen  bg-base-300 w-full mx-auto">
       <div className="drawer lg:drawer-open  mx-auto bg-white  rounded-2xl min-h-[calc(100vh-32px)]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col   ">
-          {/* Page content here */}
-          <div className="lg:ml-10 ">
+        <div className="drawer-content bg-base-300 flex flex-col">
+          {/* Page content  */}
+          {/* lg:ml-8 */}
+          <div className="mt-12">
             <Outlet></Outlet>
           </div>
           <label
@@ -26,19 +27,19 @@ const Dashboard = () => {
             <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
           </label>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
 
-          <div className="w-52 h-screen bg-white justify-center  flex flex-col ">
+          <div className="w-60 xl:w-80 min-h-screen bg-white justify-between p-8 flex flex-col">
             <div>
-              <div className="  rounded-lg lg:mt-3">
+              <div className="rounded-lg lg:mt-3">
                 <figure>
                   <Link to="/">
-                    <img src={home} alt="" />
+                    <img src={home} alt="asset hexa website logo" />
                   </Link>
                 </figure>
               </div>
@@ -46,7 +47,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/overView"
@@ -57,7 +58,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/transection"
@@ -69,7 +70,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/statistics"
@@ -81,7 +82,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/accounts"
@@ -93,7 +94,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/addBlog"
@@ -104,7 +105,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/investments"
@@ -115,7 +116,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/business"
@@ -126,7 +127,7 @@ const Dashboard = () => {
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
+                      ? "flex px-4 gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
                       : "flex px-4 p-2 items-center mr-4 gap-3"
                   }
                   to="/dashboard/profile"

@@ -1,6 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MyBlogsTable from "./MyBlogsTable";
+import MybusinessTable from "./business/MybusinessTable";
 
 const ProfileTab = () => {
     return (
@@ -9,8 +10,8 @@ const ProfileTab = () => {
                 <Tabs className={"mt-8"}>
                     <TabList className={"flex font-bold gap-5 justify-center border-b"}>
                         <Tab>My Blogs</Tab>
-                        <Tab>My  post</Tab>
-                        <Tab>My company</Tab>
+                        <Tab>My  Business</Tab>
+                        {/* <Tab>My company</Tab> */}
                     </TabList>
 
                     <TabPanel>
@@ -21,14 +22,14 @@ const ProfileTab = () => {
                     </TabPanel>
                     <TabPanel>
                         <div className="mt-8 space-y-3">
-                            <h1>Business</h1>
+                            <MybusinessTable/>
                         </div>
                     </TabPanel>
-                    <TabPanel>
+                    {/* <TabPanel>
                         <div className="mt-8 space-y-3">
                             <h1>Investments</h1>
                         </div>
-                    </TabPanel>
+                    </TabPanel> */}
                 </Tabs>
             </div>
         </div>

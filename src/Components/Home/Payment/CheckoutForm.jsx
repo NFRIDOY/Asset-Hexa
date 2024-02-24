@@ -18,10 +18,10 @@ const CheckoutForm = () => {
     // const price = 200;
 
     useEffect(() => {
-        axiosPublic.post('http://localhost:5000/create-payment-intent', { price: price })
-        // axiosPublic.post('/create-payment-intent', { price: price })
+        // axiosPublic.post('http://localhost:5000/create-payment-intent', { price: price })
+        axiosPublic.post('/create-payment-intent', { price: price })
             .then(res => {
-                console.log(res.data.clientSecret)
+                // console.log(res.data.clientSecret)
                 setClientSecret(res.data.clientSecret)
             })
     }, [axiosPublic, price])
@@ -48,11 +48,11 @@ const CheckoutForm = () => {
         })
 
         if (error) {
-            console.log('payment error', error)
+            // console.log('payment error', error)
             setError(error.message)
         }
         else {
-            console.log('payment method', paymentMethod)
+            // console.log('payment method', paymentMethod)
             setError('')
         }
 
@@ -72,7 +72,7 @@ const CheckoutForm = () => {
         else {
             console.log('payment intent', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
-                console.log('transaction id', paymentIntent.id)
+                // console.log('transaction id', paymentIntent.id)
                 setTransactionId(paymentIntent.id)
                 // now save the payment in the database
 
@@ -85,10 +85,11 @@ const CheckoutForm = () => {
                     date: new Date(),  //utc date convert. use moment js to convert
                     // status: 'pending'
                 }
-                axiosPublic.post('http://localhost:5000/payments', payment)
+                // axiosPublic.post('http://localhost:5000/payments', payment)
+                axiosPublic.post('/payments', payment)
                 // axiosPublic.post('/payments', payment)
                     .then(res => {
-                        console.log('payment saved', res.data)
+                        // console.log('payment saved', res.data)
                         if (res.data?.paymentResult?.insertedId) {
                             // refetch()
                             Swal.fire({
