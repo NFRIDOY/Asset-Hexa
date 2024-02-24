@@ -1,4 +1,6 @@
+
 import WhyChooseUs from "../../Components/HelpDesk/WhyChooseUs";
+import NewsLetter from "../../Components/Home/NewsLetter";
 import Banner from "./Banner";
 import FeatureHome from "./FeatureHome";
 
@@ -7,7 +9,10 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <FeatureHome></FeatureHome>
+      {/* <NewsLetter></NewsLetter> */}
       <WhyChooseUs></WhyChooseUs>
+       
+    
     </div>
   );
 };

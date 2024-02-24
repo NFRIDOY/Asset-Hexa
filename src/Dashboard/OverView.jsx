@@ -8,7 +8,6 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { Link } from "react-router-dom";
 
 const OverView = () => {
-
   // state to hold  erroretext from diffrent modal
 
   const [incomeText, setIncomeText] = useState("");
@@ -17,21 +16,11 @@ const OverView = () => {
 
   const axiosPublic = useAxios();
   const { user } = useContext(AuthContext);
-  // const [pieData, setPieData] = useState([]);
-
-  // useEffect(() => {
-  // 	axiosPublic.get(`/totalInExp?email=${user?.email}`).then((res) => {
-  // 		setPieData(res?.data);
-  // 	});
-  // }, [axiosPublic]);
-
 
   const { data: PiData = [], refetch: PiREfetch } = useQuery({
     queryKey: ["piData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(
-        `/totalInExp?email=${user?.email}`
-      );
+      const res = await axiosPublic.get(`/totalInExp?email=${user?.email}`);
       return res.data;
     },
   });
@@ -43,14 +32,13 @@ const OverView = () => {
   const { data: transectionData = [], refetch } = useQuery({
     queryKey: ["transeferData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(
-        `/transections?email=${user?.email}`
-      );
+      const res = await axiosPublic.get(`/transections?email=${user?.email}`);
       return res.data;
     },
   });
 
   const sortedTransactions = [...transectionData];
+  console.log(sortedTransactions);
 
   // Sorting by date in descending order
   sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -115,8 +103,8 @@ const OverView = () => {
         // console.log(res.data);
         if (res?.data.resultAccount.acknowledged) {
           toast.success("Income Data added Successfully");
-          refetch()
-          PiREfetch()
+          refetch();
+          PiREfetch();
         }
       });
     }
@@ -160,8 +148,8 @@ const OverView = () => {
         // console.log(res.data);
         if (res?.data.resultAccount.acknowledged) {
           toast.success("Expanse Data added Successfully");
-          refetch()
-          PiREfetch()
+          refetch();
+          PiREfetch();
         }
       });
     }
@@ -197,7 +185,7 @@ const OverView = () => {
         console.log(res.data);
         if (res?.data.resultTransec.acknowledged) {
           toast.success("Transfer Data added Successfully");
-          refetch()
+          refetch();
         }
       });
     }
@@ -215,59 +203,80 @@ const OverView = () => {
 
   const getRandomColor = () => {
     // Generate a random index to pick a color from the array
-    const randomIndex = Math.floor(
-      Math.random() * BGcolorsOfAccount.length
-    );
+    const randomIndex = Math.floor(Math.random() * BGcolorsOfAccount.length);
     return BGcolorsOfAccount[randomIndex];
   };
   const getIndexColor = () => {
     // Generate a random index to pick a color from the array
-    const randomIndex = Math.floor(
-      Math.random() * BGcolorsOfAccount.length
-    );
+    const randomIndex = Math.floor(Math.random() * BGcolorsOfAccount.length);
     return BGcolorsOfAccount[randomIndex];
   };
 
+  const handleParent = () => {
+    let elements = document.querySelectorAll(".no-hover");
+
+    // Loop through each element and remove the class 'oldClass'
+    elements.forEach(function (element) {
+      element.classList.remove("no-hover");
+      console.log(element);
+    });
+  };
+
+  const addClass = () => {
+    let elements = document.querySelectorAll(".custom-button");
+    elements.forEach(function (element) {
+      element.classList.add("no-hover");
+      console.log(element);
+    });
+  };
+
   return (
-    <div className="p-8   bg-base-300 ">
+    <div className="p-8  bg-base-300 ">
       <div className=" ">
         <div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
-          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8  min-w-60 ">
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-60 ">
             <h1 className="text-xl font-medium">Cash</h1>
-            <p className="text-5xl font-semibold">$00</p>
+            <p className="text-3xl md:text-5xl font-semibold">$00</p>
           </div>
-          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8   min-w-60 ">
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-60 ">
             <h1 className="text-xl font-medium">Nagad</h1>
-            <p className="text-5xl font-semibold">$00</p>
+            <p className="text-3xl md:text-5xl font-semibold">$00</p>
           </div>
-          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8   min-w-60">
+          <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-60">
             <h1 className="text-xl font-medium">Saving</h1>
-            <p className="text-5xl font-semibold">$00</p>
+            <p className="text-3xl md:text-5xl font-semibold">$00</p>
           </div>
-          <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8  min-w-60 ">
+          <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-60 ">
             <h1 className="text-xl font-medium">Loan</h1>
-            <p className="text-5xl font-semibold">$00</p>
+            <p className="text-3xl md:text-5xl font-semibold">$00</p>
           </div>
-          {AccountData ? AccountData.map((item) => (
-            <div
-              style={{ backgroundColor: getRandomColor() }}
-              key={item?.id}
-              className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8  min-w-60 "
+          {AccountData ? (
+            AccountData.map((item) => (
+              <div
+                style={{ backgroundColor: getRandomColor() }}
+                key={item?.id}
+                className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8 min-w-48 md:min-w-60 "
+              >
+                <h1 className="text-xl font-medium">{item?.account}</h1>
+                <p className="text-3xl md:text-5xl font-semibold">
+                  ${item?.amount}
+                </p>
+              </div>
+            ))
+          ) : (
+            <Link
+              to={"../../dashboard/AddBalance"}
+              className="h-32 w-full flex justify-center items-center "
             >
-              <h1 className="text-xl font-medium">
-                {item?.account
-                }
-              </h1>
-              <p className="text-5xl font-semibold">
-                ${item?.amount}
-              </p>
-            </div>
-          )) : <Link to={"../../dashboard/AddBalance"} className="h-32 w-full flex justify-center items-center "> <p className="btn btn-accent w-fit ">Create Accounts First</p></Link>}
+              {" "}
+              <p className="btn btn-accent w-fit ">Create Accounts First</p>
+            </Link>
+          )}
         </div>
 
-        <div className="flex gap-5 mt-5">
+        <div className="flex flex-col md:flex-row gap-5 mt-5">
           <div className="bg-white ">
-            <PieChart width={400} height={400}>
+            <PieChart width={350} height={350}>
               <Pie
                 dataKey="value"
                 isAnimationActive={false}
@@ -291,12 +300,12 @@ const OverView = () => {
             </PieChart>{" "}
           </div>
 
-          <div className="flex-1 overflow-y-scroll scrollable-content h-[500px] bg-white ">
+          <div className="flex-1 overflow-y-scroll scrollable-content h-[420px] bg-white ">
             <h1 className="text-center    text-2xl my-2 ">
               {" "}
               Recent Transection
             </h1>
-            <table className="table table-pin-rows  table-lg  text-center">
+            <table className="table table-pin-rows table-md md:table-lg  text-center">
               <thead>
                 <tr className="">
                   <th>Date</th>
@@ -308,18 +317,8 @@ const OverView = () => {
               <tbody className="  ">
                 {sortedTransactions?.map((item) => (
                   <tr key={item?.id} className="hover">
-                    <td>
-                      {" "}
-                      {new Date(
-                        item?.date
-                      ).toLocaleDateString()}{" "}
-                    </td>
-                    <td>
-                      {" "}
-                      {new Date(
-                        item?.date
-                      ).toLocaleTimeString()}{" "}
-                    </td>
+                    <td> {new Date(item?.date).toLocaleDateString()} </td>
+                    <td> {new Date(item?.date).toLocaleTimeString()} </td>
                     <td> {item?.type} </td>
                     {/* <td>{item?.category}</td> */}
                     <td>${item?.amount}</td>
@@ -339,9 +338,13 @@ const OverView = () => {
 
       {/* for add income , Expanse , transfer and parent Button  */}
 
-      <div className="group parentbutton space-x-4 absolute bottom-16 right-20">
-        <button className="group w-[50px] h-[50px] relative">
-          <span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 left-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
+      <div className="group parentbutton  space-x-4 fixed  z-[999] bottom-16 right-20">
+        <button
+          onTouchEnd={addClass}
+          onClick={handleParent}
+          className="group w-[50px] h-[50px] relative"
+        >
+          <span className="group-hover:shadow-[0px_0px_30px_2px_#00EC25] group-hover:rotate-180 duration-500 z-30 absolute flex justify-center items-center bg-gradient-to-tr from-[#00EC25] to-[#00EC61] bottom-0 right-1/2 transform -translate-x-1/2 rounded-full w-[60px] h-[60px] bg-white">
             <svg
               width={25}
               viewBox="0 0 24 24"
@@ -364,14 +367,14 @@ const OverView = () => {
                     <path
                       id="vector"
                       d="M11.998 5.84424L11.998 18.1604"
-                      stroke="#000"
+                      stroke="#fff"
                       strokeWidth="2"
                       strokeLinecap="round"
                     ></path>{" "}
                     <path
                       id="vector_2"
                       d="M18.1561 12.002L5.83998 12.0019"
-                      stroke="#000"
+                      stroke="#fff"
                       strokeWidth="2"
                       strokeLinecap="round"
                     ></path>{" "}
@@ -380,33 +383,29 @@ const OverView = () => {
               </g>{" "}
             </svg>{" "}
           </span>{" "}
-          <span className="-z-10 bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
-          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block "></span>{" "}
-          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block "></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2  transform -translate-x-1/2  from-[#00EC25]/80 to-[#00EC61]/80 duration-300  absolute   rounded-full  z-20 w-0 h-0   group-hover:w-[130px] group-hover:h-[130px]"></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[200px] group-hover:h-[200px] hover:duration-300 group-hover:block"></span>{" "}
+          <span className=" bg-gradient-to-tr bottom-0 left-1/2 from-[#00EC25]/50 to-[#00EC61]/50 transform -translate-x-1/2 duration-500  absolute  rounded-full  z-20 w-0 h-0  group-hover:w-[260px] group-hover:h-[260px] hover:duration-300 group-hover:block"></span>{" "}
         </button>
 
         <button
           onClick={() => {
             document.getElementById("modal_income").showModal();
           }}
-          className="custom-button income"
+          className="custom-button no-hover income"
         >
           Add Income
         </button>
         <button
-          onClick={() =>
-            document.getElementById("modal_expanse").showModal()
-          }
-          className="custom-button expanse"
+          onClick={() => document.getElementById("modal_expanse").showModal()}
+          className="custom-button no-hover  expanse"
         >
           Add Expence{" "}
         </button>
 
         <button
-          onClick={() =>
-            document.getElementById("modal_transfer").showModal()
-          }
-          className="custom-button Transfer"
+          onClick={() => document.getElementById("modal_transfer").showModal()}
+          className="custom-button no-hover Transfer"
         >
           Add Transfer{" "}
         </button>
@@ -422,11 +421,7 @@ const OverView = () => {
           <form onSubmit={handleSubmitIncome} className="space-y-4">
             <div className="input input-bordered flex  justify-between items-center">
               <p> Date</p>
-              <input
-                name="date"
-                placeholder=""
-                type="datetime-local"
-              />
+              <input name="date" placeholder="" type="datetime-local" />
             </div>
             <input
               name="amount"
@@ -457,9 +452,11 @@ const OverView = () => {
               <option disabled value="">
                 Select Account
               </option>
-              {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
 							<option value="Accounts">Accounts</option>
 							<option value="Card">Card</option> */}
@@ -477,7 +474,7 @@ const OverView = () => {
           </form>
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button>close</button>
+          <button onClick={addClass}>close</button>
         </form>
       </dialog>
 
@@ -491,11 +488,7 @@ const OverView = () => {
           <form onSubmit={handleSubmitExpanse} className="space-y-4">
             <div className="input input-bordered flex  justify-between items-center">
               <p> Date</p>
-              <input
-                name="date"
-                placeholder=""
-                type="datetime-local"
-              />
+              <input name="date" placeholder="" type="datetime-local" />
             </div>
             <input
               name="amount"
@@ -527,9 +520,11 @@ const OverView = () => {
               <option disabled value="">
                 Select Account
               </option>
-              {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
 							<option value="Accounts">Accounts</option>
 							<option value="Card">Card</option> */}
@@ -561,11 +556,7 @@ const OverView = () => {
           <form onSubmit={handleSubmittransfer} className="space-y-4">
             <div className="input input-bordered flex  justify-between items-center">
               <p> Date</p>
-              <input
-                name="date"
-                placeholder=""
-                type="datetime-local"
-              />
+              <input name="date" placeholder="" type="datetime-local" />
             </div>
             <input
               name="amount"
@@ -583,9 +574,11 @@ const OverView = () => {
               <option disabled value="">
                 From
               </option>
-              {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
               <option value="Card">Card</option> */}
@@ -599,9 +592,11 @@ const OverView = () => {
               <option disabled value="">
                 To
               </option>
-              {
-                AccountData.map((acc) => <option key={acc?._id} value={acc?.account}>{acc?.account}</option>)
-              }
+              {AccountData.map((acc) => (
+                <option key={acc?._id} value={acc?.account}>
+                  {acc?.account}
+                </option>
+              ))}
               {/* <option value="Cash">Cash</option>
               <option value="Accounts">Accounts</option>
               <option value="Card">Card</option> */}
@@ -624,7 +619,6 @@ const OverView = () => {
       </dialog>
     </div>
   );
-
 };
 
 export default OverView;

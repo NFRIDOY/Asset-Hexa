@@ -16,9 +16,9 @@ const Banner = () => {
 					and simplified money management!
 				</p>
 				{user ? (
-					<Link to="/dashboard/overView">
+					<Link to="/dashboard/accounts">
 						<button className="btn btn-outline font-bold  text-white mt-4 ">
-							 Dashboard
+							Create Account
 						</button>
 					</Link>
 				) : (

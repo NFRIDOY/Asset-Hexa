@@ -1,3 +1,4 @@
+import Contact from "../../Contact/Contact";
 import OurTeam from "./OurTeam";
 import WhoWeAre from "./WhoWeAre";
 
@@ -13,6 +14,8 @@ const About = () => {
             <div>
                 <OurTeam></OurTeam>
             </div>
+
+            <Contact/>
         </div>
     );
 };
