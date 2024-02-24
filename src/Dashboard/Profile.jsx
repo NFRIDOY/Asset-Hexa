@@ -55,7 +55,7 @@ if (loading) return <Loader />;
           </a>
 
           <p className='p-2 px-4 text-xs text-white bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  rounded-full'>
-            {users && users?.displayName}
+            {users && users?.role}
           </p>
 
 

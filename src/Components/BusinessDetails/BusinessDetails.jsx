@@ -30,13 +30,13 @@ const BusinessDetails = () => {
     axiosPublic.get(`/bussiness/${id}`)
       .then((res) => {
         console.log(res.data);
-        setBusiness(res.data[0]);
+        setBusiness(res.data);
         setTotalInvestment(business?.totalInvestment)
       })
     // .catch(()=>{
     //   console.log("error on getting business Details");
     // })
-  }, [business?.totalInvestment, totalInvestments])
+  }, [business?.totalInvestment, totalInvestments, business])
   // const getTotalInvestment = business?.totalInvestment;
 
 
@@ -96,7 +96,7 @@ const BusinessDetails = () => {
   const [isAdmin] = useAdmin();
 
   return (
-    <div className="max-w-7xl mx-auto px-2">
+    <div className="max-w-7xl overflow-hidden mx-auto px-2">
       <div className=" ">
         <div className="">
           <img
