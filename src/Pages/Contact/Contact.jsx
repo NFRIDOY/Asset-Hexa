@@ -24,7 +24,7 @@ const Contact = () => {
   return (
     <div id="contact" className="mt-4 mb-20 ">
       <p className="text-3xl font-bold text-center text-black mb-5 mt-10">
-        Contact US
+        CONTACT US
       </p>
      
       <div id="contact" className="xl:mt-12 flex md:flex-row flex-col gap-10  overflow-hidden">

@@ -68,9 +68,9 @@ const Profile = () => {
                 </span>
               </p>
 
-              <Link to="/UpdateProfile">
+              <Link to="/">
                 <button className=" mt-2 m-auto flex bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white px-10 py-1 rounded-lg  cursor-pointer ">
-                  Update Profile
+                  Home
                 </button>
               </Link>
             </div>
