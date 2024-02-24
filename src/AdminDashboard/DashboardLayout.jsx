@@ -23,14 +23,21 @@ const DashboardLayout = () => {
           <div className=" ">
             <Outlet ></Outlet>
           </div>
+          <label
+            htmlFor="my-drawer-2"
+            className="fixed bg-white  z-[999] top-0  justify-start flex  mx-auto  drawer-button lg:hidden"
+          >
+            <AiOutlineMenu className="text-2xl m-4 "></AiOutlineMenu>
+          </label>
+        </div>
           <div className="drawer-side    ">
             <label
               htmlFor="my-drawer-2"
               aria-label="close sidebar"
-              className="drawer-overlay"
+              className="drawer-overlay "
             ></label>
 
-            <div className="w-60 h-full g=  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
+            <div className="w-60 h-full   bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
               <div>
                 <div className="w-48  rounded-lg lg:mt-3">
                   <figure>
@@ -125,7 +132,7 @@ const DashboardLayout = () => {
             </div>
           </div>
         </div>
-      </div>        </div>
+      </div>        
   );
 };
 
