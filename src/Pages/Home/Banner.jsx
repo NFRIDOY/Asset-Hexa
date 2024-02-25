@@ -24,7 +24,7 @@ const Banner = () => {
 				) : (
 					<Link to="/login">
 						<button className="btn btn-outline font-bold  text-white mt-4 ">
-							GEt STARTED
+							GET STARTED
 						</button>
 					</Link>
 				)}

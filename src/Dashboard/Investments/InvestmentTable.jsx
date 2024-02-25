@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import useAuth from './../../hooks/useAuth';
-import axiosSecure from "./../../api/index";
+
 import useAxios from "../../hooks/useAxios";
 import InvestmentRow from "./InvestmentRow";
-import Investments from './Investments';
+
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ export default function InvestmentTable() {
     // console.log(`${user?.email}`)
     useEffect(() => {
         axiosPublic.get(`/investments?email=${user?.email}`)
-            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+        // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 // console.log(res.data)
@@ -31,7 +31,8 @@ export default function InvestmentTable() {
         // <div className="h-[calc(100vh-280px)] lg:mx-5 w-full">
         // <div className="h-full lg:mx-5 w-full overflow-x-hidden ">
         // <div className="bg-white w-full lg:max-h-[calc(100vh-280px)] flex gap-5 items-center overflow-auto">
-        <div className="bg-white w-full overflow-auto">
+        <div className="table table-pin-rows table-md md:table-lg  text-center">
+            {/* <div className="bg-white w-full overflow-auto"> */}
             {/* <h1>
                 investmentTable
             </h1> */}
@@ -40,9 +41,10 @@ export default function InvestmentTable() {
                 <thead >
                     <tr className="">
                         <th></th>
-                        <th></th>
+                        <th>Brand Logo</th>
                         <th>BrandName</th>
                         <th>Invesment</th>
+                        <th>Total Invesment</th>
                         {/* <th>profit</th>
                         <th>view Business</th> */}
                     </tr>

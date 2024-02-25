@@ -39,7 +39,7 @@ const Profile = () => {
           <a href="#" className="relative block">
             <img
               alt="profile"
-              src={users?.photoURL}
+              src={user?.photoURL || "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="}
               className="mx-auto object-cover rounded-full h-24 w-24  border-2 border-white "
             />
           </a>
@@ -55,7 +55,7 @@ const Profile = () => {
                   Name{" "}
                 </span>
                 <span className="font-bold text-lg  text-black ">
-                  {users?.displayName}
+                  {user?.displayName || "n"}
                 </span>
               </p>
               <p className="flex flex-col">
@@ -68,9 +68,9 @@ const Profile = () => {
                 </span>
               </p>
 
-              <Link to="/UpdateProfile">
+              <Link to="/">
                 <button className=" mt-2 m-auto flex bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white px-10 py-1 rounded-lg  cursor-pointer ">
-                  Update Profile
+                  Home
                 </button>
               </Link>
             </div>

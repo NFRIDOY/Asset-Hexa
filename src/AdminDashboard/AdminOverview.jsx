@@ -20,7 +20,6 @@ const AdminOverview = () => {
 			return res.data;
 		},
 	});
-	// console.log(adminState);
 
 	const data01 = [
 		{
@@ -75,8 +74,8 @@ const AdminOverview = () => {
 				</div>
 			</div>
 
-			<div className="flex flex-col lg:flex-row justify gap-5   md:mt-5 my-5   ">
-				<div className="bg-white w-full flex justify-center items-center h-0 flex-1 lg:h-[calc(100vh-250px)] mx-auto">
+			<div className="flex flex-col  lg:flex-row justify gap-5   md:mt-5 my-5   ">
+				<div className="bg-white min-h-[300px] w-full flex justify-center items-center h-0 flex-1 lg:h-[calc(100vh-250px)] mx-auto">
 					<PieChart width={350} height={350}>
 						<Pie
 							dataKey="value"
@@ -101,13 +100,14 @@ const AdminOverview = () => {
 					</PieChart>{" "}
 				</div>
 
-				<div className="bg-white w-full lg:h-[calc(100vh-250px)]  p-6 px-10 flex flex-col md:flex-row gap-5 items-center justify-between">
+				<div className="flex-1 min-h-[300px] bg-white w-full lg:h-[calc(100vh-260px)]  p-6 px-10 flex flex-col md:flex-row gap-5 items-center justify-between">
+					
 					<Link
 						to="/AdminDashboard/BusinessVerification"
 						className="w-72   md:w-48 shadow-custom flex flex-col justify-center items-center h-72 md:h-48 md:-mt-16 transition-all  hover:scale-110 duration-500 "
 					>
 						<div className="relative">
-							<IoMdBusiness size={72} className="!z-[-999]" />
+							<IoMdBusiness size={72} className="" />
 
 							<img
 								className="absolute w-6 h-6  bottom-1 right-0 !z-[999]"
@@ -123,7 +123,7 @@ const AdminOverview = () => {
 						className="w-72 md:w-48 flex flex-col justify-center items-center h-72 md:h-48 md:mt-16 shadow-custom transition-all  hover:scale-110 duration-500"
 					>
 						<div className="relative">
-							<FaUserAlt size={72} className="!z-[-999]" />
+							<FaUserAlt size={72} className="" />
 
 							<img
 								className="absolute w-6 h-6  -bottom-1 -right-3 !z-[999]"
@@ -139,7 +139,7 @@ const AdminOverview = () => {
 						className="w-72 md:w-48 flex flex-col justify-center items-center h-72 md:h-48 md:-mt-16 shadow-custom transition-all  hover:scale-110 duration-500 "
 					>
 						<div className="relative">
-							<ImBlog size={72} className="!z-[-999]" />
+							<ImBlog size={72} className="" />
 
 							<img
 								className="absolute w-6 h-6  bottom-1 right-0 !z-[999]"

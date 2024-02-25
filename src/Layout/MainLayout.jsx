@@ -81,7 +81,7 @@ const MainLayout = () => {
       <div className="min-h-[calc(100vh-56px-256px)]">
         <div className="drawer">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col">
+          <div className="drawer-content   flex flex-col">
             <Navrouts
               setToastData={setToastData}
               setIsUnSeenNotification={setIsUnSeenNotification}
@@ -99,7 +99,7 @@ const MainLayout = () => {
             ></label>
             <ul
               style={{ backdropFilter: "blur(30px)" }}
-              className="menu bg-transparent p-4 w-80 min-h-full text-center"
+              className=" menu pt-8 !z-[99999999]  bg-transparent p-4 w-80 min-h-full text-center"
             >
               {/* Sidebar content here */}
               <NavUl></NavUl>
