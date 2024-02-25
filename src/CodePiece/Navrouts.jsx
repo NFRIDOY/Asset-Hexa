@@ -9,10 +9,14 @@ import useAdmin from "../hooks/useAdmin";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hooks/useAxios";
+import { IoMdClose } from "react-icons/io";
+import { AiOutlineMenu } from "react-icons/ai";
+
 
 const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification}) => {
 	const { user, logOut } = useContext(AuthContext);
 	const axiosPublic = useAxios()
+	const [open , setOpen] = useState(true)
 
 
 	const [isAdmin] = useAdmin();
@@ -61,24 +65,17 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 		<div className="w-full navbar p-0 sticky bg-white top-0 z-[99]  ">
 
 			<div className="flex-none lg:hidden">
-				<label
+				<label onClick={() => setOpen(!open)}
 					htmlFor="my-drawer-3"
 					aria-label="open sidebar"
-					className="btn btn-square btn-ghost"
+					className="btn btn-square btn-ghost text-xl"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						className="inline-block w-8 h-8 stroke-current"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="2"
-							d="M4 6h16M4 12h16M4 18h16"
-						></path>
-					</svg>
+					
+					{
+						open ? <AiOutlineMenu /> :<IoMdClose clasn /> 
+					}
+
+
 				</label>
 			</div>
 
