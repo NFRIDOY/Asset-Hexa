@@ -23,8 +23,6 @@ export default function Investments() {
     });
     // console.log(adminState)
 
-
-
     const [total, setTotal] = useState(0);
 
     const [accountData, setAccountData] = useState([]);
