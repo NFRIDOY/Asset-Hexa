@@ -133,8 +133,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "business",
-        // element: <Business></Business>,
-        element: <BusinessForm />,
+        element: <Business></Business>,
+        // element: <BusinessForm />,
       },
       {
         path: "businessForm",
