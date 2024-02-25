@@ -5,7 +5,7 @@ import useAxios from "../../hooks/useAxios";
 import InvestmentRow from "./InvestmentRow";
 
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 
 
 export default function InvestmentTable() {
