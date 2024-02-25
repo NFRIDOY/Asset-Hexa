@@ -20,8 +20,8 @@ export default function BusinessTable() {
 
     // console.log(`${user?.email}`)
     useEffect(() => {
-        // axiosPublic.get(`/bussiness?email=${user?.email}`)
-        axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
+        axiosPublic.get(`/bussiness?email=${user?.email}`)
+        // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 // console.log(res.data)
