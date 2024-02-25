@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import image from "../../../lottie/Animation - 1702402794506.json";
 import { Link } from "react-router-dom";
 
+
 const WhoWeAre = () => {
   return (
     <div className="my-40">
