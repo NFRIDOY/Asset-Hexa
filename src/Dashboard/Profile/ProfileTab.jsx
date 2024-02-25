@@ -2,6 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MyBlogsTable from "./MyBlogsTable";
 import MybusinessTable from "./business/MybusinessTable";
+import MyInvestmentTable from "./investment/MyInvestmentTable";
 
 const ProfileTab = () => {
     return (
@@ -16,13 +17,14 @@ const ProfileTab = () => {
 
                     <TabPanel>
                         <div className="mt-2 space-y-3">
-                           
-                            <MyBlogsTable/>
+
+                            <MyBlogsTable />
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className="mt-8 space-y-3">
-                            <MybusinessTable/>
+                            {/* <MybusinessTable/> */}
+                            <MyInvestmentTable />
                         </div>
                     </TabPanel>
                     {/* <TabPanel>
