@@ -10,7 +10,7 @@ const ProfileTab = () => {
                 <Tabs className={"mt-8"}>
                     <TabList className={"flex font-bold gap-5 justify-center border-b"}>
                         <Tab>My Blogs</Tab>
-                        <Tab>My  Business</Tab>
+                        <Tab>My Investments</Tab>
                         {/* <Tab>My company</Tab> */}
                     </TabList>
 
