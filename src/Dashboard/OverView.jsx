@@ -6,7 +6,9 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { Link } from "react-router-dom";
-import image from "../../src/assets/Nodataforund/NOdata.png"
+import image from "../../src/assets/Nodataforund/NOdata.png";
+import CountUp from "react-countup";
+
 const OverView = () => {
 	// state to hold  erroretext from diffrent modal
 
@@ -64,7 +66,7 @@ const OverView = () => {
 	// This is for Paichart (color and data fo piechart)
 
 	const data01 = [
-		{ name: "Income", value: PiData?.totalIncome  },
+		{ name: "Income", value: PiData?.totalIncome },
 		{ name: "Expanse", value: PiData?.totalExpense },
 	];
 
@@ -115,7 +117,7 @@ const OverView = () => {
 	};
 
 	// this is function to handle Expanse Data from to Post Data
-  // console.log("pidata" , )
+	// console.log("pidata" , )
 
 	const handleSubmitExpanse = (e) => {
 		e.preventDefault();
@@ -243,77 +245,87 @@ const OverView = () => {
 		<div className="p-5  bg-base-300 ">
 			<div className=" ">
 				<div className="bg-white p-4 flex rounded-xl gap-5 overflow-x-auto min-h-40">
-					
+					{AccountData?.length == 0 ? (
+						<div className="flex min-w-[500px] items-center">
+							<img src={image} className="w-44 " alt="" />
+							<div className="space-y-2">
+								<h1 className="text-2xl ">
+									No Account to Show{" "}
+								</h1>
+								<p>
+									Please Add Account first to add income ,
+									expanse and other functionality
+								</p>
+								<Link
+									to="/dashboard/addBalance"
+									className="btn btn-outline text-green-500"
+								>
+									Add Account
+								</Link>
+							</div>
+						</div>
+					) : AccountData ? (
+						AccountData.map((item) => (
+							<div
+								style={{ backgroundColor: getRandomColor() }}
+								key={item?.id}
+								className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8 min-w-48 md:min-w-60 "
+							>
+								<h1 className="text-xl font-medium">
+									{item?.account}
+								</h1>
+								<p className="text-3xl md:text-5xl font-semibold">
+									$
+                  <CountUp end={item?.amount} />
 
-          {
-            AccountData?.length == 0 ? (
-              <div className="flex min-w-[500px] items-center" >
-                <img src={image} className="w-44 " alt="" />
-                <div className="space-y-2">
-                <h1 className="text-2xl ">No Account to Show </h1>
-                <p>Please Add Account first to add income , expanse and other functionality</p>
-                <Link to="/dashboard/addBalance" className="btn btn-outline text-green-500">Add Account</Link>
-                </div>
-              </div>
-            ) : AccountData ? (
-              AccountData.map((item) => (
-                <div
-                  style={{ backgroundColor: getRandomColor() }}
-                  key={item?.id}
-                  className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8 min-w-48 md:min-w-60 "
-                >
-                  <h1 className="text-xl font-medium">
-                    {item?.account}
-                  </h1>
-                  <p className="text-3xl md:text-5xl font-semibold">
-                    ${item?.amount}
-                  </p>
-                </div>
-              ))
-            ) : (
-              <Link
-                to={"../../dashboard/AddBalance"}
-                className="h-32 w-full flex justify-center items-center "
-              >
-                {" "}
-                <p className="btn btn-accent w-fit ">
-                  Create Accounts First
-                </p>
-              </Link>
-            )
-          }
-					
+								</p>
+							</div>
+						))
+					) : (
+						<Link
+							to={"../../dashboard/AddBalance"}
+							className="h-32 w-full flex justify-center items-center "
+						>
+							{" "}
+							<p className="btn btn-accent w-fit ">
+								Create Accounts First
+							</p>
+						</Link>
+					)}
 				</div>
 
 				<div className="flex flex-col lg:flex-row justify gap-5    mt-5  ">
 					<div className="bg-white min-h-[300px]   w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
-						{
-              PiData?.totalIncome == 0 && PiData?.totalExpense == 0 ? <div>
-                <h1>No Data to show</h1>   </div>: <PieChart width={350} height={350}>
-							<Pie
-								dataKey="value"
-								isAnimationActive={false}
-								data={data01}
-								cx="50%"
-								cy="50%"
-								outerRadius={140}
-								fill="#8884d8"
-								label
-							>
-								{data01?.map((entry, index) => (
-									<Cell
-										key={`cell-${index}`}
-										fill={COLORS[index % COLORS.length]}
-									/>
-								))}
-							</Pie>
+						{PiData?.totalIncome == 0 &&
+						PiData?.totalExpense == 0 ? (
+							<div>
+								<h1>No Data to show</h1>{" "}
+							</div>
+						) : (
+							<PieChart width={350} height={350}>
+								<Pie
+									dataKey="value"
+									isAnimationActive={false}
+									data={data01}
+									cx="50%"
+									cy="50%"
+									outerRadius={140}
+									fill="#8884d8"
+									label
+								>
+									{data01?.map((entry, index) => (
+										<Cell
+											key={`cell-${index}`}
+											fill={COLORS[index % COLORS.length]}
+										/>
+									))}
+								</Pie>
 
-							<Tooltip />
-							<Legend />
-						</PieChart>
-            }
-              </div>
-				
+								<Tooltip />
+								<Legend />
+							</PieChart>
+						)}
+					</div>
 
 					<div className="flex-1 relative min-h-[300px] overflow-y-scroll scrollable-content lg:h-[calc(100vh-270px)] bg-white ">
 						<h1 className="text-center    text-2xl my-2 ">
@@ -330,29 +342,33 @@ const OverView = () => {
 								</tr>
 							</thead>
 							<tbody className="  ">
-								{
-                 sortedTransactions?.length == 0 ? <div className="mt-10 md:mt-20  absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 ">
-                  <h1 className="text-2xl ">No Transaction to show</h1>
-                 </div> : sortedTransactions?.map((item) => (
-									<tr key={item?.id} className="hover">
-										<td>
-											{" "}
-											{new Date(
-												item?.date
-											).toLocaleDateString()}{" "}
-										</td>
-										<td>
-											{" "}
-											{new Date(
-												item?.date
-											).toLocaleTimeString()}{" "}
-										</td>
-										<td> {item?.type} </td>
-										{/* <td>{item?.category}</td> */}
-										<td>${item?.amount}</td>
-									</tr>
-								))
-                }
+								{sortedTransactions?.length == 0 ? (
+									<div className="mt-10 md:mt-20  absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 ">
+										<h1 className="text-2xl ">
+											No Transaction to show
+										</h1>
+									</div>
+								) : (
+									sortedTransactions?.map((item) => (
+										<tr key={item?.id} className="hover">
+											<td>
+												{" "}
+												{new Date(
+													item?.date
+												).toLocaleDateString()}{" "}
+											</td>
+											<td>
+												{" "}
+												{new Date(
+													item?.date
+												).toLocaleTimeString()}{" "}
+											</td>
+											<td> {item?.type} </td>
+											{/* <td>{item?.category}</td> */}
+											<td>${item?.amount}</td>
+										</tr>
+									))
+								)}
 							</tbody>
 						</table>
 					</div>
