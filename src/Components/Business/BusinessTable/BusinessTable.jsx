@@ -16,14 +16,14 @@ export default function BusinessTable() {
 
     const axiosPublic = useAxios();
 
-    const [investments, setInvestments] = useState([]);
+    const [myBusiness, setMyBusiness] = useState([]);
 
     // console.log(`${user?.email}`)
     useEffect(() => {
         axiosPublic.get(`/bussiness?email=${user?.email}`)
         // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
             .then((res) => {
-                setInvestments(res.data)
+                setMyBusiness(res.data)
                 // console.log(res.data)
             })
         // .catch((error) => console.log(error))
@@ -53,13 +53,13 @@ export default function BusinessTable() {
                 </thead>
                 <tbody className="">
                     {
-                        ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <BusinessTableRow key={investment?._id} investment={investment} index={index + 1} />) : null
+                        ((myBusiness.length !== 0) || myBusiness) ? myBusiness?.map((investment, index) => <BusinessTableRow key={investment?._id} investment={investment} index={index + 1} />) : null
                     }
                 </tbody>
 
             </table>
             {
-                (investments.length === 0) ? <div
+                (myBusiness.length === 0) ? <div
                     className="flex flex-col justify-center items-center my-10">
                     <div>
                         <div className=" w-fit  col-span-12 text-center flex justify-center">
