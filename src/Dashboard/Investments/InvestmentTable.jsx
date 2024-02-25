@@ -18,8 +18,8 @@ export default function InvestmentTable() {
 
     // console.log(`${user?.email}`)
     useEffect(() => {
-        // axiosPublic.get(`/investments?email=${user?.email}`)
-        axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+        axiosPublic.get(`/investments?email=${user?.email}`)
+        // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 // console.log(res.data)
