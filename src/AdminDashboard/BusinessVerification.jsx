@@ -22,7 +22,7 @@ const BusinessVerification = () => {
 
 	if (loading) return <Loader />;
 	return (
-		<div className="bg-base-300 h-screen ">
+		<div className="bg-base-300 min-h-screen ">
 			<div className=" overflow-scroll md:overflow-x-hidden">
 				<table className="table  table-pin-rows table-lg text-center">
 					{/* head */}

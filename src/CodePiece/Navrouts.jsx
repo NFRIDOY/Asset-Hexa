@@ -72,7 +72,7 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 				>
 					
 					{
-						open ? <AiOutlineMenu /> :<IoMdClose clasn /> 
+						open ? <AiOutlineMenu /> :<IoMdClose  /> 
 					}
 
 
