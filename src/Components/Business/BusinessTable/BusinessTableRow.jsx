@@ -8,10 +8,7 @@ export default function BusinessTableRow({ investment, index }) {
             <th>{index}</th>
             <th><img src={BrandImage} alt="" className="h-10" /></th>
             <td>{CompanyName}</td>
-            <td>{investment?.investment}</td>
             <td>{totalInvestment}</td>
-            {/* <td>{investor}</td> */}
-            {/* <td>Blue</td> */}
         </tr>
     )
 }

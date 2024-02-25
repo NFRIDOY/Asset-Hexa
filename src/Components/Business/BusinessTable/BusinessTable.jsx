@@ -21,7 +21,7 @@ export default function BusinessTable() {
     // console.log(`${user?.email}`)
     useEffect(() => {
         axiosPublic.get(`/bussiness?email=${user?.email}`)
-        // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
+            // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
             .then((res) => {
                 setMyBusiness(res.data)
                 // console.log(res.data)
@@ -45,8 +45,8 @@ export default function BusinessTable() {
                         <th></th>
                         <th>Brand Logo</th>
                         <th>BrandName</th>
-                        <th>Invesment</th>
-                        <th>Total Invesment</th>
+                        {/* <th>Invesment</th> */}
+                        <th>Collection</th>
                         {/* <th>profit</th>
                         <th>view Business</th> */}
                     </tr>

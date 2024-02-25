@@ -29,8 +29,9 @@ export default function Business() {
     const [total, setTotal] = useState(0);
 
     const [accountData, setAccountData] = useState([]);
-    const [investments, setInvestments] = useState([]);
+    const [myTotalBusiness, setMyTotalBusiness] = useState([]);
     const [totalInvestments, setTotalInvestments] = useState(0);
+    const [myBlogs, setMyBlogs] = useState(0);
 
     useEffect(() => {
         axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
@@ -43,18 +44,24 @@ export default function Business() {
         );
         setTotal(totalAmount);
 
-        axiosPublic.get(`/investments?email=${user?.email}`)
+        axiosPublic.get(`/bussiness?email=${user?.email}`)
             // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
-                setInvestments(res.data)
+                setMyTotalBusiness(res.data)
                 // console.log(res.data)
             })
 
-        const totalInvestment = investments.reduce(
+        const totalInvestment = myTotalBusiness.reduce(
             // (total, item) => total + parseInt(item?.invest),
-            (total, item) => total + parseInt(item?.investment),
+            (total, item) => total + parseInt(item?.totalInvestment),
             0
         );
+        axiosPublic.get(`/blog/${user?.email}`)
+            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+            .then((res) => {
+                setMyBlogs(res.data)
+                // console.log(res.data)
+            })
         setTotalInvestments(totalInvestment);
     }, [user, accountData, setTotal]);
 
@@ -77,17 +84,24 @@ export default function Business() {
                 </div> */}
                         <div className="flex justify-center gap-10 w-full">
                             <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
-                                <h1 className="text-base font-medium">Total Asset</h1>
-                                <p className="text-3xl md:text-5xl font-semibold">{total}</p>
+                                <h1 className="text-base font-medium">My Blog Post</h1>
+                                <p className="text-3xl md:text-5xl font-semibold">{myBlogs.length}</p>
                             </div>
                             <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
-                                <h1 className="text-base font-medium">Total Investments</h1>
+                                <h1 className="text-base font-medium">Total Collection</h1>
                                 <p className="text-3xl md:text-5xl font-semibold">{totalInvestments}</p>
+                            </div>
+                            <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#38ffca] to-[#20ae65]  px-8 min-w-48 md:min-w-56 ">
+                                <h1 className="text-base font-medium">
+                                    {" "}
+                                    My Business posted{" "}
+                                </h1>
+                                <p className="text-3xl md:text-5xl font-semibold">{myTotalBusiness.length}</p>
                             </div>
                             <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
                                 <h1 className="text-base font-medium">
                                     {" "}
-                                    Business posted{" "}
+                                    Total Business posted{" "}
                                 </h1>
                                 <p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
                             </div>
