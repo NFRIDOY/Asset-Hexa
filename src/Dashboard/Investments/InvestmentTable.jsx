@@ -19,7 +19,7 @@ export default function InvestmentTable() {
     // console.log(`${user?.email}`)
     useEffect(() => {
         axiosPublic.get(`/investments?email=${user?.email}`)
-        // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setInvestments(res.data)
                 // console.log(res.data)
@@ -41,12 +41,13 @@ export default function InvestmentTable() {
                 <thead >
                     <tr className="">
                         <th></th>
-                        <th>Brand Logo</th>
-                        <th>BrandName</th>
+                        <th>Brand</th>
+                        <th>Name</th>
+                        <th>Total Invest</th>
                         <th>Invesment</th>
-                        <th>Total Invesment</th>
-                        {/* <th>profit</th>
-                        <th>view Business</th> */}
+                        <th>Profit(%)</th>
+                        {/* <th>Profit Amount</th> */}
+                        {/* <th>view Business</th> */}
                     </tr>
                 </thead>
                 <tbody className="">

@@ -47,8 +47,9 @@ export default function BusinessTable() {
                         <th>BrandName</th>
                         {/* <th>Invesment</th> */}
                         <th>Collection</th>
-                        {/* <th>profit</th>
-                        <th>view Business</th> */}
+                        <th>Profit(%)</th>
+                        {/* <th>Profit Amount / Month</th> */}
+                        {/* <th>view Business</th> */}
                     </tr>
                 </thead>
                 <tbody className="">
@@ -67,11 +68,11 @@ export default function BusinessTable() {
                                 No Data
                             </span>
                         </div>
-                        <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
+                        {/* <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
                             <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
                                 Invest Now
                             </span>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div> : null
             }
