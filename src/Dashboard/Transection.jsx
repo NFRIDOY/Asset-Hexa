@@ -9,7 +9,7 @@ const Transection = () => {
   const { transections: tranfers } = useTransection("TRANSFER");
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto min-h-screen p-10 bg-white rounded-lg font-bold text-2xl uppercase">
       <Tabs className={"mt-8"}>
         <TabList className={"flex gap-5 justify-center border-b"}>
           <Tab>Income</Tab>
@@ -18,7 +18,7 @@ const Transection = () => {
         </TabList>
 
         <TabPanel>
-          <div className="mt-8 space-y-3">
+          <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
             {incomes.length ? (
               incomes.map((transection) => (
                 <TransectionColumn
@@ -34,7 +34,7 @@ const Transection = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="mt-8 space-y-3">
+          <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
             {expenses.length ? (
               expenses.map((transection) => (
                 <TransectionColumn
@@ -50,7 +50,7 @@ const Transection = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="mt-8 space-y-3">
+          <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
             {tranfers.length ? (
               tranfers.map((transection) => (
                 <TransectionColumn

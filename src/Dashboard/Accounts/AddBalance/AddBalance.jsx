@@ -15,8 +15,8 @@ const AddBalance = () => {
       e.preventDefault();
       const form = e.target;
       const group = form.group.value;
-      const account = form.name.value;
-      const amount = form.amount.value;
+      const account = form.account.value;
+      const amount = parseFloat(form.amount.value);
       const description = form.description.value;
       const addBalance = {
          group, account, amount, description,  email: user?.email,
@@ -73,7 +73,7 @@ const AddBalance = () => {
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Amount</span>
                </label>
-               <input name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
+               <input name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text"  />
             </div>
             <div className="flex gap-[49px] mb-5">
                <label className="label w-fit">

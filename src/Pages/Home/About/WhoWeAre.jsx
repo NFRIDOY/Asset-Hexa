@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import image from "../../../lottie/Animation - 1702402794506.json";
 import { Link } from "react-router-dom";
 
+
 const WhoWeAre = () => {
   return (
     <div className="my-40">
@@ -39,11 +40,13 @@ const WhoWeAre = () => {
               partners, your financial guardians, walking alongside you on your
               journey to wealth and freedom.
             </p>
-            <Link to="">
+           <a href="#contact">
               <button className="btn bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  text-white  btn-outline  mt-2 ">
                 Contact us
               </button>
-            </Link>
+
+           </a>
+            
           </div>
         </div>
       </div>

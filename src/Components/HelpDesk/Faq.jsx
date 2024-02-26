@@ -72,11 +72,11 @@ const Faq = () => {
     //     </div>
     //   </div>
     // </div>
-    <div className="flex flex-col lg:flex-row items-center max-w-7xl">
-      <div>
-        <img src={faqImage} alt="" />
+    <div className="flex flex-col lg:flex-row items-center max-w-7xl mx-auto my-40">
+      <div className="flex-1">
+        <img src={faqImage} alt="faq image" />
       </div>
-      <div>
+      <div className="flex-1">
         <div className="join join-vertical w-full bg-[#34D399] text-white">
           <div className="collapse collapse-arrow join-item border border-base-300">
             <input type="radio" name="my-accordion-4" checked="checked" />
@@ -84,7 +84,11 @@ const Faq = () => {
               How do I log in to my account?
             </div>
             <div className="collapse-content">
-              <p>To log in, visit our website and click on the Log In button. Enter your username and password, and you will have access to your account.</p>
+              <p>
+                To log in, visit our website and click on the Log In button.
+                Enter your username and password, and you will have access to
+                your account.
+              </p>
             </div>
           </div>
           <div className="collapse collapse-arrow join-item border border-base-300">
@@ -93,14 +97,16 @@ const Faq = () => {
               Can I use your website on my mobile phone?
             </div>
             <div className="collapse-content">
-              <p>Yes, our website is mobile-friendly. You can access and manage your finances on the go by using your smartphone or tablet.
+              <p>
+                Yes, our website is mobile-friendly. You can access and manage
+                your finances on the go by using your smartphone or tablet.
               </p>
             </div>
           </div>
           <div className="collapse collapse-arrow join-item border border-base-300">
             <input type="radio" name="my-accordion-4" />
             <div className="collapse-title text-xl font-medium">
-            Is there a fee for creating an account?
+              Is there a fee for creating an account?
             </div>
             <div className="collapse-content">
               <p>No, creating an account on our platform is completely free.</p>
