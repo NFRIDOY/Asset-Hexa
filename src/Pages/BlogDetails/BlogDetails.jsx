@@ -205,6 +205,7 @@ const BlogDetails = () => {
       mongoDate
     );
     const commentData = {
+      commentId: blog?.comments?.length + 1,
       text,
       commenter: user?.displayName,
       commenterEmail: user?.email,
@@ -319,6 +320,7 @@ const BlogDetails = () => {
       <div className="mt-20 max-w-7xl mx-auto">
         <CommentSection
           comments={blog?.comments}
+          id={blog._id}
           handlePostComment={handlePostComment}
         />
       </div>
