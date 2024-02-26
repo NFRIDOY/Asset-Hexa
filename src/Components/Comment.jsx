@@ -2,10 +2,24 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
+import { useDeleteCommentMutation } from "../features/blogSlice";
+import useAuth from "../hooks/useAuth";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, id }) => {
   const [isShow, setIsShow] = useState(false);
-  const { commenter, text, time } = comment;
+  const { commenter, text, time, commentId } = comment;
+  const { user } = useAuth();
+  const [deleteComment] = useDeleteCommentMutation();
+
+  const handleDeleteComment = () => {
+    const data = {
+      id: id,
+      commentID: commentId,
+      email: user?.email,
+    };
+
+    deleteComment(data);
+  };
   return (
     <>
       <div className="chat chat-start text-white">
@@ -22,6 +36,7 @@ const Comment = ({ comment }) => {
             <BsThreeDots />
           </button>
           <button
+            onClick={handleDeleteComment}
             className={`btn btn-xs text-xl absolute text-red-500 transition-all duration-500 ${
               isShow ? "-right-12 block" : "hidden"
             } `}
@@ -36,5 +51,6 @@ const Comment = ({ comment }) => {
 
 Comment.propTypes = {
   comment: PropTypes.object,
+  id: PropTypes.string,
 };
 export default Comment;
