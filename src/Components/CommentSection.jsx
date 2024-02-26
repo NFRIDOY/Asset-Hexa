@@ -8,7 +8,7 @@ const CommentSection = ({ comments, handlePostComment }) => {
       <h2 className="text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-white px-2 ">
         — Comments
       </h2>
-      <div className="w-full bg-emerald-300 flex flex-col-reverse md:flex-row pt-5 mt-5 rounded-t-lg">
+      <div className="w-full bg-emerald-600 flex flex-col-reverse md:flex-row pt-5 mt-5 rounded-t-lg">
         <div className="flex-1 p-5">
           {comments?.length ? (
             comments?.map((comment, idx) => (
