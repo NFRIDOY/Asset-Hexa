@@ -1,12 +1,5 @@
-import { Link } from "react-router-dom";
 import InvestmentTable from "./investmentTable";
-
-import { ImBlog } from "react-icons/im";
-import { FaUserAlt } from "react-icons/fa";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
-import { IoMdBusiness } from "react-icons/io";
-// import verified from "../assets/dashboard/varified.png";
-import verified from "../../assets/dashboard/varified.png";
 import "../../../src/App.css";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -29,8 +22,6 @@ export default function Investments() {
         },
     });
     // console.log(adminState)
-
-
 
     const [total, setTotal] = useState(0);
 

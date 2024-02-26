@@ -76,6 +76,14 @@ export const blogApi = createApi({
       }),
       invalidatesTags: ["blogAPI"],
     }),
+    // Delete Comment
+    deleteComment: builder.mutation({
+      query: (data) => ({
+        url: `/blog/deleteComment/${data?.id}?email=${data?.email}&commentID=${data?.commentID}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["blogAPI"],
+    }),
   }),
 });
 // invalidatesTags: ["BlogAPI"], for mutations {update,delete,create}
@@ -89,4 +97,5 @@ export const {
   useAddToBookmarkMutation,
   useUpdateVerificationMutation,
   useUnlikeOrUndislikeMutation,
+  useDeleteCommentMutation,
 } = blogApi;

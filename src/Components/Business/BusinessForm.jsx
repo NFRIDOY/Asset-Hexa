@@ -1,4 +1,3 @@
-import axios from "axios";
 import useAuth from "../../hooks/useAuth"
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
