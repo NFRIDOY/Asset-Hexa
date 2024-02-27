@@ -8,7 +8,7 @@ import { IoStatsChartSharp } from "react-icons/io5";
 import { MdAccountBalance } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMenu } from "react-icons/ai";
-
+import budget from "../assets/dashboard/budget-preview.png"
 const Dashboard = () => {
   return (
     <div className="h-screen  bg-base-300 min-w-full  mx-auto">
@@ -97,6 +97,20 @@ const Dashboard = () => {
                   <MdAccountBalance />
                   Accounts
                 </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex  gap-3 items-center bg-[#38d626] text-white p-2 rounded-xl  pr-4"
+                      : "flex  p-2 items-center mr-4 gap-3"
+                  }
+                  to="/dashboard/budget"
+                >
+                  <div className="flex gap-2 justify-between">
+                  <img src={budget} className="w-8" alt="" />
+                  Budget
+                  </div>
+                </NavLink>
+
 
                 <NavLink
                   className={({ isActive }) =>
@@ -142,16 +156,7 @@ const Dashboard = () => {
                   <CgProfile />
                   Profile
                 </NavLink>
-                {/* <NavLink
-									className={({ isActive }) =>
-										isActive
-											? "text-black flex px-4 gap-3 items-center bg-[#00EC25] p-2 rounded-xl  pr-4"
-											: "flex px-4 p-2 items-center mr-4 gap-3"
-									}
-									to="/dashboard/addBlog"
-								>
-									<MdOutlineDashboard /> Add Blog
-								</NavLink> */}
+                
               </ul>
             </div>
 

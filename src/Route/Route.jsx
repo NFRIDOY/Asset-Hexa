@@ -34,6 +34,7 @@ import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
 import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
+import Budget from "../Dashboard/Budget/Budget";
 
 export const router = createBrowserRouter([
   {
@@ -123,6 +124,7 @@ export const router = createBrowserRouter([
         element: <AddBalance></AddBalance>,
       },
 
+
       {
         path: "addBlog",
         element: <AddBlog />,
@@ -157,6 +159,10 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
+      {
+        path:"budget",
+        element: <Budget></Budget>
+      }
     ],
   },
   {
