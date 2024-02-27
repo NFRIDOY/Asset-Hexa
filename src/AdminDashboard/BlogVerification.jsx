@@ -23,8 +23,8 @@ const BlogVerification = () => {
 	if (loading) return <Loader />;
 
     return (
-       <div className="bg-base-300 h-screen">
-			<div className="overflow-x-scroll md:overflow-x-hidden">
+       <div className="bg-base-300 min-h-screen">
+			<div className="overflow-x-scroll ">
 				<table className="table table-pin-rows table-lg text-center">
 					{/* head */}
 					<thead>

@@ -1,53 +1,40 @@
-import { useEffect, useState } from "react"
-import useAuth from './../../hooks/useAuth';
+import { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxios from '../../../hooks/useAxios';
+import InvestmentRow from '../../Investments/InvestmentRow';
+import { Link } from 'react-router-dom';
 
-import useAxios from "../../hooks/useAxios";
-import InvestmentRow from "./InvestmentRow";
-
-import { Link } from "react-router-dom";
-
-
-
-export default function InvestmentTable() {
-
+const MyInvestmentTable = () => {
     const { user } = useAuth();
 
     const axiosPublic = useAxios();
 
     const [investments, setInvestments] = useState([]);
 
-    // console.log(`${user?.email}`)
     useEffect(() => {
         axiosPublic.get(`/investments?email=${user?.email}`)
-            // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
+
             .then((res) => {
                 setInvestments(res.data)
-                // console.log(res.data)
+
             })
-        // .catch((error) => console.log(error))
-    }, [])
+
+    }, [axiosPublic, user])
+
 
     return (
-        // <div className="h-[calc(100vh-280px)] lg:mx-5 w-full">
-        // <div className="h-full lg:mx-5 w-full overflow-x-hidden ">
-        // <div className="bg-white w-full lg:max-h-[calc(100vh-280px)] flex gap-5 items-center overflow-auto">
-        <div className="table table-pin-rows table-md md:table-lg  text-center">
-            {/* <div className="bg-white w-full overflow-auto"> */}
-            {/* <h1>
-                investmentTable
-            </h1> */}
-            <table className="table table-xs lg:table-lg">
-                {/* head */}
+
+        <div className="bg-white w-full overflow-auto">
+
+            <table className="table-auto w-full md:table md:table-xs lg:table-lg">
+
                 <thead >
                     <tr className="">
-                        <th></th>
-                        <th>Brand</th>
-                        <th>Name</th>
-                        <th>Total Invest</th>
-                        <th>Invesment</th>
-                        <th>Profit(%)</th>
-                        {/* <th>Profit Amount</th> */}
-                        {/* <th>view Business</th> */}
+                        <th className="hidden md:table-cell"></th>
+                        <th className="hidden md:table-cell"></th>
+                        <th className="hidden md:table-cell">BrandName</th>
+                        <th className="hidden md:table-cell">Invesment</th>
+
                     </tr>
                 </thead>
                 <tbody className="">
@@ -76,4 +63,6 @@ export default function InvestmentTable() {
             }
         </div >
     )
-}
+};
+
+export default MyInvestmentTable;
