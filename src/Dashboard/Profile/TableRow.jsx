@@ -25,13 +25,13 @@ const TableRow = ({ blog, handelDelete }) => {
           </div>
         </div>
       </td>
-      {/* <td className='border-gray-200 bg-white ' >
-        <Link to={`/dashboard/updateblogs/${blog._id}`}>
+      <td className='border-gray-200 bg-white ' >
+        <Link to={`/dashboard/updateblogs/${_id}`}>
           <button className="ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none border-none hover:bg-primaryColor text-white btn btn-sm">
             Update
           </button>
         </Link>
-      </td> */}
+      </td>
       <td className='border-gray-200 bg-white '>
         <div >
           <button

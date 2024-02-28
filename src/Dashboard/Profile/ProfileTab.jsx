@@ -27,11 +27,11 @@ const ProfileTab = () => {
                             <MyInvestmentTable />
                         </div>
                     </TabPanel>
-                    {/* <TabPanel>
+                    <TabPanel>
                         <div className="mt-8 space-y-3">
                             <h1>Investments</h1>
                         </div>
-                    </TabPanel> */}
+                    </TabPanel>
                 </Tabs>
             </div>
         </div>
