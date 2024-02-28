@@ -80,10 +80,7 @@ export const router = createBrowserRouter([
     path: "login",
     element: <Login />,
   },
-  {
-    path: "UpdateProfile",
-    element: <UpdateProfile />,
-  },
+  
 
   {
     path: "register",
@@ -153,6 +150,12 @@ export const router = createBrowserRouter([
         path: "updateblogs/:id",
         element: <UpdateBlog />,
         loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/blogs/${params.id}`)
+      },
+
+      {
+        path: "UpdateProfile/:id",
+        element: <UpdateProfile />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/users/${params.id}`)
       },
       {
         path: "addBlog",
