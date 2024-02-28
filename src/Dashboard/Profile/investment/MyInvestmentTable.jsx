@@ -30,10 +30,12 @@ const MyInvestmentTable = () => {
 
                 <thead >
                     <tr className="">
-                        <th className="hidden md:table-cell"></th>
-                        <th className="hidden md:table-cell"></th>
-                        <th className="hidden md:table-cell">BrandName</th>
+                        <th className="hidden md:table-cell">index</th>
+                        <th className="hidden md:table-cell">Brand</th>
+                        <th className="hidden md:table-cell">Name</th>
+                        <th className="hidden md:table-cell">Total Invest</th>
                         <th className="hidden md:table-cell">Invesment</th>
+                        <th className="hidden md:table-cell">Profit(%)</th>
 
                     </tr>
                 </thead>
