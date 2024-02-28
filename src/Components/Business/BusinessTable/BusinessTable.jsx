@@ -48,7 +48,7 @@ export default function BusinessTable() {
                         {/* <th>Invesment</th> */}
                         <th>Collection</th>
                         <th>Profit(%)</th>
-                        {/* <th>Profit Amount / Month</th> */}
+                        <th>Profit Amount</th>
                         {/* <th>view Business</th> */}
                     </tr>
                 </thead>

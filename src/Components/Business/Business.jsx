@@ -31,6 +31,7 @@ export default function Business() {
     const [accountData, setAccountData] = useState([]);
     const [myTotalBusiness, setMyTotalBusiness] = useState([]);
     const [totalInvestments, setTotalInvestments] = useState(0);
+    const [totalProfitDist, setTotalProfitDist] = useState(0);
     const [myBlogs, setMyBlogs] = useState(0);
 
     useEffect(() => {
@@ -53,16 +54,22 @@ export default function Business() {
 
         const totalInvestment = myTotalBusiness.reduce(
             // (total, item) => total + parseInt(item?.invest),
-            (total, item) => total + parseInt(item?.totalInvestment),
+            (total, item) => total + parseFloat(item?.totalInvestment),
             0
         );
+        setTotalInvestments(totalInvestment);
+        const getTotalProfitDist = myTotalBusiness.reduce(
+            // (total, item) => total + parseInt(item?.invest),
+            (total, item) => total + parseFloat((item?.totalInvestment * item?.Profit) / 100),
+            0
+        );
+        setTotalProfitDist(getTotalProfitDist)
         axiosPublic.get(`/blog/${user?.email}`)
             // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
             .then((res) => {
                 setMyBlogs(res.data)
                 // console.log(res.data)
             })
-        setTotalInvestments(totalInvestment);
     }, [user, accountData, setTotal]);
 
     const data01 = [
@@ -93,7 +100,7 @@ export default function Business() {
                             </div>
                             <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#8773cc] to-[#6637db]  px-8  min-w-48 md:min-w-56">
                                 <h1 className="text-base font-medium">Total Profit</h1>
-                                <p className="text-3xl md:text-5xl font-semibold">{0}</p>
+                                <p className="text-3xl md:text-5xl font-semibold">{totalProfitDist}</p>
                             </div>
                             <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#38ffca] to-[#20ae65]  px-8 min-w-48 md:min-w-56 ">
                                 <h1 className="text-base font-medium">
