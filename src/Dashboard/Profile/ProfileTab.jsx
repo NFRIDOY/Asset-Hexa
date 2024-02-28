@@ -11,8 +11,8 @@ const ProfileTab = () => {
                 <Tabs className={"mt-8"}>
                     <TabList className={"flex font-bold gap-5 justify-center border-b"}>
                         <Tab>My Blogs</Tab>
+                        <Tab>My Business</Tab>
                         <Tab>My Investments</Tab>
-                        {/* <Tab>My company</Tab> */}
                     </TabList>
 
                     <TabPanel>
@@ -23,13 +23,13 @@ const ProfileTab = () => {
                     </TabPanel>
                     <TabPanel>
                         <div className="mt-8 space-y-3">
-                            {/* <MybusinessTable/> */}
-                            <MyInvestmentTable />
+                           <MybusinessTable/>
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className="mt-8 space-y-3">
-                            <h1>Investments</h1>
+                            
+                            <MyInvestmentTable />
                         </div>
                     </TabPanel>
                 </Tabs>

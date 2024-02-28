@@ -1,68 +1,139 @@
-import  { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
-import useAxios from '../../../hooks/useAxios';
-import InvestmentRow from '../../Investments/InvestmentRow';
-import { Link } from 'react-router-dom';
+// import { useContext, useEffect, useState } from "react";
+// import TableRow from "./TableRow";
+
+import BusinessTable from "./BusinessTable";
+
+// import { AuthContext } from "../../providers/AuthProvider";
+// import Loader from "../../Route/loader";
+
+// import Swal from "sweetalert2";
 
 const MybusinessTable = () => {
-  const { user } = useAuth();
 
-  const axiosPublic = useAxios();
-
-  const [investments, setInvestments] = useState([]);
-
-  useEffect(() => {
-      axiosPublic.get(`/investments?email=${user?.email}`)
-          
-          .then((res) => {
-              setInvestments(res.data)
-            
-          })
-    
-  }, [axiosPublic,user])
+//   const { user  } = useContext(AuthContext);
+//   // console.log(user);
+//   const [loading, setLoading] = useState(true);
+//   const [blogs, setBlogs] = useState([]);
 
 
-return (
+//   useEffect(() => {
+//     setLoading(true);
+//     fetch(`https://asset-hexa-server.vercel.app/blog/${user?.email}`)
+//       .then(res => res.json())
+//       .then(data => setBlogs(data))
+//       setLoading(false);
+//   }, [user]);
 
-  <div className="bg-white w-full overflow-auto">
-     
-      <table className="table-auto w-full md:table md:table-xs lg:table-lg">
-          
-          <thead >
+//   // console.log(blogs);
+
+//   const handelDelete = id => {
+//     Swal.fire({
+//         title: 'Are you sure?',
+//         text: "You won't be able to recover this blog!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!',
+//         cancelButtonText: 'No, cancel!',
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             fetch(`https://asset-hexa-server.vercel.app/blogs/${id}`, {
+//                 method: 'DELETE'
+//             })
+//             .then(res => res.json())
+//             .then(data => {
+//                 console.log(data);
+
+//                 if (data.deletedCount > 0) {
+//                     Swal.fire({
+//                         position: 'center',
+//                         icon: 'success',
+//                         title: 'Your Blog has been Deleted!',
+//                         showConfirmButton: false,
+//                         timer: 1500,
+//                     });
+
+//                     const remaining = blogs.filter(blog => blog._id !== id);
+//                     setBlogs(remaining);
+//                 }
+//             });
+//         } else if (result.isDismissed) {
+//             Swal.fire({
+//                 title: 'Cancelled',
+//                 text: 'Your blog is safe!',
+//                 icon: 'error',
+//                 confirmButtonText: 'OK!',
+//             });
+//         }
+//     });
+// };
+
+
+//   if (loading) return <Loader />;
+
+
+  return (
+    <div className='container mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24 2xl:px-28'>
+      <div className='py-8'>
+        <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
+          <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
+            <table className='min-w-full leading-normal'>
+              <thead>
               <tr className="">
-                  <th className="hidden md:table-cell"></th>
-                  <th className="hidden md:table-cell"></th>
-                  <th className="hidden md:table-cell">BrandName</th>
-                  <th className="hidden md:table-cell">Invesment</th>
-                 
-              </tr>
-          </thead>
-          <tbody className="">
-              {
-                  ((investments.length !== 0) || investments) ? investments?.map((investment, index) => <InvestmentRow key={investment?._id} investment={investment} index={index + 1} />) : null
-              }
-          </tbody>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Author Name
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Title 
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Image 
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Update
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Delete
+                    </th>
 
-      </table>
-      {
-          (investments.length === 0) ? <div
-              className="flex flex-col justify-center items-center my-10">
-              <div>
-                  <div className=" w-fit  col-span-12 text-center flex justify-center">
-                      <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
-                          No Data
-                      </span>
-                  </div>
-                  <Link to={"/businesses"} className=" w-fit  flex justify-center btn btn-warning my-8">
-                      <span className="text-xl w-fit text-black font-bold text-center flex justify-center">
-                          Invest Now
-                      </span>
-                  </Link>
-              </div>
-          </div> : null
-      }
-  </div >
-)
+                  </tr>
+              </thead>
+              <tbody>
+                {/* {
+                  blogs.map(blog => <TableRow
+                    key={blog._id}
+                    blog={blog}
+                    handelDelete={handelDelete}
+                  />)
+                } */}
+
+                    <BusinessTable/>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  
+
 };
 
 export default MybusinessTable;
