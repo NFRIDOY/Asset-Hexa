@@ -2,49 +2,62 @@
 // import useAuth from "../../api/useAuth";
 // import useAxios from "../../hooks/useAxios";
 
+import {  useLoaderData, useLocation, useNavigate } from "react-router-dom";
+
+import Swal from "sweetalert2";
+
 const UpdateBlog = () => {
 
-   
-    // const { user } = useAuth();
-    
-    // const axiosPublic = useAxios();
+   const blog = useLoaderData();
 
+   const {_id,title,description,image} = blog;
+
+   const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || "/dashboard/profile";
     
     
-    // const handleUpdateBlog = (e) => {
-    //   e.preventDefault();
-    //   const form = e.target;
-    //   const title = form.title.value;
-    //   const description = form.description.value;
-    //   const image = form.image.value;
+    
+    const handleUpdateBlog = (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const title = form.title.value;
+      const description = form.description.value;
+      const image = form.image.value;
   
      
   
-    //   const data = {
+      const data = {
         
-    //     title,
-    //     description,
-    //     image,
+        title,
+        description,
+        image,
        
-    //   };
-    //   // console.log(formattedDate);
-    //   axiosPublic
-    //   .patch(`/blog/${user?.email}`, data)
-    //   .then((res) => {
-    //     if (res.data?.modifiedCount) {
-    //       Swal.fire({
-    //         position: "center",
-    //         icon: "success",
-    //         title: "Your Blogs has been update!",
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       });
-          
-    //       e.target.reset();
-    //     }
-    //   });
+      };
+
+      fetch(`https://asset-hexa-server.vercel.app/blogs/${_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          navigate(from, { replace: true })
+          Swal.fire({
+            title: 'success!',
+            text: 'Update Succesfull',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+          })
+        }
+        
+       
+
+      });
   
-    // }
+    }
 
     return (
         // <div className=" bg-[#91F0AC]"> {/*  */}
@@ -60,7 +73,7 @@ const UpdateBlog = () => {
             
             
             <div className="  p-6 rounded-md bg-gradient-to-tr from-[#8dc487] to-[#b7f4b1f7]   w-1/2   ">
-              <form  >
+              <form onSubmit={handleUpdateBlog} >
                 <div className=" mb-2">
                   <label className="label">
                     <span className="label-text text-3xl font-bold text-[#000]">
@@ -71,6 +84,7 @@ const UpdateBlog = () => {
                   <input
                     name="title"
                     type="text"
+                    defaultValue={title}
                     placeholder="type "
                     className="shadow-xl outline-none input input-bordered input-primary w-full"
                     required
@@ -85,6 +99,7 @@ const UpdateBlog = () => {
                   <textarea
                     name="description"
                     className="w-full shadow-xl textarea textarea-primary"
+                    defaultValue={description}
                     placeholder="type"
                     required
                   ></textarea>
@@ -98,6 +113,7 @@ const UpdateBlog = () => {
                   <input
                     name="image"
                     type="text"
+                    defaultValue={image}
                     placeholder="image url"
                     className="shadow-xl input input-bordered input-primary w-full"
                     required

@@ -152,6 +152,7 @@ export const router = createBrowserRouter([
       {
         path: "updateblogs/:id",
         element: <UpdateBlog />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/blogs/${params.id}`)
       },
       {
         path: "addBlog",
