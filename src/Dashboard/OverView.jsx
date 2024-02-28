@@ -8,6 +8,7 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { Link } from "react-router-dom";
 import image from "../../src/assets/Nodataforund/NOdata.png";
 import CountUp from "react-countup";
+import axios from "axios";
 
 const OverView = () => {
 	// state to hold  erroretext from diffrent modal
@@ -151,7 +152,9 @@ const OverView = () => {
 			setExpanseText("");
 			// console.log(expanseData);
 			form.reset();
-			axiosPublic.post("/transections", expanseData).then((res) => {
+			// axiosPublic.post("/transections", expanseData)
+			axios.post("http://localhost:5000/transections", expanseData)
+			.then((res) => {
 				// console.log(res.data);
 				if (res?.data.resultAccount.acknowledged) {
 					toast.success("Expanse Data added Successfully");
