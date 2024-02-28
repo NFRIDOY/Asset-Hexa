@@ -10,8 +10,8 @@ export default function BusinessTableRow({ investment, index }) {
             <td>{CompanyName}</td>
             <td>{totalInvestment}</td>
             <td>{Profit}%</td>
+            <td className="">{Profit * totalInvestment / 100}</td>
             {/* <td className="w-full border-2 text-center">{Profit * totalInvestment / 100}</td> */}
-            {/* <td className="">{Profit * totalInvestment / 100}</td> */}
         </tr>
     )
 }
