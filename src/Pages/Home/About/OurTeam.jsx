@@ -30,7 +30,7 @@ const OurTeam = () => {
 
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/Ariful2634" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor"
                     style={20}
@@ -75,7 +75,7 @@ const OurTeam = () => {
 
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/NFRIDOY" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor"
                     style={20}
@@ -120,7 +120,7 @@ const OurTeam = () => {
 
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/Rezuan-Alam-Rean" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor"
                     style={20}
@@ -169,7 +169,7 @@ const OurTeam = () => {
 
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/Mustafiz82" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor"
                     style={20}
@@ -217,7 +217,7 @@ const OurTeam = () => {
             <p className="-m-2">mdmehediislammoksedul@gmail.com</p>
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/mehediislamm" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor"
                     style={20}
@@ -262,7 +262,7 @@ const OurTeam = () => {
 
             <div className=" flex gap-4 mt-5  ">
               <div className="flex text-xl">
-                <a href="">
+                <a href="https://github.com/Radiat09" target="__blank">
                   <FaGithub
                     className="mt-1 text-primaryColor text-black"
                     style={20}

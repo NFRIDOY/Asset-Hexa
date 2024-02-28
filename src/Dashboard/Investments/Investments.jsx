@@ -60,7 +60,7 @@ export default function Investments() {
         { name: "Total Asset", value: total },
     ];
 
-    const COLORS = ["#317DF0", "#F8A11B"];
+    const COLORS = ["#07afd9", "#8404c4"];
     return (
         // <div style={{ border: "2px solid red" }} className="h-[calc(100vh-32px)] p-5">
 
@@ -106,7 +106,7 @@ export default function Investments() {
                                 data={data01}
                                 cx="50%"
                                 cy="50%"
-                                outerRadius={140}
+                                outerRadius={120}
                                 fill="#8884d8"
                                 label
                             >
