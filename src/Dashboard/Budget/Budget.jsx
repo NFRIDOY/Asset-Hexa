@@ -14,17 +14,19 @@ const Budget = () => {
 	const [updateIndex, setUpdateIndex] = useState(null);
 
 	const axiosPublic = useAxios();
-	// const axiosSecure = 
+	// const axiosSecure =
 	const { user } = useContext(AuthContext);
 
-	const { data: expanseData = {}, refetch:ExpanseRefetch } = useQuery({
+	const { data: expanseData = {}, refetch: ExpanseRefetch } = useQuery({
 		queryKey: ["expanseData"],
 		queryFn: async () => {
-			const res = await axiosPublic.get(`/ExpanseThisMonth/${user?.email}`);
+			const res = await axiosPublic.get(
+				`/ExpanseThisMonth/${user?.email}`
+			);
 			return res.data;
 		},
 	});
-	console.log("expansedata" , expanseData);
+	console.log("expansedata", expanseData);
 
 	const { data: budgetData = [], refetch } = useQuery({
 		queryKey: ["budgetData"],
@@ -52,8 +54,7 @@ const Budget = () => {
 
 		axiosPublic.post("/budget", budgetInfo).then((res) => {
 			refetch();
-			ExpanseRefetch()
-
+			ExpanseRefetch();
 		});
 	};
 
@@ -85,8 +86,7 @@ const Budget = () => {
 		const budgetInfo = { date, budgetName, budgetAmount };
 		console.log(budgetInfo);
 
-
-		const updatedBudgetData = budgetData.map(item => {
+		const updatedBudgetData = budgetData.map((item) => {
 			if (item._id === id) {
 				// Update the budget item with the new values
 				return { ...item, budgetName, budgetAmount };
@@ -96,12 +96,11 @@ const Budget = () => {
 		setBudgetStateData(updatedBudgetData); // Update the state with the modified data
 		setUpdateIndex(null); // Reset update index after updating
 
-
 		axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
 			console.log(res?.data);
-			refetch()
-			ExpanseRefetch()
-			setUpdateIndex(null)
+			refetch();
+			ExpanseRefetch();
+			setUpdateIndex(null);
 		});
 	};
 
@@ -128,24 +127,71 @@ const Budget = () => {
 						icon: "success",
 					});
 					refetch();
-					ExpanseRefetch()
+					ExpanseRefetch();
 				});
 			}
 		});
 	};
-``
+	const handleDeleteAll = () => {
+		Swal.fire({
+			title: "Delete All you budget ?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				axiosPublic.delete(`/budget`).then((res) => {
+					Swal.fire({
+						title: "Deleted!",
+						text: "all Budget has been deleted.",
+						icon: "success",
+					});
+					refetch();
+					ExpanseRefetch();
+				});
+			}
+		});
+	};
+	const months = [
+		"January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December"
+	  ];
+	  
+	  const currentDate = new Date();
+	  const currentMonth = months[currentDate.getMonth()];
+
+
 	return (
 		<div>
 			<div></div>
 			<div className="m-6 sticky top-0">
 				<div className="bg-white p-4  flex justify-between">
 					<div className="text text-red-500">
-						<h1 className="text-sm">Total Expense</h1>
-						<p className="text-3xl font-semibold">${expanseData?.totalExpenseInThisMonth}</p>
+						<h1 className="text-sm">Total Expense in {currentMonth} </h1>
+						<p className="text-3xl font-semibold">
+							${expanseData?.totalExpenseInThisMonth}
+						</p>
 					</div>
-					<div className="text-green-600 text-right">
-						<h1 className="text-sm ">Total Budget</h1>
-						<p className="text-3xl font-semibold">${expanseData?.totalBudgetInThisMonth}</p>
+					<div className="flex gap-5 items-center">
+						<div className="text-green-600 text-right">
+							<h1 className="text-sm ">Total Budget</h1>
+							<p className="text-3xl font-semibold">
+								${expanseData?.totalBudgetInThisMonth}
+							</p>
+						</div>
+
+						{
+							budgetData?.length > 0 ? <div className="" title="Delete All Budget">
+								<button  onClick={handleDeleteAll} className="   ">
+							<MdDelete className="text-xl  text-red-500" /></button> 
+								<button  onClick={handleDeleteAll} className="   ">
+							<MdDelete className="text-xl top-9 right-3 absolute  text-red-500" /></button> 
+						
+							</div>: null
+						}
 					</div>
 				</div>
 
@@ -172,19 +218,17 @@ const Budget = () => {
 										defaultValue={item?.budgetAmount}
 									/>
 									<div className="flex gap-4 ">
-										<button
+										<button title="cancel editing"
 											onClick={handleCancelUpdate}
 											className=" text-red-500 text-2xl"
 										>
-<MdOutlineCancel />
-
+											<MdOutlineCancel />
 										</button>
-										<button
-											
+										<button title="Save changes"
 											type="submit"
 											className=" text-green-500"
 										>
-<FaCheck />
+											<FaCheck />
 										</button>
 									</div>
 								</div>
@@ -200,7 +244,7 @@ const Budget = () => {
 								<p className="mr-2">{item?.budgetAmount}</p>
 
 								{item?._id ? (
-									<button
+									<button title="Edit Budget"
 										onClick={() =>
 											handleUpdateUi(index, item?._id)
 										}
@@ -208,11 +252,10 @@ const Budget = () => {
 										className=" "
 									>
 										<FaEdit />
-
 									</button>
 								) : null}
 								{item?._id ? (
-									<button
+									<button title="Delete this budget"
 										onClick={() => {
 											handleDelete(item?._id);
 										}}
@@ -220,11 +263,8 @@ const Budget = () => {
 										className="text-red-500 "
 									>
 										<MdDelete />
-
 									</button>
 								) : null}
-
-
 							</div>
 						</div>
 					)
@@ -241,14 +281,22 @@ const Budget = () => {
 									onClick={handleCollapse}
 									className="collapse-title flex  text-xl relative justify-between font-medium"
 								>
-									<h1>{ budgetStateData?.length > 0 ? "Add Another Budget" : "Add Your First Budget"} </h1>
+									<h1>
+										{budgetStateData?.length > 0
+											? "Add Another Budget"
+											: "Add Your First Budget"}{" "}
+									</h1>
 								</div>
 							) : (
 								<div
 									onClick={handleCollapseClose}
 									className="collapse-title flex  text-xl relative justify-between font-medium"
 								>
-									<h1>{ budgetStateData?.length > 0 ? "Add Another Budget" : "Add Your First Budget"} </h1>
+									<h1>
+										{budgetStateData?.length > 0
+											? "Add Another Budget"
+											: "Add Your First Budget"}{" "}
+									</h1>
 								</div>
 							)}
 
