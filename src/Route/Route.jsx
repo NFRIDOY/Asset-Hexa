@@ -34,6 +34,7 @@ import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
 import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
+import Pricing from "../Pages/Pricing/Pricing";
 
 export const router = createBrowserRouter([
   {
@@ -74,16 +75,17 @@ export const router = createBrowserRouter([
         path: "/newsPayment",
         element: <Payment></Payment>,
       },
+      {
+        path: "/pricing",
+        element: <Pricing></Pricing>,
+      },
     ],
   },
   {
     path: "login",
     element: <Login />,
   },
-  {
-    path: "UpdateProfile",
-    element: <UpdateProfile />,
-  },
+  
 
   {
     path: "register",
@@ -152,6 +154,13 @@ export const router = createBrowserRouter([
       {
         path: "updateblogs/:id",
         element: <UpdateBlog />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/blogs/${params.id}`)
+      },
+
+      {
+        path: "UpdateProfile/:id",
+        element: <UpdateProfile />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/users/${params.id}`)
       },
       {
         path: "addBlog",
