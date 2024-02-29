@@ -5,10 +5,17 @@ import lotiBlog from "../lottie/AnimationBlog.json";
 import Lottie from "lottie-react";
 import useAuth from "../api/useAuth";
 import { io } from "socket.io-client";
+import { usePostBlogMutation } from "../features/blogSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../features/authSlice";
 
 const AddBlog = () => {
   const { user } = useAuth();
   const axiosPublic = useAxios();
+  const [postBlog] = usePostBlogMutation();
+  const token = useSelector(selectCurrentToken);
+  // console.log(token);
+
   const handleSubmitBlog = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -52,9 +59,9 @@ const AddBlog = () => {
       image: user?.photoURL,
     };
 
-    axiosPublic.post("/blogs", blogData).then((res) => {
-      //   console.log(res.data);
-      if (res.data.insertedId) {
+    postBlog(blogData).then((res) => {
+      // console.log(res.data);
+      if (res.data?.insertedId) {
         console.log("connected to Socet io");
         const socket = io("https://asset-hexa-server-notification.glitch.me/", {
           transports: ["websocket"],
