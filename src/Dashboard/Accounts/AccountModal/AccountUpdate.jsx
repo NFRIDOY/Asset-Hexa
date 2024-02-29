@@ -38,10 +38,16 @@ const AccountUpdate = () => {
 
 
       axiosPublic.put(`/accounts/${Update._id}`, addBalance)
-            .then((data) => {
-                console.log(data);
-                if (data.modifiedCount > 0) {
-                    Swal("Good job!", "Update Producted Successfull", "success");
+            .then((res) => {
+                console.log(res.data);
+                if (res?.data.modifiedCount > 0) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
                 }
             });
 
