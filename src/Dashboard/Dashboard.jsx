@@ -1,7 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import home from "../assets/logo/logo.png";
-import money from "../lottie/Animation - 1706022352528.json";
-import Lottie from "lottie-react";
 import { MdOutlineDashboard } from "react-icons/md";
 import { GrTransaction } from "react-icons/gr";
 import { IoStatsChartSharp } from "react-icons/io5";
@@ -19,20 +17,19 @@ const Dashboard = () => {
           {/* lg:ml-8 */}
 
           <div className="sticky  top-0 z-[99]">
-        <div className="flex lg:hidden justify-between items-center bg-white px-4 py-2 ">
-          <img className="w-48" src={home} alt="" />
-        <label 
-            htmlFor="my-drawer-2"
-            className=" z-[999]     drawer-button "
-          >
-            <AiOutlineMenu className="text-2xl  "></AiOutlineMenu>
-          </label>
-        </div>
-        </div>
+            <div className="flex lg:hidden justify-between items-center bg-white px-4 py-2 ">
+              <img className="w-48" src={home} alt="" />
+              <label
+                htmlFor="my-drawer-2"
+                className=" z-[999]     drawer-button "
+              >
+                <AiOutlineMenu className="text-2xl  "></AiOutlineMenu>
+              </label>
+            </div>
+          </div>
           <div className=" md:mt-0">
             <Outlet></Outlet>
           </div>
-          
         </div>
         <div className="drawer-side z-[999] scrollable-content">
           <label
@@ -43,13 +40,13 @@ const Dashboard = () => {
 
           <div className="w-60 h-full bg-white  bg-gradient-to-br  justify-between  flex flex-col">
             <div>
-            <div className="w-48  rounded-lg lg:mt-3">
-                  <figure>
-                    <Link to="/">
-                      <img src={home} alt="" />
-                    </Link>
-                  </figure>
-                </div>
+              <div className="w-48  rounded-lg lg:mt-3">
+                <figure>
+                  <Link to="/">
+                    <img src={home} alt="" />
+                  </Link>
+                </figure>
+              </div>
               <ul className="menu text-lg  space-y-2   rounded-lg mt-4">
                 <NavLink
                   className={({ isActive }) =>
@@ -154,8 +151,6 @@ const Dashboard = () => {
 								</NavLink> */}
               </ul>
             </div>
-
-            
           </div>
         </div>
       </div>

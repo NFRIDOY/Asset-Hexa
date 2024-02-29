@@ -4,21 +4,20 @@ import { useContext, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../providers/AuthProvider";
 import AccountCard from "./Accounts/AccountCard/AccountCard";
-// eslint-disable-next-line no-unused-vars
-import { FaRegChartBar } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Accounts = () => {
-  const axiosPublic = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [total, setTotal] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
   const [Balance, setBalance] = useState([]);
   useEffect(() => {
-    axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
+    axiosSecure.get(`/accounts?email=${user?.email}`).then((data) => {
       setBalance(data?.data);
       // console.log(data.data);
     });
@@ -27,10 +26,8 @@ const Accounts = () => {
       0
     );
     setTotal(totalAmount);
-  }, [axiosPublic, user, Balance, setTotal]);
+  }, [user, Balance, setTotal, axiosSecure]);
 
-  // delete section
-  //{/* <FaRegChartBar style={20} /> */}
   return (
     <div className="min-h-screen p-10 bg-[#F7F7FA]">
       {/* <div className="border-t-2 border-b-2 border-red-500 h-16 flex justify-between pt-4 pl-4 pr-4 mb-2 ">
