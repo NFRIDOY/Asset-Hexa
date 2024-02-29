@@ -9,6 +9,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 export default function Modal({ setBalance, Balance, isOpen, setIsOpen, id }) {
+  // console.log(id);
 
 
   const axiosPublic = useAxios();
@@ -30,7 +31,7 @@ export default function Modal({ setBalance, Balance, isOpen, setIsOpen, id }) {
       if (result.isConfirmed) {
         // Deleting the account
         await axiosPublic.delete(`/accounts/${_id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data?.deletedCount > 0) {
             // Notifying the user about successful deletion
             Swal.fire({
@@ -85,9 +86,9 @@ export default function Modal({ setBalance, Balance, isOpen, setIsOpen, id }) {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex justify-between">
                     {/* Passing the correct function and parameters */}
-                    <MdDelete className='text-4xl    text-[#db3b3b]  '   onClick={() => handleDelete(id)} />
+                    <MdDelete className='text-4xl text-[#db3b3b]' onClick={() => handleDelete(id)} />
                     <Link to={`/dashboard/accountUpdate/${id}`}>
-                      <FaEdit className='text-4xl text-[#8CC820]' />
+                      <FaEdit className='text-4xl text-[#8CC820]'/>
                     </Link>
                   </div>
                 </Dialog.Panel>
