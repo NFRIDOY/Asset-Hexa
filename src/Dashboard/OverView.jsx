@@ -40,17 +40,17 @@ const OverView = () => {
   });
 
   const sortedTransactions = [...transectionData];
-  console.log(sortedTransactions);
+//   console.log(sortedTransactions);
 
   // Sorting by date in descending order
   sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Now sortedTransactions contains the sorted data by recent date
-  console.log("this is sorted data", sortedTransactions);
+//   console.log("this is sorted data", sortedTransactions);
 
   console.log("transectionData", transectionData);
 
-  const { data: AccountData = [] } = useQuery({
+  const { data: AccountData = [] , refetch : accountRefetch } = useQuery({
     queryKey: ["AccountData"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
@@ -107,6 +107,7 @@ const OverView = () => {
           toast.success("Income Data added Successfully");
           refetch();
           PiREfetch();
+		  accountRefetch()
         }
       });
     }
@@ -154,6 +155,7 @@ const OverView = () => {
           toast.success("Expanse Data added Successfully");
           refetch();
           PiREfetch();
+		  accountRefetch()
         }
       });
     }
@@ -190,6 +192,7 @@ const OverView = () => {
         if (res?.data.resultTransec.acknowledged) {
           toast.success("Transfer Data added Successfully");
           refetch();
+		  accountRefetch()
         }
       });
     }
@@ -264,11 +267,12 @@ const OverView = () => {
               >
                 <h1 className="text-xl font-medium">{item?.account}</h1>
                 <p className="text-3xl md:text-5xl font-semibold">
-                  $
+                  $	
                   <CountUp end={item?.amount} />
+				  {/* {item?.amount} */}
                 </p>
               </div>
-            ))
+            ))		
           ) : (
             <Link
               to={"../../dashboard/AddBalance"}
