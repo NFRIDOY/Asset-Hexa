@@ -7,9 +7,8 @@ import Swal from "sweetalert2";
 const Budget = () => {
 	const [budgetStateData, setBudgetStateData] = useState([]);
 	const [collapse, setCollapse] = useState(true);
-	const [showButton, setShowButton] = useState(false);
-	const [showDelete , handleShowDelete] = useState(true)
-	
+	const [updateIndex, setUpdateIndex] = useState(null);
+
 	const axiosPublic = useAxios();
 	const { user } = useContext(AuthContext);
 
@@ -23,8 +22,6 @@ const Budget = () => {
 		},
 	});
 
-	console.log(budgetData);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(122);
@@ -34,17 +31,15 @@ const Budget = () => {
 		const date = new Date();
 
 		const budgetInfo = { date, email, budgetName, budgetAmount };
-		console.log(budgetInfo);
+		// console.log(budgetInfo);
 
 		setBudgetStateData([...budgetStateData, budgetInfo]);
 		e.target.reset();
 
 		axiosPublic.post("/budget", budgetInfo).then((res) => {
-			console.log(res.data);
 			refetch();
 		});
 	};
-	console.log(budgetStateData);
 
 	const handleCollapse = () => {
 		setCollapse(false);
@@ -59,8 +54,49 @@ const Budget = () => {
 		document.getElementById("collapse").classList.add("collapse-close");
 	};
 
-	const handleUpdate = () => {
-		console.log("update");
+	const handleUpdateUi = (index, id) => {
+		console.log(index, id);
+		setUpdateIndex(index);
+	};
+
+	const handleUpdate = (e, id) => {
+		e.preventDefault();
+
+		const budgetName = e.target.budget_Name.value;
+		const budgetAmount = e.target.budget_amount.value;
+		const date = new Date();
+
+		const budgetInfo = { date, budgetName, budgetAmount };
+		console.log(budgetInfo);
+
+		// const stateUpdateData = budgetData?.find(item => item._id === id)
+		// stateUpdateData.budgetName = "New Budget Name"
+		// console.log(stateUpdateData);
+		// console.log(budgetStateData)
+
+		const updatedBudgetData = budgetData.map(item => {
+			if (item._id === id) {
+				// Update the budget item with the new values
+				return { ...item, budgetName, budgetAmount };
+			}
+			return item; // Return other items unchanged
+		});
+		setBudgetStateData(updatedBudgetData); // Update the state with the modified data
+		setUpdateIndex(null); // Reset update index after updating
+
+
+
+		
+
+		axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
+			console.log(res?.data);
+			refetch()
+			setUpdateIndex(null)
+		});
+	};
+
+	const handleCancelUpdate = () => {
+		setUpdateIndex(null);
 	};
 
 	const handleDelete = (id) => {
@@ -107,39 +143,81 @@ const Budget = () => {
 					<p>4000</p>
 				</div>
 
-				{budgetStateData.map((item, index) => (
-					<div
-						key={item?.id || index}
-						className="text-xl flex justify-between bg-white p-4	 mt-4"
-					>
-						<h1>{item?.budgetName} </h1>
-						<div className="flex gap-5">
-							<p>{item?.budgetAmount}</p>
-							
+				{budgetStateData.map((item, index) =>
+					updateIndex === index ? (
+						<form onSubmit={(e) => handleUpdate(e, item?._id)}>
+							<div className="text-xl flex items-center justify-between bg-white p-4 mt-4">
+								<input
+									required
+									type="text"
+									placeholder="Name of your Budget"
+									className=" md:mt-0 md:px-0 border-gray-400   outline-none border-b-2  w-full md:max-w-xs"
+									name="budget_Name"
+									defaultValue={item?.budgetName}
+								/>
 
-							{
-								item?._id ? <button
-								onClick={handleUpdate}
-								type="submit"
-								className=" btn btn-outline btn-sm "
-							>
-								update
-							</button>: null
-							}
-							{
-								item?._id ? <button
-								onClick={() => {
-									handleDelete(item?._id);
-								}}
-								type="submit"
-								className="text-red-500 btn btn-outline btn-sm"
-							>
-								Delete
-							</button> : null
-							}
+								<div className="flex gap-4">
+									<input
+										required
+										type="number"
+										placeholder="Amount of your Budget"
+										className=" md:mt-0 md:px-0 border-gray-400  md:text-right outline-none border-b-2  w-full md:max-w-xs"
+										name="budget_amount"
+										defaultValue={item?.budgetAmount}
+									/>
+									<div className="flex gap-4 ">
+										<button
+											onClick={handleCancelUpdate}
+											className=" btn btn-outline btn-sm"
+										>
+											cancel
+										</button>
+										<button
+											
+											type="submit"
+											className=" btn btn-outline btn-sm"
+										>
+											update
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					) : (
+						<div
+							key={item?.id || index}
+							className="text-xl flex justify-between bg-white p-4	 mt-4"
+						>
+							<h1>{item?.budgetName} </h1>
+							<div className="flex gap-5">
+								<p className="mr-2">{item?.budgetAmount}</p>
+
+								{item?._id ? (
+									<button
+										onClick={() =>
+											handleUpdateUi(index, item?._id)
+										}
+										type="submit"
+										className=" btn btn-outline btn-sm "
+									>
+										update
+									</button>
+								) : null}
+								{item?._id ? (
+									<button
+										onClick={() => {
+											handleDelete(item?._id);
+										}}
+										type="submit"
+										className="text-red-500 btn btn-outline btn-sm"
+									>
+										Delete
+									</button>
+								) : null}
+							</div>
 						</div>
-					</div>
-				))}
+					)
+				)}
 				<div className="">
 					<form onSubmit={handleSubmit}>
 						<div
