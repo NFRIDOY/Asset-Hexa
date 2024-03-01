@@ -5,3 +5,4 @@ This project focuses on effective money management, offering financial guidance,
 Furthermore, users can showcase their entrepreneurial ventures by adding detailed information about their businesses. All users have the opportunity to invest in these businesses, creating a dynamic investment ecosystem.
 The project incorporates two distinct roles – admin and guest. Admins hold the authority to manage user accounts, verify blogs, and validate business posts. This dual-role system ensures a secure and controlled environment for financial activities and community engagement.
 
+

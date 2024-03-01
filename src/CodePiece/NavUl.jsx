@@ -63,6 +63,18 @@ const NavUl = () => {
 			>
 				Businesses
 			</NavLink>
+			<NavLink
+				to="/pricing"
+				className={({ isActive, isPending }) =>
+					isPending
+						? "pending"
+						: isActive
+						? "text-black lg:text-primaryColor font-bold  p-2 text-xl "
+						: "p-2 text-xl text-white  lg:text-black"
+				}
+			>
+				Pricing
+			</NavLink>
 		</>
     );
 };

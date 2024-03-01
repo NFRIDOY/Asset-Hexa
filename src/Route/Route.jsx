@@ -35,6 +35,12 @@ import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
 import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
 
+import Budget from "../Dashboard/Budget/Budget";
+
+import Pricing from "../Pages/Pricing/Pricing";
+import Revenue from "../AdminDashboard/Revenue";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -73,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "/newsPayment",
         element: <Payment></Payment>,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing></Pricing>,
       },
     ],
   },
@@ -120,6 +130,7 @@ export const router = createBrowserRouter([
         element: <AddBalance></AddBalance>,
       },
 
+
       {
         path: "addBlog",
         element: <AddBlog />,
@@ -161,6 +172,10 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
+      {
+        path:"budget",
+        element: <Budget></Budget>
+      }
     ],
   },
   {
@@ -187,6 +202,10 @@ export const router = createBrowserRouter([
       {
         path: "subscriptionList",
         element: <SubscriptionList></SubscriptionList>,
+      },
+      {
+        path: "Revenue",
+        element: <Revenue></Revenue>,
       },
     ],
   },

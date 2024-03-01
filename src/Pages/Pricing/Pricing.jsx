@@ -111,7 +111,7 @@ const Pricing = () => {
    
 
         return (
-            <div className="max-w-[1300px] mx-auto pr-3 pl-3">
+            <div className="max-w-[1300px] min-h-[calc(100vh-336px)] mx-auto pr-3 pl-3">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div  >
                         <div className="card lg:w-96 glass bg-[#BA7245]">
