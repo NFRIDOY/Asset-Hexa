@@ -121,6 +121,8 @@ const Budget = () => {
 	};
 
 	const handleDelete = (id , budgetAmount , indexToRemove) => {
+
+
 		
 		console.log(id , budgetAmount);
 		Swal.fire({
@@ -134,7 +136,13 @@ const Budget = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 
+				setBudgetStateData(prevBudgetStateData =>
+					prevBudgetStateData?.filter((_, index) => index !== indexToRemove)
+				  );
+				
+
 		setBudgetTotal(budgetTotal - parseInt(budgetAmount));
+		
 
 		axiosPublic.delete(`/budget/${id}`).then((res) => {
 		  Swal.fire({
