@@ -71,9 +71,9 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 					className="btn btn-square btn-ghost text-xl"
 				>
 					
-					{
-						open ? <AiOutlineMenu /> :<IoMdClose  /> 
-					}
+					
+						<AiOutlineMenu /> 
+					
 
 
 				</label>
