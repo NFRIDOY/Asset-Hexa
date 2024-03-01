@@ -63,7 +63,7 @@ const NavUl = () => {
 			>
 				Businesses
 			</NavLink>
-			<NavLink
+			{/* <NavLink
 				to="/pricing"
 				className={({ isActive, isPending }) =>
 					isPending
@@ -74,7 +74,7 @@ const NavUl = () => {
 				}
 			>
 				Pricing
-			</NavLink>
+			</NavLink> */}
 		</>
     );
 };
