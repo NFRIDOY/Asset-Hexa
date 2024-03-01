@@ -34,7 +34,12 @@ import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
 import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
+
 import Budget from "../Dashboard/Budget/Budget";
+
+import Pricing from "../Pages/Pricing/Pricing";
+import Revenue from "../AdminDashboard/Revenue";
+
 
 export const router = createBrowserRouter([
   {
@@ -75,16 +80,17 @@ export const router = createBrowserRouter([
         path: "/newsPayment",
         element: <Payment></Payment>,
       },
+      {
+        path: "/pricing",
+        element: <Pricing></Pricing>,
+      },
     ],
   },
   {
     path: "login",
     element: <Login />,
   },
-  {
-    path: "UpdateProfile",
-    element: <UpdateProfile />,
-  },
+  
 
   {
     path: "register",
@@ -135,8 +141,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "business",
-        // element: <Business></Business>,
-        element: <BusinessForm />,
+        element: <Business></Business>,
+        // element: <BusinessForm />,
       },
       {
         path: "businessForm",
@@ -154,6 +160,13 @@ export const router = createBrowserRouter([
       {
         path: "updateblogs/:id",
         element: <UpdateBlog />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/blogs/${params.id}`)
+      },
+
+      {
+        path: "UpdateProfile/:id",
+        element: <UpdateProfile />,
+        loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/users/${params.id}`)
       },
       {
         path: "addBlog",
@@ -189,6 +202,10 @@ export const router = createBrowserRouter([
       {
         path: "subscriptionList",
         element: <SubscriptionList></SubscriptionList>,
+      },
+      {
+        path: "Revenue",
+        element: <Revenue></Revenue>,
       },
     ],
   },

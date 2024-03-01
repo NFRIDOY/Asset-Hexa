@@ -1,12 +1,5 @@
-import { Link } from "react-router-dom";
 import InvestmentTable from "./investmentTable";
-
-import { ImBlog } from "react-icons/im";
-import { FaUserAlt } from "react-icons/fa";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
-import { IoMdBusiness } from "react-icons/io";
-// import verified from "../assets/dashboard/varified.png";
-import verified from "../../assets/dashboard/varified.png";
 import "../../../src/App.css";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -30,13 +23,11 @@ export default function Investments() {
     });
     // console.log(adminState)
 
-
-
     const [total, setTotal] = useState(0);
 
     const [accountData, setAccountData] = useState([]);
     const [investments, setInvestments] = useState([]);
-    const [totalInvestments, setTotalInvestments] = useState([]);
+    const [totalInvestments, setTotalInvestments] = useState(0);
 
     useEffect(() => {
         axiosPublic.get(`/accounts?email=${user?.email}`).then((data) => {
@@ -57,7 +48,8 @@ export default function Investments() {
             })
 
         const totalInvestment = investments.reduce(
-            (total, item) => total + parseInt(item.invest),
+            // (total, item) => total + parseInt(item?.invest),
+            (total, item) => total + parseInt(item?.investment),
             0
         );
         setTotalInvestments(totalInvestment);
@@ -68,7 +60,7 @@ export default function Investments() {
         { name: "Total Asset", value: total },
     ];
 
-    const COLORS = ["#317DF0", "#F8A11B"];
+    const COLORS = ["#07afd9", "#8404c4"];
     return (
         // <div style={{ border: "2px solid red" }} className="h-[calc(100vh-32px)] p-5">
 
@@ -79,20 +71,22 @@ export default function Investments() {
                             <h1 className="text-base font-medium">total Users</h1>
                             <p className="text-3xl md:text-5xl font-semibold">00</p>
                         </div> */}
-                    <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
-                        <h1 className="text-base font-medium">Total Asset</h1>
-                        <p className="text-3xl md:text-5xl font-semibold">{total}</p>
-                    </div>
-                    <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
-                        <h1 className="text-base font-medium">Total Investments</h1>
-                        <p className="text-3xl md:text-5xl font-semibold">{totalInvestments}</p>
-                    </div>
-                    <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
-                        <h1 className="text-base font-medium">
-                            {" "}
-                            Business posted{" "}
-                        </h1>
-                        <p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
+                    <div className="flex justify-center gap-10 w-full">
+                        <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
+                            <h1 className="text-base font-medium">Total Asset</h1>
+                            <p className="text-3xl md:text-5xl font-semibold">{total}</p>
+                        </div>
+                        <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#49a7e0] to-[#8fd6ff]  px-8  min-w-48 md:min-w-56">
+                            <h1 className="text-base font-medium">Total Investments</h1>
+                            <p className="text-3xl md:text-5xl font-semibold">{totalInvestments}</p>
+                        </div>
+                        <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-[#FFE338] to-[#e94444]  px-8 min-w-48 md:min-w-56 ">
+                            <h1 className="text-base font-medium">
+                                {" "}
+                                Business posted{" "}
+                            </h1>
+                            <p className="text-3xl md:text-5xl font-semibold">{adminState?.businessCount}</p>
+                        </div>
                     </div>
                     {/* <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-purple-700 to-purple-400  px-8 min-w-48 md:min-w-56 ">
                             <h1 className="text-base font-medium">
@@ -104,7 +98,7 @@ export default function Investments() {
                 </div>
 
                 <div className="flex gap-5 mt-5 flex-col md:flex-row  ">
-                    <div className="bg-white  p-10">
+                    <div className="bg-white min-h-[300px]  w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
                         <PieChart width={350} height={350}>
                             <Pie
                                 dataKey="value"
@@ -112,7 +106,7 @@ export default function Investments() {
                                 data={data01}
                                 cx="50%"
                                 cy="50%"
-                                outerRadius={140}
+                                outerRadius={120}
                                 fill="#8884d8"
                                 label
                             >
@@ -130,7 +124,7 @@ export default function Investments() {
                     </div>
 
                     {/* <div className="bg-red-500 w-full p-6 px-10 flex gap-5 items-center justify-between"> */}
-                    <div className="w-full h-full">
+                    <div className="flex-1  min-h-[300px] overflow-y-scroll scrollable-content lg:h-[calc(100vh-270px)] bg-white ">
                         <InvestmentTable />
                     </div>
 

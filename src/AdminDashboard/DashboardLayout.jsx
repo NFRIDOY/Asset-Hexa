@@ -21,100 +21,110 @@ const DashboardLayout = () => {
         <div className="drawer-content   bg-base-300 flex flex-col   ">
           {/* Page content here */}
 
-        <div className="sticky top-0 z-[99]">
-        <div className="flex lg:hidden justify-between items-center bg-white px-4 py-2 ">
-          <img className="w-48" src={home} alt="" />
-        <label 
-            htmlFor="my-drawer-2"
-            className=" z-[999]     drawer-button "
-          >
-            <AiOutlineMenu className="text-2xl  "></AiOutlineMenu>
-          </label>
-        </div>
-        </div>
+          <div className="sticky top-0 z-[99]">
+            <div className="flex lg:hidden justify-between items-center bg-white px-4 py-2 ">
+              <img className="w-48" src={home} alt="" />
+              <label
+                htmlFor="my-drawer-2"
+                className=" z-[999]     drawer-button "
+              >
+                <AiOutlineMenu className="text-2xl  "></AiOutlineMenu>
+              </label>
+            </div>
+          </div>
           <div className=" md:mt-0">
             <Outlet ></Outlet>
           </div>
-          
+
         </div>
-          <div className="drawer-side z-[999] min-h-[500px] scrollable-content   ">
-            <label
-              htmlFor="my-drawer-2"
-              aria-label="close sidebar"
-              className="drawer-overlay "
-            ></label>
+        <div className="drawer-side z-[999] min-h-[500px] scrollable-content   ">
+          <label
+            htmlFor="my-drawer-2"
+            aria-label="close sidebar"
+            className="drawer-overlay "
+          ></label>
 
-            <div className="w-60 h-full  scrollable-content  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
-              <div className="">
-                <div className="w-48  rounded-lg lg:mt-3">
-                  <figure>
-                    <Link to="/">
-                      <img src={home} alt="" />
-                    </Link>
-                  </figure>
-                </div>
-                <ul className="menu text-lg  space-y-2 text-white   rounded-lg mt-2">
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-black flex px-4 gap-3 items-center bg-white p-2  pr-4"
-                        : "flex px-4 p-2 items-center mr-4 gap-3"
-                    }
-                    to="/AdminDashboard/AdminOverview"
-                  >
-                    <MdOutlineDashboard /> Overview
-                  </NavLink>
+          <div className="w-60 h-full  scrollable-content  bg-gradient-to-br from-[#23A455] to-[#34D399] justify-between  flex flex-col ">
+            <div className="">
+              <div className="w-48  rounded-lg lg:mt-3">
+                <figure>
+                  <Link to="/">
+                    <img src={home} alt="" />
+                  </Link>
+                </figure>
+              </div>
+              <ul className="menu text-lg  space-y-2 text-white   rounded-lg mt-2">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2  pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/AdminOverview"
+                >
+                  <MdOutlineDashboard /> Overview
+                </NavLink>
 
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
-                        : "flex px-4 p-2 items-center mr-4 gap-3"
-                    }
-                    to="/AdminDashboard/BusinessVerification"
-                  >
-                    <IoMdBusiness />
-                    Verify Business
-                  </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/BusinessVerification"
+                >
+                  <IoMdBusiness />
+                  Verify Business
+                </NavLink>
 
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
-                        : "flex px-4 p-2 items-center mr-4 gap-3"
-                    }
-                    to="/AdminDashboard/userVerification"
-                  >
-                    <FaUserAlt />
-                    Verify User
-                  </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/userVerification"
+                >
+                  <FaUserAlt />
+                  Verify User
+                </NavLink>
 
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
-                        : "flex px-4 p-2 items-center mr-4 gap-3"
-                    }
-                    to="/AdminDashboard/BlogVerification"
-                  >
-                    <ImBlog />
-                    verify Blogs
-                  </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/BlogVerification"
+                >
+                  <ImBlog />
+                  verify Blogs
+                </NavLink>
 
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
-                        : "flex px-4 p-2 items-center mr-4 gap-3"
-                    }
-                    to="/AdminDashboard/subscriptionList"
-                  >
-                    <ImBlog />
-                    Subscription List
-                  </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/subscriptionList"
+                >
+                  <ImBlog />
+                  Subscription List
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black flex px-4 gap-3 items-center bg-white p-2  pr-4"
+                      : "flex px-4 p-2 items-center mr-4 gap-3"
+                  }
+                  to="/AdminDashboard/Revenue"
+                >
+                  <MdOutlineDashboard /> Revenue
+                </NavLink>
 
 
-                  {/* <NavLink
+                {/* <NavLink
 									className={({ isActive }) =>
 										isActive
 											? "text-black flex px-4 gap-3 items-center bg-white p-2   pr-4"
@@ -124,22 +134,22 @@ const DashboardLayout = () => {
 								>
 									<MdOutlineDashboard /> Add Blog
 								</NavLink> */}
-                </ul>
-              </div>
+              </ul>
+            </div>
 
-              <div className="  rounded-lg ">
-                <div className="mx-auto ">
-                  <Lottie
-                    className=" w-[150px] md:[w-150px] lg:w-[180px]"
-                    animationData={money}
-                    loop={true}
-                  />
-                </div>
+            <div className="  rounded-lg ">
+              <div className="mx-auto ">
+                <Lottie
+                  className=" w-[150px] md:[w-150px] lg:w-[180px]"
+                  animationData={money}
+                  loop={true}
+                />
               </div>
             </div>
           </div>
         </div>
-      </div>        
+      </div>
+    </div>
   );
 };
 

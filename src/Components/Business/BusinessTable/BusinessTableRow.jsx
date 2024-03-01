@@ -1,6 +1,6 @@
 
 // eslint-disable-next-line react/prop-types
-export default function InvestmentRow({ investment, index }) {
+export default function BusinessTableRow({ investment, index }) {
     // eslint-disable-next-line react/prop-types
     const { CompanyName, BrandImage, totalInvestment, investor, Profit } = investment;
     return (
@@ -9,12 +9,9 @@ export default function InvestmentRow({ investment, index }) {
             <th><img src={BrandImage} alt="" className="h-10" /></th>
             <td>{CompanyName}</td>
             <td>{totalInvestment}</td>
-            <td>{investment?.investment}</td>
             <td>{Profit}%</td>
+            <td className="">{Profit * totalInvestment / 100}</td>
             {/* <td className="w-full border-2 text-center">{Profit * totalInvestment / 100}</td> */}
-            {/* <td className="">{Profit * investment?.investment / 100}</td> */}
-            {/* <td>{investor}</td> */}
-            {/* <td>Blue</td> */}
         </tr>
     )
 }

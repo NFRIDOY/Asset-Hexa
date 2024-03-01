@@ -1,6 +1,5 @@
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import useAccountsPie from "../hooks/usePieChartsData";
-import { longFormatters } from "date-fns";
 import { useEffect, useState } from "react";
 
 const COLORS = [
@@ -40,7 +39,7 @@ const Statistics = () => {
 
   // console.log(isData01, isData02, isData03);
   return (
-    <div className="w-full">
+    <div className="w-full bg-white h-screen pt-10">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-10">
         {/* Pie 1 */}
         <div className="flex flex-col justify-center items-center place-self-start">

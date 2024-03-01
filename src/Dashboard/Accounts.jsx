@@ -68,7 +68,8 @@ const Accounts = () => {
           <AccountCard
             setBalance={setBalance}
             Balance={Balance}
-            key={Balances._id}
+            key={Balances?._id}
+            
             Balances={Balances}
             isOpen={isOpen}
             setIsOpen={setIsOpen}

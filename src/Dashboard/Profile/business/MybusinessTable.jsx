@@ -1,62 +1,72 @@
-import React from 'react';
+import { useEffect, useState } from "react";
+import useAuth from "../../../hooks/useAuth";
+import useAxios from "../../../hooks/useAxios";
+import BusinessTableM from "./BusinessTableM";
 
 const MybusinessTable = () => {
-    return (
-        <div className='container mx-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24 2xl:px-28'>
-          <div className='py-8'>
-            <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-              <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
-                <table className='min-w-full leading-normal'>
-                  <thead>
-                  <tr className="">
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Author Name
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Title 
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Image 
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Update
-                        </th>
-                        <th
-                          scope='col'
-                          className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                        >
-                          Delete
-                        </th>
-    
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {/* {
-                      blogs.map(blog => <TableRow
-                        key={blog._id}
-                        blog={blog}
-                        handelDelete={handelDelete}
-                      />)
-                    } */}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
+
+  const { user } = useAuth();
+
+  const axiosPublic = useAxios();
+
+  const [myBusiness, setMyBusiness] = useState([]);
+
+  // console.log(`${user?.email}`)
+  useEffect(() => {
+      axiosPublic.get(`/bussiness?email=${user?.email}`)
+          // axios.get(`http://localhost:5000/bussiness?email=${user?.email}`)
+          .then((res) => {
+              setMyBusiness(res.data)
+              // console.log(res.data)
+          })
+      // .catch((error) => console.log(error))
+  }, [axiosPublic,user])
+
+
+  return (
+    <div>
+       <div className="table table-pin-rows table-md md:table-lg  text-center">
+            {/* <div className="bg-white w-full overflow-auto"> */}
+            {/* <h1>
+                BusinessTable
+            </h1> */}
+            <table className="table table-xs lg:table-lg">
+                {/* head */}
+                <thead >
+                    <tr className="">
+                        <th></th>
+                        <th>Brand Logo</th>
+                        <th>BrandName</th>
+                        {/* <th>Invesment</th> */}
+                        <th>Collection</th>
+                        <th>Profit(%)</th>
+                        <th>Profit Amount</th>
+                        {/* <th>view Business</th> */}
+                    </tr>
+                </thead>
+                <tbody className="">
+                    {
+                        ((myBusiness.length !== 0) || myBusiness) ? myBusiness?.map((investment, index) => <BusinessTableM key={investment?._id} investment={investment} index={index + 1} />) : null
+                    }
+                </tbody>
+
+            </table>
+            {
+                (myBusiness.length === 0) ? <div
+                    className="flex flex-col justify-center items-center my-10">
+                    <div>
+                        <div className=" w-fit  col-span-12 text-center flex justify-center">
+                            <span className="text-3xl w-fit text-red-500 font-bold text-center flex justify-center">
+                                No Data
+                            </span>
+                        </div>
+                       
+                    </div>
+                </div> : null
+            }
+        </div >
+    </div>
+  );
 };
 
 export default MybusinessTable;

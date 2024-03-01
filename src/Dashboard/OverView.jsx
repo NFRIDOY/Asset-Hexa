@@ -8,6 +8,7 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { Link } from "react-router-dom";
 import image from "../../src/assets/Nodataforund/NOdata.png";
 import CountUp from "react-countup";
+import axios from "axios";
 
 const OverView = () => {
 	// state to hold  erroretext from diffrent modal
@@ -151,14 +152,16 @@ const OverView = () => {
 			setExpanseText("");
 			// console.log(expanseData);
 			form.reset();
-			axiosPublic.post("/transections", expanseData).then((res) => {
-				// console.log(res.data);
-				if (res?.data.resultAccount.acknowledged) {
-					toast.success("Expanse Data added Successfully");
-					refetch();
-					PiREfetch();
-				}
-			});
+			// axios.post("http://localhost:5000/transections", expanseData)
+			axiosPublic.post("/transections", expanseData)
+				.then((res) => {
+					// console.log(res.data);
+					if (res?.data.resultAccount.acknowledged) {
+						toast.success("Expanse Data added Successfully");
+						refetch();
+						PiREfetch();
+					}
+				});
 		}
 	};
 
@@ -276,7 +279,7 @@ const OverView = () => {
 								</h1>
 								<p className="text-3xl md:text-5xl font-semibold">
 									$
-                  <CountUp end={item?.amount} />
+									<CountUp end={item?.amount} />
 
 								</p>
 							</div>
@@ -297,7 +300,7 @@ const OverView = () => {
 				<div className="flex flex-col lg:flex-row justify gap-5    mt-5  ">
 					<div className="bg-white min-h-[300px]   w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
 						{PiData?.totalIncome == 0 &&
-						PiData?.totalExpense == 0 ? (
+							PiData?.totalExpense == 0 ? (
 							<div>
 								<h1>No Data to show</h1>{" "}
 							</div>
