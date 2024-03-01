@@ -3,6 +3,10 @@ import useAxios from "../../hooks/useAxios";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
 
 const Budget = () => {
 	const [budgetStateData, setBudgetStateData] = useState([]);
@@ -10,7 +14,17 @@ const Budget = () => {
 	const [updateIndex, setUpdateIndex] = useState(null);
 
 	const axiosPublic = useAxios();
+	// const axiosSecure = 
 	const { user } = useContext(AuthContext);
+
+	const { data: expanseData = {}, refetch:ExpanseRefetch } = useQuery({
+		queryKey: ["expanseData"],
+		queryFn: async () => {
+			const res = await axiosPublic.get(`/ExpanseThisMonth/${user?.email}`);
+			return res.data;
+		},
+	});
+	console.log("expansedata" , expanseData);
 
 	const { data: budgetData = [], refetch } = useQuery({
 		queryKey: ["budgetData"],
@@ -38,6 +52,8 @@ const Budget = () => {
 
 		axiosPublic.post("/budget", budgetInfo).then((res) => {
 			refetch();
+			ExpanseRefetch()
+
 		});
 	};
 
@@ -69,10 +85,6 @@ const Budget = () => {
 		const budgetInfo = { date, budgetName, budgetAmount };
 		console.log(budgetInfo);
 
-		// const stateUpdateData = budgetData?.find(item => item._id === id)
-		// stateUpdateData.budgetName = "New Budget Name"
-		// console.log(stateUpdateData);
-		// console.log(budgetStateData)
 
 		const updatedBudgetData = budgetData.map(item => {
 			if (item._id === id) {
@@ -85,12 +97,10 @@ const Budget = () => {
 		setUpdateIndex(null); // Reset update index after updating
 
 
-
-		
-
 		axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
 			console.log(res?.data);
 			refetch()
+			ExpanseRefetch()
 			setUpdateIndex(null)
 		});
 	};
@@ -118,11 +128,12 @@ const Budget = () => {
 						icon: "success",
 					});
 					refetch();
+					ExpanseRefetch()
 				});
 			}
 		});
 	};
-
+``
 	return (
 		<div>
 			<div></div>
@@ -130,17 +141,12 @@ const Budget = () => {
 				<div className="bg-white p-4  flex justify-between">
 					<div className="text text-red-500">
 						<h1 className="text-sm">Total Expense</h1>
-						<p className="text-3xl font-semibold">50000</p>
+						<p className="text-3xl font-semibold">${expanseData?.totalExpenseInThisMonth}</p>
 					</div>
-					<div className="text-green-600">
-						<h1 className="text-sm">Total Budget</h1>
-						<p className="text-3xl font-semibold">50000</p>
+					<div className="text-green-600 text-right">
+						<h1 className="text-sm ">Total Budget</h1>
+						<p className="text-3xl font-semibold">${expanseData?.totalBudgetInThisMonth}</p>
 					</div>
-				</div>
-
-				<div className="text-xl flex justify-between bg-white p-4 mt-4">
-					<h1>Shak Sobji </h1>
-					<p>4000</p>
 				</div>
 
 				{budgetStateData.map((item, index) =>
@@ -168,16 +174,17 @@ const Budget = () => {
 									<div className="flex gap-4 ">
 										<button
 											onClick={handleCancelUpdate}
-											className=" btn btn-outline btn-sm"
+											className=" text-red-500 text-2xl"
 										>
-											cancel
+<MdOutlineCancel />
+
 										</button>
 										<button
 											
 											type="submit"
-											className=" btn btn-outline btn-sm"
+											className=" text-green-500"
 										>
-											update
+<FaCheck />
 										</button>
 									</div>
 								</div>
@@ -198,9 +205,10 @@ const Budget = () => {
 											handleUpdateUi(index, item?._id)
 										}
 										type="submit"
-										className=" btn btn-outline btn-sm "
+										className=" "
 									>
-										update
+										<FaEdit />
+
 									</button>
 								) : null}
 								{item?._id ? (
@@ -209,11 +217,14 @@ const Budget = () => {
 											handleDelete(item?._id);
 										}}
 										type="submit"
-										className="text-red-500 btn btn-outline btn-sm"
+										className="text-red-500 "
 									>
-										Delete
+										<MdDelete />
+
 									</button>
 								) : null}
+
+
 							</div>
 						</div>
 					)
@@ -230,16 +241,14 @@ const Budget = () => {
 									onClick={handleCollapse}
 									className="collapse-title flex  text-xl relative justify-between font-medium"
 								>
-									<h1>Add Another Budget </h1>
+									<h1>{ budgetStateData?.length > 0 ? "Add Another Budget" : "Add Your First Budget"} </h1>
 								</div>
 							) : (
 								<div
 									onClick={handleCollapseClose}
 									className="collapse-title flex  text-xl relative justify-between font-medium"
 								>
-									<h1 onClick={handleCollapse}>
-										Add Another Budget{" "}
-									</h1>
+									<h1>{ budgetStateData?.length > 0 ? "Add Another Budget" : "Add Your First Budget"} </h1>
 								</div>
 							)}
 
