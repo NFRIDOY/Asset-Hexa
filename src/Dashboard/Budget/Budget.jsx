@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +12,10 @@ const Budget = () => {
 	const [budgetStateData, setBudgetStateData] = useState([]);
 	const [collapse, setCollapse] = useState(true);
 	const [updateIndex, setUpdateIndex] = useState(null);
+	const [budgetTotal , setBudgetTotal] = useState(0)
+	const [deleteQueue, setDeleteQueue] = useState([]);
+	const [largeValue , setLargeValue] = useState([])
+
 
 	const axiosPublic = useAxios();
 	// const axiosSecure =
@@ -23,20 +27,24 @@ const Budget = () => {
 			const res = await axiosPublic.get(
 				`/ExpanseThisMonth/${user?.email}`
 			);
+			setBudgetTotal(res.data?.totalBudgetInThisMonth)
 			return res.data;
 		},
 	});
-	console.log("expansedata", expanseData);
 
 	const { data: budgetData = [], refetch } = useQuery({
 		queryKey: ["budgetData"],
 		queryFn: async () => {
 			const res = await axiosPublic.get(`/budget/${user?.email}`);
 			setBudgetStateData(res.data);
+			
 
 			return res.data;
 		},
 	});
+	console.log(budgetData);
+
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -45,6 +53,7 @@ const Budget = () => {
 		const budgetAmount = e.target.budget_amount.value;
 		const email = user?.email;
 		const date = new Date();
+		setBudgetTotal(budgetTotal + parseInt(budgetAmount))
 
 		const budgetInfo = { date, email, budgetName, budgetAmount };
 		// console.log(budgetInfo);
@@ -76,12 +85,15 @@ const Budget = () => {
 		setUpdateIndex(index);
 	};
 
-	const handleUpdate = (e, id) => {
+	const handleUpdate = (e, id ,prevAmount ) => {
 		e.preventDefault();
 
 		const budgetName = e.target.budget_Name.value;
 		const budgetAmount = e.target.budget_amount.value;
 		const date = new Date();
+		setBudgetTotal((parseInt(budgetTotal) - parseInt(prevAmount)) + parseInt(budgetAmount) )
+		console.log(budgetTotal , prevAmount , budgetAmount);
+		
 
 		const budgetInfo = { date, budgetName, budgetAmount };
 		console.log(budgetInfo);
@@ -108,8 +120,9 @@ const Budget = () => {
 		setUpdateIndex(null);
 	};
 
-	const handleDelete = (id) => {
-		console.log(id);
+	const handleDelete = (id , budgetAmount , indexToRemove) => {
+		
+		console.log(id , budgetAmount);
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You won't be able to revert this!",
@@ -120,18 +133,22 @@ const Budget = () => {
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				axiosPublic.delete(`/budget/${id}`).then((res) => {
-					Swal.fire({
-						title: "Deleted!",
-						text: "Your file has been deleted.",
-						icon: "success",
-					});
-					refetch();
-					ExpanseRefetch();
-				});
+
+		setBudgetTotal(budgetTotal - parseInt(budgetAmount));
+
+		axiosPublic.delete(`/budget/${id}`).then((res) => {
+		  Swal.fire({
+			title: "Deleted!",
+			text: "Your file has been deleted.",
+			icon: "success",
+		  });
+		  refetch();
+		  ExpanseRefetch();
+		});
 			}
 		});
 	};
+
 	const handleDeleteAll = () => {
 		Swal.fire({
 			title: "Delete All you budget ?",
@@ -142,13 +159,13 @@ const Budget = () => {
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
+			
 			if (result.isConfirmed) {
+				
+				setBudgetTotal(0)
+				setBudgetStateData([])
 				axiosPublic.delete(`/budget`).then((res) => {
-					Swal.fire({
-						title: "Deleted!",
-						text: "all Budget has been deleted.",
-						icon: "success",
-					});
+					
 					refetch();
 					ExpanseRefetch();
 				});
@@ -179,7 +196,8 @@ const Budget = () => {
 						<div className="text-green-600 text-right">
 							<h1 className="text-sm ">Total Budget</h1>
 							<p className="text-3xl font-semibold">
-								${expanseData?.totalBudgetInThisMonth}
+								${budgetTotal}
+
 							</p>
 						</div>
 
@@ -197,7 +215,7 @@ const Budget = () => {
 
 				{budgetStateData.map((item, index) =>
 					updateIndex === index ? (
-						<form onSubmit={(e) => handleUpdate(e, item?._id)}>
+						<form onSubmit={(e) => handleUpdate(e, item?._id ,  item?.budgetAmount)}>
 							<div className="text-xl flex items-center justify-between bg-white p-4 mt-4">
 								<input
 									required
@@ -246,7 +264,7 @@ const Budget = () => {
 								{item?._id ? (
 									<button title="Edit Budget"
 										onClick={() =>
-											handleUpdateUi(index, item?._id)
+											handleUpdateUi(index, item?._id )
 										}
 										type="submit"
 										className=" "
@@ -254,17 +272,17 @@ const Budget = () => {
 										<FaEdit />
 									</button>
 								) : null}
-								{item?._id ? (
-									<button title="Delete this budget"
+									{
+										item?._id ? <button title="Delete this budget"
 										onClick={() => {
-											handleDelete(item?._id);
+											handleDelete(item?._id , item?.budgetAmount , index);
 										}}
 										type="submit"
 										className="text-red-500 "
 									>
 										<MdDelete />
-									</button>
-								) : null}
+									</button> : null
+									}
 							</div>
 						</div>
 					)
