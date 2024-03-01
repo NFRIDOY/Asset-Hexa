@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
+import BussinessDefault from "../../assets/Banner/BussinessDefault.jpg"
 
 
 const BusinessCard = ({ business }) => {
@@ -14,7 +15,7 @@ const BusinessCard = ({ business }) => {
                         <div className="">
                             <img
                                 className="rounded-lg w-full h-72"
-                                src={business?.BannerImage}
+                                src={business?.BannerImage || BussinessDefault}
                                 alt=""
                             />
                         </div>
