@@ -26,7 +26,7 @@ const Profile = () => {
 
   if (loading) return <Loader />;
 
-  console.log(users);
+  // console.log(users);
   return (
     <div className="flex justify-center">
       <div className=" shadow-lg rounded-2xl w-full ">
@@ -39,13 +39,16 @@ const Profile = () => {
           <a href="#" className="relative block">
             <img
               alt="profile"
-              src={users?.photoURL || "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="}
+              src={
+                users?.photoURL ||
+                "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+              }
               className="mx-auto object-cover rounded-full h-24 w-24  border-2 border-white "
             />
           </a>
 
-          <p className='p-2 px-4 text-xs text-white bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  rounded-full'>
-            { users?.role}
+          <p className="p-2 px-4 text-xs text-white bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none  border-none hover:bg-primaryColor  rounded-full">
+            {users?.role}
           </p>
 
           <div className="w-full p-2 mt-2 rounded-lg">
@@ -69,10 +72,10 @@ const Profile = () => {
               </p>
 
               <Link to={`/dashboard/UpdateProfile/${users._id}`}>
-          <button className="ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none border-none hover:bg-primaryColor text-white btn btn-sm">
-            Update  Profile
-          </button>
-        </Link>
+                <button className="ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none border-none hover:bg-primaryColor text-white btn btn-sm">
+                  Update Profile
+                </button>
+              </Link>
             </div>
             <div>
               <ProfileTab />
