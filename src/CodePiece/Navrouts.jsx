@@ -192,9 +192,9 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 						{
 							notifications.map(item => <div key={item?.id} className="bg-white flex gap-4 p-4 mb-2">
 							<img src={item?.photoURL} className="w-10 h-10 rounded-full" alt="" />
-							<div>
+							<div className="overflow-hidden">
 								<h1>{item?.userName} posted a {item?.type}</h1>
-								<p className="font-bold">{item?.title ? item?.title : null}</p>
+								<p className="font-bold w-full ">{item?.title ? item?.title : null}</p>
 							</div>
 						</div>)
 						}

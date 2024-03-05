@@ -198,14 +198,14 @@ const Budget = () => {
 		console.log(maxLengthOfAmount , "expnas");
 		console.log(maxLengthOfAmount , "maxlength");
 		if (maxLengthOfAmount < 7) {
-		  setFontSize("40px");
-		} else if ((maxLengthOfAmount < 12) && (maxLengthOfAmount >= 7)) {
-		  setFontSize("30px");
-		} else if (maxLengthOfAmount > 12) {
+		  setFontSize("34px");
+		} else if ((maxLengthOfAmount < 10) && (maxLengthOfAmount >= 7)) {
+		  setFontSize("28px");
+		} else if (maxLengthOfAmount >= 10) {
 		  setFontSize("20px");
 		}
-	  }, [expanseData , fontSize]);
-	//   console.log(fontsize); 
+	}, [expanseData , fontSize]);
+	console.log(fontSize); 
 
 
 
