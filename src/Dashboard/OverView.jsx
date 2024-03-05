@@ -15,6 +15,7 @@ const OverView = () => {
   const [incomeText, setIncomeText] = useState("");
   const [expanseText, setExpanseText] = useState("");
   const [transferText, setTransferText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const axiosPublic = useAxios();
   const { user } = useContext(AuthContext);
@@ -145,6 +146,14 @@ const OverView = () => {
         note,
         type,
       };
+
+      const AccountsName = AccountData.find(filteredAccount => filteredAccount.account === account );
+
+      if(AccountsName.amount < amount) {
+        setExpanseText("you can't add expanse more than your balance");
+        return
+      }
+
       setExpanseText("");
       // console.log(expanseData);
       form.reset();
@@ -184,6 +193,20 @@ const OverView = () => {
       setTransferText("please fill out all the form");
     } else {
       const transferData = { email, date, amount, from, to, note, type };
+      console.log(transferData);
+
+      const AccountsName = AccountData.find(filteredAccount => filteredAccount.account === from );
+
+      if(AccountsName.amount < amount) {
+        setTransferText("you can't transfer more than your balance");
+        return
+      }
+      
+      if(from === to){
+        setTransferText("you can't transfer  balance in same account");
+        return
+      }
+
       setTransferText("");
       // console.log(transferData);
       form.reset();
@@ -450,6 +473,8 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               className="input input-bordered w-full "
+              max="999999999999"
+							min="0"
             />
             <select
               name="category"
@@ -476,7 +501,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -517,6 +542,8 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               className="input input-bordered w-full "
+              max="999999999999"
+							min="0"
             />
             <select
               name="category"
@@ -544,7 +571,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -585,6 +612,7 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               min="0"
+              max="999999999999"
               onInput="validity.valid||(value='');"
               className="input input-bordered w-full "
             />
@@ -598,7 +626,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -616,7 +644,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
