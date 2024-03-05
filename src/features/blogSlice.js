@@ -27,7 +27,7 @@ export const blogApi = createApi({
     }),
     // Get all blogs data
     getBlogs: builder.query({
-      query: () => "/blogs",
+      query: (data) => `/blogs?page=${data?.currentPage}&size=${data?.BlogsPerPage}`,
       providesTags: ["blogAPI"],
     }),
     // Get single blog data

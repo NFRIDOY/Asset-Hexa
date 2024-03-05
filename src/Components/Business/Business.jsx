@@ -1,5 +1,6 @@
+ 
 
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 import InvestmentTable from "./../../Dashboard/Investments/InvestmentTable";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
@@ -27,6 +28,7 @@ export default function Business() {
     // console.log(adminState)
 
     const [total, setTotal] = useState(0);
+  
 
     const [accountData, setAccountData] = useState([]);
     const [myTotalBusiness, setMyTotalBusiness] = useState([]);
@@ -70,7 +72,7 @@ export default function Business() {
                 setMyBlogs(res.data)
                 // console.log(res.data)
             })
-    }, [user, accountData, setTotal]);
+    }, [user, accountData, setTotal, axiosPublic, myTotalBusiness]);
 
     const data01 = [
         { name: "Investment", value: totalInvestments },
