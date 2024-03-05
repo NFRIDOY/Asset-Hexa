@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../src/App.css";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxios from "../hooks/useAxios";
@@ -16,6 +16,7 @@ const OverView = () => {
 	const [expanseText, setExpanseText] = useState("");
 	const [transferText, setTransferText] = useState("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fontsize , setFontSize] = useState(16)
 
 	const axiosPublic = useAxios();
 	const { user } = useContext(AuthContext);
@@ -268,9 +269,23 @@ const OverView = () => {
 		let elements = document.querySelectorAll(".custom-button");
 		elements.forEach(function (element) {
 			element.classList.add("no-hover");
-			console.log(element);
+			// console.log(element);
 		});
 	};
+
+  useEffect(() => {
+    const maxLengthOfAmount = AccountData?.reduce((maxLength, obj) => Math.max(maxLength, String(obj.amount).length), 0);
+    if (maxLengthOfAmount < 7) {
+      setFontSize(40);
+    } else if ((maxLengthOfAmount < 10) && (maxLengthOfAmount >= 7)) {
+      setFontSize(30);
+    } else if (maxLengthOfAmount > 10) {
+      setFontSize(18);
+    }
+  }, [fontsize , AccountData]);
+  console.log(fontsize); 
+
+
 
 	return (
 		<div className="p-5  bg-base-300 ">
@@ -305,7 +320,7 @@ const OverView = () => {
 								<h1 className="text-xl font-medium">
 									{item?.account}
 								</h1>
-								<p className="text-3xl md:text-5xl font-semibold">
+								<p style={{fontSize: fontsize }} className="text-3xl md:text-5xl font-semibold">
 									$
 									<CountUp end={item?.amount} />
 									{/* {item?.amount} */}

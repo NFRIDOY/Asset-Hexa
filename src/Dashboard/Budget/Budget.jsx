@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
+import { string } from "prop-types";
 
 const Budget = () => {
 	const [budgetStateData, setBudgetStateData] = useState([]);
@@ -15,6 +16,7 @@ const Budget = () => {
 	const [budgetTotal , setBudgetTotal] = useState(0)
 	const [deleteQueue, setDeleteQueue] = useState([]);
 	const [largeValue , setLargeValue] = useState([])
+	const [fontSize , setFontSize] = useState("20px")
 
 
 	const axiosPublic = useAxios();
@@ -42,7 +44,7 @@ const Budget = () => {
 			return res.data;
 		},
 	});
-	console.log(budgetData);
+	console.log(expanseData );
 
 
 
@@ -188,6 +190,24 @@ const Budget = () => {
 	  const currentDate = new Date();
 	  const currentMonth = months[currentDate.getMonth()];
 
+	  useEffect(() => {
+		  
+		  const expanseLength = String(expanseData?.totalBudgetInThisMonth)?.length
+		  const budgetLength = String(expanseData?.totalExpenseInThisMonth)?.length
+		  const maxLengthOfAmount = expanseLength + budgetLength
+		console.log(maxLengthOfAmount , "expnas");
+		console.log(maxLengthOfAmount , "maxlength");
+		if (maxLengthOfAmount < 7) {
+		  setFontSize("40px");
+		} else if ((maxLengthOfAmount < 12) && (maxLengthOfAmount >= 7)) {
+		  setFontSize("30px");
+		} else if (maxLengthOfAmount > 12) {
+		  setFontSize("20px");
+		}
+	  }, [expanseData , fontSize]);
+	//   console.log(fontsize); 
+
+
 
 	return (
 		<div>
@@ -197,14 +217,15 @@ const Budget = () => {
 					<div className="text text-red-500">
 						<h1 className="text-sm">Total Expense in {currentMonth} </h1>
 						<p className="text-3xl font-semibold">
-							${expanseData?.totalExpenseInThisMonth}
+							
+							<span className={`text-[${fontSize}]`} >${expanseData?.totalExpenseInThisMonth}</span>
 						</p>
-					</div>
+					</div> 
 					<div className="flex gap-5 items-center">
 						<div className="text-green-600 text-right">
 							<h1 className="text-sm ">Total Budget</h1>
 							<p className="text-3xl font-semibold">
-								${budgetTotal}
+								<span  className={`text-[${fontSize}]`} >${budgetTotal}</span>
 
 							</p>
 						</div>
@@ -340,6 +361,9 @@ const Budget = () => {
 									placeholder="Amount of your Budget"
 									className="mt-4 md:mt-0 md:p-2 md:text-right outline-none border-b-2  w-full md:max-w-xs"
 									name="budget_amount"
+									max="999999999999"
+
+
 								/>
 								<button
 									type="submit"
