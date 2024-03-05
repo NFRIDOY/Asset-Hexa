@@ -58,7 +58,8 @@ export const router = createBrowserRouter([
       {
         path: "/Blogs",
         element: <Blog />,
-        loader: () => fetch('http://localhost:5000/blogsCount')
+        loader: () => fetch('https://asset-hexa-server.vercel.app/blogsCount')
+        // loader: () => fetch(' http://localhost:5000/blogsCount')
       },
 
       {
@@ -68,7 +69,7 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <Businesses></Businesses>,
-        loader: () => fetch('http://localhost:5000/bussinessCount')
+        loader: () => fetch(' https://asset-hexa-server.vercel.app/bussinessCount')
       },
       {
         path: "/businessDetails/:id",

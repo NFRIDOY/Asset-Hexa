@@ -11,7 +11,7 @@ export default function Businesses() {
 
   const { count } = useLoaderData();
   const [currentPage, setCurrentPage] = useState(0);
-  const [BusinessPerPage, setBusinessPerPage] = useState(3);
+  const [BusinessPerPage, setBusinessPerPage] = useState(9);
 
   const axiosPublic = useAxios();
 
@@ -74,16 +74,16 @@ export default function Businesses() {
           <button className="btn btn-sm" onClick={handlePrevPage} >prev</button>
           {
             pages?.map(page => <button
-              className={`ml-5 btn btn-sm ${page === currentPage ? "btn-primary" : ""}`}
-              onClick={() => setCurrentPage(page)}
-              key={page}>{page}</button>)
+              className={`md:ml-5  btn btn-sm ${page === currentPage ? "text-white bg-[#38d626]" : ""}`}
+              onClick={() => setCurrentPage(page )}
+              key={page}>{ parseInt(page) +1 }</button>)
           }
-          <button className="btn btn-sm ml-5" onClick={handleNextPage} >Next</button>
-          <select onChange={handleBusinessPerPage} className="ml-5 bg-primary btn-sm rounded-xl text-white" value={BusinessPerPage}>
-            <option value="3">3</option>
-            <option value="6">6</option>
+          <button className="btn btn-sm md:ml-5" onClick={handleNextPage} >Next</button>
+          <select onChange={handleBusinessPerPage} className="ml-5 text-white bg-[#38d626] btn-sm rounded-xl " value={BusinessPerPage}>
             <option value="9">9</option>
-            <option value="12">12</option>
+            <option value="18">18</option>
+            <option value="27">27</option>
+            <option value="36">36</option>
           </select>
         </div>
 

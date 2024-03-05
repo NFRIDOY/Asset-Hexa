@@ -12,7 +12,7 @@ const Blog = () => {
 
   const { count } = useLoaderData();
   const [currentPage, setCurrentPage] = useState(0);
-  const [BlogsPerPage, setBlogsPerPage] = useState(3);
+  const [BlogsPerPage, setBlogsPerPage] = useState(9);
 
   const axiosPublic = useAxios();
   const numberOfPage = Math.ceil(count / BlogsPerPage);
@@ -79,16 +79,16 @@ const Blog = () => {
           <button className="btn btn-sm" onClick={handlePrevPage} >prev</button>
           {
             pages?.map(page => <button
-              className={`ml-5 btn btn-sm ${page === currentPage ? "btn-primary" : ""}`}
+              className={` md:ml-5 btn btn-sm ${page === currentPage ? " text-white bg-[#38d626]" : ""}`}
               onClick={() => setCurrentPage(page)}
-              key={page}>{page}</button>)
+              key={page}>{parseInt(page) + 1}</button>)
           }
-          <button className="btn btn-sm ml-5" onClick={handleNextPage} >Next</button>
-          <select onChange={handleBlogsPerPage} className="ml-5 bg-primary btn-sm rounded-xl text-white" value={BlogsPerPage}>
-            <option value="3">3</option>
-            <option value="6">6</option>
+          <button className="btn btn-sm md:ml-5" onClick={handleNextPage} >Next</button>
+          <select onChange={handleBlogsPerPage} className="md:ml-5  btn-sm rounded-xl text-white bg-[#38d626]" value={BlogsPerPage}>
             <option value="9">9</option>
-            <option value="12">12</option>
+            <option value="18">18</option>
+            <option value="27">27</option>
+            <option value="36">36</option>
           </select>
         </div>
 
