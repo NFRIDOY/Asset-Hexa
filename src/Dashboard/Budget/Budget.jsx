@@ -44,13 +44,11 @@ const Budget = () => {
 			return res.data;
 		},
 	});
-	console.log(expanseData );
 
 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(122);
 		const budgetName = e.target.budget_Name.value;
 		const budgetAmount = e.target.budget_amount.value;
 		const email = user?.email;
@@ -58,7 +56,6 @@ const Budget = () => {
 		setBudgetTotal(budgetTotal + parseInt(budgetAmount))
 
 		const budgetInfo = { date, email, budgetName, budgetAmount };
-		// console.log(budgetInfo);
 
 		setBudgetStateData([...budgetStateData, budgetInfo]);
 		e.target.reset();
@@ -83,7 +80,6 @@ const Budget = () => {
 	};
 
 	const handleUpdateUi = (index, id) => {
-		console.log(index, id);
 		setUpdateIndex(index);
 	};
 
@@ -94,24 +90,20 @@ const Budget = () => {
 		const budgetAmount = e.target.budget_amount.value;
 		const date = new Date();
 		setBudgetTotal((parseInt(budgetTotal) - parseInt(prevAmount)) + parseInt(budgetAmount) )
-		console.log(budgetTotal , prevAmount , budgetAmount);
 		
 
 		const budgetInfo = { date, budgetName, budgetAmount };
-		console.log(budgetInfo);
 
 		const updatedBudgetData = budgetData.map((item) => {
 			if (item._id === id) {
-				// Update the budget item with the new values
 				return { ...item, budgetName, budgetAmount };
 			}
-			return item; // Return other items unchanged
+			return item; 
 		});
 		setBudgetStateData(updatedBudgetData); // Update the state with the modified data
 		setUpdateIndex(null); // Reset update index after updating
 
 		axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
-			console.log(res?.data);
 			refetch();
 			ExpanseRefetch();
 			setUpdateIndex(null);
@@ -126,7 +118,6 @@ const Budget = () => {
 
 
 		
-		console.log(id , budgetAmount);
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You won't be able to revert this!",
@@ -195,8 +186,6 @@ const Budget = () => {
 		  const expanseLength = String(expanseData?.totalBudgetInThisMonth)?.length
 		  const budgetLength = String(expanseData?.totalExpenseInThisMonth)?.length
 		  const maxLengthOfAmount = expanseLength + budgetLength
-		console.log(maxLengthOfAmount , "expnas");
-		console.log(maxLengthOfAmount , "maxlength");
 		if (maxLengthOfAmount < 7) {
 		  setFontSize("34px");
 		} else if ((maxLengthOfAmount < 10) && (maxLengthOfAmount >= 7)) {
@@ -205,7 +194,6 @@ const Budget = () => {
 		  setFontSize("20px");
 		}
 	}, [expanseData , fontSize]);
-	console.log(fontSize); 
 
 
 
@@ -225,7 +213,7 @@ const Budget = () => {
 						<div className="text-green-600 text-right">
 							<h1 className="text-sm ">Total Budget</h1>
 							<p className="text-3xl font-semibold">
-								<span  className={`text-[${fontSize}]`} >${budgetTotal}</span>
+								<span  className={`text-[${fontSize}] md:text-2xl`} >${budgetTotal}</span>
 
 							</p>
 						</div>
@@ -245,24 +233,26 @@ const Budget = () => {
 				{budgetStateData.map((item, index) =>
 					updateIndex === index ? (
 						<form onSubmit={(e) => handleUpdate(e, item?._id ,  item?.budgetAmount)}>
-							<div className="text-xl flex items-center justify-between bg-white p-4 mt-4">
+							<div className="text-xl  flex items-center justify-between bg-white p-4 mt-4">
 								<input
 									required
 									type="text"
 									placeholder="Name of your Budget"
-									className=" md:mt-0 md:px-0 border-gray-400   outline-none border-b-2  w-full md:max-w-xs"
+									className="mr-2 md:mt-0 md:px-0 border-gray-400   outline-none border-b-2   max-w-[150px] md:max-w-xs"
 									name="budget_Name"
 									defaultValue={item?.budgetName}
 								/>
 
-								<div className="flex gap-4">
+								<div className="flex  gap-4">
 									<input
 										required
 										type="number"
 										placeholder="Amount of your Budget"
-										className=" md:mt-0 md:px-0 border-gray-400  md:text-right outline-none border-b-2  w-full md:max-w-xs"
+										className="text-right  md:mt-0 md:px-0 border-gray-400  md:text-right outline-none border-b-2  w-full md:max-w-xs"
 										name="budget_amount"
 										defaultValue={item?.budgetAmount}
+										min="0"
+										max="999999999999"
 									/>
 									<div className="flex gap-4 ">
 										<button title="cancel editing"

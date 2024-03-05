@@ -31,9 +31,6 @@ const OverView = () => {
 		},
 	});
 
-	// https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
-
-	// Loading Data for recent transection Table
 
 	const { data: transectionData = [], refetch } = useQuery({
 		queryKey: ["transeferData"],
@@ -46,15 +43,9 @@ const OverView = () => {
 	});
 
 	const sortedTransactions = [...transectionData];
-	//   console.log(sortedTransactions);
 
-	// Sorting by date in descending order
 	sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-	// Now sortedTransactions contains the sorted data by recent date
-	//   console.log("this is sorted data", sortedTransactions);
-
-	console.log("transectionData", transectionData);
 
 	const { data: AccountData = [], refetch: accountRefetch } = useQuery({
 		queryKey: ["AccountData"],
@@ -64,8 +55,6 @@ const OverView = () => {
 		},
 	});
 
-	console.log(AccountData);
-	// This is for Paichart (color and data fo piechart)
 
 	const data01 = [
 		{ name: "Income", value: PiData?.totalIncome },
@@ -162,11 +151,8 @@ const OverView = () => {
 			}
 
 			setExpanseText("");
-			// console.log(expanseData);
 			form.reset();
-			// axios.post("http://localhost:5000/transections", expanseData)
 			axiosPublic.post("/transections", expanseData).then((res) => {
-				// console.log(res.data);
 				if (res?.data.resultAccount.acknowledged) {
 					toast.success("Expanse Data added Successfully");
 					refetch();
@@ -241,24 +227,16 @@ const OverView = () => {
 	];
 
 	const getRandomColor = () => {
-		// Generate a random index to pick a color from the array
 		const randomIndex = Math.floor(
 			Math.random() * BGcolorsOfAccount.length
 		);
 		return BGcolorsOfAccount[randomIndex];
 	};
-	const getIndexColor = () => {
-		// Generate a random index to pick a color from the array
-		const randomIndex = Math.floor(
-			Math.random() * BGcolorsOfAccount.length
-		);
-		return BGcolorsOfAccount[randomIndex];
-	};
+	
 
 	const handleParent = () => {
 		let elements = document.querySelectorAll(".no-hover");
 
-		// Loop through each element and remove the class 'oldClass'
 		elements.forEach(function (element) {
 			element.classList.remove("no-hover");
 			console.log(element);
@@ -269,7 +247,6 @@ const OverView = () => {
 		let elements = document.querySelectorAll(".custom-button");
 		elements.forEach(function (element) {
 			element.classList.add("no-hover");
-			// console.log(element);
 		});
 	};
 
@@ -283,7 +260,6 @@ const OverView = () => {
       setFontSize(18);
     }
   }, [fontsize , AccountData]);
-  console.log(fontsize); 
 
 
 
@@ -341,7 +317,7 @@ const OverView = () => {
 				</div>
 
 				<div className="flex flex-col lg:flex-row justify gap-5    mt-5  ">
-					<div className="bg-white min-h-[400px] md:min-h-[300px]    w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
+					<div className="bg-white min-h-[400px] lg:min-h-[300px]    w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
 						{PiData?.totalIncome == 0 &&
 						PiData?.totalExpense == 0 ? (
 							<div>

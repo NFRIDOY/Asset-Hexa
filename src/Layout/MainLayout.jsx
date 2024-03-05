@@ -39,11 +39,11 @@ const MainLayout = () => {
     });
 
     socket.on("connection", () => {
-      console.log("connected to Socet io");
+      // console.log("connected to Socet io");
     });
 
     socket.on("new_blog_posted", (data) => {
-      console.log("new blog posted ", data);
+      // console.log("new blog posted ", data);
       setIsUnSeenNotification(isUnSeenNotification + 1);
 
       setTimeout(function () {
@@ -57,7 +57,7 @@ const MainLayout = () => {
       axiosPublic.put(`/notificationsCount/${user?.email}`, obj);
     });
     socket.on("new_business_posted", (data) => {
-      console.log("new business posted ", data);
+      // console.log("new business posted ", data);
       setIsUnSeenNotification(isUnSeenNotification + 1);
 
       setTimeout(function () {

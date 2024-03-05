@@ -33,9 +33,6 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 		
 
 	};
-	
-
-
 	const { data: notifications = [] } = useQuery({
 		queryKey: ["Notifications"],
 		queryFn: async () => {
@@ -55,8 +52,6 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 	if (notifications.length > 0) {
 		setToastData(notifications);
 	}
-
-	// console.log(notifications);
 
 
 	return (
@@ -93,43 +88,7 @@ const Navrouts = ({setToastData , isUnSeenNotification , setIsUnSeenNotification
 				{/* Login Logout toggle button logic */}
 				<div className="navbar-end mr-2">
 					{user?.email ? (
-						// <div className="flex gap-3 items-center">
-						// 	<div className="dropdown dropdown-end">
-						// 		<div
-						// 			tabIndex={0}
-						// 			role="button"
-						// 			className="btn btn-ghost btn-circle avatar"
-						// 		>
-						// 			<div id="my-drawer-2" className="w-10 rounded-full">
-						// 				{
-						//                     user?.photoURL ? <img src={user.photoURL} alt="" /> : <img
-						// 					alt="Tailwind CSS Navbar component"
-						// 					src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-						// 				/>
-						//                 }
-						// 			</div>
-						// 		</div>
-						// 		<ul style={{backdropFilter: "blur(30px)"}}
-						// 			tabIndex={0}
-						// 			className=" absolute top-0 -mr-4  right-0 h-screen z-[1] text-right  p-6  text-xl text-black font-bold dropdown-content bg-transparent  w-60 space-y-5 gap-5 -mt-4 pt-8"
-						// 		>
-						// 			<li >
-						// 				<Link to="/">
-						// 					Dashboard
-						// 				</Link>
-						// 			</li>
-						// 			<li>
-						// 				<Link
-						// 					onClick={() =>
-						// 						logOut()
-						// 					}
-						// 				>
-						// 					Logout
-						// 				</Link>
-						// 			</li>
-						// 		</ul>
-						// 	</div>
-						// </div>
+						
 
 						<div className="">
 							<div className="flex gap-2  items-center ">
