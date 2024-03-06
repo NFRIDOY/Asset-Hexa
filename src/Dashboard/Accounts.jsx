@@ -60,12 +60,11 @@ const Accounts = () => {
         </p>
       </div>
       <div className="grid grid-cols-1">
-        {Balance.map((Balances) => (
+        {Balance?.map((Balances) => (
           <AccountCard
             setBalance={setBalance}
             Balance={Balance}
             key={Balances?._id}
-            
             Balances={Balances}
             isOpen={isOpen}
             setIsOpen={setIsOpen}

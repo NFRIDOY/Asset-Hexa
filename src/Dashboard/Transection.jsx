@@ -19,8 +19,8 @@ const Transection = () => {
 
         <TabPanel>
           <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
-            {incomes.length ? (
-              incomes.map((transection) => (
+            {incomes?.length ? (
+              incomes?.map((transection) => (
                 <TransectionColumn
                   key={transection._id}
                   transection={transection}
@@ -35,8 +35,8 @@ const Transection = () => {
         </TabPanel>
         <TabPanel>
           <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
-            {expenses.length ? (
-              expenses.map((transection) => (
+            {expenses?.length ? (
+              expenses?.map((transection) => (
                 <TransectionColumn
                   key={transection._id}
                   transection={transection}
@@ -51,8 +51,8 @@ const Transection = () => {
         </TabPanel>
         <TabPanel>
           <div className="mt-8 space-y-2 shadow-md shadow-[#38d626] p-5 border border-[#38d626]">
-            {tranfers.length ? (
-              tranfers.map((transection) => (
+            {tranfers?.length ? (
+              tranfers?.map((transection) => (
                 <TransectionColumn
                   key={transection._id}
                   transection={transection}

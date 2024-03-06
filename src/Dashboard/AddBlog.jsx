@@ -62,7 +62,7 @@ const AddBlog = () => {
     postBlog(blogData).then((res) => {
       // console.log(res.data);
       if (res.data?.insertedId) {
-        console.log("connected to Socet io");
+        // console.log("connected to Socet io");
         const socket = io("https://asset-hexa-server-notification.glitch.me/", {
           transports: ["websocket"],
         });

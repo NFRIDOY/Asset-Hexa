@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../src/App.css";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxios from "../hooks/useAxios";
@@ -8,6 +8,7 @@ import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 import { Link } from "react-router-dom";
 import image from "../../src/assets/Nodataforund/NOdata.png";
 import CountUp from "react-countup";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const OverView = () => {
   // state to hold  erroretext from diffrent modal
@@ -15,51 +16,39 @@ const OverView = () => {
   const [incomeText, setIncomeText] = useState("");
   const [expanseText, setExpanseText] = useState("");
   const [transferText, setTransferText] = useState("");
+  const [fontsize, setFontSize] = useState(16);
 
   const axiosPublic = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
   const { data: PiData = [], refetch: PiREfetch } = useQuery({
     queryKey: ["piData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/totalInExp?email=${user?.email}`);
+      const res = await axiosSecure.get(`/totalInExp?email=${user?.email}`);
       return res.data;
     },
   });
 
-  // https://asset-hexa-server.vercel.app/transections?ty pe=EXPENSE&email=backend@example.com
-
-  // Loading Data for recent transection Table
-
   const { data: transectionData = [], refetch } = useQuery({
     queryKey: ["transeferData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/transections?email=${user?.email}`);
+      const res = await axiosSecure.get(`/transections?email=${user?.email}`);
       return res.data;
     },
   });
 
   const sortedTransactions = [...transectionData];
-//   console.log(sortedTransactions);
 
-  // Sorting by date in descending order
   sortedTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // Now sortedTransactions contains the sorted data by recent date
-//   console.log("this is sorted data", sortedTransactions);
-
-  console.log("transectionData", transectionData);
-
-  const { data: AccountData = [] , refetch : accountRefetch } = useQuery({
+  const { data: AccountData = [], refetch: accountRefetch } = useQuery({
     queryKey: ["AccountData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/accounts?email=${user?.email}`);
+      const res = await axiosSecure.get(`/accounts?email=${user?.email}`);
       return res.data;
     },
   });
-
-  console.log(AccountData);
-  // This is for Paichart (color and data fo piechart)
 
   const data01 = [
     { name: "Income", value: PiData?.totalIncome },
@@ -101,13 +90,13 @@ const OverView = () => {
       };
       setIncomeText("");
       form.reset();
-      axiosPublic.post("/transections", incomeData).then((res) => {
+      axiosSecure.post("/transections", incomeData).then((res) => {
         // console.log(res.data);
         if (res?.data.resultAccount.acknowledged) {
           toast.success("Income Data added Successfully");
           refetch();
           PiREfetch();
-		  accountRefetch()
+          accountRefetch();
         }
       });
     }
@@ -145,17 +134,24 @@ const OverView = () => {
         note,
         type,
       };
+
+      const AccountsName = AccountData.find(
+        (filteredAccount) => filteredAccount.account === account
+      );
+
+      if (AccountsName.amount < amount) {
+        setExpanseText("you can't add expanse more than your balance");
+        return;
+      }
+
       setExpanseText("");
-      // console.log(expanseData);
       form.reset();
-      // axios.post("http://localhost:5000/transections", expanseData)
-      axiosPublic.post("/transections", expanseData).then((res) => {
-        // console.log(res.data);
+      axiosSecure.post("/transections", expanseData).then((res) => {
         if (res?.data.resultAccount.acknowledged) {
           toast.success("Expanse Data added Successfully");
           refetch();
           PiREfetch();
-		  accountRefetch()
+          accountRefetch();
         }
       });
     }
@@ -184,15 +180,31 @@ const OverView = () => {
       setTransferText("please fill out all the form");
     } else {
       const transferData = { email, date, amount, from, to, note, type };
+      // console.log(transferData);
+
+      const AccountsName = AccountData.find(
+        (filteredAccount) => filteredAccount.account === from
+      );
+
+      if (AccountsName.amount < amount) {
+        setTransferText("you can't transfer more than your balance");
+        return;
+      }
+
+      if (from === to) {
+        setTransferText("you can't transfer  balance in same account");
+        return;
+      }
+
       setTransferText("");
       // console.log(transferData);
       form.reset();
-      axiosPublic.post("/transections", transferData).then((res) => {
-        console.log(res.data);
+      axiosSecure.post("/transections", transferData).then((res) => {
+        // console.log(res.data);
         if (res?.data.resultTransec.acknowledged) {
           toast.success("Transfer Data added Successfully");
           refetch();
-		  accountRefetch()
+          accountRefetch();
         }
       });
     }
@@ -209,12 +221,6 @@ const OverView = () => {
   ];
 
   const getRandomColor = () => {
-    // Generate a random index to pick a color from the array
-    const randomIndex = Math.floor(Math.random() * BGcolorsOfAccount.length);
-    return BGcolorsOfAccount[randomIndex];
-  };
-  const getIndexColor = () => {
-    // Generate a random index to pick a color from the array
     const randomIndex = Math.floor(Math.random() * BGcolorsOfAccount.length);
     return BGcolorsOfAccount[randomIndex];
   };
@@ -222,10 +228,9 @@ const OverView = () => {
   const handleParent = () => {
     let elements = document.querySelectorAll(".no-hover");
 
-    // Loop through each element and remove the class 'oldClass'
     elements.forEach(function (element) {
       element.classList.remove("no-hover");
-      console.log(element);
+      // console.log(element);
     });
   };
 
@@ -233,9 +238,22 @@ const OverView = () => {
     let elements = document.querySelectorAll(".custom-button");
     elements.forEach(function (element) {
       element.classList.add("no-hover");
-      console.log(element);
     });
   };
+
+  useEffect(() => {
+    const maxLengthOfAmount = AccountData?.reduce(
+      (maxLength, obj) => Math.max(maxLength, String(obj.amount).length),
+      0
+    );
+    if (maxLengthOfAmount < 7) {
+      setFontSize(40);
+    } else if (maxLengthOfAmount < 10 && maxLengthOfAmount >= 7) {
+      setFontSize(30);
+    } else if (maxLengthOfAmount > 10) {
+      setFontSize(18);
+    }
+  }, [fontsize, AccountData]);
 
   return (
     <div className="p-5  bg-base-300 ">
@@ -266,13 +284,16 @@ const OverView = () => {
                 className=" overflow-scroll scrollable-content space-y-2 py-8 text-white rounded-xl  px-8 min-w-48 md:min-w-60 "
               >
                 <h1 className="text-xl font-medium">{item?.account}</h1>
-                <p className="text-3xl md:text-5xl font-semibold">
-                  $	
+                <p
+                  style={{ fontSize: fontsize }}
+                  className="text-3xl md:text-5xl font-semibold"
+                >
+                  $
                   <CountUp end={item?.amount} />
-				  {/* {item?.amount} */}
+                  {/* {item?.amount} */}
                 </p>
               </div>
-            ))		
+            ))
           ) : (
             <Link
               to={"../../dashboard/AddBalance"}
@@ -285,7 +306,7 @@ const OverView = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row justify gap-5    mt-5  ">
-          <div className="bg-white min-h-[300px]   w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
+          <div className="bg-white min-h-[400px] lg:min-h-[300px]    w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
             {PiData?.totalIncome == 0 && PiData?.totalExpense == 0 ? (
               <div>
                 <h1>No Data to show</h1>{" "}
@@ -316,12 +337,12 @@ const OverView = () => {
             )}
           </div>
 
-          <div className="flex-1 relative min-h-[300px] overflow-y-scroll scrollable-content lg:h-[calc(100vh-270px)] bg-white ">
+          <div className="flex-1 relative min-h-[300px] overflow-y-scroll scrollable-content lg:h-[calc(100vh-270px)] bg-white mb-14 md:mb-0">
             <h1 className="text-center    text-2xl my-2 ">
               {" "}
               Recent Transection
             </h1>
-            <table className="table  table-pin-rows table-md md:table-lg  text-center">
+            <table className="table  md:table-pin-rows table-md md:table-lg  text-center">
               <thead>
                 <tr className="">
                   <th>Date</th>
@@ -360,7 +381,8 @@ const OverView = () => {
 
       {/* for add income , Expanse , transfer and parent Button  */}
 
-      <div className="group parentbutton   space-x-4 fixed  z-[999] bottom-16 right-28">
+      <div className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-[#00EC25] flex items-center justify-center"></div>
+      <div className="group p-4 bg-white  md:px-0 md:py-0  rounded-full   parentbutton   space-x-4 fixed  z-[9999] bottom-8  md:bottom-16 right-[50%] translate-x-1/2  md:right-28">
         <button
           onTouchEnd={addClass}
           onClick={handleParent}
@@ -450,6 +472,8 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               className="input input-bordered w-full "
+              max="999999999999"
+              min="0"
             />
             <select
               name="category"
@@ -476,7 +500,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -517,6 +541,8 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               className="input input-bordered w-full "
+              max="999999999999"
+              min="0"
             />
             <select
               name="category"
@@ -544,7 +570,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -585,6 +611,7 @@ const OverView = () => {
               type="number"
               placeholder="Amount"
               min="0"
+              max="999999999999"
               onInput="validity.valid||(value='');"
               className="input input-bordered w-full "
             />
@@ -598,7 +625,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
@@ -616,7 +643,7 @@ const OverView = () => {
               </option>
               {AccountData.map((acc) => (
                 <option key={acc?._id} value={acc?.account}>
-                  {acc?.account}
+                  {acc?.account} (${acc?.amount})
                 </option>
               ))}
               {/* <option value="Cash">Cash</option>
