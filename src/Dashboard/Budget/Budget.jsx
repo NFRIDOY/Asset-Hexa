@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
+import { string } from "prop-types";
 
 const Budget = () => {
 	const [budgetStateData, setBudgetStateData] = useState([]);
@@ -15,6 +16,7 @@ const Budget = () => {
 	const [budgetTotal , setBudgetTotal] = useState(0)
 	const [deleteQueue, setDeleteQueue] = useState([]);
 	const [largeValue , setLargeValue] = useState([])
+	const [fontSize , setFontSize] = useState("20px")
 
 
 	const axiosPublic = useAxios();
@@ -42,13 +44,11 @@ const Budget = () => {
 			return res.data;
 		},
 	});
-	console.log(budgetData);
 
 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(122);
 		const budgetName = e.target.budget_Name.value;
 		const budgetAmount = e.target.budget_amount.value;
 		const email = user?.email;
@@ -56,7 +56,6 @@ const Budget = () => {
 		setBudgetTotal(budgetTotal + parseInt(budgetAmount))
 
 		const budgetInfo = { date, email, budgetName, budgetAmount };
-		// console.log(budgetInfo);
 
 		setBudgetStateData([...budgetStateData, budgetInfo]);
 		e.target.reset();
@@ -81,7 +80,6 @@ const Budget = () => {
 	};
 
 	const handleUpdateUi = (index, id) => {
-		console.log(index, id);
 		setUpdateIndex(index);
 	};
 
@@ -92,24 +90,20 @@ const Budget = () => {
 		const budgetAmount = e.target.budget_amount.value;
 		const date = new Date();
 		setBudgetTotal((parseInt(budgetTotal) - parseInt(prevAmount)) + parseInt(budgetAmount) )
-		console.log(budgetTotal , prevAmount , budgetAmount);
 		
 
 		const budgetInfo = { date, budgetName, budgetAmount };
-		console.log(budgetInfo);
 
 		const updatedBudgetData = budgetData.map((item) => {
 			if (item._id === id) {
-				// Update the budget item with the new values
 				return { ...item, budgetName, budgetAmount };
 			}
-			return item; // Return other items unchanged
+			return item; 
 		});
 		setBudgetStateData(updatedBudgetData); // Update the state with the modified data
 		setUpdateIndex(null); // Reset update index after updating
 
 		axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
-			console.log(res?.data);
 			refetch();
 			ExpanseRefetch();
 			setUpdateIndex(null);
@@ -124,7 +118,6 @@ const Budget = () => {
 
 
 		
-		console.log(id , budgetAmount);
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You won't be able to revert this!",
@@ -188,6 +181,21 @@ const Budget = () => {
 	  const currentDate = new Date();
 	  const currentMonth = months[currentDate.getMonth()];
 
+	  useEffect(() => {
+		  
+		  const expanseLength = String(expanseData?.totalBudgetInThisMonth)?.length
+		  const budgetLength = String(expanseData?.totalExpenseInThisMonth)?.length
+		  const maxLengthOfAmount = expanseLength + budgetLength
+		if (maxLengthOfAmount < 7) {
+		  setFontSize("34px");
+		} else if ((maxLengthOfAmount < 10) && (maxLengthOfAmount >= 7)) {
+		  setFontSize("28px");
+		} else if (maxLengthOfAmount >= 10) {
+		  setFontSize("20px");
+		}
+	}, [expanseData , fontSize]);
+
+
 
 	return (
 		<div>
@@ -197,14 +205,15 @@ const Budget = () => {
 					<div className="text text-red-500">
 						<h1 className="text-sm">Total Expense in {currentMonth} </h1>
 						<p className="text-3xl font-semibold">
-							${expanseData?.totalExpenseInThisMonth}
+							
+							<span className={`text-[${fontSize}]`} >${expanseData?.totalExpenseInThisMonth}</span>
 						</p>
-					</div>
+					</div> 
 					<div className="flex gap-5 items-center">
 						<div className="text-green-600 text-right">
 							<h1 className="text-sm ">Total Budget</h1>
 							<p className="text-3xl font-semibold">
-								${budgetTotal}
+								<span  className={`text-[${fontSize}] md:text-2xl`} >${budgetTotal}</span>
 
 							</p>
 						</div>
@@ -224,24 +233,26 @@ const Budget = () => {
 				{budgetStateData.map((item, index) =>
 					updateIndex === index ? (
 						<form onSubmit={(e) => handleUpdate(e, item?._id ,  item?.budgetAmount)}>
-							<div className="text-xl flex items-center justify-between bg-white p-4 mt-4">
+							<div className="text-xl  flex items-center justify-between bg-white p-4 mt-4">
 								<input
 									required
 									type="text"
 									placeholder="Name of your Budget"
-									className=" md:mt-0 md:px-0 border-gray-400   outline-none border-b-2  w-full md:max-w-xs"
+									className="mr-2 md:mt-0 md:px-0 border-gray-400   outline-none border-b-2   max-w-[150px] md:max-w-xs"
 									name="budget_Name"
 									defaultValue={item?.budgetName}
 								/>
 
-								<div className="flex gap-4">
+								<div className="flex  gap-4">
 									<input
 										required
 										type="number"
 										placeholder="Amount of your Budget"
-										className=" md:mt-0 md:px-0 border-gray-400  md:text-right outline-none border-b-2  w-full md:max-w-xs"
+										className="text-right  md:mt-0 md:px-0 border-gray-400  md:text-right outline-none border-b-2  w-full md:max-w-xs"
 										name="budget_amount"
 										defaultValue={item?.budgetAmount}
+										min="0"
+										max="999999999999"
 									/>
 									<div className="flex gap-4 ">
 										<button title="cancel editing"
@@ -340,6 +351,9 @@ const Budget = () => {
 									placeholder="Amount of your Budget"
 									className="mt-4 md:mt-0 md:p-2 md:text-right outline-none border-b-2  w-full md:max-w-xs"
 									name="budget_amount"
+									max="999999999999"
+
+
 								/>
 								<button
 									type="submit"
