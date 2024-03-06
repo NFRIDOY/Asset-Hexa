@@ -186,7 +186,7 @@ const OverView = () => {
 			setTransferText("please fill out all the form");
 		} else {
 			const transferData = { email, date, amount, from, to, note, type };
-			console.log(transferData);
+			// console.log(transferData);
 
 			const AccountsName = AccountData.find(
 				(filteredAccount) => filteredAccount.account === from
@@ -206,7 +206,7 @@ const OverView = () => {
 			// console.log(transferData);
 			form.reset();
 			axiosPublic.post("/transections", transferData).then((res) => {
-				console.log(res.data);
+				// console.log(res.data);
 				if (res?.data.resultTransec.acknowledged) {
 					toast.success("Transfer Data added Successfully");
 					refetch();
@@ -239,7 +239,7 @@ const OverView = () => {
 
 		elements.forEach(function (element) {
 			element.classList.remove("no-hover");
-			console.log(element);
+			// console.log(element);
 		});
 	};
 

@@ -102,7 +102,7 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       // console.log("unSubscribe")
-      console.log(currentUser);
+      // console.log(currentUser);
       setUser(currentUser);
 
       if (currentUser) {
@@ -113,7 +113,6 @@ export default function AuthProvider({ children }) {
         setLoading(false);
         //{ email: currentUser.email };
         // console.log(loggedInUser)
-        // TODO: get token
       } else {
         // User is signed out
         // alert("User Signed Out!!!")

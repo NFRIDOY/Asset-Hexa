@@ -38,7 +38,7 @@ const Register = () => {
       toast.success("Signup Successful");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };
@@ -56,7 +56,7 @@ const Register = () => {
       toast.success("Signup Successful");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };

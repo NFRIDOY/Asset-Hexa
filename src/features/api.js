@@ -17,7 +17,7 @@ export const securedBaseQuery = fetchBaseQuery({
 export const baseQueryWithReauth = async (args, api, extraOptiopns) => {
   let result = await securedBaseQuery(args, api, extraOptiopns);
   if (result?.error?.originalStatus === 404) {
-    console.log("send refresh token");
+    // console.log("send refresh token");
     //send refresh tpoken to get new access token
     const refreshResult = await securedBaseQuery(
       "/refresh",

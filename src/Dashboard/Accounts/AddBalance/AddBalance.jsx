@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
- 
+
 // import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const AddBalance = () => {
-   
-   const  {user} = useContext(AuthContext)
+
+   const { user } = useContext(AuthContext)
    const axiosPublic = useAxios();
    const Balance = e => {
       e.preventDefault();
@@ -19,27 +19,27 @@ const AddBalance = () => {
       const amount = parseFloat(form.amount.value);
       const description = form.description.value;
       const addBalance = {
-         group, account, amount, description,  email: user?.email,
+         group, account, amount, description, email: user?.email,
       }
       e.target.reset();
       // console.log(addBalance);
       axiosPublic.post('/accounts', addBalance)
-      .then(res => { 
-         console.log(res.data);
-         if (res.data.insertedId) {
-             console.log('user balance added to the data base ');
-             Swal.fire({
-                 position: "top-end",
-                 icon: "success",
-                 title: "  Your has been added",
-                 showConfirmButton: false,
-                 timer: 1500
-             });
-         }
-     })
+         .then(res => {
+            // console.log(res.data);
+            if (res.data.insertedId) {
+               // console.log('user balance added to the data base ');
+               Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "  Your has been added",
+                  showConfirmButton: false,
+                  timer: 1500
+               });
+            }
+         })
    }
-   
-    
+
+
 
    return (
       <div>
@@ -67,13 +67,13 @@ const AddBalance = () => {
                <label className="label ">
                   <span className="label-text text-[#000]">Account Name </span>
                </label>
-               <input name="account"  className="input input-bordered w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
+               <input name="account" className="input input-bordered w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
             </div>
             <div className="flex  flex-col ">
                <label className="label w-fit">
                   <span className="label-text text-[#000]">Amount</span>
                </label>
-               <input name="amount" max={"999999999999"} min={"0"} className="input input-bordered   w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="number"  />
+               <input name="amount" max={"999999999999"} min={"0"} className="input input-bordered   w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="number" />
             </div>
             <div className="flex  flex-col ">
                <label className="label w-fit">

@@ -46,7 +46,7 @@ export default function BusinessForm() {
             totalInvestment: 0,
             // totalInvestment: getTotalInvestment(),
         }
-        console.log(newBusinessObj);
+        // console.log(newBusinessObj);
         
     const details = {message : ` posted a business ` , userName : user?.displayName , image : user?.photoURL}
 
@@ -63,7 +63,7 @@ export default function BusinessForm() {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    console.log("connected to Socet io");
+                    // console.log("connected to Socet io");
                     const socket = io("https://asset-hexa-server-notification.glitch.me/" , {transports : ["websocket"]})
                     socket.emit("new_business_posted" ,details)
                 }
