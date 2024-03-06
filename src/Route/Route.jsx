@@ -74,7 +74,6 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <Businesses></Businesses>,
-        loader: () => fetch(' https://asset-hexa-server.vercel.app/bussinessCount')
       },
       {
         path: "/businessDetails/:id",

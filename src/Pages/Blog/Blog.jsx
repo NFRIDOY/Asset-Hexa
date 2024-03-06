@@ -68,20 +68,26 @@ const Blog = () => {
 
   return (
     <div className="mt-10 mb-40">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
-        {blogs?.map((Bloggs) => (
-          <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
+      {blogs?.map((Bloggs) => (
+        <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
+      ))}
+    </div>
 
+    {blogs.length >= 9 && (
       <div className="mt-20 flex justify-center">
         <div>
           <button className="btn btn-sm" onClick={handlePrevPage} >prev</button>
           {
-            pages?.map(page => <button
-              className={` md:ml-5 btn btn-sm ${page === currentPage ? " text-white bg-[#38d626]" : ""}`}
-              onClick={() => setCurrentPage(page)}
-              key={page}>{parseInt(page) + 1}</button>)
+            pages?.map(page => (
+              <button
+                className={` md:ml-5 btn btn-sm ${page === currentPage ? " text-white bg-[#38d626]" : ""}`}
+                onClick={() => setCurrentPage(page)}
+                key={page}
+              >
+                {parseInt(page) + 1}
+              </button>
+            ))
           }
           <button className="btn btn-sm md:ml-5" onClick={handleNextPage} >Next</button>
           <select onChange={handleBlogsPerPage} className="md:ml-5  btn-sm rounded-xl text-white bg-[#38d626]" value={BlogsPerPage}>
@@ -91,10 +97,10 @@ const Blog = () => {
             <option value="36">36</option>
           </select>
         </div>
-
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
 };
 
 export default Blog;
