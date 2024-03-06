@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const blogApi = createApi({
   reducerPath: "blogApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://asset-hexa-server.vercel.app",
+    baseUrl: "http://localhost:5000",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = getState()?.auth?.token;
@@ -78,6 +78,14 @@ export const blogApi = createApi({
       }),
       invalidatesTags: ["bookmarkedApi"],
     }),
+    // Post Bookmarked Data
+    removeFromBookmark: builder.mutation({
+      query: (id) => ({
+        url: `/bookmark/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["bookmarkedApi"],
+    }),
     // Update Blog Verification Data
     updateVerification: builder.mutation({
       query: (id) => ({
@@ -114,6 +122,7 @@ export const {
   useCommentBlogMutation,
   useGetBookmarkedQuery,
   useAddToBookmarkMutation,
+  useRemoveFromBookmarkMutation,
   useUpdateVerificationMutation,
   useUnlikeOrUndislikeMutation,
   useDeleteCommentMutation,
