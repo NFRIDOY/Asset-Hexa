@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import useAuth from './../../hooks/useAuth';
 import useSubscriptionList from "../../hooks/useSubscriptionList";
+import toast from "react-hot-toast";
 
 
 const NewsLetter = () => {
@@ -36,7 +37,8 @@ const NewsLetter = () => {
                 }
             })
             .catch(() => {
-                console.log("Error On Subscribe");
+                // console.log("Error On Subscribe");
+                toast.error("Error");
             })
     }
 

@@ -42,7 +42,7 @@ const Blog = () => {
 
   const handleBlogsPerPage = e => {
     const val = parseInt(e.target.value);
-    console.log(val);
+    // console.log(val);
     setBlogsPerPage(val);
     setCurrentPage(0);
   }
@@ -60,7 +60,7 @@ const Blog = () => {
       setCurrentPage(currentPage + 1);
     }
   }
-  console.log(pages);
+  // console.log(pages);
 
   // const { data: blogs = [], isLoading } = useGetBlogsQuery(data);
   if (isLoading) return <Loader />;

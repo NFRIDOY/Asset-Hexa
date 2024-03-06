@@ -16,7 +16,8 @@ const Contact = () => {
         form.current.reset();
       })
       .catch((error) => {
-        console.error('Email error:', error);
+        // console.error('Email error:', error);
+        toast.error("Error");
       });
   };
 
