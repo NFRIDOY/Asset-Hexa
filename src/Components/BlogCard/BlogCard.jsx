@@ -6,51 +6,12 @@ import { useEffect, useState } from "react";
 import { MdVerified } from "react-icons/md";
 
 const BlogCard = ({ Bloggs }) => {
-  // const { user } = useAuth();
   const { bookmarked } = useBookmarked();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  // Event Handler for Adding to bookmark Functionality
-  // const handleAddtoBookmark = () => {
-  //   const mongoDate = new Date();
-  //   // Customize the date format
-  //   const options = {
-  //     year: "numeric",
-  //     month: "short",
-  //     day: "numeric",
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //     second: "2-digit",
-  //   };
-  //   const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
-  //     mongoDate
-  //   );
-  //   const bookmarkedBlogData = {
-  //     blogID: Bloggs?._id,
-  //     author: Bloggs?.author,
-  //     blogTitle: Bloggs?.title,
-  //     user: user?.email,
-  //     date: formattedDate,
-  //   };
-
-  //   // console.log(bookmarkedBlogData);
-  //   axios
-  //     .post("http://localhost:5000/bookmark", bookmarkedBlogData)
-  //     .then((res) => {
-  //       if (res.data?.insertedId) {
-  //         // console.log(res.data);
-  //         bookmarkRefetch();
-  //         toast.success("Added to bookmark!");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message);
-  //     });
-  // };
-
   useEffect(() => {
     const didBookmarked = bookmarked?.find(
-      (bookmked) => bookmked.blogID === Bloggs._id
+      (bookmked) => bookmked?.blogID === Bloggs?._id
     );
     if (didBookmarked) {
       setIsBookmarked(true);
