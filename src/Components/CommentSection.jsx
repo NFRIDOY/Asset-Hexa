@@ -15,7 +15,7 @@ const CommentSection = ({ comments, handlePostComment, id }) => {
               <Comment key={idx} id={id} comment={comment} />
             ))
           ) : (
-            <p className="text-center font-bold mt-10 text-gray-500">
+            <p className="text-center font-bold mt-10 text-white">
               No one commented
             </p>
           )}
