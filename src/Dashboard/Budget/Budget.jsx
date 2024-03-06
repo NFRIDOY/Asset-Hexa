@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Budget = () => {
   const [budgetStateData, setBudgetStateData] = useState([]);
@@ -16,13 +17,13 @@ const Budget = () => {
   const [fontSize, setFontSize] = useState("20px");
 
   const axiosPublic = useAxios();
-  // const axiosSecure =
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
 
   const { data: expanseData = {}, refetch: ExpanseRefetch } = useQuery({
     queryKey: ["expanseData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/ExpanseThisMonth/${user?.email}`);
+      const res = await axiosSecure.get(`/ExpanseThisMonth/${user?.email}`);
       setBudgetTotal(res.data?.totalBudgetInThisMonth);
       return res.data;
     },
@@ -31,7 +32,7 @@ const Budget = () => {
   const { data: budgetData = [], refetch } = useQuery({
     queryKey: ["budgetData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/budget/${user?.email}`);
+      const res = await axiosSecure.get(`/budget/${user?.email}`);
       setBudgetStateData(res.data);
 
       return res.data;
@@ -51,7 +52,7 @@ const Budget = () => {
     setBudgetStateData([...budgetStateData, budgetInfo]);
     e.target.reset();
 
-    axiosPublic.post("/budget", budgetInfo).then((res) => {
+    axiosSecure.post("/budget", budgetInfo).then(() => {
       refetch();
       ExpanseRefetch();
     });
@@ -70,7 +71,7 @@ const Budget = () => {
     document.getElementById("collapse").classList.add("collapse-close");
   };
 
-  const handleUpdateUi = (index, id) => {
+  const handleUpdateUi = (index) => {
     setUpdateIndex(index);
   };
 
@@ -95,7 +96,7 @@ const Budget = () => {
     setBudgetStateData(updatedBudgetData); // Update the state with the modified data
     setUpdateIndex(null); // Reset update index after updating
 
-    axiosPublic.put(`/budget/${id}`, budgetInfo).then((res) => {
+    axiosSecure.put(`/budget/${id}`, budgetInfo).then(() => {
       refetch();
       ExpanseRefetch();
       setUpdateIndex(null);
@@ -123,7 +124,7 @@ const Budget = () => {
 
         setBudgetTotal(budgetTotal - parseInt(budgetAmount));
 
-        axiosPublic.delete(`/budget/${id}`).then((res) => {
+        axiosSecure.delete(`/budget/${id}`).then(() => {
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -149,7 +150,7 @@ const Budget = () => {
       if (result.isConfirmed) {
         setBudgetTotal(0);
         setBudgetStateData([]);
-        axiosPublic.delete(`/budget`).then((res) => {
+        axiosSecure.delete(`/budget`).then(() => {
           refetch();
           ExpanseRefetch();
         });

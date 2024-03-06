@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo.png";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { AiOutlineMenu } from "react-icons/ai";
+
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user?.email);
@@ -12,7 +12,7 @@ const Nav = () => {
         to="/"
         className={({ isActive }) =>
           isActive
-            ? "text-black font-bold text-primaryColor p-2 text-xl "
+            ? "font-bold text-primaryColor p-2 text-xl "
             : "btn btn-ghost"
         }
       >
@@ -25,7 +25,7 @@ const Nav = () => {
           isPending
             ? "pending"
             : isActive
-            ? "text-black font-bold text-primaryColor p-2 text-xl "
+            ? " font-bold text-primaryColor p-2 text-xl "
             : "p-2 text-xl "
         }
       >
@@ -37,8 +37,8 @@ const Nav = () => {
           isPending
             ? "pending"
             : isActive
-            ? "text-black font-bold text-primaryColor p-2 text-xl "
-            : "p-2 text-xl "
+            ? "font-bold text-primaryColor p-2 text-xl "
+            : "p-2 font-bold text-xl "
         }
       >
         Help Desk
@@ -49,7 +49,7 @@ const Nav = () => {
           isPending
             ? "pending"
             : isActive
-            ? "text-black font-bold text-primaryColor p-2 text-xl "
+            ? "font-bold text-primaryColor p-2 text-xl "
             : "p-2 text-xl "
         }
       >
