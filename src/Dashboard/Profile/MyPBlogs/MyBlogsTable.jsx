@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import TableRow from "./TableRow";
 
-import { AuthContext } from "../../providers/AuthProvider";
-import Loader from "../../Route/loader";
+import { AuthContext } from "../../../providers/AuthProvider";
+import Loader from "../../../Route/loader";
 
 import Swal from "sweetalert2";
 

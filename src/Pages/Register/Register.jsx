@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../api/utils";
 import { saveUser } from "../../api/auth";
 import toast from "react-hot-toast";
-import { TbFidgetSpinner } from "react-icons/tb";
+
 import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
@@ -22,6 +22,7 @@ const Register = () => {
     try {
       //1. Upload Image
       const imageData = await imageUpload(image);
+      // console.log(imageData);
 
       //2. User Registration
       const result = await createUserEmailPass(email, password);
@@ -38,7 +39,7 @@ const Register = () => {
       toast.success("Signup Successful");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };
@@ -56,7 +57,7 @@ const Register = () => {
       toast.success("Signup Successful");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };
@@ -65,7 +66,7 @@ const Register = () => {
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-emerald-400 font-thin">
+          <p className="text-sm text-emerald-400 font-bold">
             Sign Up for Asset-hexa
           </p>
         </div>
@@ -83,6 +84,7 @@ const Register = () => {
               <input
                 type="text"
                 name="name"
+                required
                 id="name"
                 placeholder="Enter Your Name Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-emerald-400 bg-gray-200 text-gray-900"
@@ -138,9 +140,7 @@ const Register = () => {
               type="submit"
               className="bg-emerald-400 w-full rounded-md py-3 text-white"
             >
-              {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
+              { (
                 "Continue"
               )}
             </button>
