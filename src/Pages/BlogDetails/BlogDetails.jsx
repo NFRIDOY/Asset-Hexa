@@ -14,6 +14,7 @@ import {
   useGetBlogQuery,
   useGetBookmarkedQuery,
   useLikeBlogMutation,
+  useRemoveFromBookmarkMutation,
   useUnlikeOrUndislikeMutation,
   useUpdateVerificationMutation,
 } from "../../features/blogSlice";
@@ -31,8 +32,9 @@ const BlogDetails = () => {
   const [likeBlog] = useLikeBlogMutation();
   const [dislikeBlog] = useDislikeBlogMutation();
   const [commentBlog] = useCommentBlogMutation();
-  const { data: bookmarked = [] } = useGetBookmarkedQuery(user?.email);
+  const { data: bookmarked = [], refetch } = useGetBookmarkedQuery(user?.email);
   const [addToBookmark] = useAddToBookmarkMutation();
+  const [removeFromBookmark] = useRemoveFromBookmarkMutation();
   const [updateVerification] = useUpdateVerificationMutation();
   const [unlikeOrUndislike] = useUnlikeOrUndislikeMutation();
 
@@ -181,12 +183,20 @@ const BlogDetails = () => {
       user: user?.email,
       date: formattedDate,
     };
-
-    addToBookmark(bookmarkedBlogData).then((res) => {
-      if (res.data?.insertedId) {
-        toast.success("Added to bookmark!");
-      }
-    });
+    if (isBookmarked) {
+      removeFromBookmark(id).then((res) => {
+        if (res?.data?.deletedCount) {
+          toast.success("Removed from bookmark.");
+          refetch();
+        }
+      });
+    } else {
+      addToBookmark(bookmarkedBlogData).then((res) => {
+        if (res.data?.insertedId) {
+          toast.success("Added to bookmark!");
+        }
+      });
+    }
   };
 
   // Event Handler for Comment Functionality
@@ -228,11 +238,11 @@ const BlogDetails = () => {
       .then((res) => {
         if (res?.data?.modifiedCount >= 1) {
           toast.success(`${blog?.title} has been verified`);
-          // document.getElementById("#email").setAttribute("hidden", "true");
         }
       })
       .catch((err) => toast.error(err.message));
   };
+
   return (
     <div className="min-h-screen">
       <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">

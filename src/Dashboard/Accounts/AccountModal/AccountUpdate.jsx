@@ -8,38 +8,38 @@ import { useParams } from "react-router-dom";
 
 
 const AccountUpdate = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [Update, setUpdate] = useState([]);
     const axiosPublic = useAxios();
-    console.log(id);
+    // console.log(id);
     useEffect(() => {
         // Fetching account data based on the user's email
         axiosPublic.get(`/accounts/${id}`)
-        // axios.get(`http://localhost:5000/accounts/${id}`)
-        .then((data) => {
-            setUpdate(data?.data);
-            console.log(data.data);
-        });
-    }, [axiosPublic,id]);
+            // axios.get(`http://localhost:5000/accounts/${id}`)
+            .then((data) => {
+                setUpdate(data?.data);
+                // console.log(data.data);
+            });
+    }, [axiosPublic, id]);
 
     const handleUpdate = (e) => {
         e.preventDefault();
-      const form = e.target;
-      const group = form.group.value;
-      const account = form.account.value;
-      const amount = parseFloat(form.amount.value);
-      const description = form.description.value;
-      e.target.reset();
-      const addBalance = {
-         group, account, amount, description,  
-      }
-      
-        
+        const form = e.target;
+        const group = form.group.value;
+        const account = form.account.value;
+        const amount = parseFloat(form.amount.value);
+        const description = form.description.value;
+        e.target.reset();
+        const addBalance = {
+            group, account, amount, description,
+        }
 
 
-      axiosPublic.put(`/accounts/${Update._id}`, addBalance)
+
+
+        axiosPublic.put(`/accounts/${Update._id}`, addBalance)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res?.data.modifiedCount > 0) {
                     Swal.fire({
                         position: "top-end",
@@ -47,7 +47,7 @@ const AccountUpdate = () => {
                         title: "Your work has been saved",
                         showConfirmButton: false,
                         timer: 1500
-                      });
+                    });
                 }
             });
 
@@ -68,7 +68,7 @@ const AccountUpdate = () => {
                                 <label className="label w-fit">
                                     <span className="label-text text-[#000]">Group </span>
                                 </label>
-                                <select defaultValue={Update?.group}  name="group" className="w-full h-10 hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded hover:outline-none outline-none">
+                                <select defaultValue={Update?.group} name="group" className="w-full h-10 hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded hover:outline-none outline-none">
                                     <option disabled selected className="text-[#000]">Select Option</option>
                                     <option className="text-[#000]">Cash</option>
                                     <option className="text-[#000]">Account</option>
@@ -81,13 +81,13 @@ const AccountUpdate = () => {
                                     <span className="label-text text-[#000]">Account Name </span>
                                 </label>
                                 <input defaultValue={Update?.account} name="account" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
-                    
+
                             </div>
                             <div className="flex gap-[70px] mb-2">
                                 <label className="label w-fit">
                                     <span className="label-text text-[#000]">Amount</span>
                                 </label>
-                                <input defaultValue={Update?.amount} name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text"/>
+                                <input defaultValue={Update?.amount} name="amount" className="w-full hover:drop-shadow-lg hover:border-b-2  hover:border-green-500 rounded outline-none " type="text" />
                             </div>
                             <div className="flex gap-[49px] mb-5">
                                 <label className="label w-fit">

@@ -28,12 +28,12 @@ export default function Businesses() {
       // console.log(data.data);
     });
   }, [axiosPublic, currentPage, BusinessPerPage]);
-  console.log(businessData);
+  // console.log(businessData);
 
 
   const handleBusinessPerPage = e => {
     const val = parseInt(e.target.value);
-    console.log(val);
+    // console.log(val);
     setBusinessPerPage(val);
     setCurrentPage(0);
   }
@@ -51,7 +51,7 @@ export default function Businesses() {
       setCurrentPage(currentPage + 1);
     }
   }
-  console.log(pages);
+  // console.log(pages);
 
 
 
