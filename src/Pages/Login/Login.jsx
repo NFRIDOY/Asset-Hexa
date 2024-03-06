@@ -30,7 +30,7 @@ const Login = () => {
       toast.success('Login Successful')
       navigate(from, { replace: true })
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       toast.error(err?.message)
     }
   }
@@ -51,7 +51,7 @@ const Login = () => {
       toast.success('Login Successful')
       navigate(from, { replace: true })
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       toast.error(err?.message)
     }
 
@@ -92,7 +92,7 @@ const Login = () => {
             setUser(user)
             console.log(user)
             // getToken()
-            alert("User Login Using Google")
+            toast("User Login Using Google")
             // console.log(location.pathname)
             console.log(location?.state)
             navigate(location?.state ? location?.state : '/')
@@ -100,39 +100,39 @@ const Login = () => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert("User Login Failed")
-            console.log(" Error on CreateUser ", errorCode)
-            console.log(" Error on CreateUser ", errorMessage)
+            toast("User Login Failed")
+            // console.log(" Error on CreateUser ", errorCode)
+            // console.log(" Error on CreateUser ", errorMessage)
         });
 }
-  const hangleGithubSignIn = () => {
-    githubSignIn()
-        .then((result) => {
-            const user = result.user;
-            setUser(user)
-            console.log(user)
-            // getToken()
-            alert("User Login Using Github")
-            // console.log(location.pathname)
-            // console.log(location?.state)
-            navigate(location?.state ? location?.state : '/')
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert("User Login Failed")
-            console.log(" Error on CreateUser ", errorCode)
-            console.log(" Error on CreateUser ", errorMessage)
-        });
-}
+//   const hangleGithubSignIn = () => {
+//     githubSignIn()
+//         .then((result) => {
+//             const user = result.user;
+//             setUser(user)
+//             console.log(user)
+//             // getToken()
+//             alert("User Login Using Github")
+//             // console.log(location.pathname)
+//             // console.log(location?.state)
+//             navigate(location?.state ? location?.state : '/')
+//         }).catch((error) => {
+//             // Handle Errors here.
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             alert("User Login Failed")
+//             console.log(" Error on CreateUser ", errorCode)
+//             console.log(" Error on CreateUser ", errorMessage)
+//         });
+// }
 
 
   return (
-    <div className='flex justify-center items-center min-h-screen'>
-      <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
+    <div className=' lg:flex justify-center items-center min-h-screen'>
+      <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100  text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
-          <p className='text-sm text-emerald-400 font-thin'>
+          <p className='text-sm text-emerald-400 font-bold'>
             Sign in to access at Asset-hexa
           </p>
         </div>
@@ -180,9 +180,7 @@ const Login = () => {
               type='submit'
               className='bg-emerald-400 w-full rounded-md py-3 text-white'
             >
-              {loading ? (
-                <TbFidgetSpinner className='animate-spin m-auto' />
-              ) : (
+              { (
                 'Continue'
               )}
             </button>

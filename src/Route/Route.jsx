@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
@@ -34,7 +35,12 @@ import UpdateBlog from "../Pages/Blog/UpdateBlog";
 import SubscriptionList from "../Dashboard/SubscriptionList/SubscriptionList";
 import { useGetBlogQuery } from "../features/blogSlice";
 import AccountUpdate from "../Dashboard/Accounts/AccountModal/AccountUpdate";
+
+import Budget from "../Dashboard/Budget/Budget";
+
 import Pricing from "../Pages/Pricing/Pricing";
+import Revenue from "../AdminDashboard/Revenue";
+
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +63,8 @@ export const router = createBrowserRouter([
       {
         path: "/Blogs",
         element: <Blog />,
+        loader: () => fetch('https://asset-hexa-server.vercel.app/blogsCount')
+        // loader: () => fetch(' http://localhost:5000/blogsCount')
       },
 
       {
@@ -66,6 +74,7 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <Businesses></Businesses>,
+        loader: () => fetch(' https://asset-hexa-server.vercel.app/bussinessCount')
       },
       {
         path: "/businessDetails/:id",
@@ -125,6 +134,7 @@ export const router = createBrowserRouter([
         element: <AddBalance></AddBalance>,
       },
 
+
       {
         path: "addBlog",
         element: <AddBlog />,
@@ -166,6 +176,10 @@ export const router = createBrowserRouter([
         path: "addBlog",
         element: <AddBlog></AddBlog>,
       },
+      {
+        path:"budget",
+        element: <Budget></Budget>
+      }
     ],
   },
   {
@@ -192,6 +206,10 @@ export const router = createBrowserRouter([
       {
         path: "subscriptionList",
         element: <SubscriptionList></SubscriptionList>,
+      },
+      {
+        path: "Revenue",
+        element: <Revenue></Revenue>,
       },
     ],
   },

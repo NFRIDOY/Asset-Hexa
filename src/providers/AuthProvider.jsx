@@ -13,12 +13,16 @@ import {
 import app from "./../utility/Firebase/firebase.config";
 import PropTypes from "prop-types"; // ES6
 import toast from "react-hot-toast";
-
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../features/authSlice";
+import { useLoginMutation } from "../features/authApiSlice";
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const auth = getAuth(app);
 
@@ -96,14 +100,18 @@ export default function AuthProvider({ children }) {
    */
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       // console.log("unSubscribe")
       console.log(currentUser);
       setUser(currentUser);
-      setLoading(false);
+
       if (currentUser) {
         // User is signed in
-        const loggedInUser = { email: currentUser.email };
+        const userData = await login({ user: currentUser?.email }).unwrap();
+        // console.log(userData);
+        dispatch(setCredentials({ ...userData, user: currentUser?.email }));
+        setLoading(false);
+        //{ email: currentUser.email };
         // console.log(loggedInUser)
         // TODO: get token
       } else {
@@ -115,7 +123,7 @@ export default function AuthProvider({ children }) {
     return () => {
       unSubscribe();
     };
-  }, [user, auth]);
+  }, [auth, dispatch, login]);
 
   //Update Ueser
   // const updateUser = (name, photoURL) => {
@@ -154,13 +162,12 @@ export default function AuthProvider({ children }) {
   //   }
   // };
 
-
   const updateUser = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
-    })
-  }
+    });
+  };
   const contextInfo = {
     user,
     setUser,

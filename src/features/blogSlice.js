@@ -5,12 +5,29 @@ export const blogApi = createApi({
   reducerPath: "blogApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://asset-hexa-server.vercel.app",
+    credentials: "include",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState()?.auth?.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: "blogAPI",
   endpoints: (builder) => ({
+    // Post blog
+    postBlog: builder.mutation({
+      query: (data) => ({
+        url: "/blogs",
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["blogAPI"],
+    }),
     // Get all blogs data
     getBlogs: builder.query({
-      query: () => "/blogs",
+      query: (data) => `/blogs?page=${data?.currentPage}&size=${data?.BlogsPerPage}`,
       providesTags: ["blogAPI"],
     }),
     // Get single blog data
@@ -88,6 +105,7 @@ export const blogApi = createApi({
 });
 // invalidatesTags: ["BlogAPI"], for mutations {update,delete,create}
 export const {
+  usePostBlogMutation,
   useGetBlogsQuery,
   useGetBlogQuery,
   useLikeBlogMutation,
