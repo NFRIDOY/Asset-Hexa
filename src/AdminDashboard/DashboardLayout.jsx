@@ -112,7 +112,7 @@ const DashboardLayout = () => {
                   <ImBlog />
                   Subscription List
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   className={({ isActive }) =>
                     isActive
                       ? "text-black flex px-4 gap-3 items-center bg-white p-2  pr-4"
@@ -121,7 +121,7 @@ const DashboardLayout = () => {
                   to="/AdminDashboard/Revenue"
                 >
                   <MdOutlineDashboard /> Revenue
-                </NavLink>
+                </NavLink> */}
 
 
                 {/* <NavLink

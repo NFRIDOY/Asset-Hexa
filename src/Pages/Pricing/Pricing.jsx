@@ -20,14 +20,14 @@ const Pricing = () => {
             bronge, brongeTwo, brongePrice, featureOne, featureTwo, email: user?.email,
             name:user?.displayName
         }
-        console.log(brongeInfo);
+        // console.log(brongeInfo);
         // e.target.reset();
 
         axiosPublic.post('/price', brongeInfo)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
-                    console.log('user balance added to the data base ');
+                    // console.log('user balance added to the data base ');
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -59,9 +59,9 @@ const Pricing = () => {
 
         axiosPublic.post('/price', selverInfo)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
-                    console.log('user balance added to the data base ');
+                    // console.log('user balance added to the data base ');
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -94,9 +94,9 @@ const Pricing = () => {
 
         axiosPublic.post('/price', GoldInfo)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
-                    console.log('user balance added to the data base ');
+                    // console.log('user balance added to the data base ');
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

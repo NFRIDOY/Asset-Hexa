@@ -42,7 +42,7 @@ const UpdateBlog = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount > 0) {
           navigate(from, { replace: true })
           Swal.fire({

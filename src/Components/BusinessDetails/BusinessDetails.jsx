@@ -29,7 +29,7 @@ const BusinessDetails = () => {
   useEffect(() => {
     axiosPublic.get(`/bussiness/${id}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setBusiness(res.data);
         setTotalInvestment(business?.totalInvestment)
       })
@@ -41,8 +41,8 @@ const BusinessDetails = () => {
 
 
 
-  console.log("business : ", business);
-  console.log("totalInvestment: ", business?.totalInvestment);
+  // console.log("business : ", business);
+  // console.log("totalInvestment: ", business?.totalInvestment);
 
   const handleVerification = () => {
     axiosPublic
@@ -54,7 +54,10 @@ const BusinessDetails = () => {
           toast.error("Business is already verified");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error("Error");
+        // console.log(err)
+      });
   };
 
   const handleInvest = (e) => {
