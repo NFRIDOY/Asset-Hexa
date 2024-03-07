@@ -6,8 +6,8 @@ import { selectCurrentToken } from "../features/authSlice";
 import useAuth from "./useAuth";
 
 const instance = axios.create({
-  // baseURL: "https://asset-hexa-server.vercel.app",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://asset-hexa-server.vercel.app",
+  // baseURL: "http://localhost:5000",
   //http://localhost:5000
   //https://asset-hexa-server.vercel.app
 });
