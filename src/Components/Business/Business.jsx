@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import BusinessTable from "./BusinessTable/BusinessTable";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 export default function Business() {
   const axiosPublic = useAxios();
@@ -35,8 +36,8 @@ export default function Business() {
     );
     setTotal(totalAmount);
 
-    axiosSecure
-      .get(`/bussiness?email=${user?.email}`)
+    axiosPublic
+      .get(`/business?email=${user?.email}`)
       // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
       .then((res) => {
         setMyTotalBusiness(res.data);
