@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "./useAxios";
 import useAuth from "./useAuth";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useAccountsPie = () => {
   const { user } = useAuth();
-  const axiosPublic = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { data: chartsData, isLoading } = useQuery({
     queryKey: ["chartsData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/chartData/${user?.email}`);
+      const res = await axiosSecure.get(`/chartData/${user?.email}`);
       return res.data;
     },
   });

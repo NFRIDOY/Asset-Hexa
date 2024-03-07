@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const BooksBlogs = ({ Bloggs }) => {
 
 
@@ -6,17 +7,17 @@ const BooksBlogs = ({ Bloggs }) => {
 
 
     //   console.log(Bloggs);
+
     return (
         <div>
 
 
-            <div
-                className={`p-2 md:p-5 cursor-pointer border transition-all duration-700 hover:scale-105`}
-            >
+            <div>
+                <div className="px-4 py-8 shadow-lg max-w-[350px] font-sans rounded-xl space-y-6 my-20 mx-auto bg-white">
                 <div className="w-full space-y-4">
                     <div className="">
                         <img
-                            className="rounded-lg w-full h-72"
+                            className="rounded-lg w-full h-64"
                             src={Bloggs?.image}
                             alt="image"
                         />
@@ -26,8 +27,8 @@ const BooksBlogs = ({ Bloggs }) => {
                             <img
                                 className="w-14 h-14 rounded-full"
                                 src={`${Bloggs?.authorImage
-                                        ? Bloggs?.authorImage
-                                        : "https://i.ibb.co/C2QsnzC/jae-park-7-GX5a-ICaawdb5i4-unsplash.jpg"
+                                    ? Bloggs?.authorImage
+                                    : "https://i.ibb.co/C2QsnzC/jae-park-7-GX5a-ICaawdb5i4-unsplash.jpg"
                                     }`}
                                 alt={`image of ${Bloggs?.author}`}
                             />
@@ -38,18 +39,32 @@ const BooksBlogs = ({ Bloggs }) => {
                         </div>
 
                     </div>
-                    <div className="space-y-2">
-                        <h1 className="font-bold text-xl lg:text-2xl text-left flex items-center h-16">
-                            {Bloggs?.blogTitle}
+                   
 
-                        </h1>
-                        <p className="text-left md:h-24">
-                            {Bloggs?.description?.slice(0, 50)}...
-                        </p>
-                    </div>
+                   
+
 
                 </div>
+
+                <div className="  ml-10">
+                        <Link to={`/blogDetails/${Bloggs?.blogID}`} >
+
+
+                        <button className="hover:bg-[#00ff62] hover:scale-95 font-medium hover:text-black w-[80%] py-2 rounded-full hover:shadow-xl   text-black shadow-[0px_0px_10px_#E2DADA] t duration-500 ">View Profile</button>
+                        </Link>
+
+                </div>
+                    
+
+                   
+                </div>
             </div>
+
+
+           
+
+
+
         </div>
     );
 };

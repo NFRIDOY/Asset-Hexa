@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 const CheckoutForm = () => {
@@ -67,10 +69,11 @@ const CheckoutForm = () => {
         })
 
         if (confirmError) {
-            console.log('confirm error')
+            // console.log('confirm error')
+            toast.error("Error");
         }
         else {
-            console.log('payment intent', paymentIntent)
+            // console.log('payment intent', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
                 // console.log('transaction id', paymentIntent.id)
                 setTransactionId(paymentIntent.id)

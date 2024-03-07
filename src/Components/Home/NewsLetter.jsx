@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import useAuth from './../../hooks/useAuth';
 import useSubscriptionList from "../../hooks/useSubscriptionList";
+import toast from "react-hot-toast";
 
 
 const NewsLetter = () => {
@@ -36,7 +37,8 @@ const NewsLetter = () => {
                 }
             })
             .catch(() => {
-                console.log("Error On Subscribe");
+                // console.log("Error On Subscribe");
+                toast.error("Error");
             })
     }
 
@@ -50,7 +52,7 @@ const NewsLetter = () => {
                             More than 2000+ people receiving monthly updates on:
                         </p>
 
-                        <div className="flex items-center gap-4 mb-4">
+                        <div className="flex flex-col items-center gap-4 mb-4">
                             <div>
 
                                 <div className="text-center lg:text-left rounded">

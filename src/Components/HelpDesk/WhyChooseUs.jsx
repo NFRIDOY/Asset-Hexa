@@ -10,17 +10,16 @@ const WhyChooseUs = () => {
         <p>Empowering Your Financial Future Through Expert Money Management</p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-5 max-w-[1300px] mx-auto  ">
+      <div className="grid  grid-cols-1 lg:grid-cols-3  gap-5 max-w-[1300px] mx-auto  ">
         <div className="rounded-xl text-center p-10 flex flex-col gap-2 bg-green-300 justify-center items-center">
           <img
             src={expence}
             className="h-20 w-20 p-4 bg-white rounded-full"
             alt=""
           />
-          <h1 className="text-2xl font-semibold">Expance Categorization</h1>
+          <h1 className="text-2xl font-semibold">Business For Funding</h1>
           <p>
-            Easily categorize and analyze your expenses with our intuitive
-            system
+            Post Business For Funding
           </p>
         </div>
         <div className="rounded-xl text-center p-10 flex flex-col gap-2 bg-green-300 justify-center items-center">
@@ -41,8 +40,8 @@ const WhyChooseUs = () => {
             className="h-20 w-20 p-4 bg-white rounded-full"
             alt=""
           />
-          <h1 className="text-2xl font-semibold">Debt Management</h1>
-          <p>Track balances, set payoff goalswith our specialized tools</p>
+          <h1 className="text-2xl font-semibold">Investment Management</h1>
+          <p>You can Invest and make Profite</p>
         </div>
       </div>
     </div>

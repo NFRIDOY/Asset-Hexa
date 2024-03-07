@@ -7,6 +7,7 @@ import useAuth from "./useAuth";
 
 const instance = axios.create({
   baseURL: "https://asset-hexa-server.vercel.app",
+  // baseURL: "http://localhost:5000",
   //http://localhost:5000
   //https://asset-hexa-server.vercel.app
 });
@@ -31,7 +32,7 @@ const useAxiosSecure = () => {
       return response;
     },
     async (error) => {
-      console.log("status error in intercerptors", error);
+      // console.log("status error in intercerptors", error);
       const status = error.response?.status;
       if (status === 401 || status === 403 || status === 404) {
         await logOut().then(() => navigate("/login"));

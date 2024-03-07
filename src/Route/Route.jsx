@@ -74,19 +74,19 @@ export const router = createBrowserRouter([
       {
         path: "/businesses",
         element: <Businesses></Businesses>,
-        loader: () => fetch(' https://asset-hexa-server.vercel.app/bussinessCount')
+        loader: () => fetch('https://asset-hexa-server.vercel.app/bussinessCount')
       },
       {
         path: "/businessDetails/:id",
-        element: <BusinessDetails></BusinessDetails>,
+        element: <PrivateRoute><BusinessDetails></BusinessDetails></PrivateRoute>,
       },
       {
         path: "/newsPayment",
-        element: <Payment></Payment>,
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>,
       },
       {
         path: "/pricing",
-        element: <Pricing></Pricing>,
+        element: <PrivateRoute><Pricing></Pricing></PrivateRoute>,
       },
     ],
   },
@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
     path: "login",
     element: <Login />,
   },
-  
+
 
   {
     path: "register",
@@ -110,47 +110,45 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "overView",
-        element: <OverView></OverView>,
+        element: <PrivateRoute><OverView></OverView></PrivateRoute>,
       },
       {
         path: "transection",
-        element: <Transection></Transection>,
+        element: <PrivateRoute><Transection></Transection></PrivateRoute>,
       },
       {
         path: "statistics",
-        element: <Statistics></Statistics>,
+        element: <PrivateRoute><Statistics></Statistics></PrivateRoute>,
       },
       {
         path: "accounts",
-        element: <Accounts></Accounts>,
+        element: <PrivateRoute><Accounts></Accounts></PrivateRoute>,
       },
       {
         path: "accountUpdate/:id",
-        element: <AccountUpdate></AccountUpdate>,
+        element: <PrivateRoute><AccountUpdate></AccountUpdate></PrivateRoute>,
       },
 
       {
         path: "addBalance",
-        element: <AddBalance></AddBalance>,
+        element: <PrivateRoute><AddBalance></AddBalance></PrivateRoute>,
       },
-
-
       {
         path: "addBlog",
-        element: <AddBlog />,
+        element: <PrivateRoute><AddBlog /></PrivateRoute>,
       },
       {
         path: "investments",
-        element: <Investments></Investments>,
+        element: <PrivateRoute><Investments></Investments></PrivateRoute>,
       },
       {
         path: "business",
-        element: <Business></Business>,
+        element: <PrivateRoute><Business></Business></PrivateRoute>,
         // element: <BusinessForm />,
       },
       {
         path: "businessForm",
-        element: <BusinessForm />,
+        element: <PrivateRoute><BusinessForm /></PrivateRoute>,
       },
       {
         path: "profile",
@@ -163,53 +161,53 @@ export const router = createBrowserRouter([
 
       {
         path: "updateblogs/:id",
-        element: <UpdateBlog />,
+        element: <PrivateRoute><UpdateBlog /></PrivateRoute>,
         loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/blogs/${params.id}`)
       },
 
       {
         path: "UpdateProfile/:id",
-        element: <UpdateProfile />,
+        element: <PrivateRoute><UpdateProfile /></PrivateRoute>,
         loader: ({ params }) => fetch(`https://asset-hexa-server.vercel.app/users/${params.id}`)
       },
       {
         path: "addBlog",
-        element: <AddBlog></AddBlog>,
+        element: <PrivateRoute><AddBlog></AddBlog></PrivateRoute>,
       },
       {
-        path:"budget",
-        element: <Budget></Budget>
+        path: "budget",
+        element: <PrivateRoute><Budget></Budget></PrivateRoute>
       }
     ],
   },
   {
     path: "AdminDashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     errorElement: <Errorpage></Errorpage>,
     children: [
       {
         path: "AdminOverview",
-        element: <AdminOverview></AdminOverview>,
+        element: <PrivateRoute><AdminOverview></AdminOverview></PrivateRoute>,
       },
       {
         path: "BusinessVerification",
-        element: <BusinessVerification></BusinessVerification>,
+        element: <PrivateRoute><BusinessVerification></BusinessVerification></PrivateRoute>,
       },
       {
         path: "BlogVerification",
-        element: <BlogVerification></BlogVerification>,
+        element: <PrivateRoute><BlogVerification></BlogVerification></PrivateRoute>,
       },
       {
         path: "userVerification",
-        element: <UserVarification></UserVarification>,
+        element: <PrivateRoute><UserVarification></UserVarification></PrivateRoute>,
       },
       {
         path: "subscriptionList",
-        element: <SubscriptionList></SubscriptionList>,
+        element: <PrivateRoute><SubscriptionList></SubscriptionList></PrivateRoute>,
       },
       {
         path: "Revenue",
-        element: <Revenue></Revenue>,
+        element: <PrivateRoute><Revenue></Revenue></PrivateRoute>,
       },
     ],
   },

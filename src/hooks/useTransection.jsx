@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
-import useAxios from "./useAxios";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useTransection = (transactionType) => {
   const { user } = useAuth();
-  const axiosPublic = useAxios();
+  const axiosSecure = useAxiosSecure();
   const {
     data: transections = [],
     refetch,
@@ -13,10 +13,10 @@ const useTransection = (transactionType) => {
     queryKey: [`transections${transactionType}`],
     enabled: !!transactionType,
     queryFn: async () => {
-      const res = await axiosPublic.get(
+      const res = await axiosSecure.get(
         `/transections?type=${transactionType}&email=${user?.email}`
       );
-      return res.data;
+      return res?.data;
     },
   });
   return { transections, refetch, isLoading };

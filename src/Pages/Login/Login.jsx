@@ -7,7 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
 
-  const { signInEmailPass, googleSignIn, loading } = useAuth()
+  const { signInEmailPass, googleSignIn, loading, setUser } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state?.from?.pathname || '/'
@@ -62,69 +62,69 @@ const Login = () => {
     const form = e.target;
     const email = form.Email.value;
     const password = form.Password.value;
-    console.log(email, password);
-''
+    // console.log(email, password);
+    ''
     signInEmailPass(email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         setUser(user)
         alert("User Login")
-        console.log(user)
+        // console.log(user)
         // console.log(location.pathname)
-        console.log(location?.state)
+        // console.log(location?.state)
         // getToken()
         navigate(location?.state ? location?.state : '/')
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorMessage = error.message;
         alert("User Login Failed")
-        console.log(" Error on CreateUser ", errorCode)
-        console.log(" Error on CreateUser ", errorMessage)
+        // console.log(" Error on CreateUser ", errorCode)
+        // console.log(" Error on CreateUser ", errorMessage)
       });
   };
 
   const hangleGoogleSignIn = () => {
     googleSignIn()
-        .then((result) => {
-            const user = result.user;
-            setUser(user)
-            console.log(user)
-            // getToken()
-            toast("User Login Using Google")
-            // console.log(location.pathname)
-            console.log(location?.state)
-            navigate(location?.state ? location?.state : '/')
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            toast("User Login Failed")
-            // console.log(" Error on CreateUser ", errorCode)
-            // console.log(" Error on CreateUser ", errorMessage)
-        });
-}
-//   const hangleGithubSignIn = () => {
-//     githubSignIn()
-//         .then((result) => {
-//             const user = result.user;
-//             setUser(user)
-//             console.log(user)
-//             // getToken()
-//             alert("User Login Using Github")
-//             // console.log(location.pathname)
-//             // console.log(location?.state)
-//             navigate(location?.state ? location?.state : '/')
-//         }).catch((error) => {
-//             // Handle Errors here.
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             alert("User Login Failed")
-//             console.log(" Error on CreateUser ", errorCode)
-//             console.log(" Error on CreateUser ", errorMessage)
-//         });
-// }
+      .then((result) => {
+        const user = result.user;
+        setUser(user)
+        // console.log(user)
+        // getToken()
+        alert("User Login Using Google")
+        // console.log(location.pathname)
+        // console.log(location?.state)
+        navigate(location?.state ? location?.state : '/')
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("User Login Failed")
+        // console.log(" Error on CreateUser ", errorCode)
+        // console.log(" Error on CreateUser ", errorMessage)
+      });
+  }
+  const hangleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const user = result.user;
+        setUser(user)
+        // console.log(user)
+        // getToken()
+        alert("User Login Using Github")
+        // console.log(location.pathname)
+        // console.log(location?.state)
+        navigate(location?.state ? location?.state : '/')
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("User Login Failed")
+        // console.log(" Error on CreateUser ", errorCode)
+        // console.log(" Error on CreateUser ", errorMessage)
+      });
+  }
 
 
   return (
@@ -186,11 +186,11 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div className='space-y-1'>
+        {/* <div className='space-y-1'>
           <button className='text-xs hover:underline hover:text-emerald-400 text-gray-400'>
             Forgot password?
           </button>
-        </div>
+        </div> */}
         <div className='flex items-center pt-4 space-x-1'>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
           <p className='px-3 text-sm dark:text-gray-400'>

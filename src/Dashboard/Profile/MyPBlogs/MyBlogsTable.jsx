@@ -5,20 +5,22 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import Loader from "../../../Route/loader";
 
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyBlogsTable = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   // console.log(user);
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://asset-hexa-server.vercel.app/blog/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setBlogs(data));
+    axiosSecure
+      .get(`/blogs/byemail/${user?.email}`)
+      .then((res) => setBlogs(res?.data));
     setLoading(false);
-  }, [user]);
+  }, [user, axiosSecure]);
 
   // console.log(blogs);
 
@@ -34,26 +36,20 @@ const MyBlogsTable = () => {
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://asset-hexa-server.vercel.app/blogs/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
+        axiosSecure.delete(`/blogs/${id}`).then((res) => {
+          if (res?.data?.deletedCount > 0) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Your Blog has been Deleted!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
 
-            if (data.deletedCount > 0) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Your Blog has been Deleted!",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-
-              const remaining = blogs.filter((blog) => blog._id !== id);
-              setBlogs(remaining);
-            }
-          });
+            const remaining = blogs.filter((blog) => blog._id !== id);
+            setBlogs(remaining);
+          }
+        });
       } else if (result.isDismissed) {
         Swal.fire({
           title: "Cancelled",
@@ -75,12 +71,12 @@ const MyBlogsTable = () => {
             <table className="min-w-full leading-normal">
               <thead>
                 <tr className="">
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                   >
                     Author Name
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
