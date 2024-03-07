@@ -72,7 +72,7 @@ const Profile = () => {
               </p>
 
               <Link to={`/dashboard/UpdateProfile/${users._id}`}>
-                <button className="ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none border-none hover:bg-primaryColor text-white btn btn-sm">
+                <button className=" ml-3 bg-gradient-to-r from-[#23A455] via-[#2ecc71] to-[#34D399] hover:border-none border-none hover:bg-primaryColor text-white btn btn-sm">
                   Update Profile
                 </button>
               </Link>
