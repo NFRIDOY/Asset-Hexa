@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import TableRow from "./TableRow";
 
-import { AuthContext } from "../../providers/AuthProvider";
-import Loader from "../../Route/loader";
+import { AuthContext } from "../../../providers/AuthProvider";
+import Loader from "../../../Route/loader";
 
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyBlogsTable = () => {
   const { user } = useContext(AuthContext);
@@ -71,12 +71,12 @@ const MyBlogsTable = () => {
             <table className="min-w-full leading-normal">
               <thead>
                 <tr className="">
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                   >
                     Author Name
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
