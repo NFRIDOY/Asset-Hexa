@@ -18,7 +18,9 @@ const Dashboard = () => {
 
           <div className="sticky  top-0 z-[99]">
             <div className="flex lg:hidden justify-between items-center bg-white px-4 py-2 ">
-              <img className="w-48" src={home} alt="" />
+              <Link to="/">
+                <img className="w-48" src={home} alt="" />
+              </Link>
               <label
                 htmlFor="my-drawer-2"
                 className=" z-[999]     drawer-button "
