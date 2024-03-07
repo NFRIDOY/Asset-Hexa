@@ -188,11 +188,11 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div className='space-y-1'>
+        {/* <div className='space-y-1'>
           <button className='text-xs hover:underline hover:text-emerald-400 text-gray-400'>
             Forgot password?
           </button>
-        </div>
+        </div> */}
         <div className='flex items-center pt-4 space-x-1'>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
           <p className='px-3 text-sm dark:text-gray-400'>
