@@ -1,15 +1,15 @@
-import "../../../src/App.css";
 import useAxios from "../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import BusinessTable from "./BusinessTable/BusinessTable";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 export default function Business() {
+  const { user } = useAuth();
   const axiosPublic = useAxios();
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
 
   const { data: adminState = [] } = useQuery({
     queryKey: ["AdminState"],
@@ -29,46 +29,34 @@ export default function Business() {
     axiosSecure.get(`/accounts?email=${user?.email}`).then((data) => {
       setAccountData(data?.data);
     });
-    const totalAmount = accountData.reduce(
-      (total, item) => total + parseInt(item.amount),
-      0
-    );
-    setTotal(totalAmount);
 
-    axiosSecure
-      .get(`/bussiness?email=${user?.email}`)
-      // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
-      .then((res) => {
-        setMyTotalBusiness(res.data);
-      });
+    axiosSecure.get(`/business/query/${user?.email}`).then((res) => {
+      setMyTotalBusiness(res?.data);
+    });
 
-    const totalInvestment = myTotalBusiness.reduce(
+    axiosSecure.get(`/blogs/byemail/${user?.email}`).then((res) => {
+      setMyBlogs(res?.data);
+    });
+  }, [axiosSecure, user?.email]);
+
+  useEffect(() => {
+    const totalInvestment = myTotalBusiness?.reduce(
       (total, item) => total + parseFloat(item?.totalInvestment),
       0
     );
     setTotalInvestments(totalInvestment);
-    const getTotalProfitDist = myTotalBusiness.reduce(
+    const getTotalProfitDist = myTotalBusiness?.reduce(
       (total, item) =>
         total + parseFloat((item?.totalInvestment * item?.Profit) / 100),
       0
     );
     setTotalProfitDist(getTotalProfitDist);
-    axiosPublic
-      .get(`/blog/${user?.email}`)
-      // axios.get(`http://localhost:5000/investments?email=${user?.email}`)
-      .then((res) => {
-        setMyBlogs(res.data);
-        // console.log(res.data)
-      });
-  }, [user, accountData, setTotal, axiosPublic, myTotalBusiness]);
-
-  const data01 = [
-    { name: "Investment", value: totalInvestments },
-    { name: "Total Asset", value: total },
-  ];
-
-  const COLORS = ["#317DF0", "#F8A11B"];
-
+    const totalAmount = accountData?.reduce(
+      (total, item) => total + parseInt(item.amount),
+      0
+    );
+    setTotal(totalAmount);
+  }, [accountData, myTotalBusiness]);
   return (
     <div className="h-[calc(100vh-32px)] p-5 relative">
       <div className=" border-purple-600 bg-green-400">

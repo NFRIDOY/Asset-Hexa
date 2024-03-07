@@ -6,7 +6,7 @@ import { IoStatsChartSharp } from "react-icons/io5";
 import { MdAccountBalance } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMenu } from "react-icons/ai";
-import budget from "../assets/dashboard/budget-preview.png"
+import budget from "../assets/dashboard/budget-preview.png";
 const Dashboard = () => {
   return (
     <div className="h-screen  bg-base-300 min-w-full  mx-auto">
@@ -43,7 +43,7 @@ const Dashboard = () => {
               <div className="w-48  rounded-lg lg:mt-3">
                 <figure>
                   <Link to="/">
-                    <img src={home} alt="" />
+                    <img src={home} alt="logo of asset hexa" />
                   </Link>
                 </figure>
               </div>
@@ -103,11 +103,10 @@ const Dashboard = () => {
                   to="/dashboard/budget"
                 >
                   <div className="flex gap-2 justify-between">
-                  <img src={budget} className="w-8" alt="" />
-                  Budget
+                    <img src={budget} className="w-8" alt="" />
+                    Budget
                   </div>
                 </NavLink>
-
 
                 <NavLink
                   className={({ isActive }) =>
@@ -153,7 +152,6 @@ const Dashboard = () => {
                   <CgProfile />
                   Profile
                 </NavLink>
-                
               </ul>
             </div>
           </div>
