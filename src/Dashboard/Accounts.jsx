@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { useContext, useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../providers/AuthProvider";
 import AccountCard from "./Accounts/AccountCard/AccountCard";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -61,12 +60,11 @@ const Accounts = () => {
         </p>
       </div>
       <div className="grid grid-cols-1">
-        {Balance.map((Balances) => (
+        {Balance?.map((Balances) => (
           <AccountCard
             setBalance={setBalance}
             Balance={Balance}
             key={Balances?._id}
-            
             Balances={Balances}
             isOpen={isOpen}
             setIsOpen={setIsOpen}

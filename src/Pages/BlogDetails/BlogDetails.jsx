@@ -19,8 +19,6 @@ import {
   useUpdateVerificationMutation,
 } from "../../features/blogSlice";
 
-//http://localhost:5000\
-
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
@@ -46,7 +44,7 @@ const BlogDetails = () => {
       (dislike) => dislike.personEmail === user?.email
     );
     const didBookmarked = bookmarked?.find(
-      (bookmked) => bookmked.blogID === blog?._id
+      (bookmked) => bookmked?.blogID === blog?._id
     );
 
     if (didLike) {
@@ -102,7 +100,9 @@ const BlogDetails = () => {
       query: "dislike",
     };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (!isLiked && isDisliked) {
+    if (!user?.email) {
+      return toast.error("Please login to like.");
+    } else if (!isLiked && isDisliked) {
       unlikeOrUndislike(queryDataD);
       return likeBlog(data);
     } else if (isLiked) {
@@ -149,7 +149,9 @@ const BlogDetails = () => {
       query: "dislike",
     };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (!isDisliked && isLiked) {
+    if (!user?.email) {
+      return toast.error("Please login to dislike.");
+    } else if (!isDisliked && isLiked) {
       unlikeOrUndislike(queryDataL);
       return dislikeBlog(data);
     } else if (isDisliked) {
@@ -183,7 +185,9 @@ const BlogDetails = () => {
       user: user?.email,
       date: formattedDate,
     };
-    if (isBookmarked) {
+    if (!user?.email) {
+      return toast.error("Please login to Bookmark-->");
+    } else if (isBookmarked) {
       removeFromBookmark(id).then((res) => {
         if (res?.data?.deletedCount) {
           toast.success("Removed from bookmark.");
@@ -227,10 +231,13 @@ const BlogDetails = () => {
       id: blog?._id,
       commentData,
     };
-
-    commentBlog(data).then(() => {
-      e.target.reset();
-    });
+    if (!user?.email) {
+      return toast.error("Please login to comment.");
+    } else {
+      commentBlog(data).then(() => {
+        e.target.reset();
+      });
+    }
   };
 
   const handleVerification = () => {
@@ -272,7 +279,7 @@ const BlogDetails = () => {
         </div>
         <div>
           <img
-            className="h-[600px] w-full mb-5"
+            className="md:h-[400px] lg:h-[600px] w-full mb-5 object-cover"
             src={blog?.image}
             alt={`image of ${blog?.title} blog`}
           />
@@ -326,7 +333,9 @@ const BlogDetails = () => {
               )}
             </span>
           </h1>
-          <p className="text-lg font-normal">{blog?.description || ""}</p>
+          <p className="text-lg font-normal text-justify">
+            {blog?.description || ""}
+          </p>
         </div>
       </div>
       <div className="mt-20 max-w-7xl mx-auto">
