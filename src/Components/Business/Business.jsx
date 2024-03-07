@@ -62,10 +62,6 @@ export default function Business() {
       <div className=" border-purple-600 bg-green-400">
         <div className="md:max-h-screen p-4 bg-base-300">
           <div className="bg-white p-4 flex rounded-xl gap-3 overflow-x-auto min-h-40">
-            {/* <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#449B38] to-[#34D399]  px-8 min-w-48 md:min-w-56 ">
-                    <h1 className="text-base font-medium">total Users</h1>
-                    <p className="text-3xl md:text-5xl font-semibold">00</p>
-                </div> */}
             <div className="flex justify-center gap-5 w-full">
               <div className="space-y-2 py-8 overflow-scroll scrollable-content  text-white rounded-xl bg-gradient-to-br from-[#F49328] to-[#E92A31]  px-8  min-w-48 md:min-w-56 ">
                 <h1 className="text-base font-medium">My Blog Post</h1>
@@ -101,47 +97,12 @@ export default function Business() {
                 </p>
               </div>
             </div>
-            {/* <div className="space-y-2 overflow-scroll scrollable-content py-8 text-white rounded-xl bg-gradient-to-br from-purple-700 to-purple-400  px-8 min-w-48 md:min-w-56 ">
-                    <h1 className="text-base font-medium">
-                        {" "}
-                        Newslater subscitption
-                    </h1>
-                    <p className="text-3xl md:text-5xl font-semibold">00</p>
-                </div> */}
           </div>
 
           <div className="flex gap-5 mt-5 flex-col md:flex-row  ">
-            {/* <div className="bg-white min-h-[300px]  w-full lg:w-1/3  flex justify-center items-center h-0  lg:h-[calc(100vh-270px)] mx-auto">
-                            <PieChart width={350} height={350}>
-                                <Pie
-                                    dataKey="value"
-                                    isAnimationActive={false}
-                                    data={data01}
-                                    cx="50%"
-                                    cy="50%"
-                                    outerRadius={140}
-                                    fill="#8884d8"
-                                    label
-                                >
-                                    {data01?.map((entry, index) => (
-                                        <Cell
-                                            key={`cell-${index}`}
-                                            fill={COLORS[index % COLORS.length]}
-                                        />
-                                    ))}
-                                </Pie>
-
-                                <Tooltip />
-                                <Legend />
-                            </PieChart>{" "}
-                        </div> */}
-
-            {/* <div className="bg-red-500 w-full p-6 px-10 flex gap-5 items-center justify-between"> */}
             <div className="flex-1  min-h-[300px] overflow-y-scroll scrollable-content lg:h-[calc(100vh-270px)] bg-white ">
               <BusinessTable />
             </div>
-
-            {/* </div> */}
           </div>
         </div>
       </div>
@@ -154,9 +115,5 @@ export default function Business() {
         </Link>
       </div>
     </div>
-    // <div className="lg:max-h-screen">
-    //     {/* <h1 className="text-center text-4xl font-bold">Manage Your Business</h1> */}
-
-    // </div>
   );
 }
