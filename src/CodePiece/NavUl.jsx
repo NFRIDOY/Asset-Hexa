@@ -6,10 +6,12 @@ const NavUl = () => {
     <>
       <NavLink
         to="/"
-        className={({ isActive }) =>
-          isActive
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
             ? "text-black lg:text-primaryColor font-bold  p-2 text-xl "
-            : "p-2 text-xl text-white lg:text-black"
+            : "p-2 text-xl text-white font-bold lg:text-black"
         }
       >
         Home
