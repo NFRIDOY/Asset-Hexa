@@ -180,6 +180,8 @@ const BlogDetails = () => {
       blogID: blog?._id,
       blogTitle: blog?.title,
       author: blog?.author,
+      image: blog?.image,
+      description: blog?.description,
       user: user?.email,
       date: formattedDate,
     };
