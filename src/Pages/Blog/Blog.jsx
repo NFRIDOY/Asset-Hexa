@@ -39,12 +39,13 @@ const Blog = () => {
 
   return (
     <div className="mt-10 mb-40">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
-        {blogs?.map((Bloggs) => (
-          <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-5 max-w-7xl mx-auto px-2">
+      {blogs?.map((Bloggs) => (
+        <BlogCard key={Bloggs._id} Bloggs={Bloggs}></BlogCard>
+      ))}
+    </div>
 
+    {blogs.length >= 9 && (
       <div className="mt-20 flex justify-center">
         <div>
           <button className="btn btn-sm" onClick={handlePrevPage}>
@@ -76,8 +77,9 @@ const Blog = () => {
           </select>
         </div>
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
 };
 
 export default Blog;

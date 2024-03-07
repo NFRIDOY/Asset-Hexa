@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { useContext, useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../providers/AuthProvider";
 import AccountCard from "./Accounts/AccountCard/AccountCard";
 import { AiOutlinePlus } from "react-icons/ai";
