@@ -14,11 +14,10 @@ import {
   useGetBlogQuery,
   useGetBookmarkedQuery,
   useLikeBlogMutation,
+  useRemoveFromBookmarkMutation,
   useUnlikeOrUndislikeMutation,
   useUpdateVerificationMutation,
 } from "../../features/blogSlice";
-
-//http://localhost:5000\
 
 const BlogDetails = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -31,8 +30,9 @@ const BlogDetails = () => {
   const [likeBlog] = useLikeBlogMutation();
   const [dislikeBlog] = useDislikeBlogMutation();
   const [commentBlog] = useCommentBlogMutation();
-  const { data: bookmarked = [] } = useGetBookmarkedQuery(user?.email);
+  const { data: bookmarked = [], refetch } = useGetBookmarkedQuery(user?.email);
   const [addToBookmark] = useAddToBookmarkMutation();
+  const [removeFromBookmark] = useRemoveFromBookmarkMutation();
   const [updateVerification] = useUpdateVerificationMutation();
   const [unlikeOrUndislike] = useUnlikeOrUndislikeMutation();
 
@@ -44,7 +44,7 @@ const BlogDetails = () => {
       (dislike) => dislike.personEmail === user?.email
     );
     const didBookmarked = bookmarked?.find(
-      (bookmked) => bookmked.blogID === blog?._id
+      (bookmked) => bookmked?.blogID === blog?._id
     );
 
     if (didLike) {
@@ -100,7 +100,9 @@ const BlogDetails = () => {
       query: "dislike",
     };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (!isLiked && isDisliked) {
+    if (!user?.email) {
+      return toast.error("Please login to like.");
+    } else if (!isLiked && isDisliked) {
       unlikeOrUndislike(queryDataD);
       return likeBlog(data);
     } else if (isLiked) {
@@ -147,7 +149,9 @@ const BlogDetails = () => {
       query: "dislike",
     };
     // const isLiked = likes.find((like) => like.personEmail === user?.email);
-    if (!isDisliked && isLiked) {
+    if (!user?.email) {
+      return toast.error("Please login to dislike.");
+    } else if (!isDisliked && isLiked) {
       unlikeOrUndislike(queryDataL);
       return dislikeBlog(data);
     } else if (isDisliked) {
@@ -179,12 +183,22 @@ const BlogDetails = () => {
       user: user?.email,
       date: formattedDate,
     };
-
-    addToBookmark(bookmarkedBlogData).then((res) => {
-      if (res.data?.insertedId) {
-        toast.success("Added to bookmark!");
-      }
-    });
+    if (!user?.email) {
+      return toast.error("Please login to Bookmark-->");
+    } else if (isBookmarked) {
+      removeFromBookmark(id).then((res) => {
+        if (res?.data?.deletedCount) {
+          toast.success("Removed from bookmark.");
+          refetch();
+        }
+      });
+    } else {
+      addToBookmark(bookmarkedBlogData).then((res) => {
+        if (res.data?.insertedId) {
+          toast.success("Added to bookmark!");
+        }
+      });
+    }
   };
 
   // Event Handler for Comment Functionality
@@ -215,10 +229,13 @@ const BlogDetails = () => {
       id: blog?._id,
       commentData,
     };
-
-    commentBlog(data).then(() => {
-      e.target.reset();
-    });
+    if (!user?.email) {
+      return toast.error("Please login to comment.");
+    } else {
+      commentBlog(data).then(() => {
+        e.target.reset();
+      });
+    }
   };
 
   const handleVerification = () => {
@@ -226,11 +243,11 @@ const BlogDetails = () => {
       .then((res) => {
         if (res?.data?.modifiedCount >= 1) {
           toast.success(`${blog?.title} has been verified`);
-          // document.getElementById("#email").setAttribute("hidden", "true");
         }
       })
       .catch((err) => toast.error(err.message));
   };
+
   return (
     <div className="min-h-screen">
       <div className="mt-10 mb-20 font-medium max-w-7xl mx-auto space-y-5 px-1">
@@ -260,7 +277,7 @@ const BlogDetails = () => {
         </div>
         <div>
           <img
-            className="h-[600px] w-full mb-5"
+            className="md:h-[400px] lg:h-[600px] w-full mb-5 object-cover"
             src={blog?.image}
             alt={`image of ${blog?.title} blog`}
           />
@@ -314,7 +331,9 @@ const BlogDetails = () => {
               )}
             </span>
           </h1>
-          <p className="text-lg font-normal">{blog?.description || ""}</p>
+          <p className="text-lg font-normal text-justify">
+            {blog?.description || ""}
+          </p>
         </div>
       </div>
       <div className="mt-20 max-w-7xl mx-auto">

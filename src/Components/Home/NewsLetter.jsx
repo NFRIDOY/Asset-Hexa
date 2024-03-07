@@ -52,7 +52,7 @@ const NewsLetter = () => {
                             More than 2000+ people receiving monthly updates on:
                         </p>
 
-                        <div className="flex items-center gap-4 mb-4">
+                        <div className="flex flex-col items-center gap-4 mb-4">
                             <div>
 
                                 <div className="text-center lg:text-left rounded">
