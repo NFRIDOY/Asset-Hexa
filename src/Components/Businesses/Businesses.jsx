@@ -6,15 +6,12 @@ import BusinessCard from "../BusinessCard/BusinessCard";
 import { useLoaderData } from "react-router-dom";
 
 export default function Businesses() {
+  const axiosPublic = useAxios();
   const [loading, setLoading] = useState(true);
   const [businessData, SetBusinessData] = useState([]);
-
   const { count } = useLoaderData();
   const [currentPage, setCurrentPage] = useState(0);
   const [BusinessPerPage, setBusinessPerPage] = useState(9);
-
-  const axiosPublic = useAxios();
-
   const numberOfPage = Math.ceil(count / BusinessPerPage);
   const pages = [...Array(numberOfPage).keys()];
 
