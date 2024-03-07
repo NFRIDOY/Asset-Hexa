@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import BookmarkButton from "../BookmarkButton";
-import useBookmarked from "../../hooks/useBookmarked";
 import { useEffect, useState } from "react";
 import { MdVerified } from "react-icons/md";
+import { useGetBookmarkedQuery } from "../../features/blogSlice";
+import useAuth from "../../hooks/useAuth";
 
 const BlogCard = ({ Bloggs }) => {
-  const { bookmarked } = useBookmarked();
+  const { user } = useAuth();
+  const { data: bookmarked = [] } = useGetBookmarkedQuery(user?.email);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const BlogCard = ({ Bloggs }) => {
     } else {
       setIsBookmarked(false);
     }
-  }, [bookmarked, Bloggs._id]);
+  }, [bookmarked, Bloggs?._id]);
   return (
     <>
       <Link to={`/blogDetails/${Bloggs._id}`}>
@@ -66,21 +68,6 @@ const BlogCard = ({ Bloggs }) => {
                 {Bloggs?.description.slice(0, 150)}...
               </p>
             </div>
-            {/* <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <button className="btn btn-sm" onClick={handleLike}>
-              <SlLike />
-            </button>
-            <p>{likes} </p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button className="btn btn-sm" onClick={handleDislike}>
-              <SlDislike />
-            </button>
-            <p>{dislikes}</p>
-          </div>
-        </div> */}
           </div>
         </div>
       </Link>
