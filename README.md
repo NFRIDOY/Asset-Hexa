@@ -1,6 +1,6 @@
 # Asset-Hexa
 ## [Live Link](https://asset-hexa.web.app)
-## [Live Link](https://docs.google.com/document/d/1cq7pdMNlDqruDteyre_6Q3NLg3R-7xZIeYwFlKhorww/edit?usp=sharing)
+## [Asset-Hexa Documentation](https://docs.google.com/document/d/1cq7pdMNlDqruDteyre_6Q3NLg3R-7xZIeYwFlKhorww/edit?usp=sharing)
 ## Project- Overview
 This project focuses on effective money management, offering financial guidance, and streamlining investment in businesses. Users have the ability to register accounts, record daily income and expenses, and access transaction histories. Additionally, users can contribute to the community by writing money management blogs, which can be liked and commented on by others.
 Furthermore, users can showcase their entrepreneurial ventures by adding detailed information about their businesses. All users have the opportunity to invest in these businesses, creating a dynamic investment ecosystem.
