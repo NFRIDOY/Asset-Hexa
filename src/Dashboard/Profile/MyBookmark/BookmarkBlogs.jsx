@@ -26,7 +26,7 @@ const BookmarkBlogs = () => {
   //     .then((data) => {
   //       setBlogs(data?.data);
   //       setIsLoading(false);
-        
+
 
   //     });
 
@@ -45,9 +45,9 @@ const BookmarkBlogs = () => {
           <BooksBlogs key={Bloggs._id} Bloggs={Bloggs}></BooksBlogs>
         ))}
       </div>
-            
-        </div>
-    );
+
+    </div>
+  );
 };
 
 export default BookmarkBlogs;

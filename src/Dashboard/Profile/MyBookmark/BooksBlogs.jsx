@@ -13,7 +13,7 @@ const BooksBlogs = ({ Bloggs }) => {
 
 
             <div>
-                <div className="px-4 py-8 shadow-lg max-w-[350px] font-sans rounded-xl space-y-6 my-20 mx-auto bg-white">
+                <div className="px-4 py-4 shadow-lg max-w-[350px] font-sans rounded-xl space-y-6 my-4 mx-auto bg-white">
                 <div className="w-full space-y-4">
                     <div className="">
                         <img
@@ -49,8 +49,7 @@ const BooksBlogs = ({ Bloggs }) => {
                 <div className="  ml-10">
                         <Link to={`/blogDetails/${Bloggs?.blogID}`} >
 
-
-                        <button className="hover:bg-[#00ff62] hover:scale-95 font-medium hover:text-black w-[80%] py-2 rounded-full hover:shadow-xl   text-black shadow-[0px_0px_10px_#E2DADA] t duration-500 ">View Profile</button>
+                        <button className="hover:bg-[#00ff62] hover:scale-95 font-medium hover:text-black w-[80%] py-2 rounded-full hover:shadow-xl   text-black shadow-[0px_0px_10px_#E2DADA] t duration-500 ">View Details</button>
                         </Link>
 
                 </div>
